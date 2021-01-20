@@ -4,11 +4,14 @@
 ### Pakete installieren
 ```
 npm install
+Falls es einen Fehler geben sollte:
 npm install --legacy-peer-deps
 ```
 
 ### Während der Entwicklung
-Datenbank starten
+Als Datenbank wird mongodb benutzt, welches vorher installiert werden muss:
+[https://docs.mongodb.com/manual/installation/]
+Datenbank starten mit
 ```
 mongod
 ```
