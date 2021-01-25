@@ -11,8 +11,8 @@ router.route('/api/books') //Seite mit allen hochgeladenen Büchern
 
 router.route('/api/books/:bookId')
 	.get(bookCtrl.read)		//keine Registrierung nötig
-	//.put(authCtrl.requireSignin, authCtrl.hasAuthorization, bookCtrl.update) // Update with PUT
-    //.delete(authCtrl.requireSignin, authCtrl.hasAuthorization, bookCtrl.remove) // Remove with DELETE
+	.put(authCtrl.requireSignin, authCtrl.hasAuthorizationForBook, bookCtrl.update) // Update with PUT
+    .delete(authCtrl.requireSignin, authCtrl.hasAuthorizationForBook, bookCtrl.remove) // Remove with DELETE
 
 router.param('bookId', bookCtrl.bookByID)
 

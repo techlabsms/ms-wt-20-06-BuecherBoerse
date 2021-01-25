@@ -3,7 +3,6 @@ import extend from 'lodash/extend'
 import errorHandler from './../helpers/dbErrorHandler'
 
 const create = async (req, res) => {
-    document.body.appendChild( "owner:" + req.auth._id) //geht das wohl so? Zum Speichern der Ersteller-ID
     const book = new Book(req.body)
 try {
     await book.save()
@@ -54,11 +53,43 @@ const read = (req, res) => {
     return res.json(req.profile)
 }
 
+//verändere Buch mit PUT
+const update = async (req, res) => {
+    try {
+        let book = req.profile
+        // lodash - merge and extend book profile
+        book = extend(book, req.body)
+        book.updated = Date.now()
+        await book.save()
+        res.json(book)
+    } catch (err) {
+        return res.status(400).json({
+            error: errorHandler.getErrorMessage(err)
+        })
+    }
+}
+
+
+//lösche Buch
+const remove = async (req, res) => {
+    try {
+        let book = req.profile
+        let deletedBook = await book.remove()
+        res.json(deletedBook)
+    } catch (err) {
+        return res.status(400).json({
+            error: errorHandler.getErrorMessage(err)
+        })
+    }
+}
+
 
 
 export default {
 	create,
 	list,
     bookByID,
-    read
+    read,
+    update,
+    remove
 }

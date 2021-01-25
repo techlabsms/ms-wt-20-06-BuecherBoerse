@@ -73,4 +73,15 @@ const hasAuthorization = (req, res, next) => {
     next()
 }
 
-export default { signin, signout, requireSignin, hasAuthorization }
+//Dürfen BenutzerInnen etwas an einem Buch ändern?
+const hasAuthorizationForBook = (req, res, next) => {
+    const authorized = req.profile.owner == req.auth._id
+    if (!(authorized)) {
+        return res.status('403').json({
+            error: "User " + req.auth._id + " is not authorized"
+        })
+    }
+    next()
+} 
+
+export default { signin, signout, requireSignin, hasAuthorization, hasAuthorizationForBook }
