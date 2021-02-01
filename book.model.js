@@ -1,5 +1,6 @@
 import mongoose from 'mongoose'
 import crypto from 'crypto'
+import User from '../models/user.model'
 
 const BookSchema = new mongoose.Schema ({
 	name: {
@@ -20,7 +21,7 @@ const BookSchema = new mongoose.Schema ({
 		type: String,
 		trim: true,
 	},
-	state: {		//Zustand des Buches
+	condition: {		//Zustand des Buches
 		type: String,
 		trim: true,
 	},
@@ -29,10 +30,10 @@ const BookSchema = new mongoose.Schema ({
 		trim: true,
 	},
 	//User ID, kann momentan nur manuell eingetragen werden 
-	owner: {			
-		type: String,
-		required: 'Besitzer des Buches fehlt'		
-	},
+	owner: {
+ 		type: Schema.Types.ObjectId,
+  		ref: 'User',
+	}
 	status: {	//privat, bereit zum Verleihen, verliehen	
 		type: String,
 		required: 'Status des Buches fehlt',	
