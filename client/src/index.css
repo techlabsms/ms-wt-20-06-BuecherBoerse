@@ -94,7 +94,7 @@ button:hover {
   transition: var(--trnstn);
 }
 
-@media screen and (min-width: 876px) {
+@media screen and (min-width: 800px) {
   h1 {
     font-size: 3rem;
   }
@@ -167,7 +167,7 @@ main {
 }
 
 .shelf-container {
-  max-width: 1144px;
+  max-width: 1024px;
   margin: 0 auto;
   display: grid;
 }
@@ -178,6 +178,7 @@ main {
   background-color: var(--fnt-clr);
   color: var(--bckgrnd-clr);
   padding: 1rem;
+  margin: 0.5rem;
   border-radius: 2rem;
 }
 
@@ -187,11 +188,11 @@ main {
 
 .book-info {
   margin-left: 1rem;
-  width: 9rem;
+  width: 8rem;
   height: auto;
   display: grid;
-  grid-template-rows: repeat(3, 1fr);
-  gap: 1rem;
+  grid-template-rows: 3rem 1.5rem 1rem;
+  gap: 2rem;
 }
 
 .book p {
@@ -213,7 +214,7 @@ main {
   text-transform: capitalize;
 }
 
-@media screen and (min-width: 828px) {
+@media screen and (min-width: 800px) {
   .form {
     width: 35em;
     padding: 1rem;
@@ -233,7 +234,7 @@ main {
     width: auto;
     margin-left: 0;
     grid-template-rows: 4rem 2rem 1.5rem;
-    gap: 1rem;
+    gap: 1.5rem;
     padding: 1rem;
   }
 

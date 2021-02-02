@@ -10,8 +10,7 @@ const App = () => {
 
   const filterBooks = (genre) => {
     if (genre === 'alle') {
-      setBookItems(books)
-      return
+      return setBookItems(books)
     }
     const filteredBooks = books.filter((book) => book.genre === genre)
     setBookItems(filteredBooks)
