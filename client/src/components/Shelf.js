@@ -3,11 +3,11 @@ import Book from './Book'
 
 const Shelf = ({ books }) => {
   return (
-    <section className='shelf-container'>
+    <ul className='shelf-container'>
       {books.map((book) => {
         return <Book {...book} key={book.id} />
       })}
-    </section>
+    </ul>
   )
 }
 

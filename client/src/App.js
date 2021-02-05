@@ -1,25 +1,41 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Genres from './components/Genres'
 import Shelf from './components/Shelf'
-import books from './components/books'
+import data from './components/books'
+import SearchBar from './components/SearchBar'
 
 const App = () => {
-  const allGenres = ['alle', ...new Set(books.map((book) => book.genre))]
-  const [bookItems, setBookItems] = useState(books)
+  const allGenres = ['alle', ...new Set(data.map((book) => book.genre))]
+  const [search, setSearch] = useState('')
   const [genres] = useState(allGenres)
+  const [books, setBooks] = useState(data)
 
   const filterBooks = (genre) => {
     if (genre === 'alle') {
-      return setBookItems(books)
+      return setBooks(data)
     }
-    const filteredBooks = books.filter((book) => book.genre === genre)
-    setBookItems(filteredBooks)
+    const filteredBooks = data.filter((book) => book.genre === genre)
+    setBooks(filteredBooks)
   }
+
+  useEffect(() => {
+    const searchedBooks = data.filter(
+      (book) =>
+        book.title.toLowerCase().includes(search.toLowerCase()) ||
+        book.author.toLowerCase().includes(search.toLowerCase())
+    )
+    setBooks(searchedBooks)
+  }, [search])
+
   return (
     <main>
-      <h1 className='title'>Bücherregal</h1>
+      <SearchBar
+        search={search}
+        setSearch={setSearch}
+        searchBooks={useEffect}
+      />
       <Genres genres={genres} filterBooks={filterBooks} />
-      <Shelf books={bookItems} />
+      <Shelf books={books} />
     </main>
   )
 }
