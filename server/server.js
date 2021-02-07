@@ -2,7 +2,7 @@ import config from './../config/config'
 import app from './express'
 import mongoose from 'mongoose'
 import Template from './../template'
-import { Server } from "socket.io";
+import socketIO from "socket.io";
 
 mongoose.Promise = global.Promise
 mongoose.connect(config.mongoUri, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true })
@@ -13,7 +13,6 @@ mongoose.connection.on('error', () => {
 mongoose.connection.on('connected', () => {
     console.info(`connected to database: ${config.mongoUri}`)
 })
-
 
 const server = app.listen(config.port, (err) => {
     if (err) {
@@ -26,7 +25,7 @@ app.get('/', (req, res) => {
     res.status(200).send(Template())
 })
 
-const io = Server.listen(server)
+const io = socketIO(config.port)
 
 // Assign socket object to every request
 app.use(function (req, res, next) {
