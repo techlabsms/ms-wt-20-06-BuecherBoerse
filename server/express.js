@@ -7,6 +7,7 @@ import helmet from 'helmet'
 import userRoutes from './routes/user.routes'
 import authRoutes from './routes/auth.routes'
 import bookRoutes from './routes/book.routes'
+import conversationRoutes from './routes/conversation.routes'
 import path from 'path'
 
 //comment out before building for production
@@ -33,6 +34,7 @@ app.use('/dist', express.static(path.join(CURRENT_WORKING_DIR, 'dist')))
 app.use('/', userRoutes)
 app.use('/', authRoutes)
 app.use('/', bookRoutes)
+app.use('/', conversationRoutes)
 
 
 app.use((err, req, res, next) => {
