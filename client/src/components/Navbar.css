@@ -1,0 +1,157 @@
+/* Navbar */
+@keyframes navBar-slideIn {
+  0% {
+    top: -80px;
+  }
+
+  100% {
+    top: 0px;
+  }
+}
+
+.nav-center {
+  width: 100vw;
+  background-color: var(--bckgrnd-clr);
+  position: absolute;
+  transition: var(--nvbr-trns);
+}
+
+.nav-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem;
+}
+
+.nav-toggle {
+  display: flex;
+  align-self: center;
+  font-size: 1rem;
+  border: 0;
+  margin: 0;
+  padding: 0.5rem;
+}
+
+.nav-toggle:hover {
+  border: 0;
+  margin: 0;
+  padding: 0.5rem;
+  background: var(--brnd-clr);
+}
+
+.nav-menu {
+  text-align: start;
+  font-size: 1rem;
+  height: 0;
+  overflow: hidden;
+  transition: var(--trnstn);
+}
+
+.show-menu {
+  height: 12rem;
+  box-shadow: var(--bx-shdw);
+}
+
+.links-container {
+  padding: 0.5rem;
+}
+
+.links {
+  transition: var(--trnstn);
+  margin: 0.5rem;
+}
+
+.links a {
+  color: var(--fnt-clr);
+}
+
+.links:hover {
+  color: rgb(153, 153, 153);
+  padding-left: 0.5rem;
+}
+
+.login {
+  padding: 0.5rem 0;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.login-btn {
+  background: var(--brnd-clr);
+  border-radius: var(--brdr-rds);
+  border: 2px solid var(--brnd-clr);
+  padding: 0.5rem;
+  margin: 0.5rem;
+}
+
+.login-btn:hover {
+  background-color: var(--bckgrnd-clr);
+  border: 2px solid var(--bckgrnd-clr);
+}
+
+.login-btn a {
+  color: var(--bckgrnd-clr);
+}
+
+.login-btn a:hover {
+  color: var(--brnd-clr);
+}
+
+@media screen and (min-width: 800px) {
+  .nav-center {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: auto;
+    flex-basis: auto;
+  }
+
+  .nav-toggle {
+    display: none;
+  }
+
+  .nav-menu {
+    display: flex;
+    justify-content: space-between;
+    height: auto;
+    width: 66vw;
+  }
+
+  .links-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .links {
+    width: 10vw;
+    margin: 1rem;
+  }
+
+  .links:hover {
+    padding-left: 0;
+  }
+
+  .links a:hover {
+    border-bottom: 3px solid var(--brnd-clr);
+  }
+
+  .login {
+    display: flex;
+    align-items: center;
+  }
+
+  .signup-btn {
+    width: 6rem;
+  }
+}
+
+.sticky-nav {
+  top: 0;
+  position: fixed;
+  width: 100%;
+  box-shadow: var(--bx-shdw);
+}
+
+.animate-nav {
+  animation: navBar-slideIn 0.3s ease-in-out;
+}

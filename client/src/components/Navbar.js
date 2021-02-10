@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { FaBars } from 'react-icons/fa'
 import logo from '../buecherregal.svg'
+import './Navbar.css'
 import LinkContainer from './LinkContainer'
 import LoginBtns from './LoginBtns'
 
@@ -9,7 +10,7 @@ const Navbar = () => {
   const [navbar, setNavbar] = useState(false)
 
   const stickyNav = () => {
-    if (window.scrollY >= 140) {
+    if (window.scrollY >= 120) {
       setNavbar(true)
     } else {
       setNavbar(false)
@@ -18,7 +19,9 @@ const Navbar = () => {
   window.addEventListener('scroll', stickyNav)
 
   return (
-    <nav className={navbar ? 'nav-center sticky-nav' : 'nav-center'}>
+    <nav
+      className={navbar ? 'nav-center sticky-nav animate-nav' : 'nav-center'}
+    >
       <div className='nav-header'>
         <img src={logo} alt='logo' />
         <button
