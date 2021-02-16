@@ -1,46 +1,23 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import Navbar from './components/Navbar'
-import GenreFilter from './components/GenreFilter'
-import Shelf from './components/Shelf'
-import availableBooks from './components/books'
-import SearchBar from './components/SearchBar'
+import Marktplatz from './pages/Marktpkatz'
+import OpenBook from './components/OpenBook'
 
 const App = () => {
-  const allGenres = [
-    'alle',
-    ...new Set(availableBooks.map((book) => book.genre)),
-  ]
-  const [search, setSearch] = useState('')
-  const [genres] = useState(allGenres)
-  const [books, setBooks] = useState(availableBooks)
-
-  const filterBooks = (genre) => {
-    if (genre === 'alle') {
-      return setBooks(availableBooks)
-    }
-    let filteredBooks = availableBooks.filter((book) => book.genre === genre)
-    setBooks(filteredBooks)
+  const [isPopupOpen, setIsPopOpen] = useState(false)
+  const openPopup = () => {
+    setIsPopOpen(true)
   }
-
-  useEffect(
-    function searchBooks() {
-      let searchedBooks = availableBooks.filter(
-        (book) =>
-          book.title.toLowerCase().includes(search.toLowerCase()) ||
-          book.author.toLowerCase().includes(search.toLowerCase())
-      )
-      setBooks(searchedBooks)
-    },
-    [search]
-  )
+  const closePopup = () => {
+    setIsPopOpen(false)
+  }
 
   return (
     <>
       <Navbar />
+      <OpenBook isPopupOpen={isPopupOpen} closePopup={closePopup} />
       <main>
-        <SearchBar search={search} setSearch={setSearch} />
-        <GenreFilter genres={genres} filterBooks={filterBooks} />
-        <Shelf books={books} />
+        <Marktplatz openPopup={openPopup} />
       </main>
     </>
   )

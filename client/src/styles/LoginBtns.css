@@ -1,0 +1,38 @@
+/* Login Buttons */
+.login {
+  padding: 0.5rem 0;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.login-btn {
+  background: var(--brnd-clr);
+  border-radius: var(--brdr-rds);
+  border: 2px solid var(--brnd-clr);
+  padding: 0.5rem;
+  margin: 0.5rem;
+}
+
+.login-btn:hover {
+  background-color: var(--bckgrnd-clr);
+  border: 2px solid var(--bckgrnd-clr);
+}
+
+.login-btn a {
+  color: var(--bckgrnd-clr);
+}
+
+.login-btn a:hover {
+  color: var(--brnd-clr);
+}
+
+@media screen and (min-width: 800px) {
+  .login {
+    display: flex;
+    align-items: center;
+  }
+
+  .signup-btn {
+    width: 6rem;
+  }
+}

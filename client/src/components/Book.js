@@ -1,15 +1,15 @@
 import React from 'react'
-import './Book.css'
+import '../styles/Book.css'
 
-const Book = ({ id, img, title, author, genre }) => {
+const Book = ({ id, img, title, author, genre, openPopup }) => {
   return (
-    <li className='book' key={id}>
+    <li className='book' key={id} onClick={openPopup}>
       <img src={img} alt={title} />
-      <div className='book-info'>
+      <footer className='book-info'>
         <h4>{title}</h4>
         <p className='book-author'>{author}</p>
         <p className='book-genre'>{genre}</p>
-      </div>
+      </footer>
     </li>
   )
 }
