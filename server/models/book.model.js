@@ -6,14 +6,14 @@ const BookSchema = new mongoose.Schema ({
 	name: {
 		type: String,
 		trim: true,
-		required: 'Name des Buches fehlt'		
+		required: 'Name des Buches fehlt'
 	},
-	author: {	
+	author: {
 		type: String,
 		trim: true,
-		required: 'Autor des Buches fehlt'		
+		required: 'Autor des Buches fehlt'
 	},
-	category: {				
+	category: {
 		type: String,
 		trim: true,
 	},
@@ -25,14 +25,14 @@ const BookSchema = new mongoose.Schema ({
 		type: String,
 		trim: true,
 	},
-	//User ID, kann momentan nur manuell eingetragen werden 
+	//User ID, kann momentan nur manuell eingetragen werden
 	owner: {
- 		type: Schema.Types.ObjectId,
+ 		type: mongoose.Schema.Types.ObjectId,
   		ref: 'User',
 	},
-	status: {	//privat, bereit zum Verleihen, verliehen	
+	status: {	//privat, bereit zum Verleihen, verliehen
 		type: String,
-		required: 'Status des Buches fehlt',	
+		required: 'Status des Buches fehlt',
 	},
 	created: {
         type: Date,
