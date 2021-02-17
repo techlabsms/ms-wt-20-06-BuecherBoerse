@@ -1,0 +1,11 @@
+/* Filter Btns */
+.filter-btn {
+  margin: 0.25rem;
+  text-transform: uppercase;
+}
+
+@media screen and (min-width: 800px) {
+  .filter-btn {
+    margin: 0.5rem;
+  }
+}

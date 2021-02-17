@@ -10,14 +10,8 @@ import bookRoutes from './routes/book.routes'
 import conversationRoutes from './routes/conversation.routes'
 import path from 'path'
 
-//comment out before building for production
-import devBundle from './devBundle'
-
 const CURRENT_WORKING_DIR = process.cwd()
 const app = express()
-
-//comment out before building for production
-devBundle.compile(app)
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))

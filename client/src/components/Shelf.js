@@ -1,4 +1,5 @@
 import React from 'react'
+import './Shelf.css'
 import Book from './Book'
 
 const Shelf = ({ books }) => {

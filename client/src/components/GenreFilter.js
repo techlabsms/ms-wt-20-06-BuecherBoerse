@@ -1,7 +1,8 @@
 import React from 'react'
 import FilterButton from './FilterButton'
+import './GenreFilter.css'
 
-const Genres = ({ genres, filterBooks }) => {
+const GenreFilter = ({ genres, filterBooks }) => {
   return (
     <section className='btn-container'>
       {genres.map((genre, index) => {
@@ -13,4 +14,4 @@ const Genres = ({ genres, filterBooks }) => {
   )
 }
 
-export default Genres
+export default GenreFilter

@@ -1,6 +1,7 @@
 import React from 'react'
+import './SearchBar.css'
 
-const SearchBar = ({ search, setSearch, useEffect }) => {
+const SearchBar = ({ search, setSearch }) => {
   return (
     <section className='search-bar'>
       <form onSubmit={(e) => e.preventDefault}>
@@ -10,8 +11,7 @@ const SearchBar = ({ search, setSearch, useEffect }) => {
           id='userinput'
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          onInput={useEffect}
-          placeholder='Nach Titel oder Autor suchen'
+          placeholder='Nach Titel oder Autor suchen...'
         ></input>
       </form>
     </section>
