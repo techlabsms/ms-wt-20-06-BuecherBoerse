@@ -4,10 +4,10 @@
     "description": "Backend fuer den User Login",
     "main": "./dist/server.generated.js",
     "scripts": {
-        "development": "nodemon",
-        "build": "webpack --config webpack.config.client.production.js && webpack --mode=production --config webpack.config.server.js",
-        "start": "NODE_ENV=production node ./dist/server.generated.js"
+        "dev": "nodemon",
+        "start": "node --es-module-specifier-resolution=node ./server/server.js"
     },
+    "type": "module",
     "repository": {
         "type": "git",
         "url": "git+https://github.com/techlabsms/ms-wt-20-06-BuecherBoerse.git"
@@ -30,6 +30,7 @@
         "compression": "1.7.4",
         "cookie-parser": "1.4.5",
         "cors": "2.8.5",
+        "esm": "^3.2.25",
         "express": "4.17.1",
         "express-jwt": "^5.3.1",
         "helmet": "3.22.0",
