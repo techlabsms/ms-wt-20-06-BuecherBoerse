@@ -6,7 +6,7 @@ const Shelf = ({ books, openPopup }) => {
   return (
     <ul className='shelf-container'>
       {books.map((book) => {
-        return <Book {...book} key={book.id} openPopup={openPopup} />
+        return <Book key={book.id} {...book} />
       })}
     </ul>
   )

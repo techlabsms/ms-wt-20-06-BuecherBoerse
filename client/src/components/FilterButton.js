@@ -5,7 +5,7 @@ const FilterButton = ({ index, genre, filterBooks }) => {
   return (
     <button
       key={index}
-      className='filter-btn'
+      className='btn'
       type='button'
       onClick={() => filterBooks(genre)}
     >

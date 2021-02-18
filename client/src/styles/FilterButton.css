@@ -1,18 +1,17 @@
 /* Filter Btns */
-.filter-btn {
-  margin: 0.25rem;
+.btn {
   text-transform: uppercase;
   background: var(--bckgrnd-trnsprnt);
   border-radius: var(--brdr-rds);
   border: 2px solid var(--bckgrnd-clr);
   padding: 0.75rem 0.5rem;
-  margin: 0.875rem;
+  margin: 0.25rem;
   color: var(--fnt-clr);
   align-self: center;
   cursor: pointer;
 }
 
-.filter-btn:hover {
+.btn:hover {
   background: var(--brnd-clr);
   color: var(--bckgrnd-clr);
   border: 2px solid var(--brnd-clr);
@@ -20,7 +19,7 @@
 }
 
 @media screen and (min-width: 800px) {
-  .filter-btn {
+  .btn {
     margin: 0.5rem;
   }
 }

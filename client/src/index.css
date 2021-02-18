@@ -43,6 +43,7 @@ ul {
 
 a {
   text-transform: capitalize;
+  color: var(--bckgrnd-clr);
   text-decoration: none;
 }
 
@@ -100,8 +101,17 @@ p {
     font-size: 1rem;
   }
 }
+main::before {
+  margin-top: 5rem;
+  content: '';
+}
 
 main {
   display: grid;
   place-items: center;
+}
+
+/* Utilities */
+.italic {
+  font-style: italic;
 }

@@ -1,99 +1,60 @@
-/* Open Book */
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  display: grid;
-  place-items: center;
-  transition: var(--trnstn);
-  visibility: hidden;
-  z-index: -1;
-}
-
-.show-modal {
-  visibility: visible;
-  z-index: 10;
-}
-
 .open-book {
-  background: var(--bckgrnd-clr);
-  border-radius: var(--brdr-rds);
-  width: 100%;
-  height: 100%;
   display: flex;
-  flex-direction: column;
+  flex-flow: column;
   align-items: center;
-  position: relative;
+  background: var(--bckgrnd-clr);
+  padding: 1rem;
+}
+
+.title {
+  color: var(--brnd-clr);
+  text-align: center;
+  padding: 0.25rem;
 }
 
 .open-book img {
-  width: 100%;
-  height: 22rem;
-  object-fit: cover;
+  width: 12rem;
+  height: 18rem;
+  object-fit: contain;
+  padding: 1rem;
 }
 
 .open-book-info {
-  width: auto;
   display: grid;
-  text-align: start;
-  grid-template-rows: 25% 50% auto;
-  padding: 2rem;
-  gap: 1rem;
+  grid-template-rows: repeat(2, auto);
+  gap: 0.5rem;
+  place-items: center;
 }
 
-.close-modal-btn {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  font-size: 2rem;
-  margin: 0;
-  padding: 0;
-  background: transparent;
-  border-color: transparent;
-  color: var(--brnd-clr);
-}
-
-.close-modal-btn:hover {
-  background: transparent;
-  color: var(--fnt-clr);
-  border-color: transparent;
-  cursor: pointer;
-}
-
-.action-btn {
+.open-book-info header {
+  display: flex;
+  flex-direction: column;
   padding: 1rem;
-  background: var(--brnd-clr);
-  color: var(--bckgrnd-clr);
-  border: 1px solid var(--brnd-clr);
-  border-radius: var(--brdr-rds);
-  margin: 1rem 0.75rem 0 0;
-  transition: var(--trnstn);
 }
 
-.action-btn:hover {
-  background: var(--bckgrnd-clr);
+.open-book-info h3,
+span {
   color: var(--brnd-clr);
 }
 
 @media screen and (min-width: 800px) {
   .open-book {
-    width: 80vw;
+    display: grid;
+    place-items: center;
+    width: 90vw;
     height: auto;
-    flex-direction: row;
+    grid-template-columns: repeat(2, 3fr);
+    gap: 3rem;
   }
 
   .open-book img {
-    width: 50%;
-    height: 100%;
-    object-fit: contain;
-    border-top-left-radius: var(--brdr-rds);
-    border-bottom-left-radius: var(--brdr-rds);
+    width: 20rem;
+    height: auto;
+    object-fit: cover;
   }
 
-  .action-btn {
-    margin: 2rem 1.5rem 0 0;
+  .open-book-info {
+    grid-template-rows: repeat(3, auto);
+    padding: 1rem;
   }
 }

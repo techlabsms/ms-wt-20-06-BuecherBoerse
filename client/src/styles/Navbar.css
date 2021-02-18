@@ -1,8 +1,8 @@
 /* Navbar */
 .nav-center {
   width: 100vw;
-  background-color: var(--bckgrnd-clr);
   position: absolute;
+  background-color: var(--bckgrnd-clr);
   transition: var(--nvbr-trns);
   z-index: 1;
 }

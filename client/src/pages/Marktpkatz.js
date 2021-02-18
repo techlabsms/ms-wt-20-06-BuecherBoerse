@@ -4,7 +4,7 @@ import Shelf from '../components/Shelf'
 import availableBooks from '../components/books'
 import SearchBar from '../components/SearchBar'
 
-const Marktplatz = ({ isPopupOpen, openPopup, closePopup }) => {
+const Marktplatz = ({ openPopup }) => {
   const allGenres = [
     'alle',
     ...new Set(availableBooks.map((book) => book.genre)),
@@ -35,9 +35,11 @@ const Marktplatz = ({ isPopupOpen, openPopup, closePopup }) => {
 
   return (
     <>
-      <SearchBar search={search} setSearch={setSearch} />
-      <GenreFilter genres={genres} filterBooks={filterBooks} />
-      <Shelf books={books} openPopup={openPopup} />
+      <main>
+        <SearchBar search={search} setSearch={setSearch} />
+        <GenreFilter genres={genres} filterBooks={filterBooks} />
+        <Shelf books={books} />
+      </main>
     </>
   )
 }

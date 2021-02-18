@@ -1,24 +1,21 @@
-import React, { useState } from 'react'
+import React from 'react'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Marktplatz from './pages/Marktpkatz'
-import OpenBook from './components/OpenBook'
+import OpenBook from './pages/OpenBook'
 
 const App = () => {
-  const [isPopupOpen, setIsPopOpen] = useState(false)
-  const openPopup = () => {
-    setIsPopOpen(true)
-  }
-  const closePopup = () => {
-    setIsPopOpen(false)
-  }
-
   return (
     <>
-      <Navbar />
-      <OpenBook isPopupOpen={isPopupOpen} closePopup={closePopup} />
-      <main>
-        <Marktplatz openPopup={openPopup} />
-      </main>
+      <Router>
+        <Navbar />
+        <Route exact path='/'>
+          <Marktplatz />
+        </Route>
+        <Route path='/openbook/:id'>
+          <OpenBook />
+        </Route>
+      </Router>
     </>
   )
 }
