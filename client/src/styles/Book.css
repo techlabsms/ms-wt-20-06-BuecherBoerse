@@ -5,7 +5,7 @@
   background-color: var(--brnd-clr);
   color: var(--bckgrnd-clr);
   border-radius: var(--brdr-rds);
-  box-shadow: var(--mn-shdw);
+  box-shadow: var(--bx-shdw);
   transition: var(--trnstn);
 }
 

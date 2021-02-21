@@ -1,19 +1,22 @@
 /* Upload Book */
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  display: grid;
-  place-items: center;
-  transition: var(--trnstn);
-  visibility: hidden;
-  z-index: -1;
+.book-form {
+  background-color: var(--clr-gry);
+  max-width: var(--mx-wdth);
+  padding: 1.5rem 2rem;
+  border-radius: var(--brdr-rds-2);
+  box-shadow: var(--frm-shdw);
+  margin: 1rem auto;
 }
 
-.show-modal {
-  visibility: visible;
-  z-index: 10;
+.form-control {
+  margin: 0.5rem 0;
+  display: grid;
+  grid-template-columns: 7rem 1fr;
+  align-items: center;
+  text-align: start;
+}
+
+.book-form input {
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--brdr-rds);
 }

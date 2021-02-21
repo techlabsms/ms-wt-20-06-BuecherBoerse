@@ -19,11 +19,11 @@ const UserSchema = new mongoose.Schema({
         required: "Password ist erforderlich"
     },
     salt: String,
-    updated: Date,
     created: {
         type: Date,
         default: Date.now
-    }
+    },
+    updated: Date
 })
 
 UserSchema.virtual('password')
