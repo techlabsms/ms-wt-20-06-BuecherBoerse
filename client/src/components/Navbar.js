@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { FaBars } from 'react-icons/fa'
 import logo from '../buecherregal.svg'
-import './Navbar.css'
+import '../styles/Navbar.css'
 import LinkContainer from './LinkContainer'
 import LoginBtns from './LoginBtns'
 

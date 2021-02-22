@@ -1,4 +1,5 @@
 import React from 'react'
+import '../styles/LoginBtns.css'
 import { login } from './linksDB'
 
 const LoginBtns = () => {

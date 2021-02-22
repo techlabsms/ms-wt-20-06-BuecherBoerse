@@ -7,14 +7,17 @@
   --fnt-sz: 0.875rem;
   --bckgrnd-clr: #fff;
   --brnd-clr: #b00055;
+  --clr-gry: #d6d6d6;
   --fnt-fmly: 'Poppins', sans-serif;
   --mn-shdw: 0 1px 5px rgba(0, 0, 0, 0.75);
   --bx-shdw: 1px 6px 6px -6px rgba(0, 0, 0, 0.5);
+  --frm-shdw: 0px 4px 18px 8px rgba(0, 0, 0, 0.3);
   --lttr-spcng: 0.1rem;
   --trnstn: all 0.3s linear;
   --nvbr-trns: 0.5s ease-in-out;
   --brdr-rds: 0.25rem;
-  --mx-wdth: 1170px;
+  --brdr-rds-2: 0.75rem;
+  --mx-wdth: 1140px;
   --bckgrnd-trnsprnt: transparent;
 }
 
@@ -43,6 +46,7 @@ ul {
 
 a {
   text-transform: capitalize;
+  color: var(--bckgrnd-clr);
   text-decoration: none;
 }
 
@@ -79,24 +83,6 @@ p {
   font-size: 0.875rem;
 }
 
-button {
-  background: var(--bckgrnd-trnsprnt);
-  border-radius: var(--brdr-rds);
-  border: 2px solid var(--bckgrnd-clr);
-  padding: 0.75rem 0.5rem;
-  margin: 0.875rem;
-  color: var(--fnt-clr);
-  align-self: center;
-  cursor: pointer;
-}
-
-button:hover {
-  background: var(--brnd-clr);
-  color: var(--bckgrnd-clr);
-  border: 2px solid var(--brnd-clr);
-  transition: var(--trnstn);
-}
-
 @media screen and (min-width: 800px) {
   h1 {
     font-size: 3rem;
@@ -117,15 +103,18 @@ button:hover {
   p {
     font-size: 1rem;
   }
-
-  button {
-    padding: 1rem;
-    margin: 1rem;
-    font-size: 1rem;
-  }
+}
+main::before {
+  margin-top: 5rem;
+  content: '';
 }
 
 main {
   display: grid;
   place-items: center;
+}
+
+/* Utilities */
+.italic {
+  font-style: italic;
 }

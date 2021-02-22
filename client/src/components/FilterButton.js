@@ -1,11 +1,11 @@
 import React from 'react'
-import './FilterButton.css'
+import '../styles/FilterButton.css'
 
 const FilterButton = ({ index, genre, filterBooks }) => {
   return (
     <button
       key={index}
-      className='filter-btn'
+      className='btn'
       type='button'
       onClick={() => filterBooks(genre)}
     >
