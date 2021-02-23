@@ -13,6 +13,12 @@ const BookSchema = new mongoose.Schema ({
 		trim: true,
 		required: 'Autor des Buches fehlt'
 	},
+
+	image: {
+		type: String,
+		required: true,
+	}, 
+
 	category: {
 		type: String,
 		trim: true,

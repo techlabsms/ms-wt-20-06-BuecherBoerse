@@ -2,12 +2,13 @@ import express from 'express'
 import authCtrl from '../controllers/auth.controller'
 import userCtrl from '../controllers/user.controller'
 import bookCtrl from '../controllers/book.controller'
+import imgCtrl from '../controllers/images.controller'
 
 const router = express.Router()
 
 router.route('/api/books') //Seite mit allen hochgeladenen Büchern
 	.get(bookCtrl.list)
-	.post(authCtrl.requireSignin, bookCtrl.create)
+	.post(authCtrl.requireSignin, imgCtrl.singleUpload,  bookCtrl.create)
 
 router.route('/api/books/:bookId')
 	.get(bookCtrl.read)		//keine Registrierung nötig

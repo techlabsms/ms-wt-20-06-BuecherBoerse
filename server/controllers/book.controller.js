@@ -1,13 +1,19 @@
 import Book from '../models/book.model'
 import extend from 'lodash/extend'
 import errorHandler from './../helpers/dbErrorHandler'
+import multer from 'multer'
 
 const create = async (req, res) => {
     const book = new Book(req.body)
+    book.image = req.file.path
+    /*const newBook = book ({
+        image: req.file.path
+    }) */
 try {
-    await book.save()
+    await book.save() 
     return res.status(200).json({
         message: "Buch erfolgreich hochgeladen!",
+        bild: req.file,
         buch: book
     })
 } catch (err) {
@@ -20,7 +26,7 @@ try {
 //Liste aller Bücher
 const list = async (req, res) => {
     try {
-        let bookList = await Book.find().select('name author category owner status updated created')
+        let bookList = await Book.find().select('name author image category owner status updated created')
         res.json(bookList)
     } catch (err) {
         return res.status(400).json({
