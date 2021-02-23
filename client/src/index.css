@@ -37,7 +37,6 @@ body {
   font-size: var(--fnt-sz);
   line-height: 1.5;
   text-align: center;
-  text-transform: capitalize;
 }
 
 ul {
@@ -105,7 +104,7 @@ p {
   }
 }
 main::before {
-  margin-top: 5rem;
+  margin-top: 7rem;
   content: '';
 }
 

@@ -10,7 +10,6 @@
 
 .links:hover {
   color: rgb(153, 153, 153);
-  padding-left: 0.5rem;
 }
 
 @media screen and (min-width: 800px) {

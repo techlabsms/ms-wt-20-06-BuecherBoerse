@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { useParams, Link } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import books from '../components/books'
+import ReturnTo from '../components/ReturnTo'
 import '../styles/OpenBook.css'
 
 const OpenBook = () => {
@@ -10,17 +11,12 @@ const OpenBook = () => {
   useEffect(() => {
     let fetchBook = books.find((book) => book.id === parseInt(id))
     setOpenBook(fetchBook)
-    console.log(fetchBook)
   }, [id])
 
   const { img, title, author, genre, desc } = openBook
   return (
     <main>
-      <div className='btn-container'>
-        <Link to='/' className='btn'>
-          zurück zum Marktpkatz
-        </Link>
-      </div>
+      <ReturnTo />
       <section className='open-book'>
         <h2 className='title'>{title}</h2>
         <h3 className='title italic'>{author}</h3>

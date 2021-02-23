@@ -1,18 +1,38 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState } from 'react'
+import ReturnTo from '../components/ReturnTo'
 import '../styles/UploadBook.css'
 
 const UploadBook = () => {
+  const [newBook, setNewBook] = useState({
+    image: '',
+    title: '',
+    author: '',
+    genre: '',
+    language: '',
+    condition: '',
+    desc: '',
+  })
+  const handleChange = (e) => {
+    let name = e.target.name
+    let value = e.target.value
+    setNewBook({ ...newBook, [name]: value })
+  }
   const handleSubmit = (e) => {
     e.preventDefault()
+    console.log(newBook)
+    setNewBook({
+      image: '',
+      title: '',
+      author: '',
+      genre: '',
+      language: '',
+      condition: '',
+      desc: '',
+    })
   }
   return (
     <main>
-      <div className='btn-container'>
-        <Link to='/' className='btn'>
-          zurück zum Marktpkatz
-        </Link>
-      </div>
+      <ReturnTo />
       <h2 className='title'>Buch hochladen</h2>
       <section className='section-center'>
         <form className='book-form' onSubmit={handleSubmit}>
@@ -20,12 +40,7 @@ const UploadBook = () => {
             <label htmlFor='image' name='image'>
               bild:
             </label>
-            <input
-              type='file'
-              id='image'
-              name='image'
-              placeholder='Bild des Buches'
-            ></input>
+            <input type='file' id='image' name='image'></input>
           </div>
           <div className='form-control'>
             <label htmlFor='title' name='title'>
@@ -36,6 +51,8 @@ const UploadBook = () => {
               id='title'
               name='title'
               placeholder='Titel des Buches'
+              value={newBook.title}
+              onChange={handleChange}
             ></input>
           </div>
           <div className='form-control'>
@@ -47,6 +64,8 @@ const UploadBook = () => {
               id='author'
               name='author'
               placeholder='Autor des Buches'
+              value={newBook.author}
+              onChange={handleChange}
             ></input>
           </div>
           <div className='form-control'>
@@ -58,6 +77,8 @@ const UploadBook = () => {
               id='genre'
               name='genre'
               placeholder='Genre des Buches'
+              value={newBook.genre}
+              onChange={handleChange}
             ></input>
           </div>
           <div className='form-control'>
@@ -69,6 +90,8 @@ const UploadBook = () => {
               id='language'
               name='language'
               placeholder='Sprache des Buches'
+              value={newBook.language}
+              onChange={handleChange}
             ></input>
           </div>
           <div className='form-control'>
@@ -80,31 +103,26 @@ const UploadBook = () => {
               id='condition'
               name='condition'
               placeholder='Zustand des Buches'
+              value={newBook.condition}
+              onChange={handleChange}
             ></input>
           </div>
           <div className='form-control'>
             <label htmlFor='desc' name='desc'>
               beschreibung:
             </label>
-            <input
-              type='text'
+            <textarea
               id='desc'
               name='desc'
               placeholder='Kurze Beschreibung des Buches'
-            ></input>
-          </div>
-          <div className='form-control'>
-            <label htmlFor='checker1' name='checker1'>
-              verleihen:
-            </label>
-            <input type='checkbox' id='checker1' name='checker1' />
-            <label htmlFor='checker2' name='checker2'>
-              tauschen:
-            </label>
-            <input type='checkbox' id='checker2' name='checker2' />
+              cols='30'
+              rows='5'
+              value={newBook.desc}
+              onChange={handleChange}
+            ></textarea>
           </div>
           <div className='btn-containr'>
-            <button className='btn' type='submit'>
+            <button className='btn' type='submit' onSubmit={handleSubmit}>
               hochladen
             </button>
             <button className='btn' type='reset'>

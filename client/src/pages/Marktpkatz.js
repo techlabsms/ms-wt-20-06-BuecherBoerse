@@ -4,7 +4,7 @@ import Shelf from '../components/Shelf'
 import availableBooks from '../components/books'
 import SearchBar from '../components/SearchBar'
 
-const Marktplatz = ({ openPopup }) => {
+const Marktplatz = () => {
   const allGenres = [
     'alle',
     ...new Set(availableBooks.map((book) => book.genre)),

@@ -4,6 +4,7 @@ import Navbar from './components/Navbar'
 import Marktplatz from './pages/Marktpkatz'
 import OpenBook from './pages/OpenBook'
 import UploadBook from './pages/UploadBook'
+import Footer from './components/Footer'
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
         <Route path='/openbook/:id'>
           <OpenBook />
         </Route>
+        <Footer />
       </Router>
     </>
   )

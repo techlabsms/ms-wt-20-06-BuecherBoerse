@@ -7,5 +7,10 @@ const login = [
   { id: 1, url: './#', text: 'anmelden' },
   { id: 2, url: './#', text: 'login' },
 ]
+const footer = [
+  { id: 1, url: './#', text: 'über uns' },
+  { id: 2, url: './#', text: 'impressum' },
+  { id: 3, url: './#', text: 'datenschutz' },
+]
 
-export { links, login }
+export { links, login, footer }
