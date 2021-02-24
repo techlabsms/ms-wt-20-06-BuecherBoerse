@@ -3,8 +3,19 @@ import GenreFilter from '../components/GenreFilter'
 import Shelf from '../components/Shelf'
 import availableBooks from '../components/books'
 import SearchBar from '../components/SearchBar'
+const api = 'http://localhost:4000/api/books/'
 
 const Marktplatz = () => {
+  const fetchBooks = async () => {
+    try {
+      let response = await fetch(api)
+      let bookList = await response.json()
+      console.log(bookList)
+    } catch (err) {
+      console.log('could not fetch books')
+    }
+  }
+
   const allGenres = [
     'alle',
     ...new Set(availableBooks.map((book) => book.genre)),
@@ -21,17 +32,18 @@ const Marktplatz = () => {
     setBooks(filteredBooks)
   }
 
-  useEffect(
-    function searchBooks() {
-      let searchedBooks = availableBooks.filter(
-        (book) =>
-          book.title.toLowerCase().includes(search.toLowerCase()) ||
-          book.author.toLowerCase().includes(search.toLowerCase())
-      )
-      setBooks(searchedBooks)
-    },
-    [search]
-  )
+  useEffect(() => {
+    let searchedBooks = availableBooks.filter(
+      (book) =>
+        book.title.toLowerCase().includes(search.toLowerCase()) ||
+        book.author.toLowerCase().includes(search.toLowerCase())
+    )
+    setBooks(searchedBooks)
+  }, [search])
+
+  useEffect(() => {
+    fetchBooks()
+  }, [])
 
   return (
     <>
