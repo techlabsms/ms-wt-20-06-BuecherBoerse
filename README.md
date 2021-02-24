@@ -1,4 +1,6 @@
-# ms-wt-20-06-BuecherBoerse
+# ms-wt-20-06-BuecherBoerse :closed_book: :green_book: :blue_book: 📙 :orange_book: :notebook_with_decorative_cover: :ledger:
+# aka Bücherregal
+
 ### Doku zum Frontend
 [Öffne Frontend](client/)
 ### Doku zum Backend
