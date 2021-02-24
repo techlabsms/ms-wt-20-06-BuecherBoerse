@@ -23,11 +23,11 @@ const OpenBook = () => {
         <img src={img} alt={title} />
         <div className='open-book-info'>
           <header>
-            <h3>beschreibung</h3>
+            <h3>Beschreibung</h3>
             <p>{desc}</p>
           </header>
           <p>
-            genre: <span>{genre}</span>
+            Genre: <span>{genre}</span>
           </p>
           <footer>
             <button className='btn'>Jetzt vormerken</button>

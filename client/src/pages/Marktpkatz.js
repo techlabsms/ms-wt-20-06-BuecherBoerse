@@ -8,11 +8,20 @@ const api = 'http://localhost:4000/api/books/'
 const Marktplatz = () => {
   const fetchBooks = async () => {
     try {
-      let response = await fetch(api)
-      let bookList = await response.json()
+      const response = await fetch(api)
+      if (response.status >= 200 && response.status <= 299) {
+        console.log('successfully fetched something')
+        console.log(response.headers.get('Content-Type'))
+        console.log(response.statusText)
+        console.log(response.type)
+        console.log(response.url)
+      } else {
+        console.log("oooops, that fetchin' went wrong somehow")
+      }
+      const bookList = await response.json()
       console.log(bookList)
     } catch (err) {
-      console.log('could not fetch books')
+      console.log('errooooorrrrrrrr....')
     }
   }
 

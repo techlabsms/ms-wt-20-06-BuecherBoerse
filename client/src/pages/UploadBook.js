@@ -38,13 +38,13 @@ const UploadBook = () => {
         <form className='book-form' onSubmit={handleSubmit}>
           <div className='form-control'>
             <label htmlFor='image' name='image'>
-              bild:
+              Bild:
             </label>
             <input type='file' id='image' name='image'></input>
           </div>
           <div className='form-control'>
             <label htmlFor='title' name='title'>
-              titel:
+              Titel:
             </label>
             <input
               type='text'
@@ -57,7 +57,7 @@ const UploadBook = () => {
           </div>
           <div className='form-control'>
             <label htmlFor='author' name='author'>
-              autor:
+              Autor:
             </label>
             <input
               type='text'
@@ -70,7 +70,7 @@ const UploadBook = () => {
           </div>
           <div className='form-control'>
             <label htmlFor='genre' name='genre'>
-              genre:
+              Genre:
             </label>
             <input
               type='text'
@@ -83,7 +83,7 @@ const UploadBook = () => {
           </div>
           <div className='form-control'>
             <label htmlFor='language' name='language'>
-              sprache:
+              Sprache:
             </label>
             <input
               type='text'
@@ -96,7 +96,7 @@ const UploadBook = () => {
           </div>
           <div className='form-control'>
             <label htmlFor='condition' name='condition'>
-              zustand:
+              Zustand:
             </label>
             <input
               type='text'
@@ -109,7 +109,7 @@ const UploadBook = () => {
           </div>
           <div className='form-control'>
             <label htmlFor='desc' name='desc'>
-              beschreibung:
+              Beschreibung:
             </label>
             <textarea
               id='desc'
@@ -123,10 +123,10 @@ const UploadBook = () => {
           </div>
           <div className='btn-containr'>
             <button className='btn' type='submit' onSubmit={handleSubmit}>
-              hochladen
+              Hochladen
             </button>
             <button className='btn' type='reset'>
-              löschen
+              Löschen
             </button>
           </div>
         </form>
