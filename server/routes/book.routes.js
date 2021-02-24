@@ -6,7 +6,7 @@ const router = express.Router()
 
 router.route('/api/books') //Seite mit allen hochgeladenen Büchern
     .get(bookCtrl.list)
-    .post(authCtrl.requireSignin, bookCtrl.create)
+    .post(bookCtrl.create) // authCtrl.requireSignin
 
 router.route('/api/books/:bookId')
     .get(bookCtrl.read)		//keine Registrierung nötig

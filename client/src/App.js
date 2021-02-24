@@ -1,47 +1,27 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 import Navbar from './components/Navbar'
-import GenreFilter from './components/GenreFilter'
-import Shelf from './components/Shelf'
-import availableBooks from './components/books'
-import SearchBar from './components/SearchBar'
+import Marktplatz from './pages/Marktpkatz'
+import OpenBook from './pages/OpenBook'
+import UploadBook from './pages/UploadBook'
+import Footer from './components/Footer'
 
 const App = () => {
-  const allGenres = [
-    'alle',
-    ...new Set(availableBooks.map((book) => book.genre)),
-  ]
-  const [search, setSearch] = useState('')
-  const [genres] = useState(allGenres)
-  const [books, setBooks] = useState(availableBooks)
-
-  const filterBooks = (genre) => {
-    if (genre === 'alle') {
-      return setBooks(availableBooks)
-    }
-    let filteredBooks = availableBooks.filter((book) => book.genre === genre)
-    setBooks(filteredBooks)
-  }
-
-  useEffect(
-    function searchBooks() {
-      let searchedBooks = availableBooks.filter(
-        (book) =>
-          book.title.toLowerCase().includes(search.toLowerCase()) ||
-          book.author.toLowerCase().includes(search.toLowerCase())
-      )
-      setBooks(searchedBooks)
-    },
-    [search]
-  )
-
   return (
     <>
-      <Navbar />
-      <main>
-        <SearchBar search={search} setSearch={setSearch} />
-        <GenreFilter genres={genres} filterBooks={filterBooks} />
-        <Shelf books={books} />
-      </main>
+      <Router>
+        <Navbar />
+        <Route exact path='/'>
+          <Marktplatz />
+        </Route>
+        <Route path='/uploadbook'>
+          <UploadBook />
+        </Route>
+        <Route path='/openbook/:id'>
+          <OpenBook />
+        </Route>
+        <Footer />
+      </Router>
     </>
   )
 }

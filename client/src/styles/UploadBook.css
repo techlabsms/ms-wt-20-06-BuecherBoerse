@@ -1,0 +1,29 @@
+/* Upload Book */
+.book-form {
+  background-color: var(--brnd-clr);
+  color: var(--bckgrnd-clr);
+  max-width: var(--mx-wdth);
+  padding: 1.5rem 2rem;
+  border-radius: var(--brdr-rds-2);
+  box-shadow: var(--frm-shdw);
+  margin: 1rem auto;
+}
+
+.form-control {
+  margin: 0.5rem 0;
+  display: grid;
+  grid-template-columns: 7rem 1fr;
+  align-items: center;
+  text-align: start;
+}
+
+.book-form input,
+textarea {
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--brdr-rds);
+}
+
+.btn {
+  background: var(--bckgrnd-clr);
+  color: var(--brnd-clr);
+}
