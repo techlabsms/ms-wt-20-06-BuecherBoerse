@@ -21,18 +21,19 @@ Server starten
 npm run development
 ```
 
-Im Browser aufrufen:
-http://localhost:3000
-
-### In der Verwendung
-devBundle.compile aus server.js entfernen
+Später dann
 ```
-npm run build
 npm run start
 ```
 
+
+Im Browser aufrufen:
+http://localhost:3000
+
+
 ### Beschreibung
 User login backend mit create, update, delete (CRUD) und authentication-authorization (auth)
+Testen mit https://install.advancedrestclient.com/install
 
 #### application programming interface (API)
 | Route         | HTTP Methode           | Beschreibung  |
@@ -45,8 +46,6 @@ User login backend mit create, update, delete (CRUD) und authentication-authoriz
 | `/auth/signin`        | `POST`    | Anmelden|
 | `/auth/signout`       | `GET`     | Abmelden|
 
-Testen mit https://install.advancedrestclient.com/install
-
 ### Benutzer Felder in der Datenbank
 | Feld        | Typ           | Beschreibung  |
 | ------------- |:-------------:| -----:|
@@ -55,3 +54,25 @@ Testen mit https://install.advancedrestclient.com/install
 | password  | string| Notwendig Passwort wird verschlüsselt gespeichert|
 | created   | Date  | Wann wurde der Benutzer erstellt? Automatisch generiert|
 | updated   | Date  | Wann wurde der Benutzer aktualisiert? Automatisch generiert|
+
+### Bücher API
+| Route         | HTTP Methode           | Beschreibung  |
+| ------------- |:-------------:| -----:|
+| `/api/books/`          |`POST`     | Erstelle Buch     |
+| `/api/books/`          | `GET`     | Liste aller Bücher  |
+| `/api/books/:bookId`   | `GET`     | Finde ein bestimmtes Buch  |
+| `/api/books/:bookId`   | `PUT`     | Verändere Buch  |
+| `/api/books/:bookId`   | `DELETE`  | Lösche Buch  |
+
+### Bücher Felder in der Datenbank
+| Feld        | Typ           | Beschreibung  |
+| ------------- |:-------------:| -----:|
+| name      | string| Notwendig |
+| author    | string| Notwendig |
+| category  | string| optional  |
+| language  | string| optional  |
+| condition | string| optional  |
+| status    | string| optional  |
+| owner     | User  | Wird automatisch generiert |
+| created   | Datum | Wird automatisch generiert |
+| updated   | Datum | Wird automatisch generiert |
