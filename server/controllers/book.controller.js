@@ -4,16 +4,17 @@ import errorHandler from './../helpers/dbErrorHandler'
 
 const create = async (req, res) => {
     const book = new Book(req.body)
-try {
-    await book.save()
-    return res.status(200).json({
-        message: "Buch erfolgreich hochgeladen!",
-        buch: book
-    })
-} catch (err) {
-    return res.status(400).json({
-        message: errorHandler.getErrorMessage(err)
-    })
+    try {
+        // get user which is creating the book
+        await book.save()
+        return res.status(200).json({
+            message: "Buch erfolgreich hochgeladen!",
+            buch: book
+        })
+    } catch (err) {
+        return res.status(400).json({
+            message: errorHandler.getErrorMessage(err)
+        })
     }
 }
 
@@ -86,8 +87,8 @@ const remove = async (req, res) => {
 
 
 export default {
-	create,
-	list,
+    create,
+    list,
     bookByID,
     read,
     update,
