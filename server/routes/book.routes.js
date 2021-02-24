@@ -6,12 +6,12 @@ import bookCtrl from '../controllers/book.controller'
 const router = express.Router()
 
 router.route('/api/books') //Seite mit allen hochgeladenen Büchern
-	.get(bookCtrl.list)
-	.post(authCtrl.requireSignin, bookCtrl.create)
+    .get(bookCtrl.list)
+    .post(bookCtrl.create) // authCtrl.requireSignin
 
 router.route('/api/books/:bookId')
-	.get(bookCtrl.read)		//keine Registrierung nötig
-	.put(authCtrl.requireSignin, authCtrl.hasAuthorizationForBook, bookCtrl.update) // Update with PUT
+    .get(bookCtrl.read)		//keine Registrierung nötig
+    .put(authCtrl.requireSignin, authCtrl.hasAuthorizationForBook, bookCtrl.update) // Update with PUT
     .delete(authCtrl.requireSignin, authCtrl.hasAuthorizationForBook, bookCtrl.remove) // Remove with DELETE
 
 router.param('bookId', bookCtrl.bookByID)

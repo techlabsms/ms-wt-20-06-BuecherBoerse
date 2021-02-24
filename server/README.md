@@ -69,10 +69,11 @@ Testen mit https://install.advancedrestclient.com/install
 | ------------- |:-------------:| -----:|
 | name      | string| Notwendig |
 | author    | string| Notwendig |
-| category  | string| optional  |
-| language  | string| optional  |
-| condition | string| optional  |
+| category  | string| Notwendig |
+| language  | string| Notwendig |
+| condition | string| Notwendig |
+| description | string | Notwendig |
 | status    | string| optional  |
-| owner     | User  | Wird automatisch generiert |
+| owner     | User  | Notwendig Wird später automatisch generiert |
 | created   | Datum | Wird automatisch generiert |
 | updated   | Datum | Wird automatisch generiert |
