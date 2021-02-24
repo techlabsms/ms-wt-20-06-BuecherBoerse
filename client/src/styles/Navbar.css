@@ -37,6 +37,10 @@
   transition: var(--trnstn);
 }
 
+.links-container {
+  padding: 0.5rem;
+}
+
 .show-menu {
   height: 12rem;
   box-shadow: var(--bx-shdw);
@@ -61,6 +65,11 @@
     justify-content: space-between;
     height: auto;
     width: 66vw;
+  }
+
+  .links-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 

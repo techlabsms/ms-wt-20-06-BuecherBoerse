@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
 import { FaBars } from 'react-icons/fa'
 import logo from '../buecherregal.svg'
-import '../styles/Navbar.css'
-import LinkContainer from './LinkContainer'
+import MenuLink from './MenuLink'
 import LoginBtns from './LoginBtns'
+import { links } from './linksDB'
+import '../styles/Navbar.css'
 
 const Navbar = () => {
   const [showLinks, setShowLinks] = useState(false)
@@ -34,7 +35,11 @@ const Navbar = () => {
         </button>
       </div>
       <div className={showLinks ? 'nav-menu show-menu' : 'nav-menu'}>
-        <LinkContainer />
+        <ul className='links-container'>
+          {links.map((link) => {
+            return <MenuLink key={link.id} {...link} />
+          })}
+        </ul>
         <LoginBtns />
       </div>
     </nav>
