@@ -15,10 +15,7 @@ const BookSchema = new mongoose.Schema({
     category: {
         type: String,
         trim: true,
-<<<<<<< HEAD
-=======
         required: "Bitte ein Genre eintragen"
->>>>>>> main
     },
     language: {
         type: String,
