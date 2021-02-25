@@ -2,19 +2,21 @@ import Book from '../models/book.model'
 import extend from 'lodash/extend'
 import errorHandler from './../helpers/dbErrorHandler'
 import multer from 'multer'
+import { unlink } from 'fs' 
 
+
+//Buch wird erstellt
 const create = async (req, res) => {
-    const book = new Book(req.body)
-    book.image = req.file.path
-    /*const newBook = book ({
-        image: req.file.path
-    }) */
-try {
-    await book.save() 
-    return res.status(200).json({
-        message: "Buch erfolgreich hochgeladen!",
-        bild: req.file,
-        buch: book
+    try {
+        const book = new Book(req.body)
+        book.image = req.file.path    
+        await book.save() 
+        return res.status(200).json({
+            message: "Buch erfolgreich hochgeladen!",
+            buch: book,
+            bild: req.file,
+            file: `uploads/${req.file.filename}` //Bild wird angezeigt, wenn im Frontent ein Image Tag vorliegt (src=file)
+
     })
 } catch (err) {
     return res.status(400).json({
@@ -62,8 +64,16 @@ const read = (req, res) => {
 //verändere Buch mit PUT
 const update = async (req, res) => {
     try {
-        let book = req.profile
-        // lodash - merge and extend book profile
+        let book = req.profile 
+        //Verändern des Bildes und löschen des alten Bildes
+        if (req.file != undefined) {
+            console.log('file detected')
+            unlink(book.image, (err) =>{})
+            book.image = req.file.path
+        } else if (req.file === undefined){
+            console.log('no file detected')
+        } 
+        //Verändern der restlichen Buchdaten
         book = extend(book, req.body)
         book.updated = Date.now()
         await book.save()
@@ -80,6 +90,12 @@ const update = async (req, res) => {
 const remove = async (req, res) => {
     try {
         let book = req.profile
+        const path = book.image
+        //löscht Bild des Buches aus der Datenbank
+        unlink(path, (err) => {
+            console.log('successfully deleted ' + path)
+        }) 
+        //löscht die restlichen Buchdaten
         let deletedBook = await book.remove()
         res.json(deletedBook)
     } catch (err) {
