@@ -39,7 +39,18 @@ const upload = multer({
 //der Rest des bodies wird ganz normal durch die book.create funktion verarbeitet
 const singleUpload = upload.single('bookImage')
 
+const imageUpload = async (req, res) =>{
+	try{
+		upload.single('bookImage')
+    } catch (err) {
+    	return res.status('400').json({
+        	message: errorHandler.getErrorMessage(err)
+    	})
+    }
+}
+
 
 export default {
 	singleUpload,
+	imageUpload,
 }
