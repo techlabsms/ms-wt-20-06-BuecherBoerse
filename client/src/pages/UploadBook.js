@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import ReturnTo from '../components/ReturnTo'
 import '../styles/UploadBook.css'
+import Alert from '../components/Alert'
 
 const UploadBook = () => {
   const [newBook, setNewBook] = useState({
@@ -12,6 +13,8 @@ const UploadBook = () => {
     condition: '',
     desc: '',
   })
+  const [alert, setAlert] = useState(false)
+
   const handleChange = (e) => {
     let name = e.target.name
     let value = e.target.value
@@ -20,6 +23,7 @@ const UploadBook = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
     console.log(newBook)
+    setAlert(true)
     setNewBook({
       image: '',
       title: '',
@@ -131,6 +135,7 @@ const UploadBook = () => {
           </div>
         </form>
       </section>
+      {alert && <Alert alert={alert} setAlert={setAlert} />}
     </main>
   )
 }

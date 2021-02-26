@@ -7,6 +7,7 @@
   --fnt-sz: 0.875rem;
   --bckgrnd-clr: #fff;
   --brnd-clr: #b00055;
+  --sm-clr: #333;
   --clr-gry: #d6d6d6;
   --fnt-fmly: 'Poppins', sans-serif;
   --mn-shdw: 0 1px 5px rgba(0, 0, 0, 0.75);
@@ -116,4 +117,9 @@ main {
 /* Utilities */
 .italic {
   font-style: italic;
+}
+
+.basic-flex {
+  display: flex;
+  align-items: center;
 }

@@ -8,7 +8,7 @@ const api = 'http://localhost:4000/api/books/'
 const Marktplatz = () => {
   const fetchBooks = async () => {
     try {
-      const response = await fetch(api)
+      let response = await fetch(api)
       if (response.status >= 200 && response.status <= 299) {
         console.log('successfully fetched something')
         console.log(response.headers.get('Content-Type'))
@@ -18,7 +18,7 @@ const Marktplatz = () => {
       } else {
         console.log("oooops, that fetchin' went wrong somehow")
       }
-      const bookList = await response.json()
+      let bookList = await response.json()
       console.log(bookList)
     } catch (err) {
       console.log('errooooorrrrrrrr....')
@@ -29,6 +29,7 @@ const Marktplatz = () => {
     'alle',
     ...new Set(availableBooks.map((book) => book.genre)),
   ]
+
   const [search, setSearch] = useState('')
   const [genres] = useState(allGenres)
   const [books, setBooks] = useState(availableBooks)
