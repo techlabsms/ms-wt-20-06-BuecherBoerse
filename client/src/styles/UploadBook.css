@@ -2,10 +2,9 @@
 .book-form {
   background-color: var(--brnd-clr);
   color: var(--bckgrnd-clr);
-  max-width: var(--mx-wdth);
   padding: 1.5rem 2rem;
   border-radius: var(--brdr-rds-2);
-  box-shadow: var(--frm-shdw);
+  box-shadow: var(--bx-shdw);
   margin: 1rem auto;
 }
 
@@ -26,4 +25,24 @@ textarea {
 .btn {
   background: var(--bckgrnd-clr);
   color: var(--brnd-clr);
+}
+
+@media screen and (min-width: 800px) {
+  .book-form {
+    max-width: var(--mx-wdth);
+    padding: 2rem 3rem;
+    margin: 2rem auto;
+  }
+
+  .form-control {
+    margin: 1rem 2rem;
+    display: grid;
+    grid-template-columns: 10rem 2fr;
+  }
+
+  .book-form input,
+  textarea {
+    padding: 1rem;
+    width: 50vw;
+  }
 }

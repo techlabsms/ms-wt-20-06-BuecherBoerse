@@ -1,13 +1,13 @@
-import React, { useEffect } from 'react'
-import { FaCheckCircle } from 'react-icons/fa'
-import '../styles/Alert.css'
+import React, { useEffect } from 'react';
+import { FaCheckCircle } from 'react-icons/fa';
+import '../styles/Alert.css';
 
-const Alert = ({ alert, setAlert }) => {
+const Alert = ({ setAlert }) => {
   useEffect(() => {
     setTimeout(() => {
-      setAlert(!alert)
-    }, 2000)
-  })
+      setAlert(false);
+    }, 3000);
+  });
 
   return (
     <div className='alert basic-flex'>
@@ -16,7 +16,7 @@ const Alert = ({ alert, setAlert }) => {
       </span>
       <p>Das Buch wurde erfolgreich hinzugefügt!</p>
     </div>
-  )
-}
+  );
+};
 
-export default Alert
+export default Alert;

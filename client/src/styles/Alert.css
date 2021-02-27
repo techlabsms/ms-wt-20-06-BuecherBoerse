@@ -8,7 +8,7 @@
   padding: 1rem;
   border-radius: var(--brdr-rds-2);
   box-shadow: var(--frm-shdw);
-  animation: alert-slideUp 2s;
+  animation: alert-popup 3s ease-in-out;
 }
 
 .alert p {
@@ -23,17 +23,21 @@
   color: var(--brnd-clr);
 }
 
-@keyframes alert-slideUp {
+@keyframes alert-popup {
   0% {
-    bottom: -6rem;
+    opacity: 0;
   }
 
-  50% {
-    bottom: 1rem;
+  25% {
+    opacity: 1;
+  }
+
+  75% {
+    opacity: 1;
   }
 
   100% {
-    bottom: -6rem;
+    opacity: 0;
   }
 }
 

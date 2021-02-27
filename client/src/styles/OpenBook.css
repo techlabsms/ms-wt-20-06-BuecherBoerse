@@ -1,14 +1,12 @@
 .open-book {
   display: flex;
   flex-flow: column;
-  align-items: center;
   background: var(--bckgrnd-clr);
   padding: 1rem;
 }
 
 .title {
   color: var(--brnd-clr);
-  text-align: center;
   padding: 0.25rem;
 }
 
@@ -40,7 +38,6 @@ span {
 @media screen and (min-width: 800px) {
   .open-book {
     display: grid;
-    place-items: center;
     width: 90vw;
     height: auto;
     grid-template-columns: repeat(2, 3fr);

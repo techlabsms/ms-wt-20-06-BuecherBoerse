@@ -1,7 +1,7 @@
 /* Book */
 .book {
   display: flex;
-  align-items: center;
+  text-align: left;
   background-color: var(--brnd-clr);
   color: var(--bckgrnd-clr);
   border-radius: var(--brdr-rds);

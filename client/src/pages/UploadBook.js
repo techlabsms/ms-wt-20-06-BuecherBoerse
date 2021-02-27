@@ -1,50 +1,53 @@
-import React, { useState } from 'react'
-import ReturnTo from '../components/ReturnTo'
-import '../styles/UploadBook.css'
-import Alert from '../components/Alert'
+import React, { useState } from 'react';
+import ReturnTo from '../components/ReturnTo';
+import '../styles/UploadBook.css';
+import Alert from '../components/Alert';
 
 const UploadBook = () => {
   const [newBook, setNewBook] = useState({
-    image: '',
     title: '',
     author: '',
     genre: '',
     language: '',
     condition: '',
     desc: '',
-  })
-  const [alert, setAlert] = useState(false)
+  });
+  const [bookImage, setBookImage] = useState();
+  const [alert, setAlert] = useState(false);
 
-  const handleChange = (e) => {
-    let name = e.target.name
-    let value = e.target.value
-    setNewBook({ ...newBook, [name]: value })
-  }
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    console.log(newBook)
-    setAlert(true)
+  const textChange = (e) => {
+    setNewBook({ ...newBook, [e.target.name]: e.target.value });
+  };
+  const imageChange = (e) => {
+    setBookImage(e.target.files[0]);
+  };
+
+  const uploadAll = (e) => {
+    e.preventDefault();
+    console.log(bookImage, newBook);
+    setAlert(true);
     setNewBook({
-      image: '',
       title: '',
       author: '',
       genre: '',
       language: '',
       condition: '',
       desc: '',
-    })
-  }
+    });
+    setBookImage();
+  };
+
   return (
     <main>
       <ReturnTo />
       <h2 className='title'>Buch hochladen</h2>
       <section className='section-center'>
-        <form className='book-form' onSubmit={handleSubmit}>
+        <form className='book-form' onSubmit={uploadAll}>
           <div className='form-control'>
             <label htmlFor='image' name='image'>
               Bild:
             </label>
-            <input type='file' id='image' name='image'></input>
+            <input type='file' id='image' name='image' onChange={imageChange} />
           </div>
           <div className='form-control'>
             <label htmlFor='title' name='title'>
@@ -56,7 +59,7 @@ const UploadBook = () => {
               name='title'
               placeholder='Titel des Buches'
               value={newBook.title}
-              onChange={handleChange}
+              onChange={textChange}
             ></input>
           </div>
           <div className='form-control'>
@@ -69,7 +72,7 @@ const UploadBook = () => {
               name='author'
               placeholder='Autor des Buches'
               value={newBook.author}
-              onChange={handleChange}
+              onChange={textChange}
             ></input>
           </div>
           <div className='form-control'>
@@ -82,7 +85,7 @@ const UploadBook = () => {
               name='genre'
               placeholder='Genre des Buches'
               value={newBook.genre}
-              onChange={handleChange}
+              onChange={textChange}
             ></input>
           </div>
           <div className='form-control'>
@@ -95,7 +98,7 @@ const UploadBook = () => {
               name='language'
               placeholder='Sprache des Buches'
               value={newBook.language}
-              onChange={handleChange}
+              onChange={textChange}
             ></input>
           </div>
           <div className='form-control'>
@@ -108,7 +111,7 @@ const UploadBook = () => {
               name='condition'
               placeholder='Zustand des Buches'
               value={newBook.condition}
-              onChange={handleChange}
+              onChange={textChange}
             ></input>
           </div>
           <div className='form-control'>
@@ -122,11 +125,11 @@ const UploadBook = () => {
               cols='30'
               rows='5'
               value={newBook.desc}
-              onChange={handleChange}
+              onChange={textChange}
             ></textarea>
           </div>
           <div className='btn-containr'>
-            <button className='btn' type='submit' onSubmit={handleSubmit}>
+            <button className='btn' type='submit' onSubmit={uploadAll}>
               Hochladen
             </button>
             <button className='btn' type='reset'>
@@ -135,9 +138,9 @@ const UploadBook = () => {
           </div>
         </form>
       </section>
-      {alert && <Alert alert={alert} setAlert={setAlert} />}
+      {alert && <Alert setAlert={setAlert} />}
     </main>
-  )
-}
+  );
+};
 
-export default UploadBook
+export default UploadBook;
