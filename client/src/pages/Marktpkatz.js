@@ -8,17 +8,17 @@ const api = 'http://localhost:4000/api/books/';
 const Marktplatz = () => {
   const fetchBooks = async () => {
     try {
-      let response = await fetch(api);
-      if (response.status >= 200 && response.status <= 299) {
+      let res = await fetch(api);
+      if (res.status >= 200 && res.status <= 299) {
         console.log('successfully fetched something');
-        console.log(response.headers.get('Content-Type'));
-        console.log(response.statusText);
-        console.log(response.type);
-        console.log(response.url);
+        console.log(res.headers.get('Content-Type'));
+        console.log(res.statusText);
+        console.log(res.type);
+        console.log(res.url);
       } else {
-        console.log("oooops, that fetchin' went wrong somehow");
+        throw new Error('Hoppala, da ist was schief gelaufen');
       }
-      let bookList = await response.json();
+      let bookList = await res.json();
       console.log(bookList);
     } catch (err) {
       console.log('errooooorrrrrrrr....');
