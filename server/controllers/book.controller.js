@@ -8,7 +8,13 @@ import { unlink } from 'fs'
 const create = async (req, res) => {
     try {
         const book = new Book(req.body)
-        book.image = req.file.path    
+        try {
+            book.image = req.file.path
+        } catch (err) {
+            return res.status(400).json({
+            message: 'You need t upload an image'
+            }) 
+        }   
         await book.save() 
         return res.status(200).json({
             message: "Buch erfolgreich hochgeladen!",
@@ -91,7 +97,6 @@ const update = async (req, res) => {
 const remove = async (req, res) => {
     try {
         let book = req.profile
-        const path = book.image
         //löscht Bild des Buches aus der Datenbank
         unlink(book.image, (err) =>{
             if (err) {
