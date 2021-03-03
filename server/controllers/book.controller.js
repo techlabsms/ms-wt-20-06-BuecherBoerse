@@ -65,7 +65,7 @@ const update = async (req, res) => {
     try {
         let book = req.profile 
         //Verändern des Bildes und löschen des alten Bildes
-        if (req.file != undefined) {
+        if (req.file !== undefined) {
             console.log('file detected')
             unlink(book.image, (err) =>{})
             book.image = req.file.path
