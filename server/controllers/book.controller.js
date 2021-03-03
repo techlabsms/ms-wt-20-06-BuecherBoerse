@@ -1,7 +1,6 @@
 import Book from '../models/book.model'
 import extend from 'lodash/extend'
 import errorHandler from './../helpers/dbErrorHandler'
-import multer from 'multer'
 import { unlink } from 'fs' 
 
 
@@ -13,8 +12,8 @@ const create = async (req, res) => {
         await book.save() 
         return res.status(200).json({
             message: "Buch erfolgreich hochgeladen!",
-            buch: book,
-            bild: req.file,
+            book: book,
+            image: req.file,
             file: `uploads/${req.file.filename}` //Bild wird angezeigt, wenn im Frontent ein Image Tag vorliegt (src=file)
 
     })
