@@ -13,6 +13,10 @@ const BookSchema = new mongoose.Schema({
         trim: true,
         required: 'Autor des Buches fehlt'
     },
+  	image: {
+		    type: String,
+		    required:'Kein Bild ausgewählt',
+	  }, 
     category: {
         type: String,
         trim: true,
@@ -33,6 +37,7 @@ const BookSchema = new mongoose.Schema({
         required: "Bitte beschreibe dein Buch"
     },
     //User ID, kann momentan nur manuell eingetragen werden?
+    // Erstmal einen String zum testen
     owner: {
         //type: mongoose.Schema.Types.ObjectId,
         //ref: 'User',
