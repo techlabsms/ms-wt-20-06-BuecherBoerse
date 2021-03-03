@@ -93,8 +93,12 @@ const remove = async (req, res) => {
         let book = req.profile
         const path = book.image
         //löscht Bild des Buches aus der Datenbank
-        unlink(path, (err) => {
-            console.log('successfully deleted ' + path)
+        unlink(book.image, (err) =>{
+            if (err) {
+                return res.status(400).json({
+                message: 'internal server error'
+                })
+            }
         }) 
         //löscht die restlichen Buchdaten
         let deletedBook = await book.remove()
