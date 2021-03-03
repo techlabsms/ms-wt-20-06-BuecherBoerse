@@ -1,5 +1,5 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 const ReturnTo = () => {
   return (
@@ -8,7 +8,7 @@ const ReturnTo = () => {
         zurück zum Marktpkatz
       </Link>
     </div>
-  )
-}
+  );
+};
 
-export default ReturnTo
+export default ReturnTo;
