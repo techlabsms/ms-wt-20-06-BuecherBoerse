@@ -8,7 +8,6 @@ import userRoutes from './routes/user.routes'
 import authRoutes from './routes/auth.routes'
 import bookRoutes from './routes/book.routes'
 import path from 'path'
-import multer from 'multer'
 
 const CURRENT_WORKING_DIR = process.cwd()
 const app = express()
