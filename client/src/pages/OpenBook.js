@@ -1,19 +1,20 @@
-import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
-import books from '../components/books'
-import ReturnTo from '../components/ReturnTo'
-import '../styles/OpenBook.css'
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import books from '../components/books';
+import ReturnTo from '../components/ReturnTo';
+import '../styles/OpenBook.css';
 
 const OpenBook = () => {
-  const [openBook, setOpenBook] = useState({})
-  const { id } = useParams()
+  const [openBook, setOpenBook] = useState({});
+  const { id } = useParams();
 
   useEffect(() => {
-    let fetchBook = books.find((book) => book.id === parseInt(id))
-    setOpenBook(fetchBook)
-  }, [id])
+    let fetchBook = books.find((book) => book.id === parseInt(id));
+    setOpenBook(fetchBook);
+  }, [id]);
 
-  const { img, title, author, genre, desc } = openBook
+  const { img, title, author, genre, desc } = openBook;
+
   return (
     <main>
       <ReturnTo />
@@ -30,13 +31,15 @@ const OpenBook = () => {
             Genre: <span>{genre}</span>
           </p>
           <footer>
-            <button className='btn'>Jetzt vormerken</button>
-            <button className='btn'>Jetzt ausleihen</button>
+            <div className='btn-container'>
+              <button className='btn'>Jetzt vormerken</button>
+              <button className='btn'>Jetzt ausleihen</button>
+            </div>
           </footer>
         </div>
       </section>
     </main>
-  )
-}
+  );
+};
 
-export default OpenBook
+export default OpenBook;

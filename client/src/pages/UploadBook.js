@@ -3,6 +3,8 @@ import ReturnTo from '../components/ReturnTo';
 import '../styles/UploadBook.css';
 import Alert from '../components/Alert';
 import ImageUploader from '../components/ImageUploader';
+import { FaCheckCircle, FaFlushed, FaPoo } from 'react-icons/fa';
+
 const api = 'http://localhost:4000/api/books/';
 
 const UploadBook = () => {
@@ -15,7 +17,8 @@ const UploadBook = () => {
     desc: '',
   });
   const [bookImage, setBookImage] = useState();
-  const [alert, setAlert] = useState(false);
+  const [alert, setAlert] = useState({ display: false, icon: '', msg: '' });
+  const { name, author, genre, language, condition, desc } = newBook;
 
   const textChange = (e) => {
     setNewBook({ ...newBook, [e.target.name]: e.target.value });
@@ -23,37 +26,56 @@ const UploadBook = () => {
 
   const uploadAll = (e) => {
     e.preventDefault();
-    const bookData = new FormData();
-    bookData.append('file', bookImage);
-    bookData.append('name', newBook.name);
-    bookData.append('author', newBook.author);
-    bookData.append('category', newBook.genre);
-    bookData.append('language', newBook.language);
-    bookData.append('condition', newBook.condition);
-    bookData.append('description', newBook.desc);
-    fetch(api, {
-      method: 'POST',
-      body: bookData,
-    })
-      .then((res) => {
-        if (res >= 200 && res <= 299) {
-          return res.json();
-        } else {
-          throw new Error('Hoppala, da ist was schief gegangen');
-        }
+    if (name && author && genre && language && condition) {
+      const bookData = new FormData();
+      bookData.append('file', bookImage);
+      bookData.append('name', name);
+      bookData.append('author', author);
+      bookData.append('category', genre);
+      bookData.append('language', language);
+      bookData.append('condition', condition);
+      bookData.append('description', desc);
+      fetch(api, {
+        method: 'POST',
+        body: bookData,
       })
-      .then((postedBook) => console.log('Success!', postedBook))
-      .catch((err) => console.log('Hochladen fehlgeschlagen', err));
-    setAlert(true);
-    setNewBook({
-      name: '',
-      author: '',
-      genre: '',
-      language: '',
-      condition: '',
-      desc: '',
-    });
-    setBookImage();
+        .then((res) => {
+          if (res >= 200 && res <= 299) {
+            return res.json();
+          } else {
+            throw new Error('Hoppala, da ist was schief gegangen');
+          }
+        })
+        .then((postedBook) => console.log('Success!', postedBook))
+        .catch((err) => {
+          console.log('Hochladen fehlgeschlagen', err);
+          setAlert({
+            display: true,
+            icon: <FaPoo />,
+            msg: 'Scheisse! Das hat irgendwie nicht geklappt...',
+          });
+        });
+      setAlert({
+        display: true,
+        icon: <FaCheckCircle />,
+        msg: 'Das Buch wurde erfolgreich hinzugefügt',
+      });
+      setNewBook({
+        name: '',
+        author: '',
+        genre: '',
+        language: '',
+        condition: '',
+        desc: '',
+      });
+      setBookImage();
+    } else {
+      setAlert({
+        display: true,
+        icon: <FaFlushed />,
+        msg: 'Halt, da fehlen paar Felder!',
+      });
+    }
   };
 
   return (
@@ -73,7 +95,7 @@ const UploadBook = () => {
                 id='name'
                 name='name'
                 placeholder='Name des Buches'
-                value={newBook.name}
+                value={name}
                 onChange={textChange}
               ></input>
             </div>
@@ -86,7 +108,7 @@ const UploadBook = () => {
                 id='author'
                 name='author'
                 placeholder='Autor des Buches'
-                value={newBook.author}
+                value={author}
                 onChange={textChange}
               ></input>
             </div>
@@ -99,7 +121,7 @@ const UploadBook = () => {
                 id='genre'
                 name='genre'
                 placeholder='Genre des Buches'
-                value={newBook.genre}
+                value={genre}
                 onChange={textChange}
               ></input>
             </div>
@@ -112,7 +134,7 @@ const UploadBook = () => {
                 id='language'
                 name='language'
                 placeholder='Sprache des Buches'
-                value={newBook.language}
+                value={language}
                 onChange={textChange}
               ></input>
             </div>
@@ -125,7 +147,7 @@ const UploadBook = () => {
                 id='condition'
                 name='condition'
                 placeholder='Zustand des Buches'
-                value={newBook.condition}
+                value={condition}
                 onChange={textChange}
               ></input>
             </div>
@@ -139,7 +161,7 @@ const UploadBook = () => {
                 placeholder='Kurze Beschreibung des Buches'
                 cols='30'
                 rows='5'
-                value={newBook.desc}
+                value={desc}
                 onChange={textChange}
               ></textarea>
             </div>
@@ -147,14 +169,28 @@ const UploadBook = () => {
               <button className='btn' type='submit' onSubmit={uploadAll}>
                 Hochladen
               </button>
-              <button className='btn' type='reset'>
+              <button
+                className='btn'
+                type='reset'
+                onClick={() => {
+                  setBookImage();
+                  setNewBook({
+                    name: '',
+                    author: '',
+                    genre: '',
+                    language: '',
+                    condition: '',
+                    desc: '',
+                  });
+                }}
+              >
                 Löschen
               </button>
             </div>
           </div>
         </form>
       </section>
-      {alert && <Alert setAlert={setAlert} />}
+      {alert.display && <Alert {...alert} setAlert={setAlert} />}
     </main>
   );
 };

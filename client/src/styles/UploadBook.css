@@ -34,7 +34,7 @@ textarea {
     margin: 2rem auto;
     display: grid;
     grid-template-columns: repeat(2, 2fr);
-    width: 80vw;
+    width: 70vw;
   }
 
   .form-control {
