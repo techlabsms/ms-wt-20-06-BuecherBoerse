@@ -66,12 +66,14 @@ const update = async (req, res) => {
         let book = req.profile 
         //Verändern des Bildes und löschen des alten Bildes
         if (req.file !== undefined) {
-            console.log('file detected')
-            unlink(book.image, (err) =>{})
+            unlink(book.image, (err) =>{
+                if (err) {
+                    return res.status(400).json({
+                    message: 'internal server error'
+                    })
+                }
+            })
             book.image = req.file.path
-        } else if (req.file === undefined){
-            console.log('no file detected')
-        } 
         //Verändern der restlichen Buchdaten
         book = extend(book, req.body)
         book.updated = Date.now()
