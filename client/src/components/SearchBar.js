@@ -1,5 +1,5 @@
 import React from 'react'
-import './SearchBar.css'
+import '../styles/SearchBar.css'
 
 const SearchBar = ({ search, setSearch }) => {
   return (
@@ -8,7 +8,6 @@ const SearchBar = ({ search, setSearch }) => {
         <input
           type='text'
           className='form'
-          id='userinput'
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           placeholder='Nach Titel oder Autor suchen...'

@@ -7,13 +7,13 @@ import imgCtrl from '../controllers/image.controller'
 const router = express.Router()
 
 router.route('/api/books') //Seite mit allen hochgeladenen Büchern
-	.get(bookCtrl.list)
-	.post(authCtrl.requireSignin, imgCtrl.singleUpload, bookCtrl.create)
+    .get(bookCtrl.list)
+    .post(imgCtrl.singleUpload, bookCtrl.create) // zum testen erstmal kein Login notwendig um buch einzufügen später dann authCtrl.requireSignin davor
 
 router.route('/api/books/:bookId')
 	.get(bookCtrl.read)		//keine Registrierung nötig
 	.put(authCtrl.requireSignin, imgCtrl.singleUpload, authCtrl.hasAuthorizationForBook, bookCtrl.update) // Update with PUT
-    .delete(authCtrl.requireSignin, authCtrl.hasAuthorizationForBook, bookCtrl.remove) // Remove with DELETE
+   .delete(authCtrl.requireSignin, authCtrl.hasAuthorizationForBook, bookCtrl.remove) // Remove with DELETE
 
 router.param('bookId', bookCtrl.bookByID)
 

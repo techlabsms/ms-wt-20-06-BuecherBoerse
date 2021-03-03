@@ -118,8 +118,8 @@ const remove = async (req, res) => {
 
 
 export default {
-	create,
-	list,
+    create,
+    list,
     bookByID,
     read,
     update,

@@ -1,6 +1,6 @@
 import React from 'react'
 import FilterButton from './FilterButton'
-import './GenreFilter.css'
+import '../styles/GenreFilter.css'
 
 const GenreFilter = ({ genres, filterBooks }) => {
   return (

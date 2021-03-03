@@ -1,0 +1,57 @@
+.open-book {
+  display: flex;
+  flex-flow: column;
+  background: var(--bckgrnd-clr);
+  padding: 1rem;
+}
+
+.title {
+  color: var(--brnd-clr);
+  padding: 0.25rem;
+}
+
+.open-book img {
+  width: 12rem;
+  height: 18rem;
+  object-fit: contain;
+  padding: 1rem;
+}
+
+.open-book-info {
+  display: grid;
+  grid-template-rows: repeat(2, auto);
+  gap: 0.5rem;
+  place-items: center;
+}
+
+.open-book-info header {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+.open-book-info h3,
+span {
+  color: var(--brnd-clr);
+}
+
+@media screen and (min-width: 800px) {
+  .open-book {
+    display: grid;
+    width: 90vw;
+    height: auto;
+    grid-template-columns: repeat(2, 3fr);
+    gap: 3rem;
+  }
+
+  .open-book img {
+    width: 20rem;
+    height: auto;
+    object-fit: cover;
+  }
+
+  .open-book-info {
+    grid-template-rows: repeat(3, auto);
+    padding: 1rem;
+  }
+}
