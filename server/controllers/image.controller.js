@@ -17,7 +17,7 @@ const storage = multer.diskStorage({
 //Überprüfung, ob es sich um ein Bild handelt
 const checkFileType  = (req,file, cb) => {
   const filetypes = /jpeg|jpg|png/; // Allowed extention
-  const mimetype = filetypes.test(file.mimetype);   // Check mime
+  const hasMatchingMimetype = filetypes.test(file.mimetype);   // Check mime
 
   if(mimetype == true){
     cb(null,true);
