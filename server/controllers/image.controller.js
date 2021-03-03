@@ -19,7 +19,7 @@ const checkFileType  = (req,file, cb) => {
   const filetypes = /jpeg|jpg|png/; // Allowed extention
   const hasMatchingMimetype = filetypes.test(file.mimetype);   // Check mime
 
-  if(mimetype == true){
+  if(hasMatchingMimetype == true){
     cb(null,true);
   } else {
     cb(null, false);
