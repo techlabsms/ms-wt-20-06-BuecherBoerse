@@ -1,0 +1,37 @@
+.tab-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  border-top-right-radius: var(--brdr-rds-2);
+  border-top-left-radius: var(--brdr-rds-2);
+}
+
+.tab-btn {
+  display: block;
+  border: none;
+  background-color: transparent;
+  padding: 0.5rem 0;
+  cursor: pointer;
+}
+
+/* .tab-btn:hover {
+  background-color: var(--brnd-clr);
+  color: var(--bckgrnd-clr);
+} */
+
+.tab-btn:nth-child(1) {
+  border-top-left-radius: var(--brdr-rds-2);
+}
+
+.tab-btn:nth-child(2) {
+  border-top-right-radius: var(--brdr-rds-2);
+}
+
+@media screen and (min-width: 800px) {
+  .tab-btn {
+    padding: 1rem 0;
+  }
+}
+
+.not-active {
+  background-color: var(--bckgrnd-trnsprnt-1);
+}
