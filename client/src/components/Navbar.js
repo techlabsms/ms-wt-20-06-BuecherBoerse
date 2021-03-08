@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { FaBars } from 'react-icons/fa';
 import logo from '../static/buecherregal.svg';
 import MenuLink from './MenuLink';
@@ -24,7 +25,9 @@ const Navbar = () => {
       className={navbar ? 'nav-center sticky-nav animate-nav' : 'nav-center'}
     >
       <div className='nav-header'>
-        <img src={logo} alt='logo' />
+        <Link to='/'>
+          <img src={logo} alt='logo' />
+        </Link>
         <button
           className='nav-toggle'
           onClick={() => {

@@ -17,9 +17,9 @@ const Marktplatz = () => {
       } else {
         throw new Error('Hoppala, da ist was schief gelaufen');
       }
-      setLoading(false);
     } catch (err) {
       console.log('errooooorrrrrrrr....');
+    } finally {
       setLoading(false);
     }
   };

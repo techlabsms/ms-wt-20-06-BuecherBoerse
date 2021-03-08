@@ -52,7 +52,7 @@ const UploadBook = () => {
           setAlert({
             display: true,
             icon: <FaPoo />,
-            msg: 'Scheisse! Das hat irgendwie nicht geklappt...',
+            msg: 'Das hat irgendwie nicht geklappt...',
           });
         });
       setAlert({

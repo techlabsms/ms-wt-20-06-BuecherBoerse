@@ -26,8 +26,8 @@ textarea {
     padding: 2rem;
     margin: 2rem auto;
     display: grid;
-    grid-template-columns: 1fr 2fr;
-    width: 80vw;
+    grid-template-columns: 2fr 2fr;
+    width: 65vw;
   }
 
   .book-form input,

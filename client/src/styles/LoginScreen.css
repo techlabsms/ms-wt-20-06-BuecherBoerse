@@ -1,6 +1,7 @@
 .hero {
   background: no-repeat url('../static/janko-ferlic-sfL_QOnmy00-unsplash.jpeg');
   background-size: cover;
+  height: 100vh;
 }
 
 .signin-center {
@@ -12,7 +13,7 @@
 }
 
 .form-center {
-  padding: 1.5rem 0.5rem;
+  padding: 1.5rem 1rem;
 }
 
 .form-center input {
@@ -21,8 +22,8 @@
 
 @media screen and (min-width: 800px) {
   .form-center {
-    padding: 2rem 1rem;
-    width: 65vw;
+    padding: 2rem 1.5rem;
+    width: 50vw;
   }
 
   .form-center input {
