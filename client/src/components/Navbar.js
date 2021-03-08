@@ -1,23 +1,23 @@
-import React, { useState } from 'react'
-import { FaBars } from 'react-icons/fa'
-import logo from '../buecherregal.svg'
-import MenuLink from './MenuLink'
-import LoginBtns from './LoginBtns'
-import { links } from './linksDB'
-import '../styles/Navbar.css'
+import React, { useState } from 'react';
+import { FaBars } from 'react-icons/fa';
+import logo from '../static/buecherregal.svg';
+import MenuLink from './MenuLink';
+import LoginBtns from './LoginBtns';
+import { links } from './linksDB';
+import '../styles/Navbar.css';
 
 const Navbar = () => {
-  const [showLinks, setShowLinks] = useState(false)
-  const [navbar, setNavbar] = useState(false)
+  const [showLinks, setShowLinks] = useState(false);
+  const [navbar, setNavbar] = useState(false);
 
   const stickyNav = () => {
     if (window.scrollY >= 120) {
-      setNavbar(true)
+      setNavbar(true);
     } else {
-      setNavbar(false)
+      setNavbar(false);
     }
-  }
-  window.addEventListener('scroll', stickyNav)
+  };
+  window.addEventListener('scroll', stickyNav);
 
   return (
     <nav
@@ -28,7 +28,7 @@ const Navbar = () => {
         <button
           className='nav-toggle'
           onClick={() => {
-            setShowLinks(!showLinks)
+            setShowLinks(!showLinks);
           }}
         >
           <FaBars />
@@ -37,13 +37,13 @@ const Navbar = () => {
       <div className={showLinks ? 'nav-menu show-menu' : 'nav-menu'}>
         <ul className='links-container'>
           {links.map((link) => {
-            return <MenuLink key={link.id} {...link} />
+            return <MenuLink key={link.id} {...link} />;
           })}
         </ul>
         <LoginBtns />
       </div>
     </nav>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;

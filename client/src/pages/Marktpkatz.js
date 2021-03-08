@@ -7,21 +7,20 @@ const api = 'http://localhost:4000/api/books/';
 
 const Marktplatz = () => {
   const fetchBooks = async () => {
+    setLoading(true);
     try {
       let res = await fetch(api);
       if (res.status >= 200 && res.status <= 299) {
         console.log('successfully fetched something');
-        console.log(res.headers.get('Content-Type'));
-        console.log(res.statusText);
-        console.log(res.type);
-        console.log(res.url);
+        let bookList = await res.json();
+        console.log(bookList);
       } else {
         throw new Error('Hoppala, da ist was schief gelaufen');
       }
-      let bookList = await res.json();
-      console.log(bookList);
+      setLoading(false);
     } catch (err) {
       console.log('errooooorrrrrrrr....');
+      setLoading(false);
     }
   };
 
@@ -33,6 +32,7 @@ const Marktplatz = () => {
   const [search, setSearch] = useState('');
   const [genres] = useState(allGenres);
   const [books, setBooks] = useState(availableBooks);
+  const [loading, setLoading] = useState(false);
 
   const filterBooks = (genre) => {
     if (genre === 'alle') {
@@ -60,7 +60,7 @@ const Marktplatz = () => {
       <main>
         <SearchBar search={search} setSearch={setSearch} />
         <GenreFilter genres={genres} filterBooks={filterBooks} />
-        <Shelf books={books} />
+        <Shelf books={books} loading={loading} />
       </main>
     </>
   );

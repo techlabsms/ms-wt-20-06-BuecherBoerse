@@ -1,20 +1,17 @@
 import React, { useEffect } from 'react';
-import { FaCheckCircle } from 'react-icons/fa';
 import '../styles/Alert.css';
 
-const Alert = ({ setAlert }) => {
+const Alert = ({ icon, msg, setAlert }) => {
   useEffect(() => {
     setTimeout(() => {
-      setAlert(false);
+      setAlert({ display: false, icon: '', msg: '' });
     }, 3000);
   });
 
   return (
     <div className='alert basic-flex'>
-      <span className='icon basic-flex'>
-        <FaCheckCircle />
-      </span>
-      <p>Das Buch wurde erfolgreich hinzugefügt!</p>
+      <span className='icon basic-flex'>{icon}</span>
+      <p>{msg}</p>
     </div>
   );
 };
