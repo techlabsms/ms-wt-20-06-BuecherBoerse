@@ -19,11 +19,11 @@ const App = () => {
           <Route path='/uploadbook'>
             <UploadBook />
           </Route>
-          <Route path='/openbook/:id'>
-            <OpenBook />
-          </Route>
           <Route path='/login'>
             <LoginScreen />
+          </Route>
+          <Route path='/openbook/:id'>
+            <OpenBook />
           </Route>
         </Switch>
         <Footer />

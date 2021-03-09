@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import ReturnTo from '../components/ReturnTo';
 import '../styles/UploadBook.css';
 import Alert from '../components/Alert';
 import ImageUploader from '../components/ImageUploader';
 import { FaCheckCircle, FaFlushed, FaPoo } from 'react-icons/fa';
+import { AppContext } from '../context';
 
 const api = 'http://localhost:4000/api/books/';
 
@@ -17,7 +18,7 @@ const UploadBook = () => {
     desc: '',
   });
   const [bookImage, setBookImage] = useState();
-  const [alert, setAlert] = useState({ display: false, icon: '', msg: '' });
+  const { alert, setAlert } = useContext(AppContext);
   const { name, author, genre, language, condition, desc } = newBook;
 
   const textChange = (e) => {
@@ -190,7 +191,7 @@ const UploadBook = () => {
           </div>
         </form>
       </section>
-      {alert.display && <Alert {...alert} setAlert={setAlert} />}
+      {alert.display && <Alert />}
     </main>
   );
 };

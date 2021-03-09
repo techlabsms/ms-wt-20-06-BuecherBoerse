@@ -1,0 +1,10 @@
+.user-bar {
+  margin-left: 1rem;
+  margin-right: 0.5rem;
+}
+
+.user-icon {
+  align-self: center;
+  font-size: 2rem;
+  padding: 0.5rem;
+}

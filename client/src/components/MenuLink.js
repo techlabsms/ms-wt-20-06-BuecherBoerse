@@ -4,7 +4,7 @@ import '../styles/MenuLink.css';
 
 const MenuLink = ({ id, url, text }) => {
   return (
-    <li key={id} className='links'>
+    <li key={id} className='links basic-flex'>
       <Link to={url}>{text}</Link>
     </li>
   );

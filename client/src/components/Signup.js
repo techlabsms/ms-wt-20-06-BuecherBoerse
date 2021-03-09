@@ -1,4 +1,7 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import { FaPoop } from 'react-icons/fa';
+import { AppContext } from '../context';
+import Alert from './Alert';
 
 const create = 'http://localhost:4000/api/users';
 
@@ -8,6 +11,7 @@ const Signup = () => {
     email: '',
     password: '',
   });
+  const { alert, setAlert } = useContext(AppContext);
   const { name, email, password } = newUserCredential;
 
   const checkSignupInput = (e) => {
@@ -35,7 +39,14 @@ const Signup = () => {
         }
       })
       .then((userCreated) => console.log('Success!', userCreated))
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        console.log(error);
+        setAlert({
+          display: true,
+          icon: <FaPoop />,
+          msg: 'Das Anmelden hat nicht funktioniert',
+        });
+      });
     setNewUserCredential({
       name: '',
       email: '',
@@ -51,7 +62,7 @@ const Signup = () => {
         </div>
         <div className='form-control'>
           <label htmlFor='name' name='name'>
-            Username
+            Dein Wunsch-Username
           </label>
           <input
             type='text'
@@ -64,7 +75,7 @@ const Signup = () => {
         </div>
         <div className='form-control'>
           <label htmlFor='email' name='email'>
-            Email
+            Deine bevorzugte Email
           </label>
           <input
             type='text'
@@ -77,7 +88,7 @@ const Signup = () => {
         </div>
         <div className='form-control'>
           <label htmlFor='password' name='password'>
-            Passwort
+            Dein bärenstarkes Passwort
           </label>
           <input
             type='text'
@@ -90,6 +101,7 @@ const Signup = () => {
         </div>
         <button className='btn'>Registrieren</button>
       </form>
+      {alert.display && <Alert />}
     </React.Fragment>
   );
 };

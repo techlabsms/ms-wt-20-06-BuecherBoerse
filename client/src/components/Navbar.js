@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { FaBars } from 'react-icons/fa';
 import logo from '../static/buecherregal.svg';
@@ -6,10 +6,13 @@ import MenuLink from './MenuLink';
 import LoginBtns from './LoginBtns';
 import { links } from './linksDB';
 import '../styles/Navbar.css';
+import { AppContext } from '../context';
+import UserBar from './UserBar';
 
 const Navbar = () => {
-  const [showLinks, setShowLinks] = useState(false);
   const [navbar, setNavbar] = useState(false);
+  const [showLinks, setShowLinks] = useState(false);
+  const { isUserLoggedIn } = useContext(AppContext);
 
   const stickyNav = () => {
     if (window.scrollY >= 120) {
@@ -43,7 +46,7 @@ const Navbar = () => {
             return <MenuLink key={link.id} {...link} />;
           })}
         </ul>
-        <LoginBtns />
+        {isUserLoggedIn ? <UserBar /> : <LoginBtns />}
       </div>
     </nav>
   );

@@ -1,4 +1,7 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import { FaPoop } from 'react-icons/fa';
+import { AppContext } from '../context';
+import Alert from './Alert';
 
 const auth = 'http://localhost:4000/auth/signin/';
 
@@ -8,6 +11,7 @@ const Login = () => {
     email: '',
     password: '',
   });
+  const { alert, setAlert } = useContext(AppContext);
   const { name, email, password } = userCredential;
 
   const checkLoginInput = (e) => {
@@ -35,7 +39,14 @@ const Login = () => {
         }
       })
       .then((userLoggedIn) => console.log('Success!', userLoggedIn))
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        console.log(error);
+        setAlert({
+          display: true,
+          icon: <FaPoop />,
+          msg: 'Login hat nicht geklappt',
+        });
+      });
     setUserCredential({ name: '', email: '', password: '' });
   };
 
@@ -88,6 +99,7 @@ const Login = () => {
           Einloggen
         </button>
       </form>
+      {alert.display && <Alert />}
     </React.Fragment>
   );
 };

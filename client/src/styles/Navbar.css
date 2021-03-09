@@ -37,10 +37,6 @@
   transition: var(--trnstn);
 }
 
-.links-container {
-  padding: 0.5rem;
-}
-
 .show-menu {
   height: 12rem;
   box-shadow: var(--bx-shdw);
