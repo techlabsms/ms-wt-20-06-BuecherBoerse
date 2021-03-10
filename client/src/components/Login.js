@@ -1,17 +1,13 @@
-import React, { useContext, useState } from 'react';
-import { FaPoop } from 'react-icons/fa';
+import React, { useContext } from 'react';
 import { AppContext } from '../context';
+import { useSignIn } from '../components/useSignIn';
 import Alert from './Alert';
 
 const auth = 'http://localhost:4000/auth/signin/';
 
 const Login = () => {
-  const [userCredential, setUserCredential] = useState({
-    name: '',
-    email: '',
-    password: '',
-  });
-  const { alert, setAlert } = useContext(AppContext);
+  const { signInUser, userCredential, setUserCredential } = useSignIn(auth);
+  const { alert } = useContext(AppContext);
   const { name, email, password } = userCredential;
 
   const checkLoginInput = (e) => {
@@ -23,31 +19,7 @@ const Login = () => {
 
   const loginNow = (e) => {
     e.preventDefault();
-    const userLogin = new FormData();
-    userLogin.append('name', name);
-    userLogin.append('email', email);
-    userLogin.append('password', password);
-    fetch(auth, {
-      method: 'POST',
-      body: userLogin,
-    })
-      .then((res) => {
-        if (res >= 200 && res <= 200) {
-          return res.json();
-        } else {
-          throw new Error('Hoppala, da ist was falsch gelaufen!');
-        }
-      })
-      .then((userLoggedIn) => console.log('Success!', userLoggedIn))
-      .catch((error) => {
-        console.log(error);
-        setAlert({
-          display: true,
-          icon: <FaPoop />,
-          msg: 'Login hat nicht geklappt',
-        });
-      });
-    setUserCredential({ name: '', email: '', password: '' });
+    signInUser();
   };
 
   return (

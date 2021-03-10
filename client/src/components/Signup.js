@@ -1,57 +1,25 @@
-import React, { useContext, useState } from 'react';
-import { FaPoop } from 'react-icons/fa';
+import React, { useContext } from 'react';
 import { AppContext } from '../context';
+import { useSignIn } from '../components/useSignIn';
 import Alert from './Alert';
 
 const create = 'http://localhost:4000/api/users';
 
 const Signup = () => {
-  const [newUserCredential, setNewUserCredential] = useState({
-    name: '',
-    email: '',
-    password: '',
-  });
-  const { alert, setAlert } = useContext(AppContext);
-  const { name, email, password } = newUserCredential;
+  const { signInUser, userCredential, setUserCredential } = useSignIn(create);
+  const { alert } = useContext(AppContext);
+  const { name, email, password } = userCredential;
 
   const checkSignupInput = (e) => {
-    setNewUserCredential({
-      ...newUserCredential,
+    setUserCredential({
+      ...userCredential,
       [e.target.name]: e.target.value,
     });
   };
 
   const signupNow = (e) => {
     e.preventDefault();
-    const userSignup = new FormData();
-    userSignup.append('name', name);
-    userSignup.append('email', email);
-    userSignup.append('password', password);
-    fetch(create, {
-      method: 'POST',
-      body: userSignup,
-    })
-      .then((res) => {
-        if (res >= 200 && res <= 299) {
-          return res.json();
-        } else {
-          throw new Error('Hoppala, da ist wohl was schief gelaufen');
-        }
-      })
-      .then((userCreated) => console.log('Success!', userCreated))
-      .catch((error) => {
-        console.log(error);
-        setAlert({
-          display: true,
-          icon: <FaPoop />,
-          msg: 'Das Anmelden hat nicht funktioniert',
-        });
-      });
-    setNewUserCredential({
-      name: '',
-      email: '',
-      password: '',
-    });
+    signInUser();
   };
 
   return (

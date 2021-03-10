@@ -27,8 +27,8 @@ const Navbar = () => {
     <nav
       className={navbar ? 'nav-center sticky-nav animate-nav' : 'nav-center'}
     >
-      <div className='nav-header'>
-        <Link to='/'>
+      <div className='nav-header basic-flex'>
+        <Link to='/' className='basic-flex'>
           <img src={logo} alt='logo' />
         </Link>
         <button

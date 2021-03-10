@@ -1,6 +1,6 @@
 import React from 'react';
 import { FaUserCircle } from 'react-icons/fa';
-import '../styles/UserIcon.css';
+import '../styles/UserBar.css';
 
 const UserBar = () => {
   return (

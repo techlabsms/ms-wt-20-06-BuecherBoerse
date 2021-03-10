@@ -9,6 +9,43 @@ import { AppContext } from '../context';
 const api = 'http://localhost:4000/api/books/';
 
 const UploadBook = () => {
+  const bookUpload = async (formdata) => {
+    try {
+      let res = await fetch(api, {
+        method: 'POST',
+        body: formdata,
+      });
+      if (res.status >= 200 && res.status <= 299) {
+        let userBook = await res.json();
+        console.log(userBook);
+        setAlert({
+          display: true,
+          icon: <FaCheckCircle />,
+          msg: 'Das Buch wurde erfolgreich hinzugefügt',
+        });
+      } else {
+        throw new Error('Hoppala, da ist was schief gegangen');
+      }
+    } catch (error) {
+      console.log('Hochladen fehlgeschlagen', error);
+      setAlert({
+        display: true,
+        icon: <FaPoo />,
+        msg: 'Das hat irgendwie nicht geklappt...',
+      });
+    } finally {
+      setNewBook({
+        name: '',
+        author: '',
+        genre: '',
+        language: '',
+        condition: '',
+        desc: '',
+      });
+      setBookImage();
+    }
+  };
+
   const [newBook, setNewBook] = useState({
     name: '',
     author: '',
@@ -27,49 +64,16 @@ const UploadBook = () => {
 
   const uploadAll = (e) => {
     e.preventDefault();
-    if (name && author && genre && language && condition) {
-      const bookData = new FormData();
-      bookData.append('file', bookImage);
+    if (bookImage && name && author && genre && language && condition && desc) {
+      let bookData = new FormData();
+      bookData.append('bookImage', bookImage);
       bookData.append('name', name);
       bookData.append('author', author);
       bookData.append('category', genre);
       bookData.append('language', language);
       bookData.append('condition', condition);
       bookData.append('description', desc);
-      fetch(api, {
-        method: 'POST',
-        body: bookData,
-      })
-        .then((res) => {
-          if (res >= 200 && res <= 299) {
-            return res.json();
-          } else {
-            throw new Error('Hoppala, da ist was schief gegangen');
-          }
-        })
-        .then((postedBook) => console.log('Success!', postedBook))
-        .catch((err) => {
-          console.log('Hochladen fehlgeschlagen', err);
-          setAlert({
-            display: true,
-            icon: <FaPoo />,
-            msg: 'Das hat irgendwie nicht geklappt...',
-          });
-        });
-      setAlert({
-        display: true,
-        icon: <FaCheckCircle />,
-        msg: 'Das Buch wurde erfolgreich hinzugefügt',
-      });
-      setNewBook({
-        name: '',
-        author: '',
-        genre: '',
-        language: '',
-        condition: '',
-        desc: '',
-      });
-      setBookImage();
+      bookUpload(bookData);
     } else {
       setAlert({
         display: true,

@@ -9,10 +9,10 @@ const Marktplatz = () => {
   const fetchBooks = async () => {
     setLoading(true);
     try {
-      let res = await fetch(api);
+      const res = await fetch(api);
       if (res.status >= 200 && res.status <= 299) {
         console.log('successfully fetched something');
-        let bookList = await res.json();
+        const bookList = await res.json();
         console.log(bookList);
       } else {
         throw new Error('Hoppala, da ist was schief gelaufen');
