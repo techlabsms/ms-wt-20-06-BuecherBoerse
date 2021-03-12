@@ -1,5 +1,13 @@
 .user-bar {
   margin: 0 0.5rem;
+  z-index: 2;
+  border: none;
+  background-color: var(--bckgrnd-clr);
+  transition: var(--trnstn);
+}
+
+.user-bar:hover {
+  transform: rotateX(360deg);
 }
 
 .user-icon {

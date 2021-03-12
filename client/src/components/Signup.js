@@ -2,7 +2,6 @@ import React, { useContext } from 'react';
 import { AppContext } from '../context';
 import { useSignIn } from '../components/useSignIn';
 import Alert from './Alert';
-
 const create = 'http://localhost:4000/api/users';
 
 const Signup = () => {
@@ -23,7 +22,7 @@ const Signup = () => {
   };
 
   return (
-    <React.Fragment>
+    <>
       <form className='form-center' onSubmit={signupNow}>
         <div className='title'>
           <h3>Melde dich jetzt an!</h3>
@@ -59,7 +58,7 @@ const Signup = () => {
             Dein bärenstarkes Passwort
           </label>
           <input
-            type='text'
+            type='password'
             id='password'
             name='password'
             value={password}
@@ -67,10 +66,12 @@ const Signup = () => {
             required
           />
         </div>
-        <button className='btn'>Registrieren</button>
+        <button type='submit' className='btn'>
+          Registrieren
+        </button>
       </form>
       {alert.display && <Alert />}
-    </React.Fragment>
+    </>
   );
 };
 

@@ -9,13 +9,15 @@ const LoginScreen = () => {
   const [isTabLeft, setIsTabLeft] = useState(true);
 
   return (
-    <main className='hero'>
-      <ReturnTo />
-      <section className='signin-center'>
-        <Tab isTabLeft={isTabLeft} setIsTabLeft={setIsTabLeft} />
-        {isTabLeft ? <Login /> : <Signup />}
-      </section>
-    </main>
+    <>
+      <main className='hero'>
+        <ReturnTo />
+        <section className='signin-center'>
+          <Tab isTabLeft={isTabLeft} setIsTabLeft={setIsTabLeft} />
+          {isTabLeft ? <Login /> : <Signup />}
+        </section>
+      </main>
+    </>
   );
 };
 

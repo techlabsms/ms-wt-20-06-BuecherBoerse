@@ -3,7 +3,7 @@ import '../styles/Tab.css';
 
 const Tab = ({ isTabLeft, setIsTabLeft }) => {
   return (
-    <React.Fragment>
+    <>
       <div className='tab-container'>
         <button
           className={`tab-btn ${!isTabLeft && 'not-active'}`}
@@ -22,7 +22,7 @@ const Tab = ({ isTabLeft, setIsTabLeft }) => {
           Anmelden
         </button>
       </div>
-    </React.Fragment>
+    </>
   );
 };
 

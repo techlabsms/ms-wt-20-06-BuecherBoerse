@@ -23,7 +23,7 @@ const Login = () => {
   };
 
   return (
-    <React.Fragment>
+    <>
       <form className='form-center' onSubmit={loginNow}>
         <div className='title'>
           <h3>Willkommen zurück</h3>
@@ -59,7 +59,7 @@ const Login = () => {
             Dein Passwort
           </label>
           <input
-            type='text'
+            type='password'
             id='password'
             name='password'
             value={password}
@@ -67,12 +67,12 @@ const Login = () => {
             required
           />
         </div>
-        <button className='btn' onSubmit={loginNow}>
+        <button type='submit' className='btn' onSubmit={loginNow}>
           Einloggen
         </button>
       </form>
       {alert.display && <Alert />}
-    </React.Fragment>
+    </>
   );
 };
 

@@ -11,12 +11,12 @@ const api = 'http://localhost:4000/api/books/';
 const UploadBook = () => {
   const bookUpload = async (formdata) => {
     try {
-      let res = await fetch(api, {
+      const res = await fetch(api, {
         method: 'POST',
         body: formdata,
       });
       if (res.status >= 200 && res.status <= 299) {
-        let userBook = await res.json();
+        const userBook = await res.json();
         console.log(userBook);
         setAlert({
           display: true,
@@ -55,7 +55,7 @@ const UploadBook = () => {
     desc: '',
   });
   const [bookImage, setBookImage] = useState();
-  const { alert, setAlert } = useContext(AppContext);
+  const { alert, setAlert, closeSubmenu } = useContext(AppContext);
   const { name, author, genre, language, condition, desc } = newBook;
 
   const textChange = (e) => {
@@ -84,119 +84,121 @@ const UploadBook = () => {
   };
 
   return (
-    <main>
-      <ReturnTo />
-      <h2 className='title'>Buch hochladen</h2>
-      <section className='section-center'>
-        <form className='book-form' onSubmit={uploadAll}>
-          <ImageUploader bookImage={bookImage} setBookImage={setBookImage} />
-          <div className='info-upload'>
-            <div className='form-control'>
-              <label htmlFor='name' name='name'>
-                Name:
-              </label>
-              <input
-                type='text'
-                id='name'
-                name='name'
-                placeholder='Name des Buches'
-                value={name}
-                onChange={textChange}
-              ></input>
+    <>
+      <main onClick={closeSubmenu}>
+        <ReturnTo />
+        <h2 className='title'>Buch hochladen</h2>
+        <section className='section-center'>
+          <form className='book-form' onSubmit={uploadAll}>
+            <ImageUploader bookImage={bookImage} setBookImage={setBookImage} />
+            <div className='info-upload'>
+              <div className='form-control'>
+                <label htmlFor='name' name='name'>
+                  Name:
+                </label>
+                <input
+                  type='text'
+                  id='name'
+                  name='name'
+                  placeholder='Name des Buches'
+                  value={name}
+                  onChange={textChange}
+                ></input>
+              </div>
+              <div className='form-control'>
+                <label htmlFor='author' name='author'>
+                  Autor:
+                </label>
+                <input
+                  type='text'
+                  id='author'
+                  name='author'
+                  placeholder='Autor des Buches'
+                  value={author}
+                  onChange={textChange}
+                ></input>
+              </div>
+              <div className='form-control'>
+                <label htmlFor='genre' name='genre'>
+                  Genre:
+                </label>
+                <input
+                  type='text'
+                  id='genre'
+                  name='genre'
+                  placeholder='Genre des Buches'
+                  value={genre}
+                  onChange={textChange}
+                ></input>
+              </div>
+              <div className='form-control'>
+                <label htmlFor='language' name='language'>
+                  Sprache:
+                </label>
+                <input
+                  type='text'
+                  id='language'
+                  name='language'
+                  placeholder='Sprache des Buches'
+                  value={language}
+                  onChange={textChange}
+                ></input>
+              </div>
+              <div className='form-control'>
+                <label htmlFor='condition' name='condition'>
+                  Zustand:
+                </label>
+                <input
+                  type='text'
+                  id='condition'
+                  name='condition'
+                  placeholder='Zustand des Buches'
+                  value={condition}
+                  onChange={textChange}
+                ></input>
+              </div>
+              <div className='form-control'>
+                <label htmlFor='desc' name='desc'>
+                  Beschreibung:
+                </label>
+                <textarea
+                  id='desc'
+                  name='desc'
+                  placeholder='Kurze Beschreibung des Buches'
+                  cols='30'
+                  rows='5'
+                  value={desc}
+                  onChange={textChange}
+                ></textarea>
+              </div>
+              <div className='btn-containr'>
+                <button className='btn' type='submit' onSubmit={uploadAll}>
+                  Hochladen
+                </button>
+                <button
+                  className='btn'
+                  type='reset'
+                  onClick={() => {
+                    setBookImage();
+                    setNewBook({
+                      name: '',
+                      author: '',
+                      genre: '',
+                      language: '',
+                      condition: '',
+                      desc: '',
+                    });
+                  }}
+                >
+                  Löschen
+                </button>
+              </div>
             </div>
-            <div className='form-control'>
-              <label htmlFor='author' name='author'>
-                Autor:
-              </label>
-              <input
-                type='text'
-                id='author'
-                name='author'
-                placeholder='Autor des Buches'
-                value={author}
-                onChange={textChange}
-              ></input>
-            </div>
-            <div className='form-control'>
-              <label htmlFor='genre' name='genre'>
-                Genre:
-              </label>
-              <input
-                type='text'
-                id='genre'
-                name='genre'
-                placeholder='Genre des Buches'
-                value={genre}
-                onChange={textChange}
-              ></input>
-            </div>
-            <div className='form-control'>
-              <label htmlFor='language' name='language'>
-                Sprache:
-              </label>
-              <input
-                type='text'
-                id='language'
-                name='language'
-                placeholder='Sprache des Buches'
-                value={language}
-                onChange={textChange}
-              ></input>
-            </div>
-            <div className='form-control'>
-              <label htmlFor='condition' name='condition'>
-                Zustand:
-              </label>
-              <input
-                type='text'
-                id='condition'
-                name='condition'
-                placeholder='Zustand des Buches'
-                value={condition}
-                onChange={textChange}
-              ></input>
-            </div>
-            <div className='form-control'>
-              <label htmlFor='desc' name='desc'>
-                Beschreibung:
-              </label>
-              <textarea
-                id='desc'
-                name='desc'
-                placeholder='Kurze Beschreibung des Buches'
-                cols='30'
-                rows='5'
-                value={desc}
-                onChange={textChange}
-              ></textarea>
-            </div>
-            <div className='btn-containr'>
-              <button className='btn' type='submit' onSubmit={uploadAll}>
-                Hochladen
-              </button>
-              <button
-                className='btn'
-                type='reset'
-                onClick={() => {
-                  setBookImage();
-                  setNewBook({
-                    name: '',
-                    author: '',
-                    genre: '',
-                    language: '',
-                    condition: '',
-                    desc: '',
-                  });
-                }}
-              >
-                Löschen
-              </button>
-            </div>
-          </div>
-        </form>
-      </section>
-      {alert.display && <Alert />}
-    </main>
+          </form>
+        </section>
+        {alert.display && <Alert />}
+      </main>
+    </>
   );
 };
 

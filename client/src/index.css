@@ -11,7 +11,7 @@
   --clr-gry: #d6d6d6;
   --fnt-fmly: 'Poppins', sans-serif;
   --mn-shdw: 0 1px 5px rgba(0, 0, 0, 0.75);
-  --bx-shdw: 1px 6px 6px -6px rgba(0, 0, 0, 0.5);
+  --bx-shdw: 1px 6px 6px -6px rgba(0, 0, 0, 0.75);
   --frm-shdw: 0px 4px 18px 8px rgba(0, 0, 0, 0.3);
   --lttr-spcng: 0.1rem;
   --trnstn: all 0.3s linear;

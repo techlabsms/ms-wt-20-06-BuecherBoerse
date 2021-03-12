@@ -5,14 +5,20 @@ import Loading from './Loading';
 
 const Shelf = ({ books, loading }) => {
   if (loading) {
-    return <Loading />;
+    return (
+      <>
+        <Loading />
+      </>
+    );
   }
   return (
-    <ul className='shelf-container'>
-      {books.map((book) => {
-        return <Book key={book.id} {...book} />;
-      })}
-    </ul>
+    <>
+      <ul className='shelf-container'>
+        {books.map((book) => {
+          return <Book key={book.id} {...book} />;
+        })}
+      </ul>
+    </>
   );
 };
 

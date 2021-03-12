@@ -11,7 +11,7 @@ export const useSignIn = (url) => {
   const { setIsUserLoggedIn, setAlert } = useContext(AppContext);
   const signInUser = async () => {
     try {
-      let res = await fetch(url, {
+      const res = await fetch(url, {
         method: 'POST',
         headers: {
           'content-type': 'application/json',
@@ -19,7 +19,7 @@ export const useSignIn = (url) => {
         body: JSON.stringify(userCredential),
       });
       if (res.status >= 200 && res.status <= 299) {
-        let userData = await res.json();
+        const userData = await res.json();
         console.log(userData);
         setIsUserLoggedIn(true);
         setAlert({
