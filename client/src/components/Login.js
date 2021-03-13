@@ -67,7 +67,7 @@ const Login = () => {
             required
           />
         </div>
-        <button type='submit' className='btn' onSubmit={loginNow}>
+        <button type='submit' className='btn'>
           Einloggen
         </button>
       </form>

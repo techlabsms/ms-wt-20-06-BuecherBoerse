@@ -21,7 +21,7 @@ const UserBar = () => {
       >
         <span className='user-info helper'>Hallo UserXYZ</span>
         <span className='user-icon basic-flex helper'>
-          <FaUserCircle />
+          <FaUserCircle className='helper' />
         </span>
       </button>
       <Submenu />

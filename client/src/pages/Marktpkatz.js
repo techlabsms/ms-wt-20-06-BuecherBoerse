@@ -15,6 +15,7 @@ const Marktplatz = () => {
         console.log('successfully fetched something');
         const bookList = await res.json();
         console.log(bookList);
+        setLoading(false);
       } else {
         throw new Error('Hoppala, da ist was schief gelaufen');
       }

@@ -1,5 +1,6 @@
 import { useContext, useState } from 'react';
-import { FaCheckCircle, FaPoop } from 'react-icons/fa';
+import { FaPoop } from 'react-icons/fa';
+import { useHistory } from 'react-router-dom';
 import { AppContext } from '../context';
 
 export const useSignIn = (url) => {
@@ -8,6 +9,7 @@ export const useSignIn = (url) => {
     email: '',
     password: '',
   });
+  const history = useHistory();
   const { setIsUserLoggedIn, setAlert } = useContext(AppContext);
   const signInUser = async () => {
     try {
@@ -21,12 +23,7 @@ export const useSignIn = (url) => {
       if (res.status >= 200 && res.status <= 299) {
         const userData = await res.json();
         console.log(userData);
-        setIsUserLoggedIn(true);
-        setAlert({
-          display: true,
-          icon: <FaCheckCircle />,
-          msg: 'Ein voller Erfolg!',
-        });
+        history.push('', setIsUserLoggedIn(true));
       } else {
         throw new Error('Hoppala, da ist wohl was schief gelaufen...');
       }
