@@ -16,7 +16,7 @@ const MessageSchema = new mongoose.Schema({
         ref: 'User',
     },
     message: {
-        type: string,
+        type: String,
         required: 'Bitte Nachricht eingeben',
     },
     created: {

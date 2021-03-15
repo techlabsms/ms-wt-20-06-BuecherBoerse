@@ -35,6 +35,9 @@ http://localhost:3000
 User login backend mit create, update, delete (CRUD) und authentication-authorization (auth)
 Testen mit https://install.advancedrestclient.com/install
 
+Body-Content-Type: application/json
+Editor-view: Json visual Editor
+
 #### application programming interface (API)
 | Route         | HTTP Methode           | Beschreibung  |
 | ------------- |:-------------:| -----:|
