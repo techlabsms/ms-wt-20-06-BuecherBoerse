@@ -5,9 +5,11 @@ import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 
 const Loading = () => {
   return (
-    <div className='loading'>
-      <Loader type='Oval' color='#b00055' height={120} width={120} />
-    </div>
+    <>
+      <div className='loading'>
+        <Loader type='Oval' color='#b00055' height={120} width={120} />
+      </div>
+    </>
   );
 };
 

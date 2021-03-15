@@ -1,0 +1,32 @@
+.hero {
+  background: no-repeat url('../static/janko-ferlic-sfL_QOnmy00-unsplash.jpeg');
+  background-size: cover;
+  height: 100vh;
+}
+
+.signin-center {
+  background-color: var(--bckgrnd-trnsprnt-1);
+  margin: 1rem 0rem 2rem;
+  border-radius: var(--brdr-rds-2);
+  box-shadow: var(--bx-shdw);
+  transition: var(--trnstn);
+}
+
+.form-center {
+  padding: 1.5rem;
+}
+
+.form-center input {
+  padding: 0.25rem;
+}
+
+@media screen and (min-width: 800px) {
+  .form-center {
+    padding: 2rem 1.5rem;
+    width: 40vw;
+  }
+
+  .form-center input {
+    padding: 0.5rem;
+  }
+}

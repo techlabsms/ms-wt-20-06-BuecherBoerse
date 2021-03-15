@@ -11,7 +11,7 @@
   --clr-gry: #d6d6d6;
   --fnt-fmly: 'Poppins', sans-serif;
   --mn-shdw: 0 1px 5px rgba(0, 0, 0, 0.75);
-  --bx-shdw: 1px 6px 6px -6px rgba(0, 0, 0, 0.5);
+  --bx-shdw: 1px 6px 6px -6px rgba(0, 0, 0, 0.75);
   --frm-shdw: 0px 4px 18px 8px rgba(0, 0, 0, 0.3);
   --lttr-spcng: 0.1rem;
   --trnstn: all 0.3s linear;
@@ -19,7 +19,8 @@
   --brdr-rds: 0.25rem;
   --brdr-rds-2: 0.75rem;
   --mx-wdth: 1140px;
-  --bckgrnd-trnsprnt: transparent;
+  --bckgrnd-trnsprnt-1: rgba(248, 248, 248, 0.6);
+  --bckgrnd-trnsprnt-2: rgba(248, 248, 248, 0.75);
 }
 
 /* Global Styles */
@@ -59,10 +60,6 @@ h4 {
   margin-bottom: 0.75rem;
 }
 
-p {
-  margin-bottom: 1rem;
-}
-
 h1 {
   font-size: 2rem;
 }
@@ -81,6 +78,15 @@ h4 {
 
 p {
   font-size: 0.875rem;
+  margin-bottom: 1rem;
+}
+
+button {
+  font-family: var(--fnt-fmly);
+}
+
+button:focus {
+  outline: none;
 }
 
 @media screen and (min-width: 800px) {
@@ -104,6 +110,7 @@ p {
     font-size: 1rem;
   }
 }
+
 main::before {
   margin-top: 7rem;
   content: '';
@@ -112,6 +119,20 @@ main::before {
 main {
   display: grid;
   place-items: center;
+}
+
+.form-control {
+  margin: 0.5rem 0;
+  display: grid;
+  align-items: center;
+  text-align: start;
+}
+
+@media screen and (min-width: 800px) {
+  .form-control {
+    margin: 1rem;
+    display: grid;
+  }
 }
 
 /* Utilities */

@@ -1,20 +1,30 @@
-import React from 'react'
-import '../styles/SearchBar.css'
+import React from 'react';
+import '../styles/SearchBar.css';
 
 const SearchBar = ({ search, setSearch }) => {
-  return (
-    <section className='search-bar'>
-      <form onSubmit={(e) => e.preventDefault}>
-        <input
-          type='text'
-          className='form'
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          placeholder='Nach Titel oder Autor suchen...'
-        ></input>
-      </form>
-    </section>
-  )
-}
+  const handleInput = (e) => {
+    setSearch(e.target.value);
+  };
 
-export default SearchBar
+  const handleSearch = (e) => {
+    e.preventDefault();
+  };
+
+  return (
+    <>
+      <section className='search-bar'>
+        <form onSubmit={handleSearch}>
+          <input
+            type='text'
+            className='form'
+            value={search}
+            onChange={handleInput}
+            placeholder='Nach Titel oder Autor suchen...'
+          ></input>
+        </form>
+      </section>
+    </>
+  );
+};
+
+export default SearchBar;

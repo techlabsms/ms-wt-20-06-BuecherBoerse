@@ -3,6 +3,7 @@
   flex-flow: column;
   background: var(--bckgrnd-clr);
   padding: 1rem;
+  align-items: center;
 }
 
 .title {
