@@ -13,14 +13,14 @@ const App = () => {
       <Router>
         <Navbar />
         <Switch>
+          <Route path='/login'>
+            <LoginScreen />
+          </Route>
           <Route exact path='/'>
             <Marktplatz />
           </Route>
           <Route path='/uploadbook'>
             <UploadBook />
-          </Route>
-          <Route path='/login'>
-            <LoginScreen />
           </Route>
           <Route path='/openbook/:id'>
             <OpenBook />

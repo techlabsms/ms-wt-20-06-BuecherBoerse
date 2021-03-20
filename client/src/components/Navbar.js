@@ -32,27 +32,29 @@ const Navbar = () => {
         className={navbar ? 'nav-center sticky-nav animate-nav' : 'nav-center'}
         onClick={hideSubmenu}
       >
-        <div className='nav-header basic-flex'>
-          <Link to='/' className='basic-flex'>
-            <img src={logo} alt='logo' />
-          </Link>
-          <button
-            className='nav-toggle'
-            onClick={() => {
-              setShowLinks(!showLinks);
-            }}
-          >
-            <FaBars />
-          </button>
-        </div>
-        <div className={showLinks ? 'nav-menu show-menu' : 'nav-menu'}>
-          <ul className='links-container'>
-            {links.map((link) => {
-              return <MenuLink key={link.id} {...link} />;
-            })}
-          </ul>
-          {isUserLoggedIn ? <UserBar /> : <LoginBtns />}
-        </div>
+        <header className='nav-content'>
+          <div className='nav-header basic-flex'>
+            <Link to='/' className='basic-flex'>
+              <img src={logo} alt='logo' />
+            </Link>
+            <button
+              className='nav-toggle'
+              onClick={() => {
+                setShowLinks(!showLinks);
+              }}
+            >
+              <FaBars />
+            </button>
+          </div>
+          <div className={showLinks ? 'nav-menu show-menu' : 'nav-menu'}>
+            <ul className='links-container basic-flex'>
+              {links.map((link) => {
+                return <MenuLink key={link.id} {...link} />;
+              })}
+            </ul>
+            {isUserLoggedIn ? <UserBar /> : <LoginBtns />}
+          </div>
+        </header>
       </nav>
     </>
   );

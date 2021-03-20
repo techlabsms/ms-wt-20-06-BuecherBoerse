@@ -3,7 +3,8 @@ import React, { useState } from 'react';
 const AppContext = React.createContext();
 
 const AppProvider = ({ children }) => {
-  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+  const jwt = localStorage.getItem('token');
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState(jwt ? true : false);
   const [isSubmenuOpen, setIsSubmenuOpen] = useState(false);
   const [location, setLocation] = useState({});
   const [alert, setAlert] = useState({ display: false, icon: '', msg: '' });

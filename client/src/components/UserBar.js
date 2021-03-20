@@ -5,13 +5,19 @@ import Submenu from '../components/Submenu';
 import { AppContext } from '../context';
 
 const UserBar = () => {
-  const { openSubmenu, isSubmenuOpen, closeSubmenu } = useContext(AppContext);
+  const {
+    isUserLoggedIn,
+    openSubmenu,
+    isSubmenuOpen,
+    closeSubmenu,
+  } = useContext(AppContext);
   const showUserSubmenu = (e) => {
     const divSize = e.currentTarget.getBoundingClientRect();
     const divCenter = (divSize.left + divSize.right) / 2;
     const divBottom = divSize.bottom - 3;
     openSubmenu({ divCenter, divBottom });
   };
+  const name = localStorage.getItem('name');
 
   return (
     <>
@@ -19,7 +25,7 @@ const UserBar = () => {
         className='user-bar basic-flex helper'
         onClick={isSubmenuOpen ? closeSubmenu : showUserSubmenu}
       >
-        <span className='user-info helper'>Hallo UserXYZ</span>
+        <span className='user-info helper'>Hallo {isUserLoggedIn && name}</span>
         <span className='user-icon basic-flex helper'>
           <FaUserCircle className='helper' />
         </span>
