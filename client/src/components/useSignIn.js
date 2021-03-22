@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react';
+import { useHistory, useLocation } from 'react-router-dom';
 import { FaPoop } from 'react-icons/fa';
-import { useHistory } from 'react-router-dom';
 import { AppContext } from '../context';
 
 export const useSignIn = (url) => {
@@ -9,8 +9,9 @@ export const useSignIn = (url) => {
     email: '',
     password: '',
   });
-  const history = useHistory();
   const { setIsUserLoggedIn, setAlert } = useContext(AppContext);
+  const history = useHistory();
+  const { state } = useLocation();
   const signInUser = async () => {
     try {
       const res = await fetch(url, {
@@ -25,7 +26,7 @@ export const useSignIn = (url) => {
         console.log(userData);
         localStorage.setItem('token', userData.token);
         localStorage.setItem('name', userData.user.name);
-        history.push('/', setIsUserLoggedIn(true));
+        history.push(state ? state.from : '/', setIsUserLoggedIn(true));
       } else {
         throw new Error('Hoppala, da ist wohl was schief gelaufen...');
       }
@@ -40,5 +41,9 @@ export const useSignIn = (url) => {
       setUserCredential({ name: '', email: '', password: '' });
     }
   };
-  return { signInUser, userCredential, setUserCredential, setIsUserLoggedIn };
+  return {
+    signInUser,
+    userCredential,
+    setUserCredential,
+  };
 };

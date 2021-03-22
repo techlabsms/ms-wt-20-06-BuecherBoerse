@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { AppContext } from '../context';
 import '../styles/Shelf.css';
 import Book from './Book';
 import Loading from './Loading';
 
-const Shelf = ({ books, loading }) => {
+const Shelf = () => {
+  const { books, loading } = useContext(AppContext);
   if (loading) {
     return (
       <>
@@ -15,7 +17,7 @@ const Shelf = ({ books, loading }) => {
     <>
       <ul className='shelf-container'>
         {books.map((book) => {
-          return <Book key={book.id} {...book} />;
+          return <Book key={book._id} {...book} />;
         })}
       </ul>
     </>

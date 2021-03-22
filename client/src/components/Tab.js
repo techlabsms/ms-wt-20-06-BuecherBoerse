@@ -19,7 +19,7 @@ const Tab = ({ isTabLeft, setIsTabLeft }) => {
             setIsTabLeft(false);
           }}
         >
-          Anmelden
+          Registrieren
         </button>
       </div>
     </>

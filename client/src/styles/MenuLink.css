@@ -12,7 +12,7 @@
   .links {
     width: 10vw;
     margin: 1rem;
-    justify-content: center;
+    align-self: center;
   }
 
   .links:hover {

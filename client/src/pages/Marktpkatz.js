@@ -1,69 +1,37 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useContext } from 'react';
 import GenreFilter from '../components/GenreFilter';
 import Shelf from '../components/Shelf';
-import availableBooks from '../components/books';
+// import availableBooks from '../components/books';
 import SearchBar from '../components/SearchBar';
 import { AppContext } from '../context';
-const api = 'http://localhost:4000/api/books/';
+import { FaBookDead } from 'react-icons/fa';
 
 const Marktplatz = () => {
-  const fetchBooks = async () => {
-    setLoading(true);
-    try {
-      const res = await fetch(api);
-      if (res.status >= 200 && res.status <= 299) {
-        console.log('successfully fetched something');
-        const bookList = await res.json();
-        console.log(bookList);
-        setLoading(false);
-      } else {
-        throw new Error('Hoppala, da ist was schief gelaufen');
-      }
-    } catch (err) {
-      console.log('errooooorrrrrrrr....');
-    } finally {
-      setLoading(false);
-    }
-  };
+  const { books, closeSubmenu } = useContext(AppContext);
 
-  const allGenres = [
-    'alle',
-    ...new Set(availableBooks.map((book) => book.genre)),
-  ];
-
-  const [search, setSearch] = useState('');
-  const [genres] = useState(allGenres);
-  const [books, setBooks] = useState(availableBooks);
-  const [loading, setLoading] = useState(false);
-  const { closeSubmenu } = useContext(AppContext);
-
-  const filterBooks = (genre) => {
-    if (genre === 'alle') {
-      return setBooks(availableBooks);
-    }
-    let filteredBooks = availableBooks.filter((book) => book.genre === genre);
-    setBooks(filteredBooks);
-  };
-
-  useEffect(() => {
-    let searchedBooks = availableBooks.filter(
-      (book) =>
-        book.title.toLowerCase().includes(search.toLowerCase()) ||
-        book.author.toLowerCase().includes(search.toLowerCase())
+  if (books.length < 1) {
+    return (
+      <>
+        <main onClick={closeSubmenu}>
+          <section className='error-page basic-flex'>
+            <span className='error-icon'>
+              <FaBookDead />
+            </span>
+            <h3 className='title'>
+              Es sind aktuell keine Bücher in unserer Datenbank... Lade schnell
+              welche hoch und erzähle es deinen Freunden!
+            </h3>
+          </section>
+        </main>
+      </>
     );
-    setBooks(searchedBooks);
-  }, [search]);
-
-  useEffect(() => {
-    fetchBooks();
-  }, []);
-
+  }
   return (
     <>
       <main onClick={closeSubmenu}>
-        <SearchBar search={search} setSearch={setSearch} />
-        <GenreFilter genres={genres} filterBooks={filterBooks} />
-        <Shelf books={books} loading={loading} />
+        <SearchBar />
+        <GenreFilter />
+        <Shelf />
       </main>
     </>
   );

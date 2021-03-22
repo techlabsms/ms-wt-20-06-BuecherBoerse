@@ -6,7 +6,7 @@ const ReturnTo = () => {
     <>
       <div className='btn-container'>
         <Link to='/' className='btn'>
-          zurück zum Marktpkatz
+          zurück
         </Link>
       </div>
     </>

@@ -1,11 +1,13 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Navbar from './components/Navbar';
+import ProtectedRoute from './components/ProtectedRoute';
 import Marktplatz from './pages/Marktpkatz';
 import OpenBook from './pages/OpenBook';
 import UploadBook from './pages/UploadBook';
 import Footer from './components/Footer';
 import LoginScreen from './pages/LoginScreen';
+import Error from './pages/Error';
 
 const App = () => {
   return (
@@ -16,14 +18,17 @@ const App = () => {
           <Route path='/login'>
             <LoginScreen />
           </Route>
-          <Route exact path='/'>
+          <ProtectedRoute exact path='/'>
             <Marktplatz />
-          </Route>
-          <Route path='/uploadbook'>
+          </ProtectedRoute>
+          <ProtectedRoute path='/uploadbook'>
             <UploadBook />
-          </Route>
-          <Route path='/openbook/:id'>
+          </ProtectedRoute>
+          <ProtectedRoute path='/openbook/:id'>
             <OpenBook />
+          </ProtectedRoute>
+          <Route path='*'>
+            <Error />
           </Route>
         </Switch>
         <Footer />

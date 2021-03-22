@@ -48,9 +48,14 @@
   transition: var(--trnstn);
 }
 
+.links-container {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
 .show-menu {
   height: 12rem;
-  padding: 0 1rem;
+  padding: 0 0.5rem;
   box-shadow: var(--bx-shdw);
 }
 
@@ -83,6 +88,7 @@
   }
 
   .links-container {
+    flex-direction: row;
     justify-content: space-evenly;
     flex: 1;
     margin: 0 2rem;

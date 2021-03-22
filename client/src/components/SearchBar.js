@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../styles/SearchBar.css';
 
-const SearchBar = ({ search, setSearch }) => {
+const SearchBar = () => {
+  const [search, setSearch] = useState('');
+
   const handleInput = (e) => {
     setSearch(e.target.value);
   };
@@ -9,6 +11,15 @@ const SearchBar = ({ search, setSearch }) => {
   const handleSearch = (e) => {
     e.preventDefault();
   };
+
+  // useEffect(() => {
+  //   let searchedBooks = books.filter(
+  //     (book) =>
+  //       book.name.toLowerCase().includes(search.toLowerCase()) ||
+  //       book.author.toLowerCase().includes(search.toLowerCase())
+  //   );
+  //   setBooks(searchedBooks);
+  // }, [search]);
 
   return (
     <>
