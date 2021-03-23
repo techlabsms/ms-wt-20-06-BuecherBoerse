@@ -1,0 +1,32 @@
+/* Login Buttons */
+.login {
+  padding: 0.5rem 0;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.login-btn {
+  background: var(--brnd-clr);
+  border-radius: var(--brdr-rds);
+  border: 2px solid var(--brnd-clr);
+  padding: 0.5rem;
+  margin-right: 0.5rem;
+  transition: var(--trnstn);
+  cursor: pointer;
+}
+
+.login-btn:hover {
+  background-color: var(--fnt-clr);
+  border: 2px solid var(--fnt-clr);
+}
+
+@media screen and (min-width: 800px) {
+  .login {
+    display: flex;
+    align-items: center;
+  }
+
+  .login-btn {
+    width: 5rem;
+  }
+}

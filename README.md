@@ -1,57 +1,42 @@
-# ms-wt-20-06-BuecherBoerse
-### Tutorial aus Full-Stack React Projects
+# ms-wt-20-06-BuecherBoerse :closed_book: :green_book: :blue_book: 📙 :orange_book: :notebook_with_decorative_cover: :ledger:
 
-### Pakete installieren
-```
-npm install
-Falls es einen Fehler geben sollte:
-npm install --legacy-peer-deps
-```
+# aka Bücherregal
 
-### Während der Entwicklung
+### Doku zum Frontend
+
+[Öffne Frontend](client/)
+
+### Doku zum Backend
+
+[Öffne Backend](server/)
+
+## Installations Anleitung
+
 Als Datenbank wird mongodb benutzt, welches vorher installiert werden muss:
-[https://docs.mongodb.com/manual/installation/]
-Datenbank starten mit
+[https://docs.mongodb.com/manual/installation/](https://docs.mongodb.com/manual/installation/)
+
+Datenbank in Windows starten mit
+
 ```
 mongod
 ```
 
-Server starten
-```
-npm run development
-```
+Datenbank in macOS starten mit
 
-Im Browser aufrufen:
-http://localhost:3000
-
-### In der Verwendung
-devBundle.compile aus server.js entfernen
 ```
-npm run build
-npm run start
+mongo
 ```
 
-### Beschreibung
-User login backend mit create, update, delete (CRUD) und authentication-authorization (auth)
+Backend starten im Main folder
 
-#### application programming interface (API)
-| Route         | HTTP Methode           | Beschreibung  |
-| ------------- |:-------------:| -----:|
-| `/api/users`          |`POST`     | Erstelle Benutzer     |
-| `/api/users`          | `GET`     | Liste aller Benutzer  |
-| `/api/users/:userId`  | `GET`     | Rufe bestimmten Benutzer auf|
-| `/api/users/:userId`  | `PUT`     | aktualisiere Benutzer|
-| `/api/users/:userId`  | `DELETE`  | Lösche Benutzer|
-| `/auth/signin`        | `POST`    | Anmelden|
-| `/auth/signout`       | `GET`     | Abmelden|
+```
+npm run dev
+```
 
-Testen mit https://install.advancedrestclient.com/install
+Frontend starten im client folder
 
-### Benutzer Felder in der Datenbank
-| Feld        | Typ           | Beschreibung  |
-| ------------- |:-------------:| -----:|
-| name      | string| Notwendig |
-| email     | string| Notwendig (einzigartig) |
-| password  | string| Notwendig Passwort wird verschlüsselt gespeichert|
-| created   | Date  | Wann wurde der Benutzer erstellt? Automatisch generiert|
-| updated   | Date  | Wann wurde der Benutzer aktualisiert? Automatisch generiert|
+```
+npm start
+```
+
+Öffne [http://localhost:3000](http://localhost:3000) im Browser um die Applikation zu sehen.
