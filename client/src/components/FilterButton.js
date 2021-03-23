@@ -3,12 +3,12 @@ import { AppContext } from '../context';
 import '../styles/FilterButton.css';
 
 const FilterButton = ({ index, category }) => {
-  const { books, setBooks } = useContext(AppContext);
+  const { allBooks, setBooks } = useContext(AppContext);
   const filterBooks = (category) => {
     if (category === 'alle') {
-      return setBooks(books);
+      return setBooks(allBooks);
     }
-    let filteredBooks = books.filter((book) => book.category === category);
+    let filteredBooks = allBooks.filter((book) => book.category === category);
     setBooks(filteredBooks);
   };
   return (

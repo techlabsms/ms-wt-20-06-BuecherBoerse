@@ -47,7 +47,6 @@ ul {
 
 a {
   text-transform: capitalize;
-  color: var(--bckgrnd-clr);
   text-decoration: none;
 }
 
@@ -116,6 +115,11 @@ main::before {
   content: '';
 }
 
+main::after {
+  margin-bottom: 7rem;
+  content: '';
+}
+
 main {
   display: grid;
   place-items: center;
@@ -128,13 +132,6 @@ main {
   text-align: start;
 }
 
-@media screen and (min-width: 800px) {
-  .form-control {
-    margin: 1rem;
-    display: grid;
-  }
-}
-
 /* Utilities */
 .italic {
   font-style: italic;
@@ -143,4 +140,9 @@ main {
 .basic-flex {
   display: flex;
   align-items: center;
+}
+
+.basic-grid {
+  display: grid;
+  place-items: center;
 }

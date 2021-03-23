@@ -7,7 +7,8 @@ const AppContext = React.createContext();
 const AppProvider = ({ children }) => {
   const jwt = localStorage.getItem('name');
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(jwt ? true : false);
-  const [books, setBooks] = useState([]);
+  const [allBooks, setAllBooks] = useState([]);
+  const [books, setBooks] = useState(allBooks);
   const [loading, setLoading] = useState(false);
   const [isSubmenuOpen, setIsSubmenuOpen] = useState(false);
   const [location, setLocation] = useState({});
@@ -19,15 +20,14 @@ const AppProvider = ({ children }) => {
       try {
         const res = await fetch(api);
         if (res.status >= 200 && res.status <= 299) {
-          console.log('successfully fetched something');
           const bookList = await res.json();
+          setAllBooks(bookList);
           setBooks(bookList);
-          console.log(bookList);
         } else {
           throw new Error('Hoppala, da ist was schief gelaufen');
         }
       } catch (err) {
-        console.log('errooooorrrrrrrr....', err);
+        console.log(err);
       } finally {
         setLoading(false);
       }
@@ -51,6 +51,7 @@ const AppProvider = ({ children }) => {
       value={{
         isUserLoggedIn,
         setIsUserLoggedIn,
+        allBooks,
         books,
         setBooks,
         loading,

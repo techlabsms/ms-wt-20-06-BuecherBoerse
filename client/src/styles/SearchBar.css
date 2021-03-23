@@ -9,7 +9,7 @@
   box-shadow: var(--mn-shdw);
 }
 
-.form {
+.search-form {
   width: 50vw;
   padding: 0.5rem;
   border: 2px solid var(--bckgrnd-trnsprnt);
@@ -17,7 +17,7 @@
 }
 
 @media screen and (min-width: 800px) {
-  .form {
+  .search-form {
     padding: 1rem;
   }
 }

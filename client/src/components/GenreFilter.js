@@ -3,11 +3,11 @@ import FilterButton from './FilterButton';
 import '../styles/GenreFilter.css';
 import { AppContext } from '../context';
 
-const GenreFilter = React.memo(() => {
-  const { books } = useContext(AppContext);
+const GenreFilter = () => {
+  const { allBooks } = useContext(AppContext);
   const allCategories = [
     'alle',
-    ...new Set(books.map((book) => book.category)),
+    ...new Set(allBooks.map((book) => book.category)),
   ];
   const [categories] = useState(allCategories);
 
@@ -20,6 +20,6 @@ const GenreFilter = React.memo(() => {
       </section>
     </>
   );
-});
+};
 
 export default GenreFilter;

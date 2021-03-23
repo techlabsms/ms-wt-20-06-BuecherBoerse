@@ -27,48 +27,50 @@ const Signup = () => {
         <div className='title'>
           <h3>Melde dich jetzt an!</h3>
         </div>
-        <div className='form-control'>
-          <label htmlFor='name' name='name'>
-            Dein Wunsch-Username
-          </label>
-          <input
-            type='text'
-            id='name'
-            name='name'
-            value={name}
-            onChange={checkSignupInput}
-            required
-          />
-        </div>
-        <div className='form-control'>
-          <label htmlFor='email' name='email'>
-            Deine bevorzugte Email
-          </label>
-          <input
-            type='text'
-            id='email'
-            name='email'
-            value={email}
-            onChange={checkSignupInput}
-            required
-          />
-        </div>
-        <div className='form-control'>
-          <label htmlFor='password' name='password'>
-            Dein bärenstarkes Passwort
-          </label>
-          <input
-            type='password'
-            id='password'
-            name='password'
-            value={password}
-            onChange={checkSignupInput}
-            required
-          />
-        </div>
-        <button type='submit' className='btn'>
-          Registrieren
-        </button>
+        <section className='form'>
+          <div className='form-control'>
+            <label htmlFor='name' name='name'>
+              Dein Wunsch-Username
+            </label>
+            <input
+              type='text'
+              id='name'
+              name='name'
+              value={name}
+              onChange={checkSignupInput}
+              required
+            />
+          </div>
+          <div className='form-control'>
+            <label htmlFor='email' name='email'>
+              Deine bevorzugte Email
+            </label>
+            <input
+              type='text'
+              id='email'
+              name='email'
+              value={email}
+              onChange={checkSignupInput}
+              required
+            />
+          </div>
+          <div className='form-control'>
+            <label htmlFor='password' name='password'>
+              Dein bärenstarkes Passwort
+            </label>
+            <input
+              type='password'
+              id='password'
+              name='password'
+              value={password}
+              onChange={checkSignupInput}
+              required
+            />
+          </div>
+          <button type='submit' className='signin-btn'>
+            Registrieren
+          </button>
+        </section>
       </form>
       {alert.display && <Alert />}
     </>

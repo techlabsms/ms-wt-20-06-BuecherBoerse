@@ -8,11 +8,13 @@ import UploadBook from './pages/UploadBook';
 import Footer from './components/Footer';
 import LoginScreen from './pages/LoginScreen';
 import Error from './pages/Error';
+import ScrollToTop from './components/ScrollToTop';
 
 const App = () => {
   return (
     <>
       <Router>
+        <ScrollToTop />
         <Navbar />
         <Switch>
           <Route path='/login'>
@@ -26,6 +28,12 @@ const App = () => {
           </ProtectedRoute>
           <ProtectedRoute path='/openbook/:id'>
             <OpenBook />
+          </ProtectedRoute>
+          <ProtectedRoute path='/favorites'>
+            <Error />
+          </ProtectedRoute>
+          <ProtectedRoute path='/messages'>
+            <Error />
           </ProtectedRoute>
           <Route path='*'>
             <Error />

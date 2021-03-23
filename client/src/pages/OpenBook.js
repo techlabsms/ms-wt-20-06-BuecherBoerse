@@ -19,7 +19,6 @@ const OpenBook = () => {
         const res = await fetch(`${api}${id}`);
         if (res.ok) {
           const singleBook = await res.json();
-          console.log(singleBook);
           setOpenBook(singleBook);
         } else {
           throw new Error('etwas hat nicht geklappt');
@@ -36,7 +35,13 @@ const OpenBook = () => {
   const { image, name, author, category, description } = openBook;
 
   if (loading) {
-    return <Loading />;
+    return (
+      <>
+        <main>
+          <Loading />
+        </main>
+      </>
+    );
   }
   return (
     <>

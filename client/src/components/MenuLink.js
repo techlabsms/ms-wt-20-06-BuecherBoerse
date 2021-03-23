@@ -1,12 +1,12 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import '../styles/MenuLink.css';
 
 const MenuLink = ({ id, url, text }) => {
   return (
     <>
       <li key={id} className='links basic-flex'>
-        <NavLink to={url}>{text}</NavLink>
+        <Link to={url}>{text}</Link>
       </li>
     </>
   );
