@@ -6,6 +6,7 @@ import OpenBook from './pages/OpenBook';
 import UploadBook from './pages/UploadBook';
 import Footer from './components/Footer';
 import LoginScreen from './pages/LoginScreen';
+import Datenschutz from './pages/Datenschutz';
 
 const App = () => {
   return (
@@ -25,7 +26,10 @@ const App = () => {
           <Route path='/openbook/:id'>
             <OpenBook />
           </Route>
-        </Switch>
+          <Route path='/datenschutz'>
+            <Datenschutz />
+          </Route>        
+          </Switch>
         <Footer />
       </Router>
     </>

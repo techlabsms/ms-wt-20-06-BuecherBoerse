@@ -7,7 +7,7 @@ const login = [{ id: 2, url: '/login', text: 'login' }];
 const footer = [
   { id: 1, url: './#', text: 'über uns' },
   { id: 2, url: './#', text: 'impressum' },
-  { id: 3, url: './#', text: 'datenschutz' },
+  { id: 3, url: '/datenschutz', text: 'datenschutz' },
 ];
 
 export { links, login, footer };
