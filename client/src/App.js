@@ -6,7 +6,8 @@ import OpenBook from './pages/OpenBook';
 import UploadBook from './pages/UploadBook';
 import Footer from './components/Footer';
 import LoginScreen from './pages/LoginScreen';
-import Datenschutz from './pages/Datenschutz';
+import DataPrivacy from './pages/DataPrivacy';
+import Imprint from './pages/Imprint';
 
 const App = () => {
   return (
@@ -26,8 +27,11 @@ const App = () => {
           <Route path='/openbook/:id'>
             <OpenBook />
           </Route>
-          <Route path='/datenschutz'>
-            <Datenschutz />
+          <Route path='/imprint'>
+            <Imprint />
+          </Route>
+          <Route path='/dataprivacy'>
+            <DataPrivacy />
           </Route>        
           </Switch>
         <Footer />
