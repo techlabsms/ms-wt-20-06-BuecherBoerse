@@ -11,12 +11,14 @@ const UserBar = () => {
     isSubmenuOpen,
     closeSubmenu,
   } = useContext(AppContext);
+
   const showUserSubmenu = (e) => {
     const divSize = e.currentTarget.getBoundingClientRect();
     const divCenter = (divSize.left + divSize.right) / 2;
     const divBottom = divSize.bottom - 3;
     openSubmenu({ divCenter, divBottom });
   };
+
   const name = localStorage.getItem('name');
 
   return (

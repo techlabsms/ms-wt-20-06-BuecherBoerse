@@ -5,7 +5,7 @@ import SearchBar from '../components/SearchBar';
 import Loading from '../components/Loading';
 import { AppContext } from '../context';
 
-const Marktplatz = () => {
+const Marketplace = () => {
   const { books, loading, closeSubmenu } = useContext(AppContext);
   if (loading && books.length < 1) {
     return (
@@ -27,4 +27,4 @@ const Marktplatz = () => {
   );
 };
 
-export default Marktplatz;
+export default Marketplace;
