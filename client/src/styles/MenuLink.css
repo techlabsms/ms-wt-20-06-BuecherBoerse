@@ -8,14 +8,11 @@
   color: var(--fnt-clr);
 }
 
-.links:hover {
-  color: rgb(153, 153, 153);
-}
-
 @media screen and (min-width: 800px) {
   .links {
     width: 10vw;
     margin: 1rem;
+    align-self: center;
   }
 
   .links:hover {
@@ -23,6 +20,6 @@
   }
 
   .links a:hover {
-    border-bottom: 3px solid var(--brnd-clr);
+    color: var(--brnd-clr);
   }
 }

@@ -10,6 +10,7 @@ const Submenu = () => {
       const res = await fetch(signOut);
       if (res.status >= 200 && res.status <= 299) {
         const userLoggedOut = await res.json();
+        localStorage.clear();
         console.log('Erfolgreich ausgeloggt!', userLoggedOut);
       } else {
         throw new Error('Hoppala, da ist wohl was schief gelaufen...');

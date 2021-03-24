@@ -171,7 +171,7 @@ const UploadBook = () => {
                   onChange={textChange}
                 ></textarea>
               </div>
-              <div className='btn-containr'>
+              <div className='btn-container'>
                 <button className='btn' type='submit' onSubmit={uploadAll}>
                   Hochladen
                 </button>

@@ -7,12 +7,14 @@
 
 .login-btn {
   background: var(--brnd-clr);
+  color: var(--bckgrnd-clr);
   border-radius: var(--brdr-rds);
   border: 2px solid var(--brnd-clr);
   padding: 0.5rem;
   margin-right: 0.5rem;
   transition: var(--trnstn);
   cursor: pointer;
+  text-transform: capitalize;
 }
 
 .login-btn:hover {

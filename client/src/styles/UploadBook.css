@@ -6,6 +6,7 @@
   border-radius: var(--brdr-rds-2);
   box-shadow: var(--bx-shdw);
   margin: 1rem auto;
+  width: 80vw;
 }
 
 .book-form input,
@@ -27,7 +28,7 @@ textarea {
     margin: 2rem auto;
     display: grid;
     grid-template-columns: 2fr 2fr;
-    width: 65vw;
+    max-width: 650px;
   }
 
   .book-form input,

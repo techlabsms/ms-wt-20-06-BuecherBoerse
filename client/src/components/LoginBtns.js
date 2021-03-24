@@ -10,7 +10,7 @@ const LoginBtns = () => {
         {login.map((loginBtn) => {
           const { id, url, text } = loginBtn;
           return (
-            <Link key={id} to={url}>
+            <Link to={url} key={id}>
               <button className='login-btn'>{text}</button>
             </Link>
           );

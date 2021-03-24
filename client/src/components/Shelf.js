@@ -1,13 +1,21 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { AppContext } from '../context';
 import '../styles/Shelf.css';
 import Book from './Book';
-import Loading from './Loading';
 
-const Shelf = ({ books, loading }) => {
-  if (loading) {
+const Shelf = () => {
+  const { books, loading } = useContext(AppContext);
+  if (books.length < 1 && !loading) {
     return (
       <>
-        <Loading />
+        <section className='empty-shelf'>
+          <div className='error-message basic-flex'>
+            <h3 className='title'>
+              Es gibt hier wohl leider keinen Match in unserer
+              Bücherdatenbank...
+            </h3>
+          </div>
+        </section>
       </>
     );
   }
@@ -15,7 +23,7 @@ const Shelf = ({ books, loading }) => {
     <>
       <ul className='shelf-container'>
         {books.map((book) => {
-          return <Book key={book.id} {...book} />;
+          return <Book key={book._id} {...book} />;
         })}
       </ul>
     </>

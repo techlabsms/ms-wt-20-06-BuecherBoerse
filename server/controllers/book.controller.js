@@ -8,7 +8,7 @@ const create = async (req, res) => {
   try {
     const book = new Book(req.body);
     try {
-      book.image = req.file.path;
+      book.image = `Uploads/${req.file.filename}`;
     } catch (err) {
       return res.status(400).json({
         message: 'You need t upload an image',
@@ -19,7 +19,7 @@ const create = async (req, res) => {
       message: 'Buch erfolgreich hochgeladen!',
       book: book,
       image: req.file,
-      file: `uploads/${req.file.filename}`, //Bild wird angezeigt, wenn im Frontent ein Image Tag vorliegt (src=file)
+      file: `Uploads/${req.file.filename}`, //Bild wird angezeigt, wenn im Frontend ein Image Tag vorliegt (src=file)
     });
   } catch (err) {
     return res.status(400).json({
@@ -78,7 +78,7 @@ const update = async (req, res) => {
           });
         }
       });
-      book.image = req.file.path;
+      book.image = `Uploads/${req.file.path}`;
     }
     //Verändern der restlichen Buchdaten
     book = extend(book, req.body);
