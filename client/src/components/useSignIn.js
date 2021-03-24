@@ -23,7 +23,6 @@ export const useSignIn = (url) => {
       });
       if (res.status >= 200 && res.status <= 299) {
         const userData = await res.json();
-        console.log(userData);
         localStorage.setItem('token', userData.token);
         localStorage.setItem('name', userData.user.name);
         history.push(state ? state.from : '/', setIsUserLoggedIn(true));
@@ -37,7 +36,6 @@ export const useSignIn = (url) => {
         icon: <FaPoop />,
         msg: 'Das hat leider nicht geklappt',
       });
-    } finally {
       setUserCredential({ name: '', email: '', password: '' });
     }
   };
