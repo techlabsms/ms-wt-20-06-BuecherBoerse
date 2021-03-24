@@ -5,7 +5,7 @@ const links = [
 ];
 const login = [{ id: 1, url: '/login', text: 'login' }];
 const footer = [
-  { id: 1, url: './#', text: 'über uns' },
+  { id: 1, url: '/about', text: 'über uns' },
   { id: 2, url: '/imprint', text: 'impressum' },
   { id: 3, url: '/dataprivacy', text: 'datenschutz' },
 ];

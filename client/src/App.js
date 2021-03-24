@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { AppContext } from './context';
 import Navbar from './components/Navbar';
 import ProtectedRoute from './components/ProtectedRoute';
 import Marktplatz from './pages/Marktpkatz';
@@ -9,7 +10,6 @@ import Footer from './components/Footer';
 import LoginScreen from './pages/LoginScreen';
 import Error from './pages/Error';
 import ScrollToTop from './components/ScrollToTop';
-import { AppContext } from './context';
 import DataPrivacy from './pages/DataPrivacy';
 import Imprint from './pages/Imprint';
 
@@ -18,8 +18,8 @@ const App = () => {
   return (
     <>
       <Router>
-        <ScrollToTop />
         {isUserLoggedIn ? <Navbar /> : null}
+        <ScrollToTop />
         <Switch>
           <Route path='/login'>
             <LoginScreen />
@@ -39,6 +39,9 @@ const App = () => {
           <ProtectedRoute path='/messages'>
             <Error />
           </ProtectedRoute>
+          <Route path='/about'>
+            <Error />
+          </Route>
           <Route path='/imprint'>
             <Imprint />
           </Route>

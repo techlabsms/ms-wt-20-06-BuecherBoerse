@@ -21,6 +21,7 @@ const Navbar = () => {
     }
   };
   window.addEventListener('scroll', stickyNav);
+
   const hideSubmenu = (e) => {
     if (!e.target.classList.contains('helper')) {
       closeSubmenu();
