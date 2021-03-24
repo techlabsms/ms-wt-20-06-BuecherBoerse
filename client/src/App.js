@@ -10,6 +10,8 @@ import LoginScreen from './pages/LoginScreen';
 import Error from './pages/Error';
 import ScrollToTop from './components/ScrollToTop';
 import { AppContext } from './context';
+import DataPrivacy from './pages/DataPrivacy';
+import Imprint from './pages/Imprint';
 
 const App = () => {
   const { isUserLoggedIn } = useContext(AppContext);
@@ -37,6 +39,12 @@ const App = () => {
           <ProtectedRoute path='/messages'>
             <Error />
           </ProtectedRoute>
+          <Route path='/imprint'>
+            <Imprint />
+          </Route>
+          <Route path='/dataprivacy'>
+            <DataPrivacy />
+          </Route>
           <Route path='*'>
             <Error />
           </Route>
