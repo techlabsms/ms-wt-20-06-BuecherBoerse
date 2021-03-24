@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { AppContext } from '../context';
 import '../styles/Imprint.css';
 
 const Imprint = () => {
+  const { closeSubmenu } = useContext(AppContext);
   return (
     <>
-      <main>
+      <main onClick={closeSubmenu}>
         <section className='imprint'>
           <h3>Impressum</h3>
           <p>Angaben gem. § 5 TMG </p>
@@ -23,7 +25,6 @@ const Imprint = () => {
             48151 Münster
           </p>
           <p>E-Mail-Adresse: info@techlabs.org</p>
-
           <br />
           <p>
             Vorstand: David Middelbeck, Marius Vennemann, Rebecca Janßen, Jana
@@ -31,7 +32,6 @@ const Imprint = () => {
             <br />
             Register und Registernummer: Amtsgericht Münster VR 5787
           </p>
-
           <br />
           <p>
             Online-Streitbeilegung gemäß Art. 14 Abs. 1 ODR-VO:
@@ -60,9 +60,6 @@ const Imprint = () => {
               https://www.techlabs.org/de/imprint
             </a>
           </p>
-
-          <br />
-          <br />
           <br />
         </section>
       </main>

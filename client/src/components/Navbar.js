@@ -13,6 +13,7 @@ const Navbar = () => {
   const [navbar, setNavbar] = useState(false);
   const [showLinks, setShowLinks] = useState(false);
   const { isUserLoggedIn, closeSubmenu } = useContext(AppContext);
+
   const stickyNav = () => {
     if (window.scrollY >= 120) {
       setNavbar(true);

@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { AppContext } from '../context';
 import '../styles/DataPrivacy.css';
 
 const DataPrivacy = () => {
+  const { closeSubmenu } = useContext(AppContext);
   return (
     <>
-      <main>
+      <main onClick={closeSubmenu}>
         <section className='datenschutz'>
           <h3>Datenschutzerklärung</h3>
           <br />
@@ -18,7 +20,6 @@ const DataPrivacy = () => {
             Die verantwortliche Stelle für die Datenverarbeitung auf dieser
             Website ist:
           </p>
-
           <p>
             <strong>
               <span>Bücherregal Münster</span>
@@ -31,13 +32,11 @@ const DataPrivacy = () => {
             <br />
             48151 Münster
           </p>
-
           <p>
             Die verantwortliche Stelle entscheidet allein oder gemeinsam mit
             anderen über die Zwecke und Mittel der Verarbeitung von
             personenbezogenen Daten (z.B. Namen, Kontaktdaten o. Ä.).
           </p>
-
           <br />
           <p>
             <strong>Widerruf Ihrer Einwilligung zur Datenverarbeitung</strong>
@@ -49,7 +48,6 @@ const DataPrivacy = () => {
             formlose Mitteilung per E-Mail. Die Rechtmäßigkeit der bis zum
             Widerruf erfolgten Datenverarbeitung bleibt vom Widerruf unberührt.
           </p>
-
           <br />
           <p>
             <strong>
@@ -73,7 +71,6 @@ const DataPrivacy = () => {
             </a>
             .
           </p>
-
           <br />
           <p>
             <strong>Recht auf Datenübertragbarkeit</strong>
@@ -86,7 +83,6 @@ const DataPrivacy = () => {
             die direkte Übertragung der Daten an einen anderen Verantwortlichen
             verlangen, erfolgt dies nur, soweit es technisch machbar ist.
           </p>
-
           <br />
           <p>
             <strong>
@@ -103,7 +99,6 @@ const DataPrivacy = () => {
             sich jederzeit über die im Impressum aufgeführten
             Kontaktmöglichkeiten an uns wenden.
           </p>
-
           <br />
           <p>
             <strong>SSL- bzw. TLS-Verschlüsselung</strong>
@@ -117,7 +112,6 @@ const DataPrivacy = () => {
             Adresszeile Ihres Browsers und am Schloss-Symbol in der
             Browserzeile.
           </p>
-
           <br />
           <p>
             <strong>Server-Log-Dateien</strong>
@@ -143,7 +137,6 @@ const DataPrivacy = () => {
             Abs. 1 lit. b DSGVO, der die Verarbeitung von Daten zur Erfüllung
             eines Vertrags oder vorvertraglicher Maßnahmen gestattet.
           </p>
-
           <br />
           <p>
             <strong>Registrierung auf dieser Website</strong>
@@ -174,7 +167,6 @@ const DataPrivacy = () => {
             werden gelöscht, sollten Sie Ihre Registrierung aufheben.
             Gesetzliche Aufbewahrungsfristen bleiben unberührt.
           </p>
-
           <br />
           <p>
             <strong>Kontaktformular</strong>
@@ -200,7 +192,6 @@ const DataPrivacy = () => {
             besteht. Zwingende gesetzliche Bestimmungen - insbesondere
             Aufbewahrungsfristen - bleiben unberührt.
           </p>
-
           <br />
           <p>
             <strong>Speicherdauer von Beiträgen und Kommentaren</strong>
@@ -219,7 +210,6 @@ const DataPrivacy = () => {
             Rechtmäßigkeit bereits erfolgter Datenverarbeitungsvorgänge bleibt
             vom Widerruf unberührt.
           </p>
-
           <br />
           <p>
             <strong>Cookies</strong>
@@ -255,7 +245,6 @@ const DataPrivacy = () => {
             Analyse-Funktionen) erfolgt, werden diese in dieser
             Datenschutzerklärung separat behandelt.
           </p>
-
           <br />
           <p>
             <strong>Google Analytics</strong>
@@ -360,7 +349,6 @@ const DataPrivacy = () => {
             “Widerspruch gegen die Datenerfassung” erläutert, generell
             untersagen.
           </p>
-
           <br />
           <p>
             <strong>Google Web Fonts</strong>
@@ -406,8 +394,6 @@ const DataPrivacy = () => {
               https://policies.google.com/privacy/partners?hl=de
             </a>
           </p>
-          <br />
-          <br />
           <br />
         </section>
       </main>

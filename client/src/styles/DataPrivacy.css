@@ -1,4 +1,4 @@
-.datenschutz  {
+.datenschutz {
   max-width: var(--mx-wdth);
   padding: 0 2rem;
   text-align: left;
@@ -7,7 +7,7 @@
 .extlink {
   color: rgb(38, 115, 191);
   text-decoration: underline;
-  text-transform: none;  
+  text-transform: none;
 }
 
 .extlink:hover {

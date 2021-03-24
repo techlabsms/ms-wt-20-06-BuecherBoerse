@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { AppContext } from './context';
 import Navbar from './components/Navbar';
 import ProtectedRoute from './components/ProtectedRoute';
-import Marktplatz from './pages/Marktpkatz';
+import Marketplace from './pages/Marketplace';
 import OpenBook from './pages/OpenBook';
 import UploadBook from './pages/UploadBook';
 import Footer from './components/Footer';
@@ -25,7 +25,7 @@ const App = () => {
             <LoginScreen />
           </Route>
           <ProtectedRoute exact path='/'>
-            <Marktplatz />
+            <Marketplace />
           </ProtectedRoute>
           <ProtectedRoute path='/uploadbook'>
             <UploadBook />
