@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import ProtectedRoute from './components/ProtectedRoute';
@@ -9,13 +9,15 @@ import Footer from './components/Footer';
 import LoginScreen from './pages/LoginScreen';
 import Error from './pages/Error';
 import ScrollToTop from './components/ScrollToTop';
+import { AppContext } from './context';
 
 const App = () => {
+  const { isUserLoggedIn } = useContext(AppContext);
   return (
     <>
       <Router>
         <ScrollToTop />
-        <Navbar />
+        {isUserLoggedIn ? <Navbar /> : null}
         <Switch>
           <Route path='/login'>
             <LoginScreen />
@@ -39,7 +41,7 @@ const App = () => {
             <Error />
           </Route>
         </Switch>
-        <Footer />
+        {isUserLoggedIn ? <Footer /> : null}
       </Router>
     </>
   );
