@@ -24,6 +24,7 @@
   display: grid;
   grid-template-rows: repeat(3, auto);
   gap: 1rem;
+  align-content: center;
 }
 
 .book-author {

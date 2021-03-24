@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { FaBars } from 'react-icons/fa';
+import { FaBook, FaBookOpen } from 'react-icons/fa';
 import logo from '../static/buecherregal.svg';
 import MenuLink from './MenuLink';
 import LoginBtns from './LoginBtns';
@@ -43,7 +43,7 @@ const Navbar = () => {
                 setShowLinks(!showLinks);
               }}
             >
-              <FaBars />
+              {showLinks ? <FaBookOpen /> : <FaBook />}
             </button>
           </div>
           <div className={showLinks ? 'nav-menu show-menu' : 'nav-menu'}>

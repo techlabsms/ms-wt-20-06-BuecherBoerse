@@ -27,17 +27,13 @@
 .nav-toggle {
   display: flex;
   align-self: center;
-  font-size: 1rem;
+  font-size: 1.5rem;
   padding: 0.5rem;
   border: 0;
   background: transparent;
-}
-
-.nav-toggle:hover {
-  border-radius: var(--brdr-rds);
-  margin: 0;
-  padding: 0.5rem;
-  background: var(--brnd-clr);
+  color: var(--brnd-clr);
+  transition: var(--trnstn);
+  cursor: pointer;
 }
 
 .nav-menu {

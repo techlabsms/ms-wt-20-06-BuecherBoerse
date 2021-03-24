@@ -1,7 +1,7 @@
 .hero {
   background: no-repeat url('../static/janko-ferlic-sfL_QOnmy00-unsplash.jpeg');
   background-size: cover;
-  height: 80vh;
+  height: 100vh;
 }
 
 .signin-center {
@@ -47,10 +47,6 @@
 }
 
 @media screen and (min-width: 800px) {
-  .hero {
-    height: 100vh;
-  }
-
   .signin-center {
     max-width: 500px;
   }
