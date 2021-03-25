@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { FaBook, FaBookOpen } from 'react-icons/fa';
 import logo from '../static/buecherregal.svg';
@@ -14,14 +14,19 @@ const Navbar = () => {
   const [showLinks, setShowLinks] = useState(false);
   const { isUserLoggedIn, closeSubmenu } = useContext(AppContext);
 
-  const stickyNav = () => {
-    if (window.scrollY >= 120) {
-      setNavbar(true);
-    } else {
-      setNavbar(false);
-    }
-  };
-  window.addEventListener('scroll', stickyNav);
+  useEffect(() => {
+    const stickyNav = () => {
+      if (window.scrollY >= 120) {
+        setNavbar(true);
+      } else {
+        setNavbar(false);
+      }
+    };
+    window.addEventListener('scroll', stickyNav);
+    return () => {
+      window.removeEventListener('scroll', stickyNav);
+    };
+  });
 
   const hideSubmenu = (e) => {
     if (!e.target.classList.contains('helper')) {
