@@ -9,13 +9,14 @@ const AppProvider = ({ children }) => {
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(jwt ? true : false);
   const [allBooks, setAllBooks] = useState([]);
   const [books, setBooks] = useState(allBooks);
+  const [isBookUploaded, setIsBookUploaded] = useState(false);
   const [loading, setLoading] = useState(false);
   const [isSubmenuOpen, setIsSubmenuOpen] = useState(false);
   const [location, setLocation] = useState({});
   const [alert, setAlert] = useState({ display: false, icon: '', msg: '' });
 
   const fetchBooks = useCallback(async () => {
-    if (isUserLoggedIn) {
+    if (isUserLoggedIn || isBookUploaded) {
       setLoading(true);
       try {
         const res = await fetch(api);
@@ -32,7 +33,7 @@ const AppProvider = ({ children }) => {
         setLoading(false);
       }
     }
-  }, [isUserLoggedIn]);
+  }, [isUserLoggedIn, isBookUploaded]);
 
   const openSubmenu = (coordinates) => {
     setLocation(coordinates);
@@ -45,6 +46,15 @@ const AppProvider = ({ children }) => {
   useEffect(() => {
     fetchBooks();
   }, [fetchBooks]);
+
+  useEffect(() => {
+    let timeout = () => {
+      setTimeout(() => {
+        setIsBookUploaded(false);
+      }, 3000);
+    };
+    return () => clearTimeout(timeout);
+  });
 
   return (
     <AppContext.Provider
@@ -62,6 +72,7 @@ const AppProvider = ({ children }) => {
         closeSubmenu,
         location,
         fetchBooks,
+        setIsBookUploaded,
       }}
     >
       {children}

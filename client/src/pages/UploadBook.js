@@ -55,7 +55,9 @@ const UploadBook = () => {
     desc: '',
   });
   const [bookImage, setBookImage] = useState();
-  const { alert, setAlert, closeSubmenu } = useContext(AppContext);
+  const { alert, setAlert, closeSubmenu, setIsBookUploaded } = useContext(
+    AppContext
+  );
   const { name, author, genre, language, condition, desc } = newBook;
 
   const textChange = (e) => {
@@ -74,6 +76,7 @@ const UploadBook = () => {
       bookData.append('condition', condition);
       bookData.append('description', desc);
       bookUpload(bookData);
+      setIsBookUploaded(true);
     } else {
       setAlert({
         display: true,

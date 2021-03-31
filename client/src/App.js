@@ -33,21 +33,21 @@ const App = () => {
           <ProtectedRoute path='/openbook/:id'>
             <OpenBook />
           </ProtectedRoute>
-          <ProtectedRoute path='/favorites'>
+          <ProtectedRoute path='/mybooks'>
             <Error />
           </ProtectedRoute>
           <ProtectedRoute path='/messages'>
             <Error />
           </ProtectedRoute>
-          <Route path='/about'>
+          <ProtectedRoute path='/about'>
             <Error />
-          </Route>
-          <Route path='/imprint'>
+          </ProtectedRoute>
+          <ProtectedRoute path='/imprint'>
             <Imprint />
-          </Route>
-          <Route path='/dataprivacy'>
+          </ProtectedRoute>
+          <ProtectedRoute path='/dataprivacy'>
             <DataPrivacy />
-          </Route>
+          </ProtectedRoute>
           <Route path='*'>
             <Error />
           </Route>
