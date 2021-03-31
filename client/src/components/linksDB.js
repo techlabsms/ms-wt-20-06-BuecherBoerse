@@ -1,6 +1,6 @@
 const links = [
   { id: 1, url: '/uploadbook', text: 'upload' },
-  { id: 2, url: '/favorites', text: 'merkliste' },
+  { id: 2, url: '/mybooks', text: 'meine bücher' },
   { id: 3, url: '/messages', text: 'nachrichten' },
 ];
 const login = [{ id: 1, url: '/login', text: 'login' }];
