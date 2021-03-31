@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 
-const api = 'http://localhost:4000/api/books/';
+const api = '/api/books/';
 
 const AppContext = React.createContext();
 

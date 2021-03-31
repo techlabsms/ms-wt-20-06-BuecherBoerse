@@ -6,7 +6,7 @@ import ImageUploader from '../components/ImageUploader';
 import { FaCheckCircle, FaFlushed, FaPoo } from 'react-icons/fa';
 import { AppContext } from '../context';
 
-const api = 'http://localhost:4000/api/books/';
+const api = '/api/books/';
 
 const UploadBook = () => {
   const bookUpload = async (formdata) => {

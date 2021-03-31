@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { AppContext } from '../context';
 import { useSignIn } from '../components/useSignIn';
 import Alert from './Alert';
-const create = 'http://localhost:4000/api/users';
+const create = '/api/users';
 
 const Signup = () => {
   const { signInUser, userCredential, setUserCredential } = useSignIn(create);

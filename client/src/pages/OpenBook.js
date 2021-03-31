@@ -4,7 +4,7 @@ import ReturnTo from '../components/ReturnTo';
 import { AppContext } from '../context';
 import Loading from '../components/Loading';
 import '../styles/OpenBook.css';
-const api = 'http://localhost:4000/api/books/';
+const api = '/api/books/';
 
 const OpenBook = () => {
   const { closeSubmenu } = useContext(AppContext);

@@ -3,7 +3,7 @@ import { AppContext } from '../context';
 import { useSignIn } from '../components/useSignIn';
 import Alert from './Alert';
 
-const auth = 'http://localhost:4000/auth/signin/';
+const auth = '/auth/signin/';
 
 const Login = () => {
   const { signInUser, userCredential, setUserCredential } = useSignIn(auth);

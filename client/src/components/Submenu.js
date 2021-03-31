@@ -2,7 +2,7 @@ import React, { useContext, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { AppContext } from '../context';
 import '../styles/Submenu.css';
-const signOut = 'http://localhost:4000/auth/signout';
+const signOut = '/auth/signout';
 
 const Submenu = () => {
   const getLoggedOut = async () => {
