@@ -11,7 +11,7 @@
 
 .book-form input,
 textarea {
-  padding: 0.5rem;
+  padding: 0.25rem;
   border: 2px solid var(--bckgrnd-trnsprnt-1);
   border-radius: var(--brdr-rds);
 }

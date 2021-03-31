@@ -1,18 +1,18 @@
 import { useContext, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
-import { FaPoop } from 'react-icons/fa';
+import { FaCheckCircle, FaPoop } from 'react-icons/fa';
 import { AppContext } from '../context';
 
-export const useSignIn = (url) => {
+export const useSignIn = () => {
   const [userCredential, setUserCredential] = useState({
     name: '',
     email: '',
     password: '',
   });
-  const { setIsUserLoggedIn, setAlert } = useContext(AppContext);
+  const { setIsUserLoggedIn, setAlert, setIsTabLeft } = useContext(AppContext);
   const history = useHistory();
   const { state } = useLocation();
-  const signInUser = async () => {
+  const signInUser = async (url, tryLogin) => {
     try {
       const res = await fetch(url, {
         method: 'POST',
@@ -23,9 +23,19 @@ export const useSignIn = (url) => {
       });
       if (res.status >= 200 && res.status <= 299) {
         const userData = await res.json();
-        localStorage.setItem('token', userData.token);
-        localStorage.setItem('name', userData.user.name);
-        history.push(state ? state.from : '/', setIsUserLoggedIn(true));
+        if (tryLogin) {
+          localStorage.setItem('token', userData.token);
+          localStorage.setItem('name', userData.user.name);
+          history.push(state ? state.from : '/', setIsUserLoggedIn(true));
+        } else {
+          setAlert({
+            display: true,
+            icon: <FaCheckCircle />,
+            msg: 'Du bist registriert! Logge dich nun ein!',
+          });
+          setUserCredential({ name: '', email: '', password: '' });
+          setIsTabLeft(true);
+        }
       } else {
         throw new Error('Hoppala, da ist wohl was schief gelaufen...');
       }

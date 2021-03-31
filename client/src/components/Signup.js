@@ -5,7 +5,7 @@ import Alert from './Alert';
 const create = '/api/users';
 
 const Signup = () => {
-  const { signInUser, userCredential, setUserCredential } = useSignIn(create);
+  const { signInUser, userCredential, setUserCredential } = useSignIn();
   const { alert } = useContext(AppContext);
   const { name, email, password } = userCredential;
 
@@ -18,7 +18,7 @@ const Signup = () => {
 
   const signupNow = (e) => {
     e.preventDefault();
-    signInUser();
+    signInUser(create);
   };
 
   return (

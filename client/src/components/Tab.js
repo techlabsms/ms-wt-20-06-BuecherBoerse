@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { AppContext } from '../context';
 import '../styles/Tab.css';
 
-const Tab = ({ isTabLeft, setIsTabLeft }) => {
+const Tab = () => {
+  const { isTabLeft, setIsTabLeft } = useContext(AppContext);
   return (
     <>
       <div className='tab-container'>

@@ -8,7 +8,7 @@
   padding: 1rem;
   border-radius: var(--brdr-rds-2);
   box-shadow: var(--frm-shdw);
-  animation: alert-popup 3s ease-in-out;
+  animation: alert-popup 2s ease-in-out;
 }
 
 .alert p {

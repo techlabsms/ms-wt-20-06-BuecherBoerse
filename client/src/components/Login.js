@@ -2,12 +2,11 @@ import React, { useContext } from 'react';
 import { AppContext } from '../context';
 import { useSignIn } from '../components/useSignIn';
 import Alert from './Alert';
-
 const auth = '/auth/signin/';
 
 const Login = () => {
-  const { signInUser, userCredential, setUserCredential } = useSignIn(auth);
-  const { alert } = useContext(AppContext);
+  const { signInUser, userCredential, setUserCredential } = useSignIn();
+  const { alert, isTabLeft } = useContext(AppContext);
   const { name, email, password } = userCredential;
 
   const checkLoginInput = (e) => {
@@ -19,7 +18,7 @@ const Login = () => {
 
   const loginNow = (e) => {
     e.preventDefault();
-    signInUser();
+    signInUser(auth, isTabLeft);
   };
 
   return (

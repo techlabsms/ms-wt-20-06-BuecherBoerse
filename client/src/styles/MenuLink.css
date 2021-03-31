@@ -10,7 +10,6 @@
 
 @media screen and (min-width: 800px) {
   .links {
-    width: 10vw;
     margin: 1rem;
     align-self: center;
   }

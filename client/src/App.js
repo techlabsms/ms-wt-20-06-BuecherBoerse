@@ -1,5 +1,10 @@
 import React, { useContext } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Redirect,
+  Route,
+  Switch,
+} from 'react-router-dom';
 import { AppContext } from './context';
 import Navbar from './components/Navbar';
 import ProtectedRoute from './components/ProtectedRoute';
@@ -18,11 +23,11 @@ const App = () => {
   return (
     <>
       <Router>
-        {isUserLoggedIn ? <Navbar /> : null}
+        {isUserLoggedIn && <Navbar />}
         <ScrollToTop />
         <Switch>
           <Route path='/login'>
-            <LoginScreen />
+            {!isUserLoggedIn ? <LoginScreen /> : <Redirect to='/' />}
           </Route>
           <ProtectedRoute exact path='/'>
             <Marketplace />
@@ -52,7 +57,7 @@ const App = () => {
             <Error />
           </Route>
         </Switch>
-        {isUserLoggedIn ? <Footer /> : null}
+        {isUserLoggedIn && <Footer />}
       </Router>
     </>
   );

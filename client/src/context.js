@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useCallback } from 'react';
-
 const api = '/api/books/';
 
 const AppContext = React.createContext();
@@ -13,6 +12,7 @@ const AppProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const [isSubmenuOpen, setIsSubmenuOpen] = useState(false);
   const [location, setLocation] = useState({});
+  const [isTabLeft, setIsTabLeft] = useState(true);
   const [alert, setAlert] = useState({ display: false, icon: '', msg: '' });
 
   const fetchBooks = useCallback(async () => {
@@ -73,6 +73,8 @@ const AppProvider = ({ children }) => {
         location,
         fetchBooks,
         setIsBookUploaded,
+        isTabLeft,
+        setIsTabLeft,
       }}
     >
       {children}
