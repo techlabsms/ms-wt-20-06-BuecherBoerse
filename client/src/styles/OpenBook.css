@@ -2,13 +2,17 @@
   display: flex;
   flex-flow: column;
   background: var(--bckgrnd-clr);
-  padding: 1rem;
+  padding: 0.5rem;
   align-items: center;
 }
 
 .title {
   color: var(--brnd-clr);
-  padding: 0.25rem;
+}
+
+.title-2 {
+  color: var(--brnd-clr);
+  font-style: normal;
 }
 
 .open-book img {
@@ -25,12 +29,6 @@
   place-items: center;
 }
 
-.open-book-info header {
-  display: flex;
-  flex-direction: column;
-  padding: 1rem;
-}
-
 .open-book-info h3,
 span {
   color: var(--brnd-clr);
@@ -39,20 +37,21 @@ span {
 @media screen and (min-width: 800px) {
   .open-book {
     display: grid;
-    width: 90vw;
-    height: auto;
-    grid-template-columns: repeat(2, 3fr);
+    max-width: var(--mx-wdth);
+    grid-template-columns: repeat(2, 2fr);
     gap: 3rem;
   }
 
   .open-book img {
-    width: 20rem;
+    width: 25rem;
     height: auto;
     object-fit: cover;
   }
 
   .open-book-info {
     grid-template-rows: repeat(3, auto);
+    place-items: start;
+    text-align: start;
     padding: 1rem;
   }
 }

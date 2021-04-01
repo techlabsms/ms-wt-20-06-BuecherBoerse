@@ -48,17 +48,20 @@ const OpenBook = () => {
       <main onClick={closeSubmenu}>
         <ReturnTo />
         <section className='open-book'>
-          <h2 className='title'>{name}</h2>
-          <h3 className='title italic'>{author}</h3>
           <img src={`../${image}`} alt={name} />
           <div className='open-book-info'>
             <header>
-              <h3>Beschreibung</h3>
-              <p>{description}</p>
+              <h1 className='title'>{name}</h1>
+              <h3 className='title-2'>{author}</h3>
             </header>
-            <p>
-              Genre: <span>{category}</span>
-            </p>
+            <div>
+              <h4>Beschreibung</h4>
+              <p>{description}</p>
+            </div>
+            <div>
+              <h4>Genre</h4>
+              <p>{category}</p>
+            </div>
             <footer>
               <div className='btn-container'>
                 <button className='btn'>Jetzt vormerken</button>
