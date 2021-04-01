@@ -65,6 +65,7 @@ const AppProvider = ({ children }) => {
         books,
         setBooks,
         loading,
+        setLoading,
         alert,
         setAlert,
         isSubmenuOpen,
