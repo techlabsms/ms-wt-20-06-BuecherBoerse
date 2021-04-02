@@ -146,3 +146,10 @@ main {
   display: grid;
   place-items: center;
 }
+
+.collapse {
+  border: none;
+  color: var(--brnd-clr);
+  background: transparent;
+  cursor: pointer;
+}

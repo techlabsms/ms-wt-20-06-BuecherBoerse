@@ -9,6 +9,7 @@ const api = '/api/books/';
 const OpenBook = () => {
   const { closeSubmenu, loading, setLoading } = useContext(AppContext);
   const [openBook, setOpenBook] = useState({});
+  const [showDesc, setShowDesc] = useState(false);
   const { id } = useParams();
 
   const fetchSingleBook = useCallback(async () => {
@@ -42,6 +43,10 @@ const OpenBook = () => {
     description,
   } = openBook;
 
+  const collapseDesc = () => {
+    setShowDesc(!showDesc);
+  };
+
   if (loading) {
     return (
       <>
@@ -60,7 +65,7 @@ const OpenBook = () => {
           <section className='open-book-info'>
             <div>
               <h2 className='title'>{name}</h2>
-              <h3 className='title'>{author}</h3>
+              <h4 className='title'>{author}</h4>
             </div>
             <hr className='separation-line' />
             <div>
@@ -73,7 +78,14 @@ const OpenBook = () => {
             </div>
             <div>
               <h4>Beschreibung</h4>
-              <p>{description}</p>
+              <p>
+                {showDesc
+                  ? `${description} `
+                  : description && `${description.substring(0, 300)}... `}
+                <button className='collapse' onClick={collapseDesc}>
+                  {!showDesc ? 'Mehr' : 'Weniger'}
+                </button>
+              </p>
             </div>
           </section>
           <aside className='user-action'>
