@@ -4,6 +4,7 @@ import ReturnTo from '../components/ReturnTo';
 import { AppContext } from '../context';
 import Loading from '../components/Loading';
 import '../styles/OpenBook.css';
+import UserAction from '../components/UserAction';
 const api = '/api/books/';
 
 const OpenBook = () => {
@@ -88,23 +89,7 @@ const OpenBook = () => {
               </p>
             </div>
           </section>
-          <aside className='user-action'>
-            <section className='action-section'>
-              <p>Dieses Buch gehört:</p>
-              <h3>User XYZ</h3>
-            </section>
-            <hr className='separation-line' />
-            <section className='action-section'>
-              <p>Zustand des Buches ist:</p>
-              <h3>{condition}</h3>
-            </section>
-            <hr className='separation-line' />
-            <section className='action-section'>
-              <p>Was möchtest du tun?</p>
-              <button className='action-btn'>Jetzt vormerken</button>
-              <button className='action-btn'>Jetzt ausleihen</button>
-            </section>
-          </aside>
+          <UserAction condition={condition} />
         </article>
       </main>
     </>

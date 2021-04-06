@@ -10,7 +10,6 @@
   border-radius: var(--brdr-rds-2);
   box-shadow: var(--bx-shdw);
   transition: var(--trnstn);
-  width: auto;
 }
 
 .form {

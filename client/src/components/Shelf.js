@@ -1,10 +1,8 @@
-import React, { useContext } from 'react';
-import { AppContext } from '../context';
+import React from 'react';
 import '../styles/Shelf.css';
 import Book from './Book';
 
-const Shelf = () => {
-  const { books, loading } = useContext(AppContext);
+const Shelf = ({ books, loading }) => {
   if (books.length < 1 && !loading) {
     return (
       <>

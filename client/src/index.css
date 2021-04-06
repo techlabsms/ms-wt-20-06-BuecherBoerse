@@ -88,6 +88,29 @@ button:focus {
   outline: none;
 }
 
+.action-btn-container {
+  margin-top: 1rem;
+}
+
+.action-btn {
+  background: var(--bckgrnd-clr);
+  color: var(--brnd-clr);
+  border: 2px solid var(--bckgrnd-clr);
+  border-radius: var(--brdr-rds);
+  width: 100%;
+  margin-bottom: 0.5rem;
+  padding: 0.25rem;
+  transition: var(--trnstn);
+  cursor: pointer;
+  text-transform: capitalize;
+}
+
+.action-btn:hover {
+  background-color: var(--fnt-clr);
+  border: 2px solid var(--fnt-clr);
+  color: var(--bckgrnd-clr);
+}
+
 @media screen and (min-width: 800px) {
   h1 {
     font-size: 3rem;
@@ -107,6 +130,11 @@ button:focus {
 
   p {
     font-size: 1rem;
+  }
+
+  .action-btn {
+    padding: 0.5rem;
+    margin-bottom: 1rem;
   }
 }
 
