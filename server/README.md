@@ -18,7 +18,7 @@ mongod
 
 Server starten
 ```
-npm run development
+npm run dev
 ```
 
 Später dann

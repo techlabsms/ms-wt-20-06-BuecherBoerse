@@ -1,5 +1,7 @@
 // Sinnvoll Fehlermeldungen
 
+// fix error handler
+
 const getUniqueErrorMessage = (err) => {
     let output
     try {
