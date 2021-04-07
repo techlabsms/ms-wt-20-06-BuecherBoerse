@@ -21,7 +21,8 @@ const AppProvider = ({ children }) => {
       try {
         const res = await fetch(api);
         if (res.ok) {
-          const bookList = await res.json();
+          let data = await res.json();
+          const bookList = data.reverse();
           setAllBooks(bookList);
           setBooks(bookList);
         } else {

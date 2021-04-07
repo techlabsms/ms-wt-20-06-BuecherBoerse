@@ -2,12 +2,13 @@ import React from 'react';
 import '../styles/UserAction.css';
 
 const UserAction = (props) => {
+  const name = localStorage.getItem('name');
   return (
     <>
       <aside className='user-action'>
         <section className='action-section'>
           <p>Dieses Buch gehört:</p>
-          <h3>User XYZ</h3>
+          <h3>{name}</h3>
         </section>
         <hr className='separation-line' />
         <section className='action-section'>

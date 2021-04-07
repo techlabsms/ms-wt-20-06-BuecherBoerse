@@ -4,18 +4,32 @@ import '../styles/GenreFilter.css';
 import { AppContext } from '../context';
 
 const GenreFilter = () => {
-  const { allBooks } = useContext(AppContext);
+  const { allBooks, setBooks } = useContext(AppContext);
   const allCategories = [
     'alle',
     ...new Set(allBooks.map((book) => book.category)),
   ];
   const [categories] = useState(allCategories);
 
+  const filterBooks = (category) => {
+    if (category === 'alle') {
+      return setBooks(allBooks);
+    }
+    let filteredBooks = allBooks.filter((book) => book.category === category);
+    setBooks(filteredBooks);
+  };
+
   return (
     <>
       <section className='btn-container'>
         {categories.map((category, index) => {
-          return <FilterButton key={index} category={category} />;
+          return (
+            <FilterButton
+              key={index}
+              category={category}
+              filterBooks={filterBooks}
+            />
+          );
         })}
       </section>
     </>

@@ -1,16 +1,7 @@
-import React, { useContext } from 'react';
-import { AppContext } from '../context';
+import React from 'react';
 import '../styles/FilterButton.css';
 
-const FilterButton = ({ index, category }) => {
-  const { allBooks, setBooks } = useContext(AppContext);
-  const filterBooks = (category) => {
-    if (category === 'alle') {
-      return setBooks(allBooks);
-    }
-    let filteredBooks = allBooks.filter((book) => book.category === category);
-    setBooks(filteredBooks);
-  };
+const FilterButton = ({ index, category, filterBooks }) => {
   return (
     <>
       <button className='btn' key={index} onClick={() => filterBooks(category)}>
