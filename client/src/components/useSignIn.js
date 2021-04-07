@@ -24,8 +24,8 @@ export const useSignIn = () => {
       if (res.status >= 200 && res.status <= 299) {
         const userData = await res.json();
         if (tryLogin) {
-          localStorage.setItem('id', userData.user._id);
-          localStorage.setItem('name', userData.user.name);
+          sessionStorage.setItem('id', userData.user._id);
+          sessionStorage.setItem('name', userData.user.name);
           history.push(state ? state.from : '/', setIsUserLoggedIn(true));
         } else {
           setAlert({

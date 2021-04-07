@@ -4,7 +4,7 @@ const api = '/api/books/';
 const AppContext = React.createContext();
 
 const AppProvider = ({ children }) => {
-  const jwt = localStorage.getItem('name');
+  const jwt = sessionStorage.getItem('name');
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(jwt ? true : false);
   const [allBooks, setAllBooks] = useState([]);
   const [books, setBooks] = useState(allBooks);

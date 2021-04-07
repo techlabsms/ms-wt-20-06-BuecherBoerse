@@ -10,7 +10,7 @@ const Submenu = () => {
       const res = await fetch(signOut);
       if (res.status >= 200 && res.status <= 299) {
         const userLoggedOut = await res.json();
-        localStorage.clear();
+        sessionStorage.clear();
         console.log('Erfolgreich ausgeloggt!', userLoggedOut);
       } else {
         throw new Error('Hoppala, da ist wohl was schief gelaufen...');
@@ -20,17 +20,21 @@ const Submenu = () => {
       console.log('Das hat nicht geklappt', error);
     }
   };
+
   const { setIsUserLoggedIn, isSubmenuOpen, location } = useContext(AppContext);
   const container = useRef(null);
+
   useEffect(() => {
     const submenu = container.current;
     const { divCenter, divBottom } = location;
     submenu.style.left = `${divCenter}px`;
     submenu.style.bottom = `${divBottom}px`;
   }, [location]);
+
   const logout = () => {
     getLoggedOut();
   };
+
   return (
     <>
       <ul

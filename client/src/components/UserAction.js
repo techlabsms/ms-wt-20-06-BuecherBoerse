@@ -2,7 +2,7 @@ import React from 'react';
 import '../styles/UserAction.css';
 
 const UserAction = (props) => {
-  const name = localStorage.getItem('name');
+  const name = sessionStorage.getItem('name');
   return (
     <>
       <aside className='user-action'>

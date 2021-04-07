@@ -2,7 +2,7 @@ import React from 'react';
 import '../styles/UserDashboard.css';
 
 const UserDashboard = () => {
-  const name = localStorage.getItem('name');
+  const name = sessionStorage.getItem('name');
   return (
     <>
       <section className='dashboard'>
