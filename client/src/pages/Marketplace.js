@@ -21,7 +21,7 @@ const Marketplace = () => {
       <main onClick={closeSubmenu}>
         <SearchBar />
         <GenreFilter />
-        <Shelf books={books} />
+        <Shelf />
       </main>
     </>
   );
