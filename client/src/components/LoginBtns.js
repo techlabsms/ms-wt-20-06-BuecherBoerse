@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/LoginBtns.css';
-import { login } from './linksDB';
+import { login } from '../utils/linksDB';
 
 const LoginBtns = () => {
   return (

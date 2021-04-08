@@ -1,16 +1,16 @@
 import React from 'react';
 
-const UploadInput = (props) => {
+const InputField = (props) => {
   return (
     <>
       <div className='form-control'>
         <label htmlFor={props.htmlFor} name={props.name}>
           {props.htmlFor}
         </label>
-        <input type='text' {...props} />
+        <input {...props} />
       </div>
     </>
   );
 };
 
-export default UploadInput;
+export default InputField;

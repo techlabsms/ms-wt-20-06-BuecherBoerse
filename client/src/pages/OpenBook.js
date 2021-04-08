@@ -89,7 +89,7 @@ const OpenBook = () => {
               </p>
             </div>
           </section>
-          <UserAction condition={condition} />
+          <UserAction>{condition}</UserAction>
         </article>
       </main>
     </>

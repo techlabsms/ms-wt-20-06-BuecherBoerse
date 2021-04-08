@@ -1,14 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import FilterButton from './FilterButton';
 
 const ReturnTo = () => {
   return (
     <>
-      <div className='btn-container'>
-        <Link to='/' className='btn'>
-          zurück
-        </Link>
-      </div>
+      <Link to='/'>
+        <FilterButton>zurück</FilterButton>
+      </Link>
     </>
   );
 };

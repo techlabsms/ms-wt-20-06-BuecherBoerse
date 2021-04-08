@@ -26,9 +26,12 @@ const GenreFilter = () => {
           return (
             <FilterButton
               key={index}
-              category={category}
-              filterBooks={filterBooks}
-            />
+              onClick={() => {
+                filterBooks(category);
+              }}
+            >
+              {category}
+            </FilterButton>
           );
         })}
       </section>

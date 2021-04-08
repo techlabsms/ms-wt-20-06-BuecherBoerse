@@ -1,5 +1,6 @@
 import React from 'react';
 import '../styles/UserAction.css';
+import ActionButton from './ActionBtn';
 
 const UserAction = (props) => {
   const name = sessionStorage.getItem('name');
@@ -13,13 +14,13 @@ const UserAction = (props) => {
         <hr className='separation-line' />
         <section className='action-section'>
           <p>Zustand des Buches ist:</p>
-          <h3>{props.condition}</h3>
+          <h3>{props.children}</h3>
         </section>
         <hr className='separation-line' />
         <section className='action-section'>
           <p>Was möchtest du tun?</p>
-          <button className='action-btn'>Jetzt vormerken</button>
-          <button className='action-btn'>Jetzt ausleihen</button>
+          <ActionButton>Jetzt vormerken</ActionButton>
+          <ActionButton>Jetzt ausleihen</ActionButton>
         </section>
       </aside>
     </>

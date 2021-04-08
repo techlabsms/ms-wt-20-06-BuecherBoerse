@@ -1,7 +1,10 @@
 import React, { useContext } from 'react';
 import { AppContext } from '../context';
-import { useSignIn } from '../components/useSignIn';
+import { useSignIn } from './useSignIn';
+import InputField from './InputField';
+import SigninBtn from './SigninBtn';
 import Alert from './Alert';
+import Form from './Form';
 const create = '/api/users';
 
 const Signup = () => {
@@ -23,55 +26,41 @@ const Signup = () => {
 
   return (
     <>
-      <form className='form-center' onSubmit={signupNow}>
+      <Form className='form-center' onSubmit={signupNow}>
         <div className='title'>
           <h3>Melde dich jetzt an!</h3>
         </div>
         <section className='form'>
-          <div className='form-control'>
-            <label htmlFor='name' name='name'>
-              Dein Wunsch-Username
-            </label>
-            <input
-              type='text'
-              id='name'
-              name='name'
-              value={name}
-              onChange={checkSignupInput}
-              required
-            />
-          </div>
-          <div className='form-control'>
-            <label htmlFor='email' name='email'>
-              Deine bevorzugte Email
-            </label>
-            <input
-              type='text'
-              id='email'
-              name='email'
-              value={email}
-              onChange={checkSignupInput}
-              required
-            />
-          </div>
-          <div className='form-control'>
-            <label htmlFor='password' name='password'>
-              Dein bärenstarkes Passwort
-            </label>
-            <input
-              type='password'
-              id='password'
-              name='password'
-              value={password}
-              onChange={checkSignupInput}
-              required
-            />
-          </div>
-          <button type='submit' className='signin-btn'>
-            Registrieren
-          </button>
+          <InputField
+            type='text'
+            htmlFor='Dein Wunsch-Username:'
+            name='name'
+            id='name'
+            value={name}
+            onChange={checkSignupInput}
+            required
+          />
+          <InputField
+            type='text'
+            htmlFor='Deine bevorzugte Email:'
+            name='email'
+            id='email'
+            value={email}
+            onChange={checkSignupInput}
+            required
+          />
+          <InputField
+            type='password'
+            htmlFor='Dein bärenstarkes Passwort:'
+            name='password'
+            id='password'
+            value={password}
+            onChange={checkSignupInput}
+            required
+          />
+          <SigninBtn type='submit'>Registrieren</SigninBtn>
         </section>
-      </form>
+      </Form>
       {alert.display && <Alert />}
     </>
   );

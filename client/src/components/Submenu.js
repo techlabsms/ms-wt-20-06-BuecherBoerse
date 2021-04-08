@@ -42,9 +42,6 @@ const Submenu = () => {
         ref={container}
       >
         <li className='links'>
-          <span>Account</span>
-        </li>
-        <li className='links'>
           <Link to='/' onClick={logout}>
             Logout
           </Link>

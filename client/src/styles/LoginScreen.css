@@ -28,23 +28,6 @@
   padding: 0.25rem;
 }
 
-.signin-btn {
-  padding: 0.25rem;
-  margin-top: 1rem;
-  background-color: var(--brnd-clr);
-  border-radius: var(--brdr-rds);
-  border: 2px solid var(--brnd-clr);
-  color: var(--bckgrnd-clr);
-  transition: var(--trnstn);
-  cursor: pointer;
-}
-
-.signin-btn:hover {
-  color: var(--bckgrnd-clr);
-  background-color: var(--fnt-clr);
-  border: 2px solid var(--fnt-clr);
-}
-
 @media screen and (min-width: 800px) {
   .signin-center {
     max-width: 500px;
@@ -56,10 +39,5 @@
 
   .form-center input {
     padding: 0.5rem;
-  }
-
-  .signin-btn {
-    padding: 0.5rem;
-    margin-top: 1.5rem;
   }
 }

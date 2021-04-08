@@ -3,10 +3,12 @@ import ReturnTo from '../components/ReturnTo';
 import '../styles/UploadBook.css';
 import Alert from '../components/Alert';
 import ImageUploader from '../components/ImageUploader';
-import UploadInput from '../components/UploadInput';
+import InputField from '../components/InputField';
 import { FaCheckCircle, FaFlushed, FaPoo } from 'react-icons/fa';
 import { AppContext } from '../context';
 import TextAreaInput from '../components/TextAreaInput';
+import ActionBtn from '../components/ActionBtn';
+import Form from '../components/Form';
 
 const api = '/api/books/';
 
@@ -93,87 +95,85 @@ const UploadBook = () => {
       <main onClick={closeSubmenu}>
         <ReturnTo />
         <h2 className='title'>Buch hochladen</h2>
-        <section className='section-center'>
-          <form className='book-form' onSubmit={uploadAll}>
-            <ImageUploader bookImage={bookImage} setBookImage={setBookImage} />
-            <div className='info-upload'>
-              <UploadInput
-                htmlFor='Name:'
-                name='name'
-                id='name'
-                placeholder='Name des Buches'
-                value={name}
-                onChange={textChange}
-              />
-              <UploadInput
-                htmlFor='Autor:'
-                name='author'
-                id='author'
-                placeholder='Autor des Buches'
-                value={author}
-                onChange={textChange}
-              />
-              <UploadInput
-                htmlFor='Genre:'
-                name='genre'
-                id='genre'
-                placeholder='Genre des Buches'
-                value={genre}
-                onChange={textChange}
-              />
-              <UploadInput
-                htmlFor='Sprache:'
-                name='language'
-                id='language'
-                placeholder='Sprache des Buches'
-                value={language}
-                onChange={textChange}
-              />
-              <UploadInput
-                htmlFor='Zustand:'
-                name='condition'
-                id='condition'
-                placeholder='Zustand des Buches'
-                value={condition}
-                onChange={textChange}
-              />
-              <TextAreaInput
-                htmlFor='Beschreibung:'
-                name='desc'
-                id='desc'
-                placeholder='Kurze Beschreibung des Buches'
-                value={desc}
-                onChange={textChange}
-              />
-              <div className='action-btn-container'>
-                <button
-                  className='action-btn'
-                  type='submit'
-                  onSubmit={uploadAll}
-                >
-                  Hochladen
-                </button>
-                <button
-                  className='action-btn'
-                  type='reset'
-                  onClick={() => {
-                    setBookImage();
-                    setNewBook({
-                      name: '',
-                      author: '',
-                      genre: '',
-                      language: '',
-                      condition: '',
-                      desc: '',
-                    });
-                  }}
-                >
-                  Löschen
-                </button>
-              </div>
+        <Form className='book-form' onSubmit={uploadAll}>
+          <ImageUploader bookImage={bookImage} setBookImage={setBookImage} />
+          <div className='info-upload'>
+            <InputField
+              type='text'
+              htmlFor='Name:'
+              name='name'
+              id='name'
+              placeholder='Name des Buches'
+              value={name}
+              onChange={textChange}
+            />
+            <InputField
+              type='text'
+              htmlFor='Autor:'
+              name='author'
+              id='author'
+              placeholder='Autor des Buches'
+              value={author}
+              onChange={textChange}
+            />
+            <InputField
+              type='text'
+              htmlFor='Genre:'
+              name='genre'
+              id='genre'
+              placeholder='Genre des Buches'
+              value={genre}
+              onChange={textChange}
+            />
+            <InputField
+              type='text'
+              htmlFor='Sprache:'
+              name='language'
+              id='language'
+              placeholder='Sprache des Buches'
+              value={language}
+              onChange={textChange}
+            />
+            <InputField
+              type='text'
+              htmlFor='Zustand:'
+              name='condition'
+              id='condition'
+              placeholder='Zustand des Buches'
+              value={condition}
+              onChange={textChange}
+            />
+            <TextAreaInput
+              htmlFor='Beschreibung:'
+              name='desc'
+              id='desc'
+              placeholder='Kurze Beschreibung des Buches'
+              value={desc}
+              onChange={textChange}
+            />
+            <div className='action-btn-container'>
+              <ActionBtn type='submit' onSubmit={uploadAll}>
+                Hochladen
+              </ActionBtn>
+              <ActionBtn
+                type='reset'
+                onClick={() => {
+                  setBookImage();
+                  setNewBook({
+                    name: '',
+                    author: '',
+                    genre: '',
+                    language: '',
+                    condition: '',
+                    desc: '',
+                  });
+                }}
+              >
+                Löschen
+              </ActionBtn>
             </div>
-          </form>
-        </section>
+          </div>
+        </Form>
         {alert.display && <Alert />}
       </main>
     </>

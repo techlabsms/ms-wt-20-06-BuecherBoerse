@@ -6,20 +6,6 @@
   gap: 1rem;
 }
 
-.empty-shelf {
-  max-width: var(--mx-wdth);
-  margin: 1rem auto;
-  display: grid;
-  place-items: center;
-}
-
-.error-message {
-  justify-content: center;
-  width: 60vw;
-  margin: 2rem auto;
-  height: 50vh;
-}
-
 @media screen and (min-width: 800px) {
   .shelf-container {
     grid-template-rows: repeat(2, 1fr);
