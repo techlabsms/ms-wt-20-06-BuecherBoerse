@@ -27,7 +27,9 @@ const UserBar = () => {
         className='user-bar basic-flex helper'
         onClick={isSubmenuOpen ? closeSubmenu : showUserSubmenu}
       >
-        <span className='user-info helper'>Hallo {isUserLoggedIn && name}</span>
+        <p style={{ marginBottom: '0' }} className='user-info helper'>
+          Hallo {isUserLoggedIn && name}
+        </p>
         <span className='user-icon basic-flex helper'>
           <FaUserCircle className='helper' />
         </span>

@@ -18,6 +18,7 @@ import ScrollToTop from './components/ScrollToTop';
 import DataPrivacy from './pages/DataPrivacy';
 import Imprint from './pages/Imprint';
 import MyBooks from './pages/MyBooks';
+import Messages from './pages/Messages';
 
 const App = () => {
   const { isUserLoggedIn } = useContext(AppContext);
@@ -43,7 +44,7 @@ const App = () => {
             <MyBooks />
           </ProtectedRoute>
           <ProtectedRoute path='/messages'>
-            <Error />
+            <Messages />
           </ProtectedRoute>
           <ProtectedRoute path='/about'>
             <Error />

@@ -147,14 +147,14 @@ const UploadBook = () => {
               htmlFor='Beschreibung:'
               name='desc'
               id='desc'
+              cols='30'
+              rows='5'
               placeholder='Kurze Beschreibung des Buches'
               value={desc}
               onChange={textChange}
             />
             <div className='action-btn-container'>
-              <ActionBtn type='submit' onSubmit={uploadAll}>
-                Hochladen
-              </ActionBtn>
+              <ActionBtn type='submit'>Hochladen</ActionBtn>
               <ActionBtn
                 type='reset'
                 onClick={() => {

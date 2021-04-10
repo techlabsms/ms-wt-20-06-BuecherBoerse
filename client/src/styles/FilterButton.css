@@ -5,7 +5,7 @@
   border-radius: var(--brdr-rds);
   border: 2px solid var(--bckgrnd-clr);
   padding: 0.75rem 0.5rem;
-  margin: 0.5rem;
+  margin: 0.5rem 0.25rem 0.75rem;
   color: var(--fnt-clr);
   align-self: center;
   cursor: pointer;
@@ -20,6 +20,6 @@
 
 @media screen and (min-width: 800px) {
   .btn {
-    margin: 0.5rem;
+    margin: 0.5rem 0.5rem 1rem;
   }
 }

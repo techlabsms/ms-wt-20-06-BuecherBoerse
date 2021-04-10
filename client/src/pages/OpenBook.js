@@ -5,10 +5,11 @@ import { AppContext } from '../context';
 import Loading from '../components/Loading';
 import '../styles/OpenBook.css';
 import UserAction from '../components/UserAction';
+import Alert from '../components/Alert';
 const api = '/api/books/';
 
 const OpenBook = () => {
-  const { closeSubmenu, loading, setLoading } = useContext(AppContext);
+  const { alert, closeSubmenu, loading, setLoading } = useContext(AppContext);
   const [openBook, setOpenBook] = useState({});
   const [showDesc, setShowDesc] = useState(false);
   const { id } = useParams();
@@ -91,6 +92,7 @@ const OpenBook = () => {
           </section>
           <UserAction>{condition}</UserAction>
         </article>
+        {alert.display && <Alert />}
       </main>
     </>
   );

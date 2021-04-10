@@ -115,12 +115,12 @@ button:focus {
 }
 
 main::before {
-  margin-top: 7rem;
+  margin-top: 15vh;
   content: '';
 }
 
 main::after {
-  margin-bottom: 7rem;
+  margin-bottom: 15vh;
   content: '';
 }
 

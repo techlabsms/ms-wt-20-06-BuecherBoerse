@@ -2,7 +2,7 @@
   max-width: 25rem;
   padding: 1rem;
   margin: 0 auto;
-  height: 75vh;
+  height: calc(100vh - 30vh);
   flex-direction: column;
   justify-content: center;
 }
