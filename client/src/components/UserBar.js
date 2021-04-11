@@ -19,7 +19,7 @@ const UserBar = () => {
     openSubmenu({ divCenter, divBottom });
   };
 
-  const name = localStorage.getItem('name');
+  const name = sessionStorage.getItem('name');
 
   return (
     <>

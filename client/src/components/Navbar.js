@@ -4,7 +4,7 @@ import { FaBook, FaBookOpen } from 'react-icons/fa';
 import logo from '../static/buecherregal.svg';
 import MenuLink from './MenuLink';
 import LoginBtns from './LoginBtns';
-import { links } from './linksDB';
+import { links } from '../utils/linksDB';
 import '../styles/Navbar.css';
 import { AppContext } from '../context';
 import UserBar from './UserBar';

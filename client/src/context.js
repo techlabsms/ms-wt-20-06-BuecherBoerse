@@ -4,7 +4,7 @@ const api = '/api/books/';
 const AppContext = React.createContext();
 
 const AppProvider = ({ children }) => {
-  const jwt = localStorage.getItem('name');
+  const jwt = sessionStorage.getItem('name');
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(jwt ? true : false);
   const [allBooks, setAllBooks] = useState([]);
   const [books, setBooks] = useState(allBooks);
@@ -21,7 +21,8 @@ const AppProvider = ({ children }) => {
       try {
         const res = await fetch(api);
         if (res.ok) {
-          const bookList = await res.json();
+          let data = await res.json();
+          const bookList = data.reverse();
           setAllBooks(bookList);
           setBooks(bookList);
         } else {

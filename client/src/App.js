@@ -17,6 +17,7 @@ import Error from './pages/Error';
 import ScrollToTop from './components/ScrollToTop';
 import DataPrivacy from './pages/DataPrivacy';
 import Imprint from './pages/Imprint';
+import MyBooks from './pages/MyBooks';
 
 const App = () => {
   const { isUserLoggedIn } = useContext(AppContext);
@@ -39,7 +40,7 @@ const App = () => {
             <OpenBook />
           </ProtectedRoute>
           <ProtectedRoute path='/mybooks'>
-            <Error />
+            <MyBooks />
           </ProtectedRoute>
           <ProtectedRoute path='/messages'>
             <Error />
