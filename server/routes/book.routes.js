@@ -10,6 +10,10 @@ router.route('/api/books')
     .get(bookCtrl.list) //Seite mit allen hochgeladenen Büchern
     .post(authCtrl.requireSignin, imgCtrl.singleUpload, bookCtrl.create) // login notwendig
 
+// New Route to getBooks by User
+router.route('/api/books/user/:userId')
+    .get(bookCtrl.bookByUser)
+
 router.route('/api/books/:bookId')
     .get(bookCtrl.read) //keine Registrierung nötig
     .put(authCtrl.requireSignin, imgCtrl.singleUpload, authCtrl.hasAuthorizationForBook, bookCtrl.update) // Update with PUT
