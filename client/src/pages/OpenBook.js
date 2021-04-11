@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState, useContext, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import ReturnTo from '../components/ReturnTo';
 import { AppContext } from '../context';
@@ -7,32 +7,45 @@ import '../styles/OpenBook.css';
 const api = '/api/books/';
 
 const OpenBook = () => {
-  const { closeSubmenu } = useContext(AppContext);
-  const [loading, setLoading] = useState(false);
+  const { closeSubmenu, loading, setLoading } = useContext(AppContext);
   const [openBook, setOpenBook] = useState({});
+  const [showDesc, setShowDesc] = useState(false);
   const { id } = useParams();
 
-  useEffect(() => {
+  const fetchSingleBook = useCallback(async () => {
     setLoading(true);
-    const fetchSingleBook = async () => {
-      try {
-        const res = await fetch(`${api}${id}`);
-        if (res.ok) {
-          const singleBook = await res.json();
-          setOpenBook(singleBook);
-        } else {
-          throw new Error('etwas hat nicht geklappt');
-        }
-      } catch (err) {
-        console.log(err);
-      } finally {
-        setLoading(false);
+    try {
+      const res = await fetch(`${api}${id}`);
+      if (res.ok) {
+        const singleBook = await res.json();
+        setOpenBook(singleBook);
+      } else {
+        throw new Error('etwas hat nicht geklappt');
       }
-    };
-    fetchSingleBook();
-  }, [id]);
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setLoading(false);
+    }
+  }, [id, setLoading]);
 
-  const { image, name, author, category, description } = openBook;
+  useEffect(() => {
+    fetchSingleBook();
+  }, [fetchSingleBook]);
+
+  const {
+    image,
+    name,
+    author,
+    category,
+    language,
+    condition,
+    description,
+  } = openBook;
+
+  const collapseDesc = () => {
+    setShowDesc(!showDesc);
+  };
 
   if (loading) {
     return (
@@ -47,29 +60,52 @@ const OpenBook = () => {
     <>
       <main onClick={closeSubmenu}>
         <ReturnTo />
-        <section className='open-book'>
+        <article className='open-book'>
           <img src={`../${image}`} alt={name} />
-          <div className='open-book-info'>
-            <header>
-              <h1 className='title'>{name}</h1>
-              <h3 className='title-2'>{author}</h3>
-            </header>
+          <section className='open-book-info'>
             <div>
-              <h4>Beschreibung</h4>
-              <p>{description}</p>
+              <h2 className='title'>{name}</h2>
+              <h4 className='title'>{author}</h4>
             </div>
+            <hr className='separation-line' />
             <div>
               <h4>Genre</h4>
               <p>{category}</p>
             </div>
-            <footer>
-              <div className='btn-container'>
-                <button className='btn'>Jetzt vormerken</button>
-                <button className='btn'>Jetzt ausleihen</button>
-              </div>
-            </footer>
-          </div>
-        </section>
+            <div>
+              <h4>Sprache</h4>
+              <p>{language}</p>
+            </div>
+            <div>
+              <h4>Beschreibung</h4>
+              <p>
+                {showDesc
+                  ? `${description} `
+                  : description && `${description.substring(0, 300)}... `}
+                <button className='collapse' onClick={collapseDesc}>
+                  {!showDesc ? 'Mehr' : 'Weniger'}
+                </button>
+              </p>
+            </div>
+          </section>
+          <aside className='user-action'>
+            <section className='action-section'>
+              <p>Dieses Buch gehört:</p>
+              <h3>User XYZ</h3>
+            </section>
+            <hr className='separation-line' />
+            <section className='action-section'>
+              <p>Zustand des Buches ist:</p>
+              <h3>{condition}</h3>
+            </section>
+            <hr className='separation-line' />
+            <section className='action-section'>
+              <p>Was möchtest du tun?</p>
+              <button className='action-btn'>Jetzt vormerken</button>
+              <button className='action-btn'>Jetzt ausleihen</button>
+            </section>
+          </aside>
+        </article>
       </main>
     </>
   );

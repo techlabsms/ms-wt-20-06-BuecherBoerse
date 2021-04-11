@@ -8,7 +8,7 @@ const Book = ({ _id, image, name, author, category }) => {
       <img src={image} alt={name} />
       <footer className='book-info'>
         <h4>{name}</h4>
-        <p className='book-author'>{author}</p>
+        <h4 className='book-author'>{author}</h4>
         <p className='book-genre'>{category}</p>
       </footer>
     </Link>

@@ -20,7 +20,7 @@ const AppProvider = ({ children }) => {
       setLoading(true);
       try {
         const res = await fetch(api);
-        if (res.status >= 200 && res.status <= 299) {
+        if (res.ok) {
           const bookList = await res.json();
           setAllBooks(bookList);
           setBooks(bookList);
@@ -65,6 +65,7 @@ const AppProvider = ({ children }) => {
         books,
         setBooks,
         loading,
+        setLoading,
         alert,
         setAlert,
         isSubmenuOpen,

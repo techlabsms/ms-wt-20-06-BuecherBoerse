@@ -66,7 +66,7 @@ const UploadBook = () => {
 
   const uploadAll = (e) => {
     e.preventDefault();
-    if (bookImage && name && author && genre && language && condition && desc) {
+    if (name && author && genre && language && condition && desc) {
       let bookData = new FormData();
       bookData.append('bookImage', bookImage);
       bookData.append('name', name);

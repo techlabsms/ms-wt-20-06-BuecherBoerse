@@ -28,6 +28,10 @@ const Navbar = () => {
     };
   });
 
+  const toggleNavbar = () => {
+    setShowLinks(!showLinks);
+  };
+
   const hideSubmenu = (e) => {
     if (!e.target.classList.contains('helper')) {
       closeSubmenu();
@@ -44,12 +48,7 @@ const Navbar = () => {
             <Link to='/' className='basic-flex'>
               <img src={logo} alt='logo' />
             </Link>
-            <button
-              className='nav-toggle'
-              onClick={() => {
-                setShowLinks(!showLinks);
-              }}
-            >
+            <button className='nav-toggle' onClick={toggleNavbar}>
               {showLinks ? <FaBookOpen /> : <FaBook />}
             </button>
           </div>
