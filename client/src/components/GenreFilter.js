@@ -1,17 +1,42 @@
-import React from 'react'
-import FilterButton from './FilterButton'
-import '../styles/GenreFilter.css'
+import React, { useContext, useState } from 'react';
+import FilterButton from './FilterButton';
+import '../styles/GenreFilter.css';
+import { AppContext } from '../context';
 
-const GenreFilter = ({ genres, filterBooks }) => {
+const GenreFilter = () => {
+  const { allBooks, setBooks } = useContext(AppContext);
+  const allCategories = [
+    'alle',
+    ...new Set(allBooks.map((book) => book.category)),
+  ];
+  const [categories] = useState(allCategories);
+
+  const filterBooks = (category) => {
+    if (category === 'alle') {
+      return setBooks(allBooks);
+    }
+    let filteredBooks = allBooks.filter((book) => book.category === category);
+    setBooks(filteredBooks);
+  };
+
   return (
-    <section className='btn-container'>
-      {genres.map((genre, index) => {
-        return (
-          <FilterButton key={index} genre={genre} filterBooks={filterBooks} />
-        )
-      })}
-    </section>
-  )
-}
+    <>
+      <section className='btn-container'>
+        {categories.map((category, index) => {
+          return (
+            <FilterButton
+              key={index}
+              onClick={() => {
+                filterBooks(category);
+              }}
+            >
+              {category}
+            </FilterButton>
+          );
+        })}
+      </section>
+    </>
+  );
+};
 
-export default GenreFilter
+export default GenreFilter;

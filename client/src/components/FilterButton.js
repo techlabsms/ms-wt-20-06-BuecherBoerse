@@ -1,12 +1,14 @@
-import React from 'react'
-import '../styles/FilterButton.css'
+import React from 'react';
+import '../styles/FilterButton.css';
 
-const FilterButton = ({ index, genre, filterBooks }) => {
+const FilterButton = (props) => {
   return (
-    <button className='btn' key={index} onClick={() => filterBooks(genre)}>
-      {genre}
-    </button>
-  )
-}
+    <>
+      <button className='btn' key={props.id} {...props}>
+        {props.children}
+      </button>
+    </>
+  );
+};
 
-export default FilterButton
+export default FilterButton;

@@ -1,29 +1,67 @@
-import React from 'react'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
-import Navbar from './components/Navbar'
-import Marktplatz from './pages/Marktpkatz'
-import OpenBook from './pages/OpenBook'
-import UploadBook from './pages/UploadBook'
-import Footer from './components/Footer'
+import React, { useContext } from 'react';
+import {
+  BrowserRouter as Router,
+  Redirect,
+  Route,
+  Switch,
+} from 'react-router-dom';
+import { AppContext } from './context';
+import Navbar from './components/Navbar';
+import ProtectedRoute from './components/ProtectedRoute';
+import Marketplace from './pages/Marketplace';
+import OpenBook from './pages/OpenBook';
+import UploadBook from './pages/UploadBook';
+import Footer from './components/Footer';
+import LoginScreen from './pages/LoginScreen';
+import Error from './pages/Error';
+import ScrollToTop from './components/ScrollToTop';
+import DataPrivacy from './pages/DataPrivacy';
+import Imprint from './pages/Imprint';
+import MyBooks from './pages/MyBooks';
 
 const App = () => {
+  const { isUserLoggedIn } = useContext(AppContext);
   return (
     <>
       <Router>
-        <Navbar />
-        <Route exact path='/'>
-          <Marktplatz />
-        </Route>
-        <Route path='/uploadbook'>
-          <UploadBook />
-        </Route>
-        <Route path='/openbook/:id'>
-          <OpenBook />
-        </Route>
-        <Footer />
+        {isUserLoggedIn && <Navbar />}
+        <ScrollToTop />
+        <Switch>
+          <Route path='/login'>
+            {!isUserLoggedIn ? <LoginScreen /> : <Redirect to='/' />}
+          </Route>
+          <ProtectedRoute exact path='/'>
+            <Marketplace />
+          </ProtectedRoute>
+          <ProtectedRoute path='/uploadbook'>
+            <UploadBook />
+          </ProtectedRoute>
+          <ProtectedRoute path='/openbook/:id'>
+            <OpenBook />
+          </ProtectedRoute>
+          <ProtectedRoute path='/mybooks'>
+            <MyBooks />
+          </ProtectedRoute>
+          <ProtectedRoute path='/messages'>
+            <Error />
+          </ProtectedRoute>
+          <ProtectedRoute path='/about'>
+            <Error />
+          </ProtectedRoute>
+          <ProtectedRoute path='/imprint'>
+            <Imprint />
+          </ProtectedRoute>
+          <ProtectedRoute path='/dataprivacy'>
+            <DataPrivacy />
+          </ProtectedRoute>
+          <Route path='*'>
+            <Error />
+          </Route>
+        </Switch>
+        {isUserLoggedIn && <Footer />}
       </Router>
     </>
-  )
-}
+  );
+};
 
-export default App
+export default App;

@@ -1,18 +1,18 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import '../styles/Book.css'
+import React from 'react';
+import { Link } from 'react-router-dom';
+import '../styles/Book.css';
 
-const Book = ({ id, img, title, author, genre }) => {
+const Book = ({ _id, image, name, author, category }) => {
   return (
-    <Link to={`/openbook/${id}`} key={id} className='book'>
-      <img src={img} alt={title} />
+    <Link to={`/openbook/${_id}`} key={_id} className='book'>
+      <img src={image} alt={name} />
       <footer className='book-info'>
-        <h4>{title}</h4>
-        <p className='book-author'>{author}</p>
-        <p className='book-genre'>{genre}</p>
+        <h4>{name}</h4>
+        <h4 className='book-author'>{author}</h4>
+        <p className='book-genre'>{category}</p>
       </footer>
     </Link>
-  )
-}
+  );
+};
 
-export default Book
+export default Book;

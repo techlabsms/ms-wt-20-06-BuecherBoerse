@@ -2,28 +2,39 @@
 .book-form {
   background-color: var(--brnd-clr);
   color: var(--bckgrnd-clr);
-  max-width: var(--mx-wdth);
   padding: 1.5rem 2rem;
   border-radius: var(--brdr-rds-2);
-  box-shadow: var(--frm-shdw);
+  box-shadow: var(--bx-shdw);
   margin: 1rem auto;
-}
-
-.form-control {
-  margin: 0.5rem 0;
-  display: grid;
-  grid-template-columns: 7rem 1fr;
-  align-items: center;
-  text-align: start;
+  width: 90vw;
 }
 
 .book-form input,
 textarea {
-  padding: 0.5rem 0.75rem;
+  padding: 0.25rem;
+  border: 2px solid var(--bckgrnd-trnsprnt-1);
   border-radius: var(--brdr-rds);
+  resize: none;
+  font-family: var(--fnt-fmly);
 }
 
 .btn {
   background: var(--bckgrnd-clr);
   color: var(--brnd-clr);
+}
+
+@media screen and (min-width: 800px) {
+  .book-form {
+    max-width: var(--mx-wdth);
+    padding: 2rem;
+    margin: 2rem auto;
+    display: grid;
+    grid-template-columns: 2fr 2fr;
+    max-width: 750px;
+  }
+
+  .book-form input,
+  textarea {
+    padding: 0.5rem;
+  }
 }

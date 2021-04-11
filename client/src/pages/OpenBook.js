@@ -1,42 +1,99 @@
-import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
-import books from '../components/books'
-import ReturnTo from '../components/ReturnTo'
-import '../styles/OpenBook.css'
+import React, { useEffect, useState, useContext, useCallback } from 'react';
+import { useParams } from 'react-router-dom';
+import ReturnTo from '../components/ReturnTo';
+import { AppContext } from '../context';
+import Loading from '../components/Loading';
+import '../styles/OpenBook.css';
+import UserAction from '../components/UserAction';
+const api = '/api/books/';
 
 const OpenBook = () => {
-  const [openBook, setOpenBook] = useState({})
-  const { id } = useParams()
+  const { closeSubmenu, loading, setLoading } = useContext(AppContext);
+  const [openBook, setOpenBook] = useState({});
+  const [showDesc, setShowDesc] = useState(false);
+  const { id } = useParams();
+
+  const fetchSingleBook = useCallback(async () => {
+    setLoading(true);
+    try {
+      const res = await fetch(`${api}${id}`);
+      if (res.ok) {
+        const singleBook = await res.json();
+        setOpenBook(singleBook);
+      } else {
+        throw new Error('etwas hat nicht geklappt');
+      }
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setLoading(false);
+    }
+  }, [id, setLoading]);
 
   useEffect(() => {
-    let fetchBook = books.find((book) => book.id === parseInt(id))
-    setOpenBook(fetchBook)
-  }, [id])
+    fetchSingleBook();
+  }, [fetchSingleBook]);
 
-  const { img, title, author, genre, desc } = openBook
+  const {
+    image,
+    name,
+    author,
+    category,
+    language,
+    condition,
+    description,
+  } = openBook;
+
+  const collapseDesc = () => {
+    setShowDesc(!showDesc);
+  };
+
+  if (loading) {
+    return (
+      <>
+        <main>
+          <Loading />
+        </main>
+      </>
+    );
+  }
   return (
-    <main>
-      <ReturnTo />
-      <section className='open-book'>
-        <h2 className='title'>{title}</h2>
-        <h3 className='title italic'>{author}</h3>
-        <img src={img} alt={title} />
-        <div className='open-book-info'>
-          <header>
-            <h3>beschreibung</h3>
-            <p>{desc}</p>
-          </header>
-          <p>
-            genre: <span>{genre}</span>
-          </p>
-          <footer>
-            <button className='btn'>Jetzt vormerken</button>
-            <button className='btn'>Jetzt ausleihen</button>
-          </footer>
-        </div>
-      </section>
-    </main>
-  )
-}
+    <>
+      <main onClick={closeSubmenu}>
+        <ReturnTo />
+        <article className='open-book'>
+          <img src={`../${image}`} alt={name} />
+          <section className='open-book-info'>
+            <div>
+              <h2 className='title'>{name}</h2>
+              <h4 className='title'>{author}</h4>
+            </div>
+            <hr className='separation-line' />
+            <div>
+              <h4>Genre</h4>
+              <p>{category}</p>
+            </div>
+            <div>
+              <h4>Sprache</h4>
+              <p>{language}</p>
+            </div>
+            <div>
+              <h4>Beschreibung</h4>
+              <p>
+                {showDesc
+                  ? `${description} `
+                  : description && `${description.substring(0, 300)}... `}
+                <button className='collapse' onClick={collapseDesc}>
+                  {!showDesc ? 'Mehr' : 'Weniger'}
+                </button>
+              </p>
+            </div>
+          </section>
+          <UserAction>{condition}</UserAction>
+        </article>
+      </main>
+    </>
+  );
+};
 
-export default OpenBook
+export default OpenBook;
