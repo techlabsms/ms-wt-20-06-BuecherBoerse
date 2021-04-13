@@ -4,9 +4,10 @@ const api = '/api/books/';
 const AppContext = React.createContext();
 
 const AppProvider = ({ children }) => {
-  const jwt = sessionStorage.getItem('name');
-  const [isUserLoggedIn, setIsUserLoggedIn] = useState(jwt ? true : false);
+  const userName = sessionStorage.getItem('name');
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState(userName ? true : false);
   const [allBooks, setAllBooks] = useState([]);
+  const [myBooks, setMyBooks] = useState([]);
   const [books, setBooks] = useState(allBooks);
   const [isBookUploaded, setIsBookUploaded] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -63,6 +64,8 @@ const AppProvider = ({ children }) => {
         isUserLoggedIn,
         setIsUserLoggedIn,
         allBooks,
+        myBooks,
+        setMyBooks,
         books,
         setBooks,
         loading,

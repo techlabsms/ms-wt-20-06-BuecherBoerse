@@ -10,13 +10,17 @@ import TextAreaInput from '../components/TextAreaInput';
 import ActionBtn from '../components/ActionBtn';
 import Form from '../components/Form';
 
-const api = '/api/books/';
+const apiBooks = '/api/books/';
+const jwt = sessionStorage.getItem('token');
 
 const UploadBook = () => {
   const bookUpload = async (formdata) => {
     try {
-      const res = await fetch(api, {
+      const res = await fetch(apiBooks, {
         method: 'POST',
+        headers: {
+          Authorization: `Bearer ${jwt}`,
+        },
         body: formdata,
       });
       if (res.status >= 200 && res.status <= 299) {
@@ -44,25 +48,28 @@ const UploadBook = () => {
         genre: '',
         language: '',
         condition: '',
+        owner: userId,
         desc: '',
       });
       setBookImage();
     }
   };
 
+  const userId = sessionStorage.getItem('id');
   const [newBook, setNewBook] = useState({
     name: '',
     author: '',
     genre: '',
     language: '',
     condition: '',
+    owner: userId,
     desc: '',
   });
   const [bookImage, setBookImage] = useState();
   const { alert, setAlert, closeSubmenu, setIsBookUploaded } = useContext(
     AppContext
   );
-  const { name, author, genre, language, condition, desc } = newBook;
+  const { name, author, genre, language, condition, owner, desc } = newBook;
 
   const textChange = (e) => {
     setNewBook({ ...newBook, [e.target.name]: e.target.value });
@@ -70,7 +77,7 @@ const UploadBook = () => {
 
   const uploadAll = (e) => {
     e.preventDefault();
-    if (name && author && genre && language && condition && desc) {
+    if (name && author && genre && language && condition && owner && desc) {
       let bookData = new FormData();
       bookData.append('bookImage', bookImage);
       bookData.append('name', name);
@@ -78,6 +85,7 @@ const UploadBook = () => {
       bookData.append('category', genre);
       bookData.append('language', language);
       bookData.append('condition', condition);
+      bookData.append('owner', owner);
       bookData.append('description', desc);
       bookUpload(bookData);
       setIsBookUploaded(true);
@@ -165,6 +173,7 @@ const UploadBook = () => {
                     genre: '',
                     language: '',
                     condition: '',
+                    owner: userId,
                     desc: '',
                   });
                 }}

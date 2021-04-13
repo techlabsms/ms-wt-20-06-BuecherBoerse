@@ -41,6 +41,7 @@ const OpenBook = () => {
     category,
     language,
     condition,
+    owner,
     description,
   } = openBook;
 
@@ -89,7 +90,7 @@ const OpenBook = () => {
               </p>
             </div>
           </section>
-          <UserAction>{condition}</UserAction>
+          <UserAction owner={owner} condition={condition} />
         </article>
       </main>
     </>
