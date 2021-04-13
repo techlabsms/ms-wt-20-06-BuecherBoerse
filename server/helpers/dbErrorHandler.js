@@ -26,7 +26,7 @@ const getErrorMessage = (err) => {
                 message = getUniqueErrorMessage(err)
                 break
             default:
-                message = 'Something went wrong'
+                message = err.message
         }
     } else {
         for (let errName in err.errors) {

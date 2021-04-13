@@ -66,6 +66,7 @@ Editor-view: Json visual Editor
 | `/api/books/:bookId`   | `GET`     | Finde ein bestimmtes Buch  |
 | `/api/books/:bookId`   | `PUT`     | Verändere Buch  |
 | `/api/books/:bookId`   | `DELETE`  | Lösche Buch  |
+| `/api/books/user/::userId`| 'GET' | Erhalte alle Bücher eines bestimmten Users|
 
 ### Bücher Felder in der Datenbank
 | Feld        | Typ           | Beschreibung  |
