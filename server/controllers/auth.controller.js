@@ -73,6 +73,25 @@ const hasAuthorization = (req, res, next) => {
     next()
 }
 
+const hasAuthorizationForConversation = (req, res, next) => {
+    let isrecipient = false
+    req.conv.recipients.forEach(recipient => {
+        if (recipient == req.auth._id) {
+            isrecipient = true
+        }
+    });
+
+    let authorized = req.post && req.auth && isrecipient
+
+    if (!(authorized)) {
+        return res.status('403').json({
+            error: "User is not authorized"
+        })
+    }
+    next()
+}
+
+
 //Dürfen BenutzerInnen etwas an einem Buch ändern?
 const hasAuthorizationForBook = (req, res, next) => {
     const authorized = req.profile.owner == req.auth._id
@@ -82,6 +101,6 @@ const hasAuthorizationForBook = (req, res, next) => {
         })
     }
     next()
-} 
+}
 
-export default { signin, signout, requireSignin, hasAuthorization, hasAuthorizationForBook }
+export default { signin, signout, requireSignin, hasAuthorization, hasAuthorizationForBook, hasAuthorizationForConversation }

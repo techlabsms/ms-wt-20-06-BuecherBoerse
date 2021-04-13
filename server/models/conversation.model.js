@@ -6,14 +6,15 @@ const ConversationSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
     }],
-    lastMessage: {
-        type: String,
-    },
+    messages: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Message'
+    }],
     created: {
         type: Date,
         default: Date.now,
     },
-    updated: Date
+    updated: Date // Last message
 })
 
 export default mongoose.model('Conversation', ConversationSchema)

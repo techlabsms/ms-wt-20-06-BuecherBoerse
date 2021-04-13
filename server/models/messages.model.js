@@ -1,17 +1,12 @@
 import mongoose from 'mongoose'
 import User from '../models/user.model'
-import Conversation from '../models/conversation.model'
 
 const MessageSchema = new mongoose.Schema({
-    conversation: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Conversation',
-    },
     sender: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
     },
-    receiver: {
+    reciever: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
     },
@@ -22,8 +17,7 @@ const MessageSchema = new mongoose.Schema({
     created: {
         type: Date,
         default: Date.now,
-    },
-    updated: Date
+    }
 })
 
 export default mongoose.model('Message', MessageSchema)
