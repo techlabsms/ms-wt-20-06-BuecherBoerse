@@ -1,10 +1,11 @@
-import React, { useEffect, useCallback, useState } from 'react';
+import React, { useEffect, useCallback, useState, useContext } from 'react';
+import { AppContext } from '../context';
 import '../styles/UserAction.css';
 import ActionButton from './ActionBtn';
 const apiUser = '/api/users/';
 
 const UserAction = (props) => {
-  const jwt = sessionStorage.getItem('token');
+  const { jwt } = useContext(AppContext);
   const [user, setUser] = useState();
 
   const fetchUser = useCallback(async () => {

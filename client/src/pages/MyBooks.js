@@ -2,17 +2,20 @@ import React, { useContext, useEffect, useCallback } from 'react';
 import { AppContext } from '../context';
 import Shelf from '../components/Shelf';
 import UserDashboard from '../components/UserDashboard';
-import ReturnTo from '../components/ReturnTo';
 import Loading from '../components/Loading';
 
 const apiBookByUser = '/api/books/user/';
-const userId = sessionStorage.getItem('id');
-const jwt = sessionStorage.getItem('token');
 
 const MyBooks = () => {
-  const { closeSubmenu, setBooks, loading, setLoading } = useContext(
-    AppContext
-  );
+  const {
+    closeSubmenu,
+    books,
+    setBooks,
+    loading,
+    setLoading,
+    userId,
+    jwt,
+  } = useContext(AppContext);
 
   const fetchMyBooks = useCallback(async () => {
     setLoading(true);
@@ -33,7 +36,7 @@ const MyBooks = () => {
     } finally {
       setLoading(false);
     }
-  }, [setLoading, setBooks]);
+  }, [setLoading, setBooks, userId, jwt]);
 
   useEffect(() => {
     fetchMyBooks();
@@ -48,13 +51,11 @@ const MyBooks = () => {
       </>
     );
   }
-
   return (
     <>
       <main onClick={closeSubmenu}>
-        <ReturnTo />
         <UserDashboard />
-        <Shelf />
+        <Shelf books={books}>{books}</Shelf>
       </main>
     </>
   );

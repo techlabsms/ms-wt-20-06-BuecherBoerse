@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useContext, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
-import ReturnTo from '../components/ReturnTo';
 import { AppContext } from '../context';
 import Loading from '../components/Loading';
 import '../styles/OpenBook.css';
@@ -61,7 +60,6 @@ const OpenBook = () => {
   return (
     <>
       <main onClick={closeSubmenu}>
-        <ReturnTo />
         <article className='open-book'>
           <img src={`../${image}`} alt={name} />
           <section className='open-book-info'>

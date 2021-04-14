@@ -1,5 +1,4 @@
 import React, { useState, useContext } from 'react';
-import ReturnTo from '../components/ReturnTo';
 import '../styles/UploadBook.css';
 import Alert from '../components/Alert';
 import ImageUploader from '../components/ImageUploader';
@@ -11,7 +10,6 @@ import ActionBtn from '../components/ActionBtn';
 import Form from '../components/Form';
 
 const apiBooks = '/api/books/';
-const jwt = sessionStorage.getItem('token');
 
 const UploadBook = () => {
   const bookUpload = async (formdata) => {
@@ -66,7 +64,7 @@ const UploadBook = () => {
     desc: '',
   });
   const [bookImage, setBookImage] = useState();
-  const { alert, setAlert, closeSubmenu, setIsBookUploaded } = useContext(
+  const { alert, setAlert, closeSubmenu, setIsBookUploaded, jwt } = useContext(
     AppContext
   );
   const { name, author, genre, language, condition, owner, desc } = newBook;
@@ -101,7 +99,6 @@ const UploadBook = () => {
   return (
     <>
       <main onClick={closeSubmenu}>
-        <ReturnTo />
         <h2 className='title'>Buch hochladen</h2>
         <Form className='book-form' onSubmit={uploadAll}>
           <ImageUploader bookImage={bookImage} setBookImage={setBookImage} />
