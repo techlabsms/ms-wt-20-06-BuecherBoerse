@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useCallback } from 'react';
-const api = '/api/books/';
+const API_BOOKS = '/api/books/';
 
 const AppContext = React.createContext();
 
 const AppProvider = ({ children }) => {
-  const jwt = sessionStorage.getItem('name');
-  const [isUserLoggedIn, setIsUserLoggedIn] = useState(jwt ? true : false);
+  const userName = sessionStorage.getItem('name');
+  const userId = sessionStorage.getItem('id');
+  const jwt = sessionStorage.getItem('token');
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState(userName ? true : false);
   const [allBooks, setAllBooks] = useState([]);
   const [books, setBooks] = useState(allBooks);
   const [isBookUploaded, setIsBookUploaded] = useState(false);
@@ -19,7 +21,7 @@ const AppProvider = ({ children }) => {
     if (isUserLoggedIn || isBookUploaded) {
       setLoading(true);
       try {
-        const res = await fetch(api);
+        const res = await fetch(API_BOOKS);
         if (res.ok) {
           let data = await res.json();
           const bookList = data.reverse();
@@ -77,6 +79,9 @@ const AppProvider = ({ children }) => {
         setIsBookUploaded,
         isTabLeft,
         setIsTabLeft,
+        userName,
+        userId,
+        jwt,
       }}
     >
       {children}

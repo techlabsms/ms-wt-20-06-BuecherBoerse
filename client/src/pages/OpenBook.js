@@ -1,11 +1,10 @@
 import React, { useEffect, useState, useContext, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
-import ReturnTo from '../components/ReturnTo';
 import { AppContext } from '../context';
 import Loading from '../components/Loading';
 import '../styles/OpenBook.css';
 import UserAction from '../components/UserAction';
-const api = '/api/books/';
+const API_BOOKS = '/api/books/';
 
 const OpenBook = () => {
   const { closeSubmenu, loading, setLoading } = useContext(AppContext);
@@ -16,7 +15,7 @@ const OpenBook = () => {
   const fetchSingleBook = useCallback(async () => {
     setLoading(true);
     try {
-      const res = await fetch(`${api}${id}`);
+      const res = await fetch(`${API_BOOKS}${id}`);
       if (res.ok) {
         const singleBook = await res.json();
         setOpenBook(singleBook);
@@ -41,6 +40,7 @@ const OpenBook = () => {
     category,
     language,
     condition,
+    owner,
     description,
   } = openBook;
 
@@ -60,7 +60,6 @@ const OpenBook = () => {
   return (
     <>
       <main onClick={closeSubmenu}>
-        <ReturnTo />
         <article className='open-book'>
           <img src={`../${image}`} alt={name} />
           <section className='open-book-info'>
@@ -89,7 +88,7 @@ const OpenBook = () => {
               </p>
             </div>
           </section>
-          <UserAction>{condition}</UserAction>
+          <UserAction owner={owner} condition={condition} />
         </article>
       </main>
     </>

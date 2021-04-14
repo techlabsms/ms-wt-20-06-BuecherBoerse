@@ -12,6 +12,7 @@ export const useSignIn = () => {
   const { setIsUserLoggedIn, setAlert, setIsTabLeft } = useContext(AppContext);
   const history = useHistory();
   const { state } = useLocation();
+
   const signInUser = async (url, tryLogin) => {
     try {
       const res = await fetch(url, {
@@ -23,9 +24,11 @@ export const useSignIn = () => {
       });
       if (res.status >= 200 && res.status <= 299) {
         const userData = await res.json();
+        console.log(userData);
         if (tryLogin) {
           sessionStorage.setItem('id', userData.user._id);
           sessionStorage.setItem('name', userData.user.name);
+          sessionStorage.setItem('token', userData.token);
           history.push(state ? state.from : '/', setIsUserLoggedIn(true));
         } else {
           setAlert({

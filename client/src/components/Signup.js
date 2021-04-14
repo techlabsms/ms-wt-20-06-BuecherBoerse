@@ -5,7 +5,7 @@ import InputField from './InputField';
 import SigninBtn from './SigninBtn';
 import Alert from './Alert';
 import Form from './Form';
-const create = '/api/users';
+const CREATE_USER = '/api/users';
 
 const Signup = () => {
   const { signInUser, userCredential, setUserCredential } = useSignIn();
@@ -21,7 +21,7 @@ const Signup = () => {
 
   const signupNow = (e) => {
     e.preventDefault();
-    signInUser(create);
+    signInUser(CREATE_USER);
   };
 
   return (
