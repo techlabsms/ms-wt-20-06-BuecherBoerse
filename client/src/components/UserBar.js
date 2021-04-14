@@ -10,6 +10,7 @@ const UserBar = () => {
     openSubmenu,
     isSubmenuOpen,
     closeSubmenu,
+    userName,
   } = useContext(AppContext);
 
   const showUserSubmenu = (e) => {
@@ -19,8 +20,6 @@ const UserBar = () => {
     openSubmenu({ divCenter, divBottom });
   };
 
-  const name = sessionStorage.getItem('name');
-
   return (
     <>
       <button
@@ -28,7 +27,7 @@ const UserBar = () => {
         onClick={isSubmenuOpen ? closeSubmenu : showUserSubmenu}
       >
         <p style={{ marginBottom: '0' }} className='user-info helper'>
-          Hallo {isUserLoggedIn && name}
+          Hallo {isUserLoggedIn && userName}
         </p>
         <span className='user-icon basic-flex helper'>
           <FaUserCircle className='helper' />

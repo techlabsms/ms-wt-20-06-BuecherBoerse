@@ -1,5 +1,4 @@
 import React, { useState, useContext } from 'react';
-import ReturnTo from '../components/ReturnTo';
 import '../styles/UploadBook.css';
 import Alert from '../components/Alert';
 import ImageUploader from '../components/ImageUploader';
@@ -10,13 +9,16 @@ import TextAreaInput from '../components/TextAreaInput';
 import ActionBtn from '../components/ActionBtn';
 import Form from '../components/Form';
 
-const api = '/api/books/';
+const API_BOOKS = '/api/books/';
 
 const UploadBook = () => {
   const bookUpload = async (formdata) => {
     try {
-      const res = await fetch(api, {
+      const res = await fetch(API_BOOKS, {
         method: 'POST',
+        headers: {
+          Authorization: `Bearer ${jwt}`,
+        },
         body: formdata,
       });
       if (res.status >= 200 && res.status <= 299) {
@@ -44,25 +46,32 @@ const UploadBook = () => {
         genre: '',
         language: '',
         condition: '',
+        owner: userId,
         desc: '',
       });
       setBookImage();
     }
   };
 
+  const [bookImage, setBookImage] = useState();
+  const {
+    alert,
+    setAlert,
+    closeSubmenu,
+    setIsBookUploaded,
+    jwt,
+    userId,
+  } = useContext(AppContext);
   const [newBook, setNewBook] = useState({
     name: '',
     author: '',
     genre: '',
     language: '',
     condition: '',
+    owner: userId,
     desc: '',
   });
-  const [bookImage, setBookImage] = useState();
-  const { alert, setAlert, closeSubmenu, setIsBookUploaded } = useContext(
-    AppContext
-  );
-  const { name, author, genre, language, condition, desc } = newBook;
+  const { name, author, genre, language, condition, owner, desc } = newBook;
 
   const textChange = (e) => {
     setNewBook({ ...newBook, [e.target.name]: e.target.value });
@@ -70,7 +79,7 @@ const UploadBook = () => {
 
   const uploadAll = (e) => {
     e.preventDefault();
-    if (name && author && genre && language && condition && desc) {
+    if (name && author && genre && language && condition && owner && desc) {
       let bookData = new FormData();
       bookData.append('bookImage', bookImage);
       bookData.append('name', name);
@@ -78,6 +87,7 @@ const UploadBook = () => {
       bookData.append('category', genre);
       bookData.append('language', language);
       bookData.append('condition', condition);
+      bookData.append('owner', owner);
       bookData.append('description', desc);
       bookUpload(bookData);
       setIsBookUploaded(true);
@@ -93,7 +103,6 @@ const UploadBook = () => {
   return (
     <>
       <main onClick={closeSubmenu}>
-        <ReturnTo />
         <h2 className='title'>Buch hochladen</h2>
         <Form className='book-form' onSubmit={uploadAll}>
           <ImageUploader bookImage={bookImage} setBookImage={setBookImage} />
@@ -165,6 +174,7 @@ const UploadBook = () => {
                     genre: '',
                     language: '',
                     condition: '',
+                    owner: userId,
                     desc: '',
                   });
                 }}
