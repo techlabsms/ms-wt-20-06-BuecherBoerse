@@ -4,7 +4,7 @@ import { AppContext } from '../context';
 import Loading from '../components/Loading';
 import '../styles/OpenBook.css';
 import UserAction from '../components/UserAction';
-const api = '/api/books/';
+const API_BOOKS = '/api/books/';
 
 const OpenBook = () => {
   const { closeSubmenu, loading, setLoading } = useContext(AppContext);
@@ -15,7 +15,7 @@ const OpenBook = () => {
   const fetchSingleBook = useCallback(async () => {
     setLoading(true);
     try {
-      const res = await fetch(`${api}${id}`);
+      const res = await fetch(`${API_BOOKS}${id}`);
       if (res.ok) {
         const singleBook = await res.json();
         setOpenBook(singleBook);

@@ -9,12 +9,12 @@ import TextAreaInput from '../components/TextAreaInput';
 import ActionBtn from '../components/ActionBtn';
 import Form from '../components/Form';
 
-const apiBooks = '/api/books/';
+const API_BOOKS = '/api/books/';
 
 const UploadBook = () => {
   const bookUpload = async (formdata) => {
     try {
-      const res = await fetch(apiBooks, {
+      const res = await fetch(API_BOOKS, {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${jwt}`,
@@ -53,7 +53,15 @@ const UploadBook = () => {
     }
   };
 
-  const userId = sessionStorage.getItem('id');
+  const [bookImage, setBookImage] = useState();
+  const {
+    alert,
+    setAlert,
+    closeSubmenu,
+    setIsBookUploaded,
+    jwt,
+    userId,
+  } = useContext(AppContext);
   const [newBook, setNewBook] = useState({
     name: '',
     author: '',
@@ -63,10 +71,6 @@ const UploadBook = () => {
     owner: userId,
     desc: '',
   });
-  const [bookImage, setBookImage] = useState();
-  const { alert, setAlert, closeSubmenu, setIsBookUploaded, jwt } = useContext(
-    AppContext
-  );
   const { name, author, genre, language, condition, owner, desc } = newBook;
 
   const textChange = (e) => {

@@ -4,7 +4,7 @@ import Shelf from '../components/Shelf';
 import UserDashboard from '../components/UserDashboard';
 import Loading from '../components/Loading';
 
-const apiBookByUser = '/api/books/user/';
+const API_BOOKSBYUSER = '/api/books/user/';
 
 const MyBooks = () => {
   const {
@@ -20,7 +20,7 @@ const MyBooks = () => {
   const fetchMyBooks = useCallback(async () => {
     setLoading(true);
     try {
-      const res = await fetch(`${apiBookByUser}${userId}`, {
+      const res = await fetch(`${API_BOOKSBYUSER}${userId}`, {
         headers: {
           authorization: `Bearer ${jwt}`,
         },

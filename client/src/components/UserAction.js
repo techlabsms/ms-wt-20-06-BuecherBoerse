@@ -2,7 +2,7 @@ import React, { useEffect, useCallback, useState, useContext } from 'react';
 import { AppContext } from '../context';
 import '../styles/UserAction.css';
 import ActionButton from './ActionBtn';
-const apiUser = '/api/users/';
+const API_USER = '/api/users/';
 
 const UserAction = (props) => {
   const { jwt } = useContext(AppContext);
@@ -13,7 +13,7 @@ const UserAction = (props) => {
       if (!props.owner) {
         return null;
       }
-      const res = await fetch(`${apiUser}${props.owner}`, {
+      const res = await fetch(`${API_USER}${props.owner}`, {
         headers: {
           authorization: `Bearer ${jwt}`,
         },
