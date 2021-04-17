@@ -4,8 +4,6 @@ import Shelf from '../components/Shelf';
 import UserDashboard from '../components/UserDashboard';
 import Loading from '../components/Loading';
 
-const API_BOOKSBYUSER = '/api/books/user/';
-
 const MyBooks = () => {
   const {
     closeSubmenu,
@@ -15,6 +13,7 @@ const MyBooks = () => {
     setLoading,
     userId,
     jwt,
+    API_BOOKSBYUSER,
   } = useContext(AppContext);
 
   const fetchMyBooks = useCallback(async () => {
@@ -36,7 +35,7 @@ const MyBooks = () => {
     } finally {
       setLoading(false);
     }
-  }, [setLoading, setBooks, userId, jwt]);
+  }, [setLoading, setBooks, userId, jwt, API_BOOKSBYUSER]);
 
   useEffect(() => {
     fetchMyBooks();

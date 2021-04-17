@@ -59,8 +59,7 @@
   padding: 1rem 2rem;
 }
 
-.message-header,
-h4 {
+.message-header > h4 {
   display: flex;
   margin-right: 2rem;
 }

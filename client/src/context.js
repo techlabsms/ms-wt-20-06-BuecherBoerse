@@ -1,9 +1,13 @@
 import React, { useState, useEffect, useCallback } from 'react';
-const API_BOOKS = '/api/books/';
 
 const AppContext = React.createContext();
 
 const AppProvider = ({ children }) => {
+  const API_BOOKS = '/api/books/';
+  const API_USERS = '/api/users/';
+  const AUTH_SIGNIN = '/auth/signin/';
+  const AUTH_SIGNOUT = '/auth/signout';
+  const API_BOOKSBYUSER = '/api/books/user/';
   const userName = sessionStorage.getItem('name');
   const userId = sessionStorage.getItem('id');
   const jwt = sessionStorage.getItem('token');
@@ -13,6 +17,7 @@ const AppProvider = ({ children }) => {
   const [isBookUploaded, setIsBookUploaded] = useState(false);
   const [loading, setLoading] = useState(false);
   const [isSubmenuOpen, setIsSubmenuOpen] = useState(false);
+  const [showLinks, setShowLinks] = useState(false);
   const [location, setLocation] = useState({});
   const [isTabLeft, setIsTabLeft] = useState(true);
   const [alert, setAlert] = useState({ display: false, icon: '', msg: '' });
@@ -46,6 +51,12 @@ const AppProvider = ({ children }) => {
     setIsSubmenuOpen(false);
   };
 
+  const hideLinks = () => {
+    if (showLinks) {
+      setShowLinks(false);
+    }
+  };
+
   useEffect(() => {
     fetchBooks();
   }, [fetchBooks]);
@@ -62,6 +73,11 @@ const AppProvider = ({ children }) => {
   return (
     <AppContext.Provider
       value={{
+        API_BOOKS,
+        API_USERS,
+        AUTH_SIGNIN,
+        AUTH_SIGNOUT,
+        API_BOOKSBYUSER,
         isUserLoggedIn,
         setIsUserLoggedIn,
         allBooks,
@@ -71,6 +87,8 @@ const AppProvider = ({ children }) => {
         setLoading,
         alert,
         setAlert,
+        showLinks,
+        setShowLinks,
         isSubmenuOpen,
         openSubmenu,
         closeSubmenu,
@@ -82,6 +100,7 @@ const AppProvider = ({ children }) => {
         userName,
         userId,
         jwt,
+        hideLinks,
       }}
     >
       {children}

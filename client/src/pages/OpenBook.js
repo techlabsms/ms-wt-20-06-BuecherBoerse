@@ -5,10 +5,11 @@ import Loading from '../components/Loading';
 import '../styles/OpenBook.css';
 import UserAction from '../components/UserAction';
 import Alert from '../components/Alert';
-const API_BOOKS = '/api/books/';
 
 const OpenBook = () => {
-  const { alert, closeSubmenu, loading, setLoading } = useContext(AppContext);
+  const { alert, closeSubmenu, loading, setLoading, API_BOOKS } = useContext(
+    AppContext
+  );
   const [openBook, setOpenBook] = useState({});
   const [showDesc, setShowDesc] = useState(false);
   const { id } = useParams();
@@ -28,7 +29,7 @@ const OpenBook = () => {
     } finally {
       setLoading(false);
     }
-  }, [id, setLoading]);
+  }, [API_BOOKS, id, setLoading]);
 
   useEffect(() => {
     fetchSingleBook();

@@ -2,12 +2,11 @@ import React, { useContext, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { AppContext } from '../context';
 import '../styles/Submenu.css';
-const signOut = '/auth/signout';
 
 const Submenu = () => {
   const getLoggedOut = async () => {
     try {
-      const res = await fetch(signOut);
+      const res = await fetch(AUTH_SIGNOUT);
       if (res.status >= 200 && res.status <= 299) {
         const userLoggedOut = await res.json();
         sessionStorage.clear();
@@ -21,7 +20,12 @@ const Submenu = () => {
     }
   };
 
-  const { setIsUserLoggedIn, isSubmenuOpen, location } = useContext(AppContext);
+  const {
+    setIsUserLoggedIn,
+    isSubmenuOpen,
+    location,
+    AUTH_SIGNOUT,
+  } = useContext(AppContext);
   const container = useRef(null);
 
   useEffect(() => {

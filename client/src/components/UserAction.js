@@ -4,10 +4,9 @@ import { useHistory } from 'react-router-dom';
 import { AppContext } from '../context';
 import '../styles/UserAction.css';
 import ActionButton from './ActionBtn';
-const API_USER = '/api/users/';
 
 const UserAction = (props) => {
-  const { setAlert, jwt } = useContext(AppContext);
+  const { setAlert, jwt, API_USERS } = useContext(AppContext);
   const [user, setUser] = useState();
 
   const fetchUser = useCallback(async () => {
@@ -15,7 +14,7 @@ const UserAction = (props) => {
       if (!props.owner) {
         return null;
       }
-      const res = await fetch(`${API_USER}${props.owner}`, {
+      const res = await fetch(`${API_USERS}${props.owner}`, {
         headers: {
           authorization: `Bearer ${jwt}`,
         },
@@ -29,7 +28,7 @@ const UserAction = (props) => {
     } catch (err) {
       console.log(err);
     }
-  }, [props.owner, jwt]);
+  }, [props.owner, jwt, API_USERS]);
 
   const pushToMessages = useHistory();
   const notAvailable = () => {

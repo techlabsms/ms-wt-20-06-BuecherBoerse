@@ -5,11 +5,10 @@ import Alert from './Alert';
 import InputField from './InputField';
 import SigninBtn from './SigninBtn';
 import Form from './Form';
-const API_AUTH = '/auth/signin/';
 
 const Login = () => {
   const { signInUser, userCredential, setUserCredential } = useSignIn();
-  const { alert, isTabLeft } = useContext(AppContext);
+  const { AUTH_SIGNIN, alert, isTabLeft } = useContext(AppContext);
   const { name, email, password } = userCredential;
 
   const checkLoginInput = (e) => {
@@ -21,7 +20,7 @@ const Login = () => {
 
   const loginNow = (e) => {
     e.preventDefault();
-    signInUser(API_AUTH, isTabLeft);
+    signInUser(AUTH_SIGNIN, isTabLeft);
   };
 
   return (

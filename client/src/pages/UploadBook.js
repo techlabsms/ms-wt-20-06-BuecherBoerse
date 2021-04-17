@@ -9,8 +9,6 @@ import TextAreaInput from '../components/TextAreaInput';
 import ActionBtn from '../components/ActionBtn';
 import Form from '../components/Form';
 
-const API_BOOKS = '/api/books/';
-
 const UploadBook = () => {
   const bookUpload = async (formdata) => {
     try {
@@ -61,6 +59,7 @@ const UploadBook = () => {
     setIsBookUploaded,
     jwt,
     userId,
+    API_BOOKS,
   } = useContext(AppContext);
   const [newBook, setNewBook] = useState({
     name: '',

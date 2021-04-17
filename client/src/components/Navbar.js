@@ -11,8 +11,13 @@ import UserBar from './UserBar';
 
 const Navbar = () => {
   const [navbar, setNavbar] = useState(false);
-  const [showLinks, setShowLinks] = useState(false);
-  const { isUserLoggedIn, closeSubmenu } = useContext(AppContext);
+  const {
+    showLinks,
+    setShowLinks,
+    hideLinks,
+    isUserLoggedIn,
+    closeSubmenu,
+  } = useContext(AppContext);
 
   useEffect(() => {
     const stickyNav = () => {
@@ -45,7 +50,7 @@ const Navbar = () => {
       >
         <header className='nav-content'>
           <div className='nav-header basic-flex'>
-            <Link to='/' className='basic-flex'>
+            <Link to='/' className='basic-flex' onClick={hideLinks}>
               <img src={logo} alt='logo' />
             </Link>
             <button className='nav-toggle' onClick={toggleNavbar}>
