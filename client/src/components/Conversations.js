@@ -1,19 +1,25 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { AppContext } from '../context';
 import Conversation from './Conversation';
 
-const Conversations = () => {
+const Conversations = ({ conversations, fetchMessages }) => {
+  const { userId } = useContext(AppContext);
+
   return (
     <>
       <aside className='conversations'>
-        <Conversation />
-        <Conversation />
-        <Conversation />
-        <Conversation />
-        <Conversation />
-        <Conversation />
-        <Conversation />
-        <Conversation />
-        <Conversation />
+        {conversations.map((conversation) => {
+          if (conversation.recipients[0] === userId) {
+            return (
+              <Conversation
+                key={conversation._id}
+                {...conversation}
+                fetchMessages={fetchMessages}
+              />
+            );
+          }
+          return null;
+        })}
       </aside>
     </>
   );

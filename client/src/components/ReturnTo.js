@@ -1,13 +1,13 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import FilterButton from './FilterButton';
 
 const ReturnTo = () => {
+  let history = useHistory();
+  const prevPath = () => history.goBack();
   return (
     <>
-      <Link to='/'>
-        <FilterButton>zurück</FilterButton>
-      </Link>
+      <FilterButton onClick={prevPath}>zurück</FilterButton>
     </>
   );
 };

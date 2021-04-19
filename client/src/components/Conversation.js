@@ -1,16 +1,20 @@
 import React from 'react';
 import { FaUserCircle } from 'react-icons/fa';
 
-const Conversation = () => {
+const Conversation = ({ recipients, messages, fetchMessages }) => {
+  const openConversation = () => {
+    fetchMessages();
+  };
+
   return (
     <>
-      <button className='conversation basic-flex'>
+      <button className='conversation basic-flex' onClick={openConversation}>
         <span className='user-icon basic-flex'>
           <FaUserCircle />
         </span>
         <aside className='glimpse-message'>
-          <h4>User</h4>
-          <p>Lorem ipsum dolor sit amet consectetur.</p>
+          <h4>{recipients[1]}</h4>
+          <p>{messages}</p>
         </aside>
       </button>
     </>

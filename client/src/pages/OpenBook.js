@@ -5,6 +5,7 @@ import Loading from '../components/Loading';
 import '../styles/OpenBook.css';
 import UserAction from '../components/UserAction';
 import Alert from '../components/Alert';
+import ReturnTo from '../components/ReturnTo';
 
 const OpenBook = () => {
   const { alert, closeSubmenu, loading, setLoading, API_BOOKS } = useContext(
@@ -62,6 +63,7 @@ const OpenBook = () => {
   return (
     <>
       <main onClick={closeSubmenu}>
+        <ReturnTo />
         <article className='open-book'>
           <img src={`../${image}`} alt={name} />
           <section className='open-book-info'>
