@@ -36,7 +36,7 @@ const writeMessage = async (req, res) => {
     try {
         await message.save()
         // Add message to conversation
-        const conversation = await Conversation.findByIdAndUpdate(req.conv._id, { $push: { messages: message } }, { new: true }, { useFindAndModify: false }).exec()
+        let conversation = await Conversation.findByIdAndUpdate(req.conv._id, { $push: { messages: message } }, { new: true, useFindAndModify: false }).exec()
 
         return res.status(200).json({
             message: "Nachricht erfolgreich gesendet!",
@@ -46,7 +46,7 @@ const writeMessage = async (req, res) => {
     } catch (err) {
         console.log(err)
         return res.status(400).json({
-            error: err.Message,
+            error: err.message,
         })
     }
 }
@@ -64,7 +64,7 @@ const getConvByUser = async (req, res) => {
         res.json(convs);
     } catch (err) {
         return res.status('400').json({
-            error: err.message,
+            error: err.Message,
         });
     }
 };
@@ -96,7 +96,7 @@ const convByID = async (req, res, next, id) => {
         next()
     } catch (err) {
         return res.status('400').json({
-            error: err.message
+            error: err.Message
         })
     }
 }
