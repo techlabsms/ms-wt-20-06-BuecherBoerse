@@ -54,7 +54,8 @@ const writeMessage = async (req, res) => {
 // Get All Conversations from User
 const getConvByUser = async (req, res) => {
     try {
-        let convs = await Conversation.find({ recipients: req.params.userId }).exec()
+        // populate messages.send _id name
+        let convs = await Conversation.find({ recipients: req.params.userId }).populate('recipients', '_id name').populate("messages", "message sender reciever").exec()
         if (!convs) {
             return res.status('400').json({
                 error: 'User has no conversations',
@@ -76,6 +77,17 @@ const read = (req, res) => {
 const convByID = async (req, res, next, id) => {
     try {
         const conv = await Conversation.findById(id).populate('recipients', '_id name').populate("messages", "message sender reciever").exec()
+
+        // Import user model?
+        // .populate({
+        //     path: 'messages.message',
+        //      model: Message
+        //     populate: {
+        //         path: 'sender',
+        //         model: 'User'
+        //     }
+        // }).
+
         if (!conv)
             return res.status('400').json({
                 error: "Conversation not found"
