@@ -5,22 +5,23 @@ import { AppContext } from '../context';
 import '../styles/UserAction.css';
 import ActionButton from './ActionBtn';
 
-const UserAction = (props) => {
+const UserAction = ({ owner, condition }) => {
   const { setAlert, jwt, API_USERS } = useContext(AppContext);
   const [user, setUser] = useState();
 
   const fetchUser = useCallback(async () => {
     try {
-      if (!props.owner) {
+      if (!owner) {
         return null;
       }
-      const res = await fetch(`${API_USERS}${props.owner}`, {
+      const res = await fetch(`${API_USERS}${owner}`, {
         headers: {
           authorization: `Bearer ${jwt}`,
         },
       });
       if (res.ok) {
         const userInfo = await res.json();
+        console.log(userInfo);
         setUser(userInfo.name);
       } else {
         throw new Error('could not get user info');
@@ -28,7 +29,7 @@ const UserAction = (props) => {
     } catch (err) {
       console.log(err);
     }
-  }, [props.owner, jwt, API_USERS]);
+  }, [owner, jwt, API_USERS]);
 
   const pushToMessages = useHistory();
   const notAvailable = () => {
@@ -40,6 +41,7 @@ const UserAction = (props) => {
   };
   const messageUser = () => {
     pushToMessages.push('/messages');
+    sessionStorage.setItem('receiver', owner);
   };
 
   useEffect(() => {
@@ -56,7 +58,7 @@ const UserAction = (props) => {
         <hr className='separation-line' />
         <section className='action-section'>
           <p>Zustand des Buches ist:</p>
-          <h3>{props.condition}</h3>
+          <h3>{condition}</h3>
         </section>
         <hr className='separation-line' />
         <section className='action-section'>

@@ -13,8 +13,8 @@ const Conversation = ({ recipients, messages, fetchMessages }) => {
           <FaUserCircle />
         </span>
         <aside className='glimpse-message'>
-          <h4>{recipients[1]}</h4>
-          <p>{messages}</p>
+          <h4>{recipients[1].name}</h4>
+          <p>{messages[messages.length - 1].message}</p>
         </aside>
       </button>
     </>

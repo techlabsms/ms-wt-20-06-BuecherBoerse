@@ -1,7 +1,7 @@
 import React from 'react';
 import { FaUserCircle } from 'react-icons/fa';
 
-const Message = ({ message, sender, reciever }) => {
+const Message = ({ message, sender }) => {
   return (
     <>
       <article className='message basic-flex'>
