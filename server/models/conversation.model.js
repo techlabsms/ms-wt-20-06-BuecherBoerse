@@ -1,6 +1,7 @@
 import mongoose from 'mongoose'
 import User from '../models/user.model'
 
+
 const ConversationSchema = new mongoose.Schema({
     recipients: [{
         type: mongoose.Schema.Types.ObjectId,
@@ -14,6 +15,7 @@ const ConversationSchema = new mongoose.Schema({
         type: Date,
         default: Date.now,
     },
+    // BookId als betreff
     updated: Date // Last message
 })
 
