@@ -7,10 +7,10 @@ const router = express.Router()
 
 router.route('/api/books')
     .get(bookCtrl.list) //Seite mit allen hochgeladenen Büchern
-    .post(authCtrl.requireSignin, imgCtrl.UploadImageToMemory, imgCtrl.UploadImageToMemory, bookCtrl.create) // login notwendig
+    .post(authCtrl.requireSignin, imgCtrl.UploadImageToMemory, imgCtrl.UploadBookImageToImagekit, bookCtrl.create) // login notwendig
 
 router.route('/api/books/upload')
-    .post(imgCtrl.UploadImageToMemory, imgCtrl.ShowUploadInfo)
+    .post(imgCtrl.UploadImageToMemory, imgCtrl.ShowUploadInfo, imgCtrl.UploadBookImageToImagekit)
 
 // New Route to getBooks by User
 router.route('/api/books/user/:userId')
