@@ -1,11 +1,10 @@
 import React, { useEffect, useCallback, useState, useContext } from 'react';
 import { FaFlushed } from 'react-icons/fa';
-import { useHistory } from 'react-router-dom';
 import { AppContext } from '../context';
 import '../styles/UserAction.css';
 import ActionButton from './ActionBtn';
 
-const UserAction = ({ owner, condition }) => {
+const UserAction = ({ owner, condition, setShowMessageModal }) => {
   const { setAlert, jwt, API_USERS } = useContext(AppContext);
   const [user, setUser] = useState();
 
@@ -31,7 +30,6 @@ const UserAction = ({ owner, condition }) => {
     }
   }, [owner, jwt, API_USERS]);
 
-  const pushToMessages = useHistory();
   const notAvailable = () => {
     setAlert({
       display: true,
@@ -40,8 +38,8 @@ const UserAction = ({ owner, condition }) => {
     });
   };
   const messageUser = () => {
-    pushToMessages.push('/messages');
     sessionStorage.setItem('receiver', owner);
+    setShowMessageModal(true);
   };
 
   useEffect(() => {

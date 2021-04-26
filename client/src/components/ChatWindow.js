@@ -11,8 +11,9 @@ const ChatWindow = ({ chat, newMessage, setNewMessage, postMessage }) => {
 
   const sendMessage = (e) => {
     e.preventDefault();
-    postMessage(newMessage);
+    postMessage(chat._id, newMessage);
   };
+
   return (
     <>
       <aside className='chat-window'>

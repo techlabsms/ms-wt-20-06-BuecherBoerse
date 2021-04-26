@@ -6,11 +6,18 @@ import '../styles/OpenBook.css';
 import UserAction from '../components/UserAction';
 import Alert from '../components/Alert';
 import ReturnTo from '../components/ReturnTo';
+import MessageModal from '../components/MessageModal';
 
 const OpenBook = () => {
-  const { alert, closeSubmenu, loading, setLoading, API_BOOKS } = useContext(
-    AppContext
-  );
+  const {
+    alert,
+    closeSubmenu,
+    loading,
+    setLoading,
+    API_BOOKS,
+    showMessageModal,
+    setShowMessageModal,
+  } = useContext(AppContext);
   const [openBook, setOpenBook] = useState({});
   const [showDesc, setShowDesc] = useState(false);
   const { id } = useParams();
@@ -62,6 +69,7 @@ const OpenBook = () => {
   }
   return (
     <>
+      {showMessageModal && <MessageModal showMessageModal={showMessageModal} />}
       <main onClick={closeSubmenu}>
         <ReturnTo />
         <article className='open-book'>
@@ -92,7 +100,11 @@ const OpenBook = () => {
               </p>
             </div>
           </section>
-          <UserAction owner={owner} condition={condition} />
+          <UserAction
+            owner={owner}
+            condition={condition}
+            setShowMessageModal={setShowMessageModal}
+          />
         </article>
         {alert.display && <Alert />}
       </main>

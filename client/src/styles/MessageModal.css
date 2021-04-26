@@ -1,0 +1,29 @@
+.modal-wrapper {
+  background: rgba(255, 255, 255, 0.46);
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -10;
+  position: fixed;
+  visibility: hidden;
+  overflow: hidden;
+  transform: scale(0);
+  transition: var(--trnstn);
+}
+
+.msg-modal {
+  display: flex;
+  padding: 2rem;
+  position: relative;
+  text-align: center;
+  background-color: rgb(61, 61, 61);
+  border-radius: 25px;
+  box-shadow: var(--bx-shdw);
+}
+
+.modal-wrapper.open {
+  visibility: visible;
+  z-index: 10;
+  transform: scale(1);
+}
