@@ -18,7 +18,7 @@ mongod
 
 Server starten
 ```
-npm run development
+npm run dev
 ```
 
 Später dann
@@ -34,6 +34,9 @@ http://localhost:3000
 ### Beschreibung
 User login backend mit create, update, delete (CRUD) und authentication-authorization (auth)
 Testen mit https://install.advancedrestclient.com/install
+
+Body-Content-Type: application/json
+Editor-view: Json visual Editor
 
 #### application programming interface (API)
 | Route         | HTTP Methode           | Beschreibung  |
@@ -78,3 +81,27 @@ Testen mit https://install.advancedrestclient.com/install
 | owner     | User  | Notwendig Wird später automatisch generiert |
 | created   | Datum | Wird automatisch generiert |
 | updated   | Datum | Wird automatisch generiert |
+
+### Nachrichten API
+| Route         | HTTP Methode           | Beschreibung  |
+| ------------- |:-------------:| -----:|
+| `/api/messages`          |`POST`     | Erstelle Nachricht/Konversation     |
+| `/api/messages/:convId`   | `GET`     | Erhalte Konversation  |
+| `/api/messages/:convId`   | `POST`     | Schicke Nachricht/Update Konversation  |
+| `/api/messages/user/:userId`   | `GET`     | Erhalte alle Nachrichten vom User  |
+
+### Nachrichten Felder in der Datenbank
+| Feld        | Typ           | Beschreibung  |
+| ------------- |:-------------:| -----:|
+| sender      | mongoose.userid| Notwendig |
+| reciever    | mongoose.userid| Notwendig |
+| message     | string| Notwendig |
+| created   | Datum | Wird automatisch generiert |
+
+### Konversation Felder in der Datenbank
+| Feld        | Typ           | Beschreibung  |
+| ------------- |:-------------:| -----:|
+| recipients   | array von mongoose.userid| Wird automatisch gesetzt (nicht veränderbar) |
+| messages    | arrray von mongoose.MessageID| Neue Nachrichten werden automatisch eingefügt |
+| created   | Datum | Wird automatisch generiert |
+| updated   | Datum | Wird automatisch generiert (noch nicht funktional) |
