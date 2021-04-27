@@ -3,6 +3,7 @@ import GenreFilter from '../components/GenreFilter';
 import Shelf from '../components/Shelf';
 import SearchBar from '../components/SearchBar';
 import Loading from '../components/Loading';
+import EmptyShelf from '../components/EmptyShelf';
 import { AppContext } from '../context';
 
 const Marketplace = () => {
@@ -15,13 +16,13 @@ const Marketplace = () => {
         </main>
       </>
     );
-  }
+  };
   return (
     <>
       <main onClick={closeSubmenu}>
         <SearchBar />
         <GenreFilter />
-        <Shelf books={books}>{books}</Shelf>
+        {books.length < 1 ? <EmptyShelf>Zurzeit befinden sich keine Bücher im Bücherregal. Lade doch gerne welche hoch!</EmptyShelf> : <Shelf books={books}>{books}</Shelf>}
       </main>
     </>
   );

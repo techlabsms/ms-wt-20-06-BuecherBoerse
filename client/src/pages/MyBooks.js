@@ -3,6 +3,7 @@ import { AppContext } from '../context';
 import Shelf from '../components/Shelf';
 import UserDashboard from '../components/UserDashboard';
 import Loading from '../components/Loading';
+import EmptyShelf from '../components/EmptyShelf';
 
 const MyBooks = () => {
   const {
@@ -54,7 +55,7 @@ const MyBooks = () => {
     <>
       <main onClick={closeSubmenu}>
         <UserDashboard />
-        <Shelf books={books}>{books}</Shelf>
+        {books.length < 1 ? <EmptyShelf>Aktuell hast du noch keine Bücher hochgeladen. Lade schnell welche hoch und biete sie zum Verleihen an!</EmptyShelf> : <Shelf books={books}>{books}</Shelf>}
       </main>
     </>
   );

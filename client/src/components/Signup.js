@@ -8,7 +8,7 @@ import Form from './Form';
 
 const Signup = () => {
   const { signInUser, userCredential, setUserCredential } = useSignIn();
-  const { API_USER, alert } = useContext(AppContext);
+  const { API_USERS, alert } = useContext(AppContext);
   const { name, email, password } = userCredential;
 
   const checkSignupInput = (e) => {
@@ -20,7 +20,7 @@ const Signup = () => {
 
   const signupNow = (e) => {
     e.preventDefault();
-    signInUser(API_USER);
+    signInUser(API_USERS);
   };
 
   return (
