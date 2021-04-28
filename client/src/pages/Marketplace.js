@@ -16,13 +16,20 @@ const Marketplace = () => {
         </main>
       </>
     );
-  };
+  }
   return (
     <>
       <main onClick={closeSubmenu}>
         <SearchBar />
         <GenreFilter />
-        {books.length < 1 ? <EmptyShelf>Zurzeit befinden sich keine Bücher im Bücherregal. Lade doch gerne welche hoch!</EmptyShelf> : <Shelf books={books}>{books}</Shelf>}
+        {books.length < 1 ? (
+          <EmptyShelf>
+            Zurzeit befinden sich keine Bücher im Bücherregal. Lade doch gerne
+            welche hoch!
+          </EmptyShelf>
+        ) : (
+          <Shelf books={books}>{books}</Shelf>
+        )}
       </main>
     </>
   );

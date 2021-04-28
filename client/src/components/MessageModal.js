@@ -14,7 +14,13 @@ const MessageModal = () => {
     showMessageModal,
     setShowMessageModal,
   } = useContext(AppContext);
+
   let recieverID = sessionStorage.getItem('receiver');
+
+  const closeMessageModal = () => {
+    setShowMessageModal(false);
+    sessionStorage.removeItem('receiver');
+  };
   return (
     <>
       <main
@@ -23,6 +29,7 @@ const MessageModal = () => {
         }`}
       >
         <aside className='msg-modal'>
+          <h3 className='title'>Deine Nachricht:</h3>
           <Form
             className='msg-modal-form'
             onSubmit={(e) => {
@@ -47,7 +54,7 @@ const MessageModal = () => {
               Abschicken
             </FilterButton>
             <FilterButton
-              onClick={() => setShowMessageModal(false)}
+              onClick={closeMessageModal}
               style={{ margin: '1rem' }}
             >
               Abbrechen

@@ -10,14 +10,14 @@
 }
 
 .search-form {
-  width: 50vw;
-  padding: 0.5rem;
+  padding: 0.75rem;
   border: 2px solid var(--bckgrnd-trnsprnt);
-  border-radius: var(--brdr-rds);
+  border-radius: var(--brdr-rds-3);
 }
 
 @media screen and (min-width: 800px) {
   .search-form {
+    width: 25vw;
     padding: 1rem;
   }
 }

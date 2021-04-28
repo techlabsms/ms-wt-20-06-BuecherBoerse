@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { FaCheckCircle } from 'react-icons/fa';
 
 const AppContext = React.createContext();
@@ -29,6 +29,7 @@ const AppProvider = ({ children }) => {
     message: '',
   });
   const [showMessageModal, setShowMessageModal] = useState(false);
+  const scrollToBottom = useRef();
 
   const fetchBooks = useCallback(async () => {
     if (isUserLoggedIn || isBookUploaded) {
@@ -174,6 +175,7 @@ const AppProvider = ({ children }) => {
         postMessage,
         showMessageModal,
         setShowMessageModal,
+        scrollToBottom,
       }}
     >
       {children}

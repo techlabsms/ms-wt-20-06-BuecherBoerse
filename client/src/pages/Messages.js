@@ -13,6 +13,7 @@ const Messages = () => {
     setNewMessage,
     postMessage,
     API_MESSAGES,
+    scrollToBottom,
   } = useContext(AppContext);
   const [chat, setChat] = useState([]);
   const [conversations, setConversations] = useState([]);
@@ -32,31 +33,38 @@ const Messages = () => {
     }
   }, [userId]);
 
-  const fetchMessages = useCallback(async () => {
-    if (!conversations) {
-      return null;
-    }
-    try {
-      const res = await fetch(`${API_MESSAGES}${conversations._id}`);
-      if (res.ok) {
-        const singleConv = await res.json();
-        console.log(singleConv);
-        setChat(singleConv);
-        setNewMessage({
-          sender: userId,
-          reciever:
-            userId === singleConv.recipients[0]._id
-              ? singleConv.recipients[1]._id
-              : singleConv.recipients[0]._id,
-          message: '',
-        });
-      } else {
-        throw new Error('could not get the conversation you are looking for');
+  const fetchMessages = useCallback(
+    async (id) => {
+      if (!conversations) {
+        return null;
       }
-    } catch (error) {
-      console.log(error);
-    }
-  }, [API_MESSAGES, userId, conversations, setNewMessage]);
+      try {
+        const res = await fetch(`${API_MESSAGES}${id}`);
+        if (res.ok) {
+          const singleConv = await res.json();
+          console.log(singleConv);
+          setChat(singleConv);
+          scrollToBottom.current.scrollIntoView({
+            block: 'end',
+            behavior: 'smooth',
+          });
+          setNewMessage({
+            sender: userId,
+            reciever:
+              userId === singleConv.recipients[0]._id
+                ? singleConv.recipients[1]._id
+                : singleConv.recipients[0]._id,
+            message: '',
+          });
+        } else {
+          throw new Error('could not get the conversation you are looking for');
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    [API_MESSAGES, userId, conversations, setNewMessage, scrollToBottom]
+  );
 
   useEffect(() => {
     fetchUserConversations();

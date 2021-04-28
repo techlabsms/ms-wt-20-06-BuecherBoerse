@@ -18,6 +18,7 @@
   --nvbr-trns: 0.5s ease-in-out;
   --brdr-rds: 0.25rem;
   --brdr-rds-2: 0.75rem;
+  --brdr-rds-3: 25px;
   --mx-wdth: 1140px;
   --bckgrnd-trnsprnt-1: rgba(248, 248, 248, 0.6);
   --bckgrnd-trnsprnt-2: rgba(248, 248, 248, 0.75);
@@ -92,28 +93,6 @@ button:focus {
   margin-top: 1rem;
 }
 
-@media screen and (min-width: 800px) {
-  h1 {
-    font-size: 3rem;
-  }
-
-  h2 {
-    font-size: 2rem;
-  }
-
-  h3 {
-    font-size: 1.5rem;
-  }
-
-  h4 {
-    font-size: 1rem;
-  }
-
-  p {
-    font-size: 1rem;
-  }
-}
-
 main::before {
   margin-top: 15vh;
   content: '';
@@ -134,6 +113,28 @@ main {
   display: grid;
   align-items: center;
   text-align: start;
+}
+
+@media screen and (min-width: 800px) {
+  h1 {
+    font-size: 3rem;
+  }
+
+  h2 {
+    font-size: 2rem;
+  }
+
+  h3 {
+    font-size: 1.5rem;
+  }
+
+  h4 {
+    font-size: 1rem;
+  }
+
+  p {
+    font-size: 1rem;
+  }
 }
 
 /* Utilities */

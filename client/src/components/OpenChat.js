@@ -1,17 +1,29 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Message from './Message';
+import Loading from './Loading';
+import { AppContext } from '../context';
 
 const OpenChat = ({ chat }) => {
-  const { messages } = chat;
-  if (chat.length === 0) {
-    return null;
+  const { loading, scrollToBottom } = useContext(AppContext);
+  const { recipients, messages } = chat;
+
+  if (loading && chat.length < 1) {
+    return (
+      <section className='chat'>
+        <Loading />
+      </section>
+    );
   }
   return (
     <>
       <section className='chat'>
-        {messages.map((message) => {
-          return <Message key={message._id} {...message} />;
-        })}
+        {messages &&
+          messages.map((message) => {
+            return (
+              <Message key={message._id} recipients={recipients} {...message} />
+            );
+          })}
+        <div ref={scrollToBottom}></div>
       </section>
     </>
   );

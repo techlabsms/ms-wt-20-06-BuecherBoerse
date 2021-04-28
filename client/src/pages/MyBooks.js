@@ -55,7 +55,14 @@ const MyBooks = () => {
     <>
       <main onClick={closeSubmenu}>
         <UserDashboard />
-        {books.length < 1 ? <EmptyShelf>Aktuell hast du noch keine Bücher hochgeladen. Lade schnell welche hoch und biete sie zum Verleihen an!</EmptyShelf> : <Shelf books={books}>{books}</Shelf>}
+        {books.length < 1 ? (
+          <EmptyShelf>
+            Aktuell hast du noch keine Bücher hochgeladen. Lade schnell welche
+            hoch und biete sie zum Verleihen an!
+          </EmptyShelf>
+        ) : (
+          <Shelf books={books}>{books}</Shelf>
+        )}
       </main>
     </>
   );

@@ -1,7 +1,7 @@
 import React from 'react';
 import { FaUserCircle } from 'react-icons/fa';
 
-const Message = ({ message, sender }) => {
+const Message = ({ recipients, message, sender }) => {
   return (
     <>
       <article className='message basic-flex'>
@@ -10,7 +10,11 @@ const Message = ({ message, sender }) => {
         </span>
         <aside className='glimpse-message'>
           <header className='message-header'>
-            <h4 className='title'>{sender}</h4>
+            <h4 className='title'>
+              {sender === recipients[0]._id
+                ? recipients[0].name
+                : recipients[1].name}
+            </h4>
           </header>
           <p>{message}</p>
         </aside>
