@@ -5,7 +5,7 @@ import '../styles/UserAction.css';
 import ActionButton from './ActionBtn';
 
 const UserAction = ({ owner, condition, setShowMessageModal }) => {
-  const { setAlert, jwt, API_USERS } = useContext(AppContext);
+  const { userId, setAlert, jwt, API_USERS } = useContext(AppContext);
   const [user, setUser] = useState();
 
   const fetchUser = useCallback(async () => {
@@ -37,9 +37,18 @@ const UserAction = ({ owner, condition, setShowMessageModal }) => {
       msg: 'Diese Funktion ist noch nicht bereit...',
     });
   };
+
   const messageUser = () => {
-    sessionStorage.setItem('receiver', owner);
-    setShowMessageModal(true);
+    if (owner === userId) {
+      setAlert({
+        display: true,
+        icon: <FaFlushed />,
+        msg: 'Du willst doch nicht dein eigenes Buch leihen, oder?',
+      });
+    } else {
+      sessionStorage.setItem('receiver', owner);
+      setShowMessageModal(true);
+    }
   };
 
   useEffect(() => {
