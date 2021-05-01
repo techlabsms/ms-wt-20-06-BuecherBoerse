@@ -20,7 +20,6 @@ const UserAction = ({ owner, condition, setShowMessageModal }) => {
       });
       if (res.ok) {
         const userInfo = await res.json();
-        console.log(userInfo);
         setUser(userInfo.name);
       } else {
         throw new Error('could not get user info');
@@ -43,7 +42,7 @@ const UserAction = ({ owner, condition, setShowMessageModal }) => {
       setAlert({
         display: true,
         icon: <FaFlushed />,
-        msg: 'Du willst doch nicht dein eigenes Buch leihen, oder?',
+        msg: 'Du willst doch nicht etwa dein eigenes Buch leihen, oder?',
       });
     } else {
       sessionStorage.setItem('receiver', owner);

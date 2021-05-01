@@ -6,6 +6,7 @@ const Conversation = ({ _id, recipients, messages, fetchMessages }) => {
   const { userName } = useContext(AppContext);
   const openConversation = (e) => {
     fetchMessages(e.currentTarget.id);
+    sessionStorage.setItem('convId', e.currentTarget.id);
   };
 
   return (
@@ -24,7 +25,11 @@ const Conversation = ({ _id, recipients, messages, fetchMessages }) => {
               ? recipients[1].name
               : recipients[0].name}
           </h4>
-          <p>{`Letzte Nachricht: ${messages[messages.length - 1].message}`}</p>
+          <p>{`${
+            messages[messages.length - 1].sender === recipients[0]._id
+              ? recipients[0].name
+              : recipients[1].name
+          }: ${messages[messages.length - 1].message}`}</p>
         </aside>
       </button>
     </>

@@ -17,12 +17,14 @@ const Messages = () => {
   } = useContext(AppContext);
   const [chat, setChat] = useState([]);
   const [conversations, setConversations] = useState([]);
+  const [isMessageSent, setIsMessageSent] = useState(false);
 
   const fetchUserConversations = useCallback(async () => {
     try {
       const res = await fetch(`${API_MESSAGESUSER}${userId}`);
       if (res.ok) {
-        const convList = await res.json();
+        let data = await res.json();
+        const convList = data.reverse();
         console.log(convList);
         setConversations(convList);
       } else {
@@ -35,7 +37,7 @@ const Messages = () => {
 
   const fetchMessages = useCallback(
     async (id) => {
-      if (!conversations) {
+      if (!conversations || !id) {
         return null;
       }
       try {
@@ -68,7 +70,7 @@ const Messages = () => {
 
   useEffect(() => {
     fetchUserConversations();
-  }, [fetchUserConversations]);
+  }, [fetchUserConversations, isMessageSent]);
 
   return (
     <>
@@ -82,6 +84,8 @@ const Messages = () => {
             chat={chat}
             newMessage={newMessage}
             setNewMessage={setNewMessage}
+            isMessageSent={isMessageSent}
+            setIsMessageSent={setIsMessageSent}
             postMessage={postMessage}
             fetchMessages={fetchMessages}
           />

@@ -33,6 +33,12 @@
   color: var(--bckgrnd-clr);
 }
 
+.active-chat {
+  background-color: var(--brnd-clr);
+  border-color: var(--brnd-clr);
+  color: var(--bckgrnd-clr);
+}
+
 .glimpse-message {
   margin-left: 1rem;
   text-align: left;

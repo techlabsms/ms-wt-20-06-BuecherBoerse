@@ -7,7 +7,7 @@ const MenuLink = ({ id, url, text }) => {
   const { hideLinks } = useContext(AppContext);
   return (
     <>
-      <li key={id} className='links basic-flex'>
+      <li key={id} className='links'>
         <NavLink to={url} onClick={hideLinks}>
           {text}
         </NavLink>
