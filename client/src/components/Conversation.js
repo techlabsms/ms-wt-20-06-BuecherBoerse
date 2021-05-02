@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { FaUserCircle } from 'react-icons/fa';
-import { AppContext } from '../context';
+import { AppContext } from '../context/OverallContext';
 
 const Conversation = ({ _id, recipients, messages, fetchMessages }) => {
   const { userName } = useContext(AppContext);

@@ -4,7 +4,7 @@ import Shelf from '../components/Shelf';
 import SearchBar from '../components/SearchBar';
 import Loading from '../components/Loading';
 import EmptyShelf from '../components/EmptyShelf';
-import { AppContext } from '../context';
+import { AppContext } from '../context/OverallContext';
 
 const Marketplace = () => {
   const { books, loading, closeSubmenu } = useContext(AppContext);

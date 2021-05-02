@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { AppContext } from '../context';
+import { AppContext } from '../context/OverallContext';
 import '../styles/SearchBar.css';
 
 const SearchBar = () => {

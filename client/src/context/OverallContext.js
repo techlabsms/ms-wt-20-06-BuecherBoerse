@@ -13,9 +13,24 @@ const AppProvider = ({ children }) => {
   const userName = sessionStorage.getItem('name');
   const userId = sessionStorage.getItem('id');
   const jwt = sessionStorage.getItem('token');
+  const [userCredential, setUserCredential] = useState({
+    name: '',
+    email: '',
+    password: '',
+  });
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(userName ? true : false);
   const [allBooks, setAllBooks] = useState([]);
   const [books, setBooks] = useState(allBooks);
+  const [newBook, setNewBook] = useState({
+    name: '',
+    author: '',
+    genre: '',
+    language: '',
+    condition: '',
+    owner: userId,
+    desc: '',
+  });
+  const [bookImage, setBookImage] = useState();
   const [isBookUploaded, setIsBookUploaded] = useState(false);
   const [loading, setLoading] = useState(false);
   const [isSubmenuOpen, setIsSubmenuOpen] = useState(false);
@@ -50,7 +65,11 @@ const AppProvider = ({ children }) => {
         setLoading(false);
       }
     }
-  }, [isUserLoggedIn, isBookUploaded]);
+  }, [isUserLoggedIn, isBookUploaded, setLoading, setAllBooks, setBooks]);
+
+  useEffect(() => {
+    fetchBooks();
+  }, [fetchBooks]);
 
   const startNewConversation = async (message) => {
     try {
@@ -125,10 +144,6 @@ const AppProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    fetchBooks();
-  }, [fetchBooks]);
-
-  useEffect(() => {
     let timeout = () => {
       setTimeout(() => {
         setIsBookUploaded(false);
@@ -146,11 +161,18 @@ const AppProvider = ({ children }) => {
         AUTH_SIGNOUT,
         API_BOOKSBYUSER,
         API_MESSAGES,
+        userCredential,
+        setUserCredential,
         isUserLoggedIn,
         setIsUserLoggedIn,
         allBooks,
+        setAllBooks,
         books,
         setBooks,
+        newBook,
+        setNewBook,
+        bookImage,
+        setBookImage,
         loading,
         setLoading,
         alert,
@@ -162,6 +184,7 @@ const AppProvider = ({ children }) => {
         closeSubmenu,
         location,
         fetchBooks,
+        isBookUploaded,
         setIsBookUploaded,
         isTabLeft,
         setIsTabLeft,

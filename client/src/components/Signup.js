@@ -1,14 +1,16 @@
 import React, { useContext } from 'react';
-import { AppContext } from '../context';
-import { useSignIn } from './useSignIn';
+import { AppContext } from '../context/OverallContext';
+import { useSignIn } from '../hooks/useSignIn';
 import InputField from './InputField';
 import SigninBtn from './SigninBtn';
 import Alert from './Alert';
 import Form from './Form';
 
 const Signup = () => {
-  const { signInUser, userCredential, setUserCredential } = useSignIn();
-  const { API_USERS, alert } = useContext(AppContext);
+  const { API_USERS, alert, userCredential, setUserCredential } = useContext(
+    AppContext
+  );
+  const { signInUser } = useSignIn();
   const { name, email, password } = userCredential;
 
   const checkSignupInput = (e) => {

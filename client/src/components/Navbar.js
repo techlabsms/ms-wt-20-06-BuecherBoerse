@@ -6,7 +6,7 @@ import MenuLink from './MenuLink';
 import LoginBtns from './LoginBtns';
 import { links } from '../utils/linksDB';
 import '../styles/Navbar.css';
-import { AppContext } from '../context';
+import { AppContext } from '../context/OverallContext';
 import UserBar from './UserBar';
 
 const Navbar = () => {

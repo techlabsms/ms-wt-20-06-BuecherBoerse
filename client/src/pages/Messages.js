@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext, useCallback } from 'react';
 import Conversations from '../components/Conversations';
 import ChatWindow from '../components/ChatWindow';
-import { AppContext } from '../context';
+import { AppContext } from '../context/OverallContext';
 import '../styles/Messages.css';
 const API_MESSAGESUSER = '/api/messages/user/';
 

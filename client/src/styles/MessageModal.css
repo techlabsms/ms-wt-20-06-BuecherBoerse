@@ -9,7 +9,7 @@
   visibility: hidden;
   overflow: hidden;
   transform: scale(0);
-  transition: var(--trnstn);
+  transition: var(--nvbr-trns);
 }
 
 .msg-modal {
@@ -18,13 +18,30 @@
   padding: 2rem;
   position: relative;
   text-align: center;
-  background-color: rgb(61, 61, 61);
+  background-color: var(--brnd-clr);
   border-radius: 25px;
   box-shadow: var(--bx-shdw);
+  animation: slide-up 0.75s;
 }
 
 .modal-wrapper.open {
   visibility: visible;
   z-index: 10;
   transform: scale(1);
+}
+
+.modal-title {
+  color: var(--bckgrnd-clr);
+}
+
+@keyframes slide-up {
+  0% {
+    opacity: 0;
+    bottom: -10vh;
+  }
+
+  100% {
+    opacity: 1;
+    bottom: 0;
+  }
 }

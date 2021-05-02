@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { AppContext } from '../context';
+import { AppContext } from '../context/OverallContext';
 import '../styles/UserDashboard.css';
 
 const UserDashboard = () => {

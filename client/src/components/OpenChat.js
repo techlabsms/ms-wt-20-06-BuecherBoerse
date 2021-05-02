@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import Message from './Message';
 import Loading from './Loading';
-import { AppContext } from '../context';
+import { AppContext } from '../context/OverallContext';
 
 const OpenChat = ({ chat }) => {
   const { loading, scrollToBottom } = useContext(AppContext);

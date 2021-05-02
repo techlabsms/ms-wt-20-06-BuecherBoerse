@@ -1,14 +1,20 @@
 import React, { useContext } from 'react';
-import { AppContext } from '../context';
-import { useSignIn } from '../components/useSignIn';
+import { AppContext } from '../context/OverallContext';
+import { useSignIn } from '../hooks/useSignIn';
 import Alert from './Alert';
 import InputField from './InputField';
 import SigninBtn from './SigninBtn';
 import Form from './Form';
 
 const Login = () => {
-  const { signInUser, userCredential, setUserCredential } = useSignIn();
-  const { AUTH_SIGNIN, alert, isTabLeft } = useContext(AppContext);
+  const {
+    AUTH_SIGNIN,
+    alert,
+    isTabLeft,
+    userCredential,
+    setUserCredential,
+  } = useContext(AppContext);
+  const { signInUser } = useSignIn();
   const { name, email, password } = userCredential;
 
   const checkLoginInput = (e) => {

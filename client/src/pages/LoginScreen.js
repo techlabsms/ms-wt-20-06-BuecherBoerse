@@ -3,7 +3,7 @@ import Login from '../components/Login';
 import '../styles/LoginScreen.css';
 import Tab from '../components/Tab';
 import Signup from '../components/Signup';
-import { AppContext } from '../context';
+import { AppContext } from '../context/OverallContext';
 
 const LoginScreen = () => {
   const { isTabLeft } = useContext(AppContext);

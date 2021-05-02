@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import '../styles/MenuLink.css';
-import { AppContext } from '../context';
+import { AppContext } from '../context/OverallContext';
 
 const MenuLink = ({ id, url, text }) => {
   const { hideLinks } = useContext(AppContext);

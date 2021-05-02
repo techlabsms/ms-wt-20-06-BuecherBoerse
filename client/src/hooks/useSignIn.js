@@ -1,15 +1,16 @@
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { FaCheckCircle, FaPoop } from 'react-icons/fa';
-import { AppContext } from '../context';
+import { AppContext } from '../context/OverallContext';
 
 export const useSignIn = () => {
-  const [userCredential, setUserCredential] = useState({
-    name: '',
-    email: '',
-    password: '',
-  });
-  const { setIsUserLoggedIn, setAlert, setIsTabLeft } = useContext(AppContext);
+  const {
+    userCredential,
+    setUserCredential,
+    setIsUserLoggedIn,
+    setAlert,
+    setIsTabLeft,
+  } = useContext(AppContext);
   const history = useHistory();
   const { state } = useLocation();
 
@@ -54,7 +55,5 @@ export const useSignIn = () => {
   };
   return {
     signInUser,
-    userCredential,
-    setUserCredential,
   };
 };

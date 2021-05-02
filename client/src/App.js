@@ -5,7 +5,7 @@ import {
   Route,
   Switch,
 } from 'react-router-dom';
-import { AppContext } from './context';
+import { AppContext } from './context/OverallContext';
 import Navbar from './components/Navbar';
 import ProtectedRoute from './components/ProtectedRoute';
 import Marketplace from './pages/Marketplace';

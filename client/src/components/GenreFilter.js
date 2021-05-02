@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import FilterButton from './FilterButton';
 import '../styles/GenreFilter.css';
-import { AppContext } from '../context';
+import { AppContext } from '../context/OverallContext';
 
 const GenreFilter = () => {
   const { allBooks, setBooks } = useContext(AppContext);

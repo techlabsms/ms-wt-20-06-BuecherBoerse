@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import Form from './Form';
 import TextAreaInput from './TextAreaInput';
 import FilterButton from './FilterButton';
-import { AppContext } from '../context';
+import { AppContext } from '../context/OverallContext';
 import '../styles/MessageModal.css';
 
 const MessageModal = () => {
@@ -29,7 +29,7 @@ const MessageModal = () => {
         }`}
       >
         <aside className='msg-modal'>
-          <h3 className='title'>Deine Nachricht:</h3>
+          <h3 className='modal-title'>Deine Nachricht:</h3>
           <Form
             className='msg-modal-form'
             onSubmit={(e) => {

@@ -1,46 +1,26 @@
-import React, { useContext, useEffect, useCallback } from 'react';
-import { AppContext } from '../context';
+import React, { useContext, useEffect } from 'react';
+import { AppContext } from '../context/OverallContext';
 import Shelf from '../components/Shelf';
 import UserDashboard from '../components/UserDashboard';
 import Loading from '../components/Loading';
 import EmptyShelf from '../components/EmptyShelf';
+import { useFetchBookData } from '../hooks/useFetchBookData';
 
 const MyBooks = () => {
   const {
     closeSubmenu,
     books,
-    setBooks,
     loading,
-    setLoading,
     userId,
     jwt,
     API_BOOKSBYUSER,
   } = useContext(AppContext);
 
-  const fetchMyBooks = useCallback(async () => {
-    setLoading(true);
-    try {
-      const res = await fetch(`${API_BOOKSBYUSER}${userId}`, {
-        headers: {
-          authorization: `Bearer ${jwt}`,
-        },
-      });
-      if (res.ok) {
-        const myBookList = await res.json();
-        setBooks(myBookList);
-      } else {
-        throw new Error(`could not get books of user ${userId}`);
-      }
-    } catch (err) {
-      console.log(err);
-    } finally {
-      setLoading(false);
-    }
-  }, [setLoading, setBooks, userId, jwt, API_BOOKSBYUSER]);
+  const { fetchMyBooks } = useFetchBookData();
 
   useEffect(() => {
-    fetchMyBooks();
-  }, [fetchMyBooks]);
+    fetchMyBooks(API_BOOKSBYUSER, userId, jwt);
+  }, [fetchMyBooks, API_BOOKSBYUSER, userId, jwt]);
 
   if (loading) {
     return (

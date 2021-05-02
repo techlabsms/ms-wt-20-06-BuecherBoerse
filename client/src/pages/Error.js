@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { AppContext } from '../context';
+import { AppContext } from '../context/OverallContext';
 import { FaMeh } from 'react-icons/fa';
 import ReturnTo from '../components/ReturnTo';
 import '../styles/Error.css';
