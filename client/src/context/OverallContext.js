@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { FaCheckCircle } from 'react-icons/fa';
+import React, { useState, useRef } from 'react';
 
 const AppContext = React.createContext();
 
@@ -10,6 +9,7 @@ const AppProvider = ({ children }) => {
   const AUTH_SIGNOUT = '/auth/signout';
   const API_BOOKSBYUSER = '/api/books/user/';
   const API_MESSAGES = '/api/messages/';
+  const API_MESSAGESUSER = '/api/messages/user/';
   const userName = sessionStorage.getItem('name');
   const userId = sessionStorage.getItem('id');
   const jwt = sessionStorage.getItem('token');
@@ -31,13 +31,13 @@ const AppProvider = ({ children }) => {
     desc: '',
   });
   const [bookImage, setBookImage] = useState();
-  const [isBookUploaded, setIsBookUploaded] = useState(false);
   const [loading, setLoading] = useState(false);
   const [isSubmenuOpen, setIsSubmenuOpen] = useState(false);
   const [showLinks, setShowLinks] = useState(false);
   const [location, setLocation] = useState({});
   const [isTabLeft, setIsTabLeft] = useState(true);
   const [alert, setAlert] = useState({ display: false, icon: '', msg: '' });
+  const [isMessageSent, setIsMessageSent] = useState(false);
   const [newMessage, setNewMessage] = useState({
     sender: '',
     reciever: '',
@@ -45,89 +45,6 @@ const AppProvider = ({ children }) => {
   });
   const [showMessageModal, setShowMessageModal] = useState(false);
   const scrollToBottom = useRef();
-
-  const fetchBooks = useCallback(async () => {
-    if (isUserLoggedIn || isBookUploaded) {
-      setLoading(true);
-      try {
-        const res = await fetch(API_BOOKS);
-        if (res.ok) {
-          let data = await res.json();
-          const bookList = data.reverse();
-          setAllBooks(bookList);
-          setBooks(bookList);
-        } else {
-          throw new Error('Hoppala, da ist was schief gelaufen');
-        }
-      } catch (err) {
-        console.log(err);
-      } finally {
-        setLoading(false);
-      }
-    }
-  }, [isUserLoggedIn, isBookUploaded, setLoading, setAllBooks, setBooks]);
-
-  useEffect(() => {
-    fetchBooks();
-  }, [fetchBooks]);
-
-  const startNewConversation = async (message) => {
-    try {
-      const res = await fetch(`${API_MESSAGES}`, {
-        method: 'POST',
-        headers: {
-          'content-type': 'application/json',
-        },
-        body: JSON.stringify(message),
-      });
-      if (res.ok) {
-        const writtenMessage = await res.json();
-        console.log(writtenMessage);
-        setAlert({
-          display: true,
-          icon: <FaCheckCircle />,
-          msg: 'Nachricht wurde erfolgreich verschickt',
-        });
-        setShowMessageModal(false);
-      } else {
-        throw new Error('Nachricht konnte nicht verschickt werden');
-      }
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setNewMessage({
-        sender: '',
-        reciever: '',
-        message: '',
-      });
-    }
-  };
-
-  const postMessage = async (id, message) => {
-    try {
-      const res = await fetch(`${API_MESSAGES}${id}`, {
-        method: 'POST',
-        headers: {
-          'content-type': 'application/json',
-        },
-        body: JSON.stringify(message),
-      });
-      if (res.ok) {
-        const writtenMessage = await res.json();
-        console.log(writtenMessage);
-      } else {
-        throw new Error('Nachricht konnte nicht verschickt werden');
-      }
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setNewMessage({
-        sender: '',
-        reciever: '',
-        message: '',
-      });
-    }
-  };
 
   const openSubmenu = (coordinates) => {
     setLocation(coordinates);
@@ -143,15 +60,6 @@ const AppProvider = ({ children }) => {
     }
   };
 
-  useEffect(() => {
-    let timeout = () => {
-      setTimeout(() => {
-        setIsBookUploaded(false);
-      }, 3000);
-    };
-    return () => clearTimeout(timeout);
-  });
-
   return (
     <AppContext.Provider
       value={{
@@ -161,6 +69,7 @@ const AppProvider = ({ children }) => {
         AUTH_SIGNOUT,
         API_BOOKSBYUSER,
         API_MESSAGES,
+        API_MESSAGESUSER,
         userCredential,
         setUserCredential,
         isUserLoggedIn,
@@ -183,9 +92,6 @@ const AppProvider = ({ children }) => {
         openSubmenu,
         closeSubmenu,
         location,
-        fetchBooks,
-        isBookUploaded,
-        setIsBookUploaded,
         isTabLeft,
         setIsTabLeft,
         userName,
@@ -194,8 +100,8 @@ const AppProvider = ({ children }) => {
         hideLinks,
         newMessage,
         setNewMessage,
-        startNewConversation,
-        postMessage,
+        isMessageSent,
+        setIsMessageSent,
         showMessageModal,
         setShowMessageModal,
         scrollToBottom,

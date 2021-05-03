@@ -2,7 +2,34 @@ import { useContext, useCallback } from 'react';
 import { AppContext } from '../context/OverallContext';
 
 export const useFetchBookData = () => {
-  const { setLoading, setBooks } = useContext(AppContext);
+  const { isUserLoggedIn, setLoading, setAllBooks, setBooks } = useContext(
+    AppContext
+  );
+
+  const fetchBooks = useCallback(
+    async (api) => {
+      if (isUserLoggedIn) {
+        setLoading(true);
+        try {
+          const res = await fetch(api);
+          if (res.ok) {
+            let data = await res.json();
+            const bookList = data.reverse();
+            setAllBooks(bookList);
+            setBooks(bookList);
+          } else {
+            throw new Error('Hoppala, da ist was schief gelaufen');
+          }
+        } catch (err) {
+          console.log(err);
+        } finally {
+          setLoading(false);
+        }
+      }
+    },
+    [isUserLoggedIn, setLoading, setAllBooks, setBooks]
+  );
+
   const fetchMyBooks = useCallback(
     async (api, id, token) => {
       setLoading(true);
@@ -26,7 +53,9 @@ export const useFetchBookData = () => {
     },
     [setLoading, setBooks]
   );
+
   return {
+    fetchBooks,
     fetchMyBooks,
   };
 };

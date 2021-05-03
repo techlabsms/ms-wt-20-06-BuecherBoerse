@@ -29,14 +29,14 @@
     display: grid;
     max-width: var(--mx-wdth);
     grid-template-columns: 1fr 2fr 1fr;
-    gap: 1.5rem;
+    gap: 2rem;
     align-items: flex-start;
     margin: 1rem auto;
   }
 
   .open-book img {
-    width: 25vw;
-    max-width: 420px;
+    width: 17vw;
+    max-width: 360px;
     height: auto;
     object-fit: cover;
   }
