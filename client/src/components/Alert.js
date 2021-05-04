@@ -1,9 +1,9 @@
-import React, { useEffect, useContext } from 'react';
-import { AppContext } from '../context/OverallContext';
+import React, { useEffect } from 'react';
+import { useGlobalContext } from '../context/OverallContext';
 import '../styles/Alert.css';
 
 const Alert = () => {
-  const { alert, setAlert } = useContext(AppContext);
+  const { alert, setAlert } = useGlobalContext();
   useEffect(() => {
     setTimeout(() => {
       setAlert({ display: false, icon: '', msg: '' });

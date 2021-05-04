@@ -1,9 +1,8 @@
-import { useContext } from 'react';
-import { AppContext } from '../context/OverallContext';
+import { useGlobalContext } from '../context/OverallContext';
 import { FaCheckCircle, FaPoo } from 'react-icons/fa';
 
 export const useBookUpload = () => {
-  const { setAlert, setNewBook, userId, setBookImage } = useContext(AppContext);
+  const { setAlert, setNewBook, userId, setBookImage } = useGlobalContext();
 
   const bookUpload = async (api, token, formdata) => {
     try {
@@ -14,7 +13,7 @@ export const useBookUpload = () => {
         },
         body: formdata,
       });
-      if (res.status >= 200 && res.status <= 299) {
+      if (res.ok) {
         const userBook = await res.json();
         console.log(userBook);
         setAlert({

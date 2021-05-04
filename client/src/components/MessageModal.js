@@ -1,19 +1,22 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import Form from './Form';
 import TextAreaInput from './TextAreaInput';
 import FilterButton from './FilterButton';
-import { AppContext } from '../context/OverallContext';
+import { useGlobalContext } from '../context/OverallContext';
+import { useMessaging } from '../hooks/useMessaging';
 import '../styles/MessageModal.css';
 
 const MessageModal = () => {
   const {
+    API_MESSAGES,
     userId,
-    newMessage,
-    setNewMessage,
-    startNewConversation,
     showMessageModal,
     setShowMessageModal,
-  } = useContext(AppContext);
+    setIsMessageSent,
+    newMessage,
+    setNewMessage,
+  } = useGlobalContext();
+  const { startNewConversation } = useMessaging();
 
   let recieverID = sessionStorage.getItem('receiver');
 
@@ -34,7 +37,9 @@ const MessageModal = () => {
             className='msg-modal-form'
             onSubmit={(e) => {
               e.preventDefault();
-              startNewConversation(newMessage);
+              startNewConversation(API_MESSAGES, newMessage);
+              setIsMessageSent(true);
+              sessionStorage.removeItem('receiver');
             }}
           >
             <TextAreaInput

@@ -1,8 +1,8 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { FaUserCircle } from 'react-icons/fa';
 import '../styles/UserBar.css';
 import Submenu from '../components/Submenu';
-import { AppContext } from '../context/OverallContext';
+import { useGlobalContext } from '../context/OverallContext';
 
 const UserBar = () => {
   const {
@@ -11,7 +11,7 @@ const UserBar = () => {
     isSubmenuOpen,
     closeSubmenu,
     userName,
-  } = useContext(AppContext);
+  } = useGlobalContext();
 
   const showUserSubmenu = (e) => {
     const divSize = e.currentTarget.getBoundingClientRect();

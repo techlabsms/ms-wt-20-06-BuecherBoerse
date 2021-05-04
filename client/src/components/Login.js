@@ -1,5 +1,5 @@
-import React, { useContext } from 'react';
-import { AppContext } from '../context/OverallContext';
+import React from 'react';
+import { useGlobalContext } from '../context/OverallContext';
 import { useSignIn } from '../hooks/useSignIn';
 import Alert from './Alert';
 import InputField from './InputField';
@@ -13,7 +13,7 @@ const Login = () => {
     isTabLeft,
     userCredential,
     setUserCredential,
-  } = useContext(AppContext);
+  } = useGlobalContext();
   const { signInUser } = useSignIn();
   const { name, email, password } = userCredential;
 

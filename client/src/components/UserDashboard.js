@@ -1,9 +1,9 @@
-import React, { useContext } from 'react';
-import { AppContext } from '../context/OverallContext';
+import React from 'react';
+import { useGlobalContext } from '../context/OverallContext';
 import '../styles/UserDashboard.css';
 
 const UserDashboard = () => {
-  const { userName } = useContext(AppContext);
+  const { userName } = useGlobalContext();
   return (
     <>
       <section className='dashboard'>

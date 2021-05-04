@@ -1,94 +1,52 @@
-import React, { useState, useEffect, useContext, useCallback } from 'react';
+import React, { useEffect } from 'react';
 import Conversations from '../components/Conversations';
 import ChatWindow from '../components/ChatWindow';
-import { AppContext } from '../context/OverallContext';
+import { useGlobalContext } from '../context/OverallContext';
+import { useMessaging } from '../hooks/useMessaging';
 import '../styles/Messages.css';
-const API_MESSAGESUSER = '/api/messages/user/';
 
 const Messages = () => {
   const {
     closeSubmenu,
-    userId,
-    newMessage,
-    setNewMessage,
-    postMessage,
     API_MESSAGES,
-    scrollToBottom,
-  } = useContext(AppContext);
-  const [chat, setChat] = useState([]);
-  const [conversations, setConversations] = useState([]);
-  const [isMessageSent, setIsMessageSent] = useState(false);
-
-  const fetchUserConversations = useCallback(async () => {
-    try {
-      const res = await fetch(`${API_MESSAGESUSER}${userId}`);
-      if (res.ok) {
-        let data = await res.json();
-        const convList = data.reverse();
-        console.log(convList);
-        setConversations(convList);
-      } else {
-        throw new Error('conversations could not be fetched');
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  }, [userId]);
-
-  const fetchMessages = useCallback(
-    async (id) => {
-      if (!conversations || !id) {
-        return null;
-      }
-      try {
-        const res = await fetch(`${API_MESSAGES}${id}`);
-        if (res.ok) {
-          const singleConv = await res.json();
-          console.log(singleConv);
-          setChat(singleConv);
-          scrollToBottom.current.scrollIntoView({
-            block: 'end',
-            behavior: 'smooth',
-          });
-          setNewMessage({
-            sender: userId,
-            reciever:
-              userId === singleConv.recipients[0]._id
-                ? singleConv.recipients[1]._id
-                : singleConv.recipients[0]._id,
-            message: '',
-          });
-        } else {
-          throw new Error('could not get the conversation you are looking for');
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    },
-    [API_MESSAGES, userId, conversations, setNewMessage, scrollToBottom]
-  );
+    API_MESSAGESUSER,
+    userId,
+    isMessageSent,
+    setIsMessageSent,
+  } = useGlobalContext();
+  const { fetchUserConversations, fetchMessages } = useMessaging();
+  let convId = sessionStorage.getItem('convId');
 
   useEffect(() => {
-    fetchUserConversations();
-  }, [fetchUserConversations, isMessageSent]);
+    fetchUserConversations(API_MESSAGESUSER, userId);
+  }, [
+    API_MESSAGESUSER,
+    fetchUserConversations,
+    isMessageSent,
+    setIsMessageSent,
+    userId,
+  ]);
+
+  useEffect(() => {
+    fetchMessages(API_MESSAGES, convId, userId);
+    return () => {
+      setIsMessageSent(false);
+    };
+  }, [
+    API_MESSAGES,
+    fetchMessages,
+    isMessageSent,
+    setIsMessageSent,
+    userId,
+    convId,
+  ]);
 
   return (
     <>
       <main onClick={closeSubmenu}>
         <section className='message-container'>
-          <Conversations
-            conversations={conversations}
-            fetchMessages={fetchMessages}
-          />
-          <ChatWindow
-            chat={chat}
-            newMessage={newMessage}
-            setNewMessage={setNewMessage}
-            isMessageSent={isMessageSent}
-            setIsMessageSent={setIsMessageSent}
-            postMessage={postMessage}
-            fetchMessages={fetchMessages}
-          />
+          <Conversations />
+          <ChatWindow />
         </section>
       </main>
     </>

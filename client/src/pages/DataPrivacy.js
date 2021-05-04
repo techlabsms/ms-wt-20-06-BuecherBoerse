@@ -1,9 +1,9 @@
-import React, { useContext } from 'react';
-import { AppContext } from '../context/OverallContext';
+import React from 'react';
+import { useGlobalContext } from '../context/OverallContext';
 import '../styles/DataPrivacy.css';
 
 const DataPrivacy = () => {
-  const { closeSubmenu } = useContext(AppContext);
+  const { closeSubmenu } = useGlobalContext();
   return (
     <>
       <main onClick={closeSubmenu}>

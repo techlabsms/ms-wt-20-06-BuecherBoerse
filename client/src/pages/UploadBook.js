@@ -1,10 +1,10 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import '../styles/UploadBook.css';
 import Alert from '../components/Alert';
 import ImageUploader from '../components/ImageUploader';
 import InputField from '../components/InputField';
 import { FaFlushed } from 'react-icons/fa';
-import { AppContext } from '../context/OverallContext';
+import { useGlobalContext } from '../context/OverallContext';
 import TextAreaInput from '../components/TextAreaInput';
 import ActionBtn from '../components/ActionBtn';
 import Form from '../components/Form';
@@ -23,7 +23,7 @@ const UploadBook = () => {
     API_BOOKS,
     bookImage,
     setBookImage,
-  } = useContext(AppContext);
+  } = useGlobalContext();
   const { bookUpload } = useBookUpload();
   const { name, author, genre, language, condition, owner, desc } = newBook;
 

@@ -1,7 +1,6 @@
-import { useContext } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { FaCheckCircle, FaPoop } from 'react-icons/fa';
-import { AppContext } from '../context/OverallContext';
+import { useGlobalContext } from '../context/OverallContext';
 
 export const useSignIn = () => {
   const {
@@ -10,7 +9,7 @@ export const useSignIn = () => {
     setIsUserLoggedIn,
     setAlert,
     setIsTabLeft,
-  } = useContext(AppContext);
+  } = useGlobalContext();
   const history = useHistory();
   const { state } = useLocation();
 
@@ -53,7 +52,25 @@ export const useSignIn = () => {
       setUserCredential({ name: '', email: '', password: '' });
     }
   };
+
+  const getLoggedOut = async (url) => {
+    try {
+      const res = await fetch(url);
+      if (res.status >= 200 && res.status <= 299) {
+        const userLoggedOut = await res.json();
+        sessionStorage.clear();
+        console.log('Erfolgreich ausgeloggt!', userLoggedOut);
+        setIsUserLoggedIn(false);
+        setUserCredential({ name: '', email: '', password: '' });
+      } else {
+        throw new Error('Hoppala, da ist wohl was schief gelaufen...');
+      }
+    } catch (error) {
+      console.log('Das hat nicht geklappt', error);
+    }
+  };
   return {
     signInUser,
+    getLoggedOut,
   };
 };

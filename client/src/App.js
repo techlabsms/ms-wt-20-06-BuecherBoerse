@@ -1,11 +1,11 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import {
   BrowserRouter as Router,
   Redirect,
   Route,
   Switch,
 } from 'react-router-dom';
-import { AppContext } from './context/OverallContext';
+import { useGlobalContext } from './context/OverallContext';
 import Navbar from './components/Navbar';
 import ProtectedRoute from './components/ProtectedRoute';
 import Marketplace from './pages/Marketplace';
@@ -21,7 +21,7 @@ import MyBooks from './pages/MyBooks';
 import Messages from './pages/Messages';
 
 const App = () => {
-  const { isUserLoggedIn } = useContext(AppContext);
+  const { isUserLoggedIn } = useGlobalContext();
   return (
     <>
       <Router>
@@ -37,11 +37,11 @@ const App = () => {
           <ProtectedRoute path='/uploadbook'>
             <UploadBook />
           </ProtectedRoute>
-          <ProtectedRoute path='/openbook/:id'>
-            <OpenBook />
-          </ProtectedRoute>
           <ProtectedRoute path='/mybooks'>
             <MyBooks />
+          </ProtectedRoute>
+          <ProtectedRoute path='/openbook/:id'>
+            <OpenBook />
           </ProtectedRoute>
           <ProtectedRoute path='/messages'>
             <Messages />

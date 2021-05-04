@@ -1,11 +1,11 @@
-import React, { useContext } from 'react';
-import { AppContext } from '../context/OverallContext';
+import React from 'react';
+import { useGlobalContext } from '../context/OverallContext';
 import { FaMeh } from 'react-icons/fa';
 import ReturnTo from '../components/ReturnTo';
 import '../styles/Error.css';
 
 const Error = () => {
-  const { closeSubmenu } = useContext(AppContext);
+  const { closeSubmenu } = useGlobalContext();
   return (
     <>
       <main onClick={closeSubmenu}>

@@ -1,14 +1,14 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import GenreFilter from '../components/GenreFilter';
 import Shelf from '../components/Shelf';
 import SearchBar from '../components/SearchBar';
 import Loading from '../components/Loading';
 import EmptyShelf from '../components/EmptyShelf';
-import { AppContext } from '../context/OverallContext';
+import { useGlobalContext } from '../context/OverallContext';
 import { useFetchBookData } from '../hooks/useFetchBookData';
 
 const Marketplace = () => {
-  const { books, loading, closeSubmenu, API_BOOKS } = useContext(AppContext);
+  const { books, loading, closeSubmenu, API_BOOKS } = useGlobalContext();
   const { fetchBooks } = useFetchBookData();
 
   useEffect(() => {

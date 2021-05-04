@@ -1,18 +1,14 @@
 import React from 'react';
+import { useGlobalContext } from '../context/OverallContext';
 import Conversation from './Conversation';
 
-const Conversations = ({ conversations, fetchMessages }) => {
+const Conversations = () => {
+  const { conversations } = useGlobalContext();
   return (
     <>
       <aside className='conversations'>
         {conversations.map((conversation) => {
-          return (
-            <Conversation
-              key={conversation._id}
-              {...conversation}
-              fetchMessages={fetchMessages}
-            />
-          );
+          return <Conversation key={conversation._id} {...conversation} />;
         })}
       </aside>
     </>

@@ -1,9 +1,8 @@
-import React, { useContext } from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import { AppContext } from '../context/OverallContext';
+import { useGlobalContext } from '../context/OverallContext';
 
 const ProtectedRoute = ({ children, location, ...path }) => {
-  const { isUserLoggedIn } = useContext(AppContext);
+  const { isUserLoggedIn } = useGlobalContext();
   if (isUserLoggedIn) {
     return (
       <>

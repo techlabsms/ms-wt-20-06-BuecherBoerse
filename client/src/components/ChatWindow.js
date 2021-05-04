@@ -1,25 +1,28 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import FilterButton from './FilterButton';
 import Form from './Form';
 import TextAreaInput from './TextAreaInput';
 import OpenChat from './OpenChat';
+import { useMessaging } from '../hooks/useMessaging';
+import { useGlobalContext } from '../context/OverallContext';
 
-const ChatWindow = ({
-  chat,
-  newMessage,
-  setNewMessage,
-  isMessageSent,
-  setIsMessageSent,
-  postMessage,
-  fetchMessages,
-}) => {
+const ChatWindow = () => {
+  const {
+    API_MESSAGES,
+    chat,
+    newMessage,
+    setNewMessage,
+    setIsMessageSent,
+  } = useGlobalContext();
+  const { postMessage } = useMessaging();
+
   const handleMessage = (e) => {
     setNewMessage({ ...newMessage, [e.target.name]: e.target.value });
   };
 
   const sendMessage = (e) => {
     e.preventDefault();
-    postMessage(chat._id, newMessage);
+    postMessage(API_MESSAGES, chat._id, newMessage);
     setIsMessageSent(true);
   };
 
@@ -29,17 +32,10 @@ const ChatWindow = ({
     }
   };
 
-  useEffect(() => {
-    fetchMessages(sessionStorage.getItem('convId'));
-    return () => {
-      setIsMessageSent(false);
-    };
-  }, [fetchMessages, isMessageSent, setIsMessageSent]);
-
   return (
     <>
       <aside className='chat-window'>
-        <OpenChat chat={chat} />
+        <OpenChat />
         <Form className='input-message' onSubmit={sendMessage}>
           <TextAreaInput
             cols='100'

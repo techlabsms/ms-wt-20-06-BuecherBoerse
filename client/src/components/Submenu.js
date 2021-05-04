@@ -1,31 +1,12 @@
-import React, { useContext, useRef, useEffect } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { AppContext } from '../context/OverallContext';
+import { useGlobalContext } from '../context/OverallContext';
+import { useSignIn } from '../hooks/useSignIn';
 import '../styles/Submenu.css';
 
 const Submenu = () => {
-  const getLoggedOut = async () => {
-    try {
-      const res = await fetch(AUTH_SIGNOUT);
-      if (res.status >= 200 && res.status <= 299) {
-        const userLoggedOut = await res.json();
-        sessionStorage.clear();
-        console.log('Erfolgreich ausgeloggt!', userLoggedOut);
-      } else {
-        throw new Error('Hoppala, da ist wohl was schief gelaufen...');
-      }
-      setIsUserLoggedIn(false);
-    } catch (error) {
-      console.log('Das hat nicht geklappt', error);
-    }
-  };
-
-  const {
-    setIsUserLoggedIn,
-    isSubmenuOpen,
-    location,
-    AUTH_SIGNOUT,
-  } = useContext(AppContext);
+  const { isSubmenuOpen, location, AUTH_SIGNOUT } = useGlobalContext();
+  const { getLoggedOut } = useSignIn();
   const container = useRef(null);
 
   useEffect(() => {
@@ -36,7 +17,7 @@ const Submenu = () => {
   }, [location]);
 
   const logout = () => {
-    getLoggedOut();
+    getLoggedOut(AUTH_SIGNOUT);
   };
 
   return (

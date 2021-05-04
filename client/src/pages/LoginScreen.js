@@ -1,12 +1,12 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import Login from '../components/Login';
 import '../styles/LoginScreen.css';
 import Tab from '../components/Tab';
 import Signup from '../components/Signup';
-import { AppContext } from '../context/OverallContext';
+import { useGlobalContext } from '../context/OverallContext';
 
 const LoginScreen = () => {
-  const { isTabLeft } = useContext(AppContext);
+  const { isTabLeft } = useGlobalContext();
   return (
     <>
       <main className='hero'>

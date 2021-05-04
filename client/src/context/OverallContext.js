@@ -1,8 +1,8 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useContext, useRef } from 'react';
 
 const AppContext = React.createContext();
 
-const AppProvider = ({ children }) => {
+export const AppProvider = ({ children }) => {
   const API_BOOKS = '/api/books/';
   const API_USERS = '/api/users/';
   const AUTH_SIGNIN = '/auth/signin/';
@@ -21,6 +21,7 @@ const AppProvider = ({ children }) => {
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(userName ? true : false);
   const [allBooks, setAllBooks] = useState([]);
   const [books, setBooks] = useState(allBooks);
+  const [openBook, setOpenBook] = useState({});
   const [newBook, setNewBook] = useState({
     name: '',
     author: '',
@@ -37,13 +38,16 @@ const AppProvider = ({ children }) => {
   const [location, setLocation] = useState({});
   const [isTabLeft, setIsTabLeft] = useState(true);
   const [alert, setAlert] = useState({ display: false, icon: '', msg: '' });
+  const [showMessageModal, setShowMessageModal] = useState(false);
+  const [user, setUser] = useState();
+  const [chat, setChat] = useState([]);
+  const [conversations, setConversations] = useState([]);
   const [isMessageSent, setIsMessageSent] = useState(false);
   const [newMessage, setNewMessage] = useState({
     sender: '',
     reciever: '',
     message: '',
   });
-  const [showMessageModal, setShowMessageModal] = useState(false);
   const scrollToBottom = useRef();
 
   const openSubmenu = (coordinates) => {
@@ -78,6 +82,8 @@ const AppProvider = ({ children }) => {
         setAllBooks,
         books,
         setBooks,
+        openBook,
+        setOpenBook,
         newBook,
         setNewBook,
         bookImage,
@@ -98,12 +104,18 @@ const AppProvider = ({ children }) => {
         userId,
         jwt,
         hideLinks,
+        showMessageModal,
+        setShowMessageModal,
+        user,
+        setUser,
+        conversations,
+        setConversations,
+        chat,
+        setChat,
         newMessage,
         setNewMessage,
         isMessageSent,
         setIsMessageSent,
-        showMessageModal,
-        setShowMessageModal,
         scrollToBottom,
       }}
     >
@@ -112,4 +124,6 @@ const AppProvider = ({ children }) => {
   );
 };
 
-export { AppContext, AppProvider };
+export const useGlobalContext = () => {
+  return useContext(AppContext);
+};

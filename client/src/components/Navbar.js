@@ -1,13 +1,13 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FaBook, FaBookOpen } from 'react-icons/fa';
 import logo from '../static/buecherregal.svg';
 import MenuLink from './MenuLink';
 import LoginBtns from './LoginBtns';
 import { links } from '../utils/linksDB';
-import '../styles/Navbar.css';
-import { AppContext } from '../context/OverallContext';
+import { useGlobalContext } from '../context/OverallContext';
 import UserBar from './UserBar';
+import '../styles/Navbar.css';
 
 const Navbar = () => {
   const [navbar, setNavbar] = useState(false);
@@ -17,7 +17,7 @@ const Navbar = () => {
     hideLinks,
     isUserLoggedIn,
     closeSubmenu,
-  } = useContext(AppContext);
+  } = useGlobalContext();
 
   useEffect(() => {
     const stickyNav = () => {

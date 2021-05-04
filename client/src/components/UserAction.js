@@ -1,33 +1,20 @@
-import React, { useEffect, useCallback, useState, useContext } from 'react';
+import React, { useEffect } from 'react';
 import { FaFlushed } from 'react-icons/fa';
-import { AppContext } from '../context/OverallContext';
+import { useGlobalContext } from '../context/OverallContext';
+import { useFetchBookData } from '../hooks/useFetchBookData';
 import '../styles/UserAction.css';
 import ActionButton from './ActionBtn';
 
-const UserAction = ({ owner, condition, setShowMessageModal }) => {
-  const { userId, setAlert, jwt, API_USERS } = useContext(AppContext);
-  const [user, setUser] = useState();
-
-  const fetchUser = useCallback(async () => {
-    try {
-      if (!owner) {
-        return null;
-      }
-      const res = await fetch(`${API_USERS}${owner}`, {
-        headers: {
-          authorization: `Bearer ${jwt}`,
-        },
-      });
-      if (res.ok) {
-        const userInfo = await res.json();
-        setUser(userInfo.name);
-      } else {
-        throw new Error('could not get user info');
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  }, [owner, jwt, API_USERS]);
+const UserAction = ({ owner, condition }) => {
+  const {
+    userId,
+    setAlert,
+    user,
+    jwt,
+    API_USERS,
+    setShowMessageModal,
+  } = useGlobalContext();
+  const { fetchUser } = useFetchBookData();
 
   const notAvailable = () => {
     setAlert({
@@ -51,8 +38,8 @@ const UserAction = ({ owner, condition, setShowMessageModal }) => {
   };
 
   useEffect(() => {
-    fetchUser();
-  }, [fetchUser]);
+    fetchUser(owner, API_USERS, jwt);
+  }, [fetchUser, owner, API_USERS, jwt]);
 
   return (
     <>

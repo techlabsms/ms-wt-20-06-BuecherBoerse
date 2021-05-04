@@ -1,5 +1,5 @@
-import React, { useContext, useEffect } from 'react';
-import { AppContext } from '../context/OverallContext';
+import React, { useEffect } from 'react';
+import { useGlobalContext } from '../context/OverallContext';
 import Shelf from '../components/Shelf';
 import UserDashboard from '../components/UserDashboard';
 import Loading from '../components/Loading';
@@ -14,8 +14,7 @@ const MyBooks = () => {
     userId,
     jwt,
     API_BOOKSBYUSER,
-  } = useContext(AppContext);
-
+  } = useGlobalContext();
   const { fetchMyBooks } = useFetchBookData();
 
   useEffect(() => {

@@ -1,10 +1,10 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import Message from './Message';
 import Loading from './Loading';
-import { AppContext } from '../context/OverallContext';
+import { useGlobalContext } from '../context/OverallContext';
 
-const OpenChat = ({ chat }) => {
-  const { loading, scrollToBottom } = useContext(AppContext);
+const OpenChat = () => {
+  const { loading, chat, scrollToBottom } = useGlobalContext();
   const { recipients, messages } = chat;
 
   if (loading && chat.length < 1) {

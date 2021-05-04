@@ -1,47 +1,30 @@
-import React, { useEffect, useState, useContext, useCallback } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { AppContext } from '../context/OverallContext';
+import { useGlobalContext } from '../context/OverallContext';
 import Loading from '../components/Loading';
 import '../styles/OpenBook.css';
 import UserAction from '../components/UserAction';
 import Alert from '../components/Alert';
 import ReturnTo from '../components/ReturnTo';
 import MessageModal from '../components/MessageModal';
+import { useFetchBookData } from '../hooks/useFetchBookData';
 
 const OpenBook = () => {
   const {
     alert,
     closeSubmenu,
     loading,
-    setLoading,
     API_BOOKS,
     showMessageModal,
-    setShowMessageModal,
-  } = useContext(AppContext);
-  const [openBook, setOpenBook] = useState({});
+    openBook,
+  } = useGlobalContext();
+  const { fetchSingleBook } = useFetchBookData();
   const [showDesc, setShowDesc] = useState(false);
   const { id } = useParams();
 
-  const fetchSingleBook = useCallback(async () => {
-    setLoading(true);
-    try {
-      const res = await fetch(`${API_BOOKS}${id}`);
-      if (res.ok) {
-        const singleBook = await res.json();
-        setOpenBook(singleBook);
-      } else {
-        throw new Error('etwas hat nicht geklappt');
-      }
-    } catch (err) {
-      console.log(err);
-    } finally {
-      setLoading(false);
-    }
-  }, [API_BOOKS, id, setLoading]);
-
   useEffect(() => {
-    fetchSingleBook();
-  }, [fetchSingleBook]);
+    fetchSingleBook(API_BOOKS, id);
+  }, [API_BOOKS, fetchSingleBook, id]);
 
   const {
     image,
@@ -100,11 +83,7 @@ const OpenBook = () => {
               </p>
             </div>
           </section>
-          <UserAction
-            owner={owner}
-            condition={condition}
-            setShowMessageModal={setShowMessageModal}
-          />
+          <UserAction owner={owner} condition={condition} />
         </article>
         {alert.display && <Alert />}
       </main>
