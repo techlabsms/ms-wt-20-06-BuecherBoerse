@@ -1,30 +1,27 @@
 import Book from '../models/book.model';
-import User from '../models/user.model';
 import extend from 'lodash/extend';
 import errorHandler from './../helpers/dbErrorHandler';
-import { unlink } from 'fs';
 
 //Buch wird erstellt
 const create = async (req, res) => {
     try {
         const book = new Book(req.body);
         try {
-            book.image = `Uploads/${req.file.filename}`;
+            book.image = req.url
         } catch (err) {
             return res.status(400).json({
-                message: 'You need t upload an image',
+                message: 'You need to upload an image',
             });
         }
         await book.save();
         return res.status(200).json({
-            message: 'Buch erfolgreich hochgeladen!',
+            message: 'Book upload successfull!',
             book: book,
-            image: req.file,
-            file: `Uploads/${req.file.filename}`, //Bild wird angezeigt, wenn im Frontend ein Image Tag vorliegt (src=file)
+            image: req.url
         });
     } catch (err) {
         return res.status(400).json({
-            message: errorHandler.getErrorMessage(err),
+            message: err.message
         });
     }
 };
@@ -66,7 +63,7 @@ const bookByID = async (req, res, next, id) => {
         let book = await Book.findById(id);
         if (!book) {
             return res.status('400').json({
-                error: 'Buch nicht gefunden',
+                error: 'Buch not found',
             });
         }
         req.profile = book;
@@ -88,16 +85,8 @@ const update = async (req, res) => {
     try {
         let book = req.profile;
         //Verändern des Bildes und löschen des alten Bildes
-        if (req.file !== undefined) {
-            unlink(book.image, (err) => {
-                if (err) {
-                    return res.status(400).json({
-                        message: 'internal server error',
-                    });
-                }
-            });
-            book.image = `Uploads/${req.file.path}`;
-        }
+        // TBD
+
         //Verändern der restlichen Buchdaten
         book = extend(book, req.body);
         book.updated = Date.now();
@@ -115,13 +104,8 @@ const remove = async (req, res) => {
     try {
         let book = req.profile;
         //löscht Bild des Buches aus der Datenbank
-        unlink(book.image, (err) => {
-            if (err) {
-                return res.status(400).json({
-                    message: 'internal server error',
-                });
-            }
-        });
+        // Loescht Bild vom Server? tbd
+
         //löscht die restlichen Buchdaten
         let deletedBook = await book.remove();
         res.json(deletedBook);

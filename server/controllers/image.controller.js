@@ -1,54 +1,78 @@
-import Book from '../models/book.model';
-import extend from 'lodash/extend';
-import errorHandler from './../helpers/dbErrorHandler';
 import multer from 'multer';
+import ImageKit from "imagekit";
 
-//definiert den Speicherort und den Filenamen
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, './client/public/Uploads/');
-  },
-  filename: function (req, file, cb) {
-    cb(null, Date.now() + '-' + file.originalname);
-  },
+// imagekit.io Auth definition
+// Define in process.env.
+var imagekitUpload = new ImageKit({
+    publicKey: process.env.imagekit_pub_key,
+    privateKey: process.env.imagekit_private_key,
+    urlEndpoint: process.env.imagekit_url_endpoint
 });
 
-//Überprüfung, ob es sich um ein Bild handelt
-const checkFileType = (req, file, cb) => {
-  const filetypes = /jpeg|jpg|png/; // Allowed extention
-  const hasMatchingMimetype = filetypes.test(file.mimetype); // Check mime
+// Save picture temporally in memory
+var storage = multer.memoryStorage()
 
-  if (hasMatchingMimetype == true) {
-    cb(null, true);
-  } else {
-    cb(null, false);
-  }
+// Überprüfung, ob es sich um ein Bild handelt
+const checkFileType = (req, file, cb) => {
+    const filetypes = /jpeg|jpg|png/; // Allowed extention
+    const hasMatchingMimetype = filetypes.test(file.mimetype); // Check mime
+
+    if (hasMatchingMimetype == true) {
+        cb(null, true);
+    } else {
+        cb(null, false);
+    }
 };
 
 //Anwendung verschiedener Upload-Parameter
 const upload = multer({
-  storage: storage,
-  limits: {
-    fileSize: 5000000, //max. Dateigröße 5MB
-  },
-  fileFilter: checkFileType,
+    storage: storage,
+    limits: {
+        fileSize: 4000000, //max. Dateigröße 4MB
+    },
+    fileFilter: checkFileType,
 });
 
-//feldname beim Upload-formular = bookImage
-//der Rest des bodies wird ganz normal durch die book.create funktion verarbeitet
-const singleUpload = upload.single('bookImage');
+// Upload Image to memory
+// feldname beim Upload-formular = bookImage
+const UploadImageToMemory = upload.single('bookImage');
 
-const imageUpload = async (req, res) => {
-  try {
-    upload.single('bookImage');
-  } catch (err) {
-    return res.status('400').json({
-      message: errorHandler.getErrorMessage(err),
+const ShowUploadInfo = function name(req, res, next) {
+    //console.log(req.file);
+    console.log("File upload to memory successfull.");
+    next();
+}
+
+const UploadBookImageToImagekit = function (req, res) {
+    console.log("Uploading to Imagekit");
+    const file_name = Date.now() + '-' + req.file.originalname;
+
+    imagekitUpload.upload({
+        file: req.file.buffer, //required
+        fileName: file_name, //required
+        folder: "b"
+    }).then(response => {
+        console.log(response);
+        res.send(response)
+
+        // fileId: '6082f6b52c03a6495e0a63f7',
+        // name: '1619195575595-mobile-phone_Z92Nxc0Jf.png',
+        // size: 3867,
+        // filePath: '/1619195575595-mobile-phone_Z92Nxc0Jf.png',
+        // url: 'https://ik.imagekit.io/buecherregal/1619195575595-mobile-phone_Z92Nxc0Jf.png',
+        // fileType: 'image',
+        // height: 512,
+        // width: 512,
+        // thumbnailUrl: 'https://ik.imagekit.io/buecherregal/tr:n-media_library_thumbnail/1619195575595-mobile-phone_Z92Nxc0Jf.png'
+
+    }).catch(error => {
+        console.log(error);
+        res.send(error)
     });
-  }
 };
 
 export default {
-  singleUpload,
-  imageUpload,
+    UploadImageToMemory,
+    UploadBookImageToImagekit,
+    ShowUploadInfo
 };
