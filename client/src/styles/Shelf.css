@@ -10,7 +10,7 @@
   .shelf-container {
     grid-template-rows: repeat(2, 1fr);
     grid-template-columns: repeat(4, 1fr);
-    gap: 1rem;
+    gap: 1.5rem;
     padding: 1rem;
   }
 }

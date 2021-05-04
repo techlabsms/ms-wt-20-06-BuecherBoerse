@@ -1,15 +1,15 @@
-import { useContext, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { FaCheckCircle, FaPoop } from 'react-icons/fa';
-import { AppContext } from '../context';
+import { useGlobalContext } from '../context/OverallContext';
 
 export const useSignIn = () => {
-  const [userCredential, setUserCredential] = useState({
-    name: '',
-    email: '',
-    password: '',
-  });
-  const { setIsUserLoggedIn, setAlert, setIsTabLeft } = useContext(AppContext);
+  const {
+    userCredential,
+    setUserCredential,
+    setIsUserLoggedIn,
+    setAlert,
+    setIsTabLeft,
+  } = useGlobalContext();
   const history = useHistory();
   const { state } = useLocation();
 
@@ -52,9 +52,25 @@ export const useSignIn = () => {
       setUserCredential({ name: '', email: '', password: '' });
     }
   };
+
+  const getLoggedOut = async (url) => {
+    try {
+      const res = await fetch(url);
+      if (res.status >= 200 && res.status <= 299) {
+        const userLoggedOut = await res.json();
+        sessionStorage.clear();
+        console.log('Erfolgreich ausgeloggt!', userLoggedOut);
+        setIsUserLoggedIn(false);
+        setUserCredential({ name: '', email: '', password: '' });
+      } else {
+        throw new Error('Hoppala, da ist wohl was schief gelaufen...');
+      }
+    } catch (error) {
+      console.log('Das hat nicht geklappt', error);
+    }
+  };
   return {
     signInUser,
-    userCredential,
-    setUserCredential,
+    getLoggedOut,
   };
 };

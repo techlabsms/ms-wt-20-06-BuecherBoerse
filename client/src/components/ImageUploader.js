@@ -1,8 +1,10 @@
 import React from 'react';
 import { FaFileImage } from 'react-icons/fa';
+import { useGlobalContext } from '../context/OverallContext';
 import '../styles/ImageUploader.css';
 
-const ImageUploader = ({ bookImage, setBookImage }) => {
+const ImageUploader = () => {
+  const { bookImage, setBookImage } = useGlobalContext();
   const imageChange = (e) => {
     setBookImage(e.target.files[0]);
   };

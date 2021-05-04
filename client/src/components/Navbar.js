@@ -1,18 +1,23 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FaBook, FaBookOpen } from 'react-icons/fa';
 import logo from '../static/buecherregal.svg';
 import MenuLink from './MenuLink';
 import LoginBtns from './LoginBtns';
 import { links } from '../utils/linksDB';
-import '../styles/Navbar.css';
-import { AppContext } from '../context';
+import { useGlobalContext } from '../context/OverallContext';
 import UserBar from './UserBar';
+import '../styles/Navbar.css';
 
 const Navbar = () => {
   const [navbar, setNavbar] = useState(false);
-  const [showLinks, setShowLinks] = useState(false);
-  const { isUserLoggedIn, closeSubmenu } = useContext(AppContext);
+  const {
+    showLinks,
+    setShowLinks,
+    hideLinks,
+    isUserLoggedIn,
+    closeSubmenu,
+  } = useGlobalContext();
 
   useEffect(() => {
     const stickyNav = () => {
@@ -45,7 +50,7 @@ const Navbar = () => {
       >
         <header className='nav-content'>
           <div className='nav-header basic-flex'>
-            <Link to='/' className='basic-flex'>
+            <Link to='/' className='basic-flex' onClick={hideLinks}>
               <img src={logo} alt='logo' />
             </Link>
             <button className='nav-toggle' onClick={toggleNavbar}>

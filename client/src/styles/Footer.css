@@ -1,7 +1,7 @@
 .footer {
   display: grid;
   place-items: center;
-  width: 100vw;
+  width: 100%;
   background-color: var(--clr-gry);
 }
 

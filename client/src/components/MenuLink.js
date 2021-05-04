@@ -1,12 +1,16 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import '../styles/MenuLink.css';
+import { useGlobalContext } from '../context/OverallContext';
 
 const MenuLink = ({ id, url, text }) => {
+  const { hideLinks } = useGlobalContext();
   return (
     <>
-      <li key={id} className='links basic-flex'>
-        <Link to={url}>{text}</Link>
+      <li key={id} className='links'>
+        <NavLink to={url} onClick={hideLinks}>
+          {text}
+        </NavLink>
       </li>
     </>
   );

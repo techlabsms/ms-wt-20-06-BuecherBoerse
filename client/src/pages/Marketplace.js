@@ -1,12 +1,20 @@
-import React, { useContext } from 'react';
+import React, { useEffect } from 'react';
 import GenreFilter from '../components/GenreFilter';
 import Shelf from '../components/Shelf';
 import SearchBar from '../components/SearchBar';
 import Loading from '../components/Loading';
-import { AppContext } from '../context';
+import EmptyShelf from '../components/EmptyShelf';
+import { useGlobalContext } from '../context/OverallContext';
+import { useFetchBookData } from '../hooks/useFetchBookData';
 
 const Marketplace = () => {
-  const { books, loading, closeSubmenu } = useContext(AppContext);
+  const { books, loading, closeSubmenu, API_BOOKS } = useGlobalContext();
+  const { fetchBooks } = useFetchBookData();
+
+  useEffect(() => {
+    fetchBooks(API_BOOKS);
+  }, [fetchBooks, API_BOOKS]);
+
   if (loading && books.length < 1) {
     return (
       <>
@@ -21,7 +29,14 @@ const Marketplace = () => {
       <main onClick={closeSubmenu}>
         <SearchBar />
         <GenreFilter />
-        <Shelf books={books}>{books}</Shelf>
+        {books.length < 1 ? (
+          <EmptyShelf>
+            Zurzeit befinden sich keine Bücher im Bücherregal. Lade doch gerne
+            welche hoch!
+          </EmptyShelf>
+        ) : (
+          <Shelf books={books}>{books}</Shelf>
+        )}
       </main>
     </>
   );

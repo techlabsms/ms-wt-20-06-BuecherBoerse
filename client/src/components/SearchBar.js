@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { AppContext } from '../context';
+import React, { useState, useEffect } from 'react';
+import { useGlobalContext } from '../context/OverallContext';
 import '../styles/SearchBar.css';
 
 const SearchBar = () => {
   const [search, setSearch] = useState('');
-  const { allBooks, setBooks } = useContext(AppContext);
+  const { allBooks, setBooks } = useGlobalContext();
   const handleInput = (e) => {
     setSearch(e.target.value);
   };

@@ -1,10 +1,10 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import FilterButton from './FilterButton';
 import '../styles/GenreFilter.css';
-import { AppContext } from '../context';
+import { useGlobalContext } from '../context/OverallContext';
 
 const GenreFilter = () => {
-  const { allBooks, setBooks } = useContext(AppContext);
+  const { allBooks, setBooks } = useGlobalContext();
   const allCategories = [
     'alle',
     ...new Set(allBooks.map((book) => book.category)),

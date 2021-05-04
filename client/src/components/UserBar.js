@@ -1,8 +1,8 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { FaUserCircle } from 'react-icons/fa';
 import '../styles/UserBar.css';
 import Submenu from '../components/Submenu';
-import { AppContext } from '../context';
+import { useGlobalContext } from '../context/OverallContext';
 
 const UserBar = () => {
   const {
@@ -11,7 +11,7 @@ const UserBar = () => {
     isSubmenuOpen,
     closeSubmenu,
     userName,
-  } = useContext(AppContext);
+  } = useGlobalContext();
 
   const showUserSubmenu = (e) => {
     const divSize = e.currentTarget.getBoundingClientRect();
@@ -26,9 +26,9 @@ const UserBar = () => {
         className='user-bar basic-flex helper'
         onClick={isSubmenuOpen ? closeSubmenu : showUserSubmenu}
       >
-        <span className='user-info helper'>
+        <p style={{ marginBottom: '0' }} className='user-info helper'>
           Hallo {isUserLoggedIn && userName}
-        </span>
+        </p>
         <span className='user-icon basic-flex helper'>
           <FaUserCircle className='helper' />
         </span>

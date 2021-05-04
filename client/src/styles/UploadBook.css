@@ -2,10 +2,10 @@
 .book-form {
   background-color: var(--brnd-clr);
   color: var(--bckgrnd-clr);
-  padding: 1.5rem 2rem;
+  padding: 1.25rem 0.75rem;
   border-radius: var(--brdr-rds-2);
   box-shadow: var(--bx-shdw);
-  margin: 1rem auto;
+  margin: 0.5rem;
   width: 90vw;
 }
 
@@ -26,7 +26,7 @@ textarea {
 @media screen and (min-width: 800px) {
   .book-form {
     max-width: var(--mx-wdth);
-    padding: 2rem;
+    padding: 1.5rem;
     margin: 2rem auto;
     display: grid;
     grid-template-columns: 2fr 2fr;

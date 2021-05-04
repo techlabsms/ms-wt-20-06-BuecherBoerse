@@ -1,15 +1,19 @@
-import React, { useContext } from 'react';
-import { AppContext } from '../context';
-import { useSignIn } from './useSignIn';
+import React from 'react';
+import { useGlobalContext } from '../context/OverallContext';
+import { useSignIn } from '../hooks/useSignIn';
 import InputField from './InputField';
 import SigninBtn from './SigninBtn';
 import Alert from './Alert';
 import Form from './Form';
-const CREATE_USER = '/api/users';
 
 const Signup = () => {
-  const { signInUser, userCredential, setUserCredential } = useSignIn();
-  const { alert } = useContext(AppContext);
+  const {
+    API_USERS,
+    alert,
+    userCredential,
+    setUserCredential,
+  } = useGlobalContext();
+  const { signInUser } = useSignIn();
   const { name, email, password } = userCredential;
 
   const checkSignupInput = (e) => {
@@ -21,7 +25,7 @@ const Signup = () => {
 
   const signupNow = (e) => {
     e.preventDefault();
-    signInUser(CREATE_USER);
+    signInUser(API_USERS);
   };
 
   return (

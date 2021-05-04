@@ -1,46 +1,25 @@
-import React, { useContext, useEffect, useCallback } from 'react';
-import { AppContext } from '../context';
+import React, { useEffect } from 'react';
+import { useGlobalContext } from '../context/OverallContext';
 import Shelf from '../components/Shelf';
 import UserDashboard from '../components/UserDashboard';
 import Loading from '../components/Loading';
-
-const API_BOOKSBYUSER = '/api/books/user/';
+import EmptyShelf from '../components/EmptyShelf';
+import { useFetchBookData } from '../hooks/useFetchBookData';
 
 const MyBooks = () => {
   const {
     closeSubmenu,
     books,
-    setBooks,
     loading,
-    setLoading,
     userId,
     jwt,
-  } = useContext(AppContext);
-
-  const fetchMyBooks = useCallback(async () => {
-    setLoading(true);
-    try {
-      const res = await fetch(`${API_BOOKSBYUSER}${userId}`, {
-        headers: {
-          authorization: `Bearer ${jwt}`,
-        },
-      });
-      if (res.ok) {
-        const myBookList = await res.json();
-        setBooks(myBookList);
-      } else {
-        throw new Error(`could not get books of user ${userId}`);
-      }
-    } catch (err) {
-      console.log(err);
-    } finally {
-      setLoading(false);
-    }
-  }, [setLoading, setBooks, userId, jwt]);
+    API_BOOKSBYUSER,
+  } = useGlobalContext();
+  const { fetchMyBooks } = useFetchBookData();
 
   useEffect(() => {
-    fetchMyBooks();
-  }, [fetchMyBooks]);
+    fetchMyBooks(API_BOOKSBYUSER, userId, jwt);
+  }, [fetchMyBooks, API_BOOKSBYUSER, userId, jwt]);
 
   if (loading) {
     return (
@@ -55,7 +34,14 @@ const MyBooks = () => {
     <>
       <main onClick={closeSubmenu}>
         <UserDashboard />
-        <Shelf books={books}>{books}</Shelf>
+        {books.length < 1 ? (
+          <EmptyShelf>
+            Aktuell hast du noch keine Bücher hochgeladen. Lade schnell welche
+            hoch und biete sie zum Verleihen an!
+          </EmptyShelf>
+        ) : (
+          <Shelf books={books}>{books}</Shelf>
+        )}
       </main>
     </>
   );

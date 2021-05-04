@@ -18,6 +18,7 @@
   --nvbr-trns: 0.5s ease-in-out;
   --brdr-rds: 0.25rem;
   --brdr-rds-2: 0.75rem;
+  --brdr-rds-3: 25px;
   --mx-wdth: 1140px;
   --bckgrnd-trnsprnt-1: rgba(248, 248, 248, 0.6);
   --bckgrnd-trnsprnt-2: rgba(248, 248, 248, 0.75);
@@ -92,6 +93,28 @@ button:focus {
   margin-top: 1rem;
 }
 
+main::before {
+  margin-top: 15vh;
+  content: '';
+}
+
+main::after {
+  margin-bottom: 15vh;
+  content: '';
+}
+
+main {
+  display: grid;
+  place-items: center;
+}
+
+.form-control {
+  margin: 0.5rem 0;
+  display: grid;
+  align-items: center;
+  text-align: start;
+}
+
 @media screen and (min-width: 800px) {
   h1 {
     font-size: 3rem;
@@ -114,28 +137,6 @@ button:focus {
   }
 }
 
-main::before {
-  margin-top: 7rem;
-  content: '';
-}
-
-main::after {
-  margin-bottom: 7rem;
-  content: '';
-}
-
-main {
-  display: grid;
-  place-items: center;
-}
-
-.form-control {
-  margin: 0.5rem 0;
-  display: grid;
-  align-items: center;
-  text-align: start;
-}
-
 /* Utilities */
 .italic {
   font-style: italic;
@@ -156,4 +157,8 @@ main {
   color: var(--brnd-clr);
   background: transparent;
   cursor: pointer;
+}
+
+.active {
+  border-bottom: 2px solid var(--brnd-clr);
 }

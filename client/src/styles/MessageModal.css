@@ -1,0 +1,47 @@
+.modal-wrapper {
+  background: rgba(255, 255, 255, 0.46);
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -10;
+  position: fixed;
+  visibility: hidden;
+  overflow: hidden;
+  transform: scale(0);
+  transition: var(--nvbr-trns);
+}
+
+.msg-modal {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  position: relative;
+  text-align: center;
+  background-color: var(--brnd-clr);
+  border-radius: 25px;
+  box-shadow: var(--bx-shdw);
+  animation: slide-up 0.75s;
+}
+
+.modal-wrapper.open {
+  visibility: visible;
+  z-index: 10;
+  transform: scale(1);
+}
+
+.modal-title {
+  color: var(--bckgrnd-clr);
+}
+
+@keyframes slide-up {
+  0% {
+    opacity: 0;
+    bottom: -10vh;
+  }
+
+  100% {
+    opacity: 1;
+    bottom: 0;
+  }
+}

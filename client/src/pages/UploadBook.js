@@ -1,76 +1,30 @@
-import React, { useState, useContext } from 'react';
+import React from 'react';
 import '../styles/UploadBook.css';
 import Alert from '../components/Alert';
 import ImageUploader from '../components/ImageUploader';
 import InputField from '../components/InputField';
-import { FaCheckCircle, FaFlushed, FaPoo } from 'react-icons/fa';
-import { AppContext } from '../context';
+import { FaFlushed } from 'react-icons/fa';
+import { useGlobalContext } from '../context/OverallContext';
 import TextAreaInput from '../components/TextAreaInput';
 import ActionBtn from '../components/ActionBtn';
 import Form from '../components/Form';
-
-const API_BOOKS = '/api/books/';
+import { useBookUpload } from '../hooks/useBookUpload';
 
 const UploadBook = () => {
-  const bookUpload = async (formdata) => {
-    try {
-      const res = await fetch(API_BOOKS, {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${jwt}`,
-        },
-        body: formdata,
-      });
-      if (res.status >= 200 && res.status <= 299) {
-        const userBook = await res.json();
-        console.log(userBook);
-        setAlert({
-          display: true,
-          icon: <FaCheckCircle />,
-          msg: 'Das Buch wurde erfolgreich hinzugefügt',
-        });
-      } else {
-        throw new Error('Hoppala, da ist was schief gegangen');
-      }
-    } catch (error) {
-      console.log('Hochladen fehlgeschlagen', error);
-      setAlert({
-        display: true,
-        icon: <FaPoo />,
-        msg: 'Das hat irgendwie nicht geklappt...',
-      });
-    } finally {
-      setNewBook({
-        name: '',
-        author: '',
-        genre: '',
-        language: '',
-        condition: '',
-        owner: userId,
-        desc: '',
-      });
-      setBookImage();
-    }
-  };
-
-  const [bookImage, setBookImage] = useState();
   const {
     alert,
     setAlert,
     closeSubmenu,
+    newBook,
+    setNewBook,
     setIsBookUploaded,
     jwt,
     userId,
-  } = useContext(AppContext);
-  const [newBook, setNewBook] = useState({
-    name: '',
-    author: '',
-    genre: '',
-    language: '',
-    condition: '',
-    owner: userId,
-    desc: '',
-  });
+    API_BOOKS,
+    bookImage,
+    setBookImage,
+  } = useGlobalContext();
+  const { bookUpload } = useBookUpload();
   const { name, author, genre, language, condition, owner, desc } = newBook;
 
   const textChange = (e) => {
@@ -89,7 +43,7 @@ const UploadBook = () => {
       bookData.append('condition', condition);
       bookData.append('owner', owner);
       bookData.append('description', desc);
-      bookUpload(bookData);
+      bookUpload(API_BOOKS, jwt, bookData);
       setIsBookUploaded(true);
     } else {
       setAlert({
@@ -105,7 +59,7 @@ const UploadBook = () => {
       <main onClick={closeSubmenu}>
         <h2 className='title'>Buch hochladen</h2>
         <Form className='book-form' onSubmit={uploadAll}>
-          <ImageUploader bookImage={bookImage} setBookImage={setBookImage} />
+          <ImageUploader />
           <div className='info-upload'>
             <InputField
               type='text'
@@ -156,14 +110,14 @@ const UploadBook = () => {
               htmlFor='Beschreibung:'
               name='desc'
               id='desc'
+              cols='30'
+              rows='5'
               placeholder='Kurze Beschreibung des Buches'
               value={desc}
               onChange={textChange}
             />
             <div className='action-btn-container'>
-              <ActionBtn type='submit' onSubmit={uploadAll}>
-                Hochladen
-              </ActionBtn>
+              <ActionBtn type='submit'>Hochladen</ActionBtn>
               <ActionBtn
                 type='reset'
                 onClick={() => {

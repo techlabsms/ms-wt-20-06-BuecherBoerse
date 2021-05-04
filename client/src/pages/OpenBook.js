@@ -1,37 +1,30 @@
-import React, { useEffect, useState, useContext, useCallback } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { AppContext } from '../context';
+import { useGlobalContext } from '../context/OverallContext';
 import Loading from '../components/Loading';
 import '../styles/OpenBook.css';
 import UserAction from '../components/UserAction';
-const API_BOOKS = '/api/books/';
+import Alert from '../components/Alert';
+import ReturnTo from '../components/ReturnTo';
+import MessageModal from '../components/MessageModal';
+import { useFetchBookData } from '../hooks/useFetchBookData';
 
 const OpenBook = () => {
-  const { closeSubmenu, loading, setLoading } = useContext(AppContext);
-  const [openBook, setOpenBook] = useState({});
+  const {
+    alert,
+    closeSubmenu,
+    loading,
+    API_BOOKS,
+    showMessageModal,
+    openBook,
+  } = useGlobalContext();
+  const { fetchSingleBook } = useFetchBookData();
   const [showDesc, setShowDesc] = useState(false);
   const { id } = useParams();
 
-  const fetchSingleBook = useCallback(async () => {
-    setLoading(true);
-    try {
-      const res = await fetch(`${API_BOOKS}${id}`);
-      if (res.ok) {
-        const singleBook = await res.json();
-        setOpenBook(singleBook);
-      } else {
-        throw new Error('etwas hat nicht geklappt');
-      }
-    } catch (err) {
-      console.log(err);
-    } finally {
-      setLoading(false);
-    }
-  }, [id, setLoading]);
-
   useEffect(() => {
-    fetchSingleBook();
-  }, [fetchSingleBook]);
+    fetchSingleBook(API_BOOKS, id);
+  }, [API_BOOKS, fetchSingleBook, id]);
 
   const {
     image,
@@ -59,7 +52,9 @@ const OpenBook = () => {
   }
   return (
     <>
+      {showMessageModal && <MessageModal showMessageModal={showMessageModal} />}
       <main onClick={closeSubmenu}>
+        <ReturnTo />
         <article className='open-book'>
           <img src={`../${image}`} alt={name} />
           <section className='open-book-info'>
@@ -90,6 +85,7 @@ const OpenBook = () => {
           </section>
           <UserAction owner={owner} condition={condition} />
         </article>
+        {alert.display && <Alert />}
       </main>
     </>
   );

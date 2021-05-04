@@ -1,37 +1,45 @@
-import React, { useEffect, useCallback, useState, useContext } from 'react';
-import { AppContext } from '../context';
+import React, { useEffect } from 'react';
+import { FaFlushed } from 'react-icons/fa';
+import { useGlobalContext } from '../context/OverallContext';
+import { useFetchBookData } from '../hooks/useFetchBookData';
 import '../styles/UserAction.css';
 import ActionButton from './ActionBtn';
-const API_USER = '/api/users/';
 
-const UserAction = (props) => {
-  const { jwt } = useContext(AppContext);
-  const [user, setUser] = useState();
+const UserAction = ({ owner, condition }) => {
+  const {
+    userId,
+    setAlert,
+    user,
+    jwt,
+    API_USERS,
+    setShowMessageModal,
+  } = useGlobalContext();
+  const { fetchUser } = useFetchBookData();
 
-  const fetchUser = useCallback(async () => {
-    try {
-      if (!props.owner) {
-        return null;
-      }
-      const res = await fetch(`${API_USER}${props.owner}`, {
-        headers: {
-          authorization: `Bearer ${jwt}`,
-        },
+  const notAvailable = () => {
+    setAlert({
+      display: true,
+      icon: <FaFlushed />,
+      msg: 'Diese Funktion ist noch nicht bereit...',
+    });
+  };
+
+  const messageUser = () => {
+    if (owner === userId) {
+      setAlert({
+        display: true,
+        icon: <FaFlushed />,
+        msg: 'Du willst doch nicht etwa dein eigenes Buch leihen, oder?',
       });
-      if (res.ok) {
-        const userInfo = await res.json();
-        setUser(userInfo.name);
-      } else {
-        throw new Error('could not get user info');
-      }
-    } catch (err) {
-      console.log(err);
+    } else {
+      sessionStorage.setItem('receiver', owner);
+      setShowMessageModal(true);
     }
-  }, [props.owner, jwt]);
+  };
 
   useEffect(() => {
-    fetchUser();
-  }, [fetchUser]);
+    fetchUser(owner, API_USERS, jwt);
+  }, [fetchUser, owner, API_USERS, jwt]);
 
   return (
     <>
@@ -43,13 +51,13 @@ const UserAction = (props) => {
         <hr className='separation-line' />
         <section className='action-section'>
           <p>Zustand des Buches ist:</p>
-          <h3>{props.condition}</h3>
+          <h3>{condition}</h3>
         </section>
         <hr className='separation-line' />
         <section className='action-section'>
           <p>Was möchtest du tun?</p>
-          <ActionButton>Jetzt vormerken</ActionButton>
-          <ActionButton>Jetzt ausleihen</ActionButton>
+          <ActionButton onClick={notAvailable}>Jetzt vormerken</ActionButton>
+          <ActionButton onClick={messageUser}>Jetzt ausleihen</ActionButton>
         </section>
       </aside>
     </>

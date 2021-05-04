@@ -7,7 +7,7 @@ const TextAreaInput = (props) => {
         <label htmlFor={props.htmlFor} name={props.name}>
           {props.htmlFor}
         </label>
-        <textarea cols='30' rows='5' {...props} />
+        <textarea {...props} />
       </div>
     </>
   );
