@@ -43,8 +43,7 @@ const ShowUploadInfo = function name(req, res, next) {
     next();
 }
 
-const UploadBookImageToImagekit = function (req, res) {
-    console.log("Uploading to Imagekit");
+const UploadBookImageToImagekit = function (req, res, next) {
     const file_name = Date.now() + '-' + req.file.originalname;
 
     imagekitUpload.upload({
@@ -52,24 +51,28 @@ const UploadBookImageToImagekit = function (req, res) {
         fileName: file_name, //required
         folder: "b"
     }).then(response => {
-        console.log(response);
-        res.send(response)
-
-        // fileId: '6082f6b52c03a6495e0a63f7',
-        // name: '1619195575595-mobile-phone_Z92Nxc0Jf.png',
-        // size: 3867,
-        // filePath: '/1619195575595-mobile-phone_Z92Nxc0Jf.png',
-        // url: 'https://ik.imagekit.io/buecherregal/1619195575595-mobile-phone_Z92Nxc0Jf.png',
-        // fileType: 'image',
-        // height: 512,
-        // width: 512,
-        // thumbnailUrl: 'https://ik.imagekit.io/buecherregal/tr:n-media_library_thumbnail/1619195575595-mobile-phone_Z92Nxc0Jf.png'
-
+        // Add the image url to the response
+        res.locals.BookUrl = response.url;
+        next();
     }).catch(error => {
-        console.log(error);
         res.send(error)
     });
 };
+
+// For later for removing pictures from the db
+const MoveBookToDeleteFolder = (req, res, next) => {
+    const fileName = req.book.image.split("/").pop()[0]
+    const sourceFilePath = "/b/" + fileName;
+    const destinationPath = "/d/" + fileName;
+
+    imagekitUpload.moveFile(sourceFilePath, destinationPath).then(response => {
+        console.log(response);
+        next();
+    }).catch(error => {
+        console.log(error);
+        res.send(error);
+    });
+}
 
 export default {
     UploadImageToMemory,

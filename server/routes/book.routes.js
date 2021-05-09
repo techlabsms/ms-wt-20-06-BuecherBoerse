@@ -9,8 +9,9 @@ router.route('/api/books')
     .get(bookCtrl.list) //Seite mit allen hochgeladenen Büchern
     .post(authCtrl.requireSignin, imgCtrl.UploadImageToMemory, imgCtrl.UploadBookImageToImagekit, bookCtrl.create) // login notwendig
 
-router.route('/api/books/upload')
-    .post(imgCtrl.UploadImageToMemory, imgCtrl.ShowUploadInfo, imgCtrl.UploadBookImageToImagekit)
+// For testing picture upload
+//router.route('/api/books/upload')
+//    .post(imgCtrl.UploadImageToMemory, imgCtrl.ShowUploadInfo, imgCtrl.UploadBookImageToImagekit)
 
 // New Route to getBooks by User
 router.route('/api/books/user/:userId')

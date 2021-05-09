@@ -7,7 +7,7 @@ const create = async (req, res) => {
     try {
         const book = new Book(req.body);
         try {
-            book.image = req.url
+            book.image = res.locals.BookUrl
         } catch (err) {
             return res.status(400).json({
                 message: 'You need to upload an image',
@@ -17,7 +17,7 @@ const create = async (req, res) => {
         return res.status(200).json({
             message: 'Book upload successfull!',
             book: book,
-            image: req.url
+            image: res.locals.BookUrl
         });
     } catch (err) {
         return res.status(400).json({
