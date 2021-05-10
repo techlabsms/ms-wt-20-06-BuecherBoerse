@@ -3,13 +3,34 @@ import React, { useState, useContext, useRef } from 'react';
 const AppContext = React.createContext();
 
 export const AppProvider = ({ children }) => {
-  const API_BOOKS = '/api/books/';
-  const API_USERS = '/api/users/';
-  const AUTH_SIGNIN = '/auth/signin/';
-  const AUTH_SIGNOUT = '/auth/signout';
-  const API_BOOKSBYUSER = '/api/books/user/';
-  const API_MESSAGES = '/api/messages/';
-  const API_MESSAGESUSER = '/api/messages/user/';
+  const API_BOOKS =
+    process.env.NODE_ENV === 'production'
+      ? 'https://secret-cliffs-96797.herokuapp.com/api/books'
+      : 'http://localhost:4000/api/books/';
+  const API_USERS =
+    process.env.NODE_ENV === 'production'
+      ? 'https://secret-cliffs-96797.herokuapp.com/api/users'
+      : 'http://localhost:4000/api/users/';
+  const AUTH_SIGNIN =
+    process.env.NODE_ENV === 'production'
+      ? 'https://secret-cliffs-96797.herokuapp.com/auth/signin'
+      : 'http://localhost:4000/auth/signin/';
+  const AUTH_SIGNOUT =
+    process.env.NODE_ENV === 'production'
+      ? 'https://secret-cliffs-96797.herokuapp.com/auth/signout'
+      : 'http://localhost:4000/auth/signout';
+  const API_BOOKSBYUSER =
+    process.env.NODE_ENV === 'production'
+      ? 'https://secret-cliffs-96797.herokuapp.com/api/books/user/'
+      : 'http://localhost:4000/api/books/user/';
+  const API_MESSAGES =
+    process.env.NODE_ENV === 'production'
+      ? 'https://secret-cliffs-96797.herokuapp.com/api/messages'
+      : 'http://localhost:4000/api/messages/';
+  const API_MESSAGESUSER =
+    process.env.NODE_ENV === 'production'
+      ? 'https://secret-cliffs-96797.herokuapp.com/api/messages/user/'
+      : 'http://localhost:4000/api/messages/user/';
   const userName = sessionStorage.getItem('name');
   const userId = sessionStorage.getItem('id');
   const jwt = sessionStorage.getItem('token');

@@ -2,9 +2,10 @@ import { useGlobalContext } from '../context/OverallContext';
 import { FaCheckCircle, FaPoo } from 'react-icons/fa';
 
 export const useBookUpload = () => {
-  const { setAlert, setNewBook, setBookImage } = useGlobalContext();
+  const { setLoading, setAlert, setNewBook, setBookImage } = useGlobalContext();
 
   const bookUpload = async (api, token, formdata) => {
+    setLoading(true);
     try {
       const res = await fetch(api, {
         method: 'POST',
@@ -31,6 +32,7 @@ export const useBookUpload = () => {
         msg: 'Das hat irgendwie nicht geklappt...',
       });
     } finally {
+      setLoading(false);
       setNewBook({
         name: '',
         author: '',
