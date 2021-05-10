@@ -2,7 +2,7 @@ import { useGlobalContext } from '../context/OverallContext';
 import { FaCheckCircle, FaPoo } from 'react-icons/fa';
 
 export const useBookUpload = () => {
-  const { setAlert, setNewBook, userId, setBookImage } = useGlobalContext();
+  const { setAlert, setNewBook, setBookImage } = useGlobalContext();
 
   const bookUpload = async (api, token, formdata) => {
     try {
@@ -14,8 +14,7 @@ export const useBookUpload = () => {
         body: formdata,
       });
       if (res.ok) {
-        const userBook = await res.json();
-        console.log(userBook);
+        await res.json();
         setAlert({
           display: true,
           icon: <FaCheckCircle />,
@@ -38,7 +37,6 @@ export const useBookUpload = () => {
         genre: '',
         language: '',
         condition: '',
-        owner: userId,
         desc: '',
       });
       setBookImage();

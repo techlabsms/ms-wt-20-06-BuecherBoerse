@@ -14,18 +14,16 @@ const UploadBook = () => {
   const {
     alert,
     setAlert,
-    closeSubmenu,
     newBook,
     setNewBook,
-    setIsBookUploaded,
+    bookImage,
+    setBookImage,
+    closeSubmenu,
     jwt,
     userId,
     API_BOOKS,
-    bookImage,
-    setBookImage,
   } = useGlobalContext();
   const { bookUpload } = useBookUpload();
-  const { name, author, genre, language, condition, owner, desc } = newBook;
 
   const textChange = (e) => {
     setNewBook({ ...newBook, [e.target.name]: e.target.value });
@@ -33,18 +31,23 @@ const UploadBook = () => {
 
   const uploadAll = (e) => {
     e.preventDefault();
-    if (name && author && genre && language && condition && owner && desc) {
-      let bookData = new FormData();
+    if (
+      newBook.name &&
+      newBook.author &&
+      newBook.genre &&
+      newBook.language &&
+      newBook.condition
+    ) {
+      const bookData = new FormData();
       bookData.append('bookImage', bookImage);
-      bookData.append('name', name);
-      bookData.append('author', author);
-      bookData.append('category', genre);
-      bookData.append('language', language);
-      bookData.append('condition', condition);
-      bookData.append('owner', owner);
-      bookData.append('description', desc);
+      bookData.append('name', newBook.name);
+      bookData.append('author', newBook.author);
+      bookData.append('category', newBook.genre);
+      bookData.append('language', newBook.language);
+      bookData.append('condition', newBook.condition);
+      bookData.append('owner', userId);
+      bookData.append('description', newBook.desc);
       bookUpload(API_BOOKS, jwt, bookData);
-      setIsBookUploaded(true);
     } else {
       setAlert({
         display: true,
@@ -59,7 +62,7 @@ const UploadBook = () => {
       <main onClick={closeSubmenu}>
         <h2 className='title'>Buch hochladen</h2>
         <Form className='book-form' onSubmit={uploadAll}>
-          <ImageUploader />
+          <ImageUploader bookImage={bookImage} setBookImage={setBookImage} />
           <div className='info-upload'>
             <InputField
               type='text'
@@ -67,7 +70,7 @@ const UploadBook = () => {
               name='name'
               id='name'
               placeholder='Name des Buches'
-              value={name}
+              value={newBook.name}
               onChange={textChange}
             />
             <InputField
@@ -76,7 +79,7 @@ const UploadBook = () => {
               name='author'
               id='author'
               placeholder='Autor des Buches'
-              value={author}
+              value={newBook.author}
               onChange={textChange}
             />
             <InputField
@@ -85,7 +88,7 @@ const UploadBook = () => {
               name='genre'
               id='genre'
               placeholder='Genre des Buches'
-              value={genre}
+              value={newBook.genre}
               onChange={textChange}
             />
             <InputField
@@ -94,7 +97,7 @@ const UploadBook = () => {
               name='language'
               id='language'
               placeholder='Sprache des Buches'
-              value={language}
+              value={newBook.language}
               onChange={textChange}
             />
             <InputField
@@ -103,7 +106,7 @@ const UploadBook = () => {
               name='condition'
               id='condition'
               placeholder='Zustand des Buches'
-              value={condition}
+              value={newBook.condition}
               onChange={textChange}
             />
             <TextAreaInput
@@ -113,7 +116,7 @@ const UploadBook = () => {
               cols='30'
               rows='5'
               placeholder='Kurze Beschreibung des Buches'
-              value={desc}
+              value={newBook.desc}
               onChange={textChange}
             />
             <div className='action-btn-container'>

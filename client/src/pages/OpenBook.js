@@ -56,7 +56,7 @@ const OpenBook = () => {
       <main onClick={closeSubmenu}>
         <ReturnTo />
         <article className='open-book'>
-          <img src={`../${image}`} alt={name} />
+          <img src={image} alt={name} />
           <section className='open-book-info'>
             <div>
               <h2 className='title'>{name}</h2>
