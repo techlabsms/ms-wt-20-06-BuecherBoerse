@@ -4,12 +4,9 @@ import ImageKit from 'imagekit';
 // imagekit.io Auth definition
 // Define in process.env.
 var imagekitUpload = new ImageKit({
-  publicKey: 'public_BkwliLu898Q6yKxWwjKmWm9xkT8=',
-  // process.env.imagekit_pub_key,
-  privateKey: 'private_nWZuyhiqy+TMwIIe97htbs+bspk=',
-  // process.env.imagekit_private_key,
-  urlEndpoint: 'https://ik.imagekit.io/buecherregal/',
-  //   process.env.imagekit_url_endpoint,
+  publicKey: process.env.imagekit_pub_key,
+  privateKey: process.env.imagekit_private_key,
+  urlEndpoint: process.env.imagekit_url_endpoint,
 });
 
 // Save picture temporally in memory
