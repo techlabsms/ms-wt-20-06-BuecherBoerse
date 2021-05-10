@@ -9,6 +9,7 @@ export const useSignIn = () => {
     setIsUserLoggedIn,
     setAlert,
     setIsTabLeft,
+    setSelectedConversation,
   } = useGlobalContext();
   const history = useHistory();
   const { state } = useLocation();
@@ -58,9 +59,9 @@ export const useSignIn = () => {
       const res = await fetch(url);
       if (res.status >= 200 && res.status <= 299) {
         const userLoggedOut = await res.json();
+        setSelectedConversation(false);
         sessionStorage.clear();
         console.log('Erfolgreich ausgeloggt!', userLoggedOut);
-        setIsUserLoggedIn(false);
         setUserCredential({ name: '', email: '', password: '' });
       } else {
         throw new Error('Hoppala, da ist wohl was schief gelaufen...');
@@ -69,6 +70,7 @@ export const useSignIn = () => {
       console.log('Das hat nicht geklappt', error);
     }
   };
+
   return {
     signInUser,
     getLoggedOut,

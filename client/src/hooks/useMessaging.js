@@ -11,6 +11,7 @@ export const useMessaging = () => {
     conversations,
     setNewMessage,
     scrollToBottom,
+    setIsMessageSent,
   } = useGlobalContext();
 
   const startNewConversation = async (api_messages, message) => {
@@ -90,9 +91,11 @@ export const useMessaging = () => {
         }
       } catch (error) {
         console.log(error);
+      } finally {
+        setIsMessageSent(false);
       }
     },
-    [conversations, setChat, setNewMessage, scrollToBottom]
+    [conversations, setChat, scrollToBottom, setNewMessage, setIsMessageSent]
   );
 
   const postMessage = async (api_messages, conv_id, message) => {

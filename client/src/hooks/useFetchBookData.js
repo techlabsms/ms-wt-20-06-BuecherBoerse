@@ -19,6 +19,7 @@ export const useFetchBookData = () => {
           const res = await fetch(api);
           if (res.ok) {
             let data = await res.json();
+            console.log(data);
             const bookList = data.reverse();
             setAllBooks(bookList);
             setBooks(bookList);

@@ -8,12 +8,20 @@ import { useGlobalContext } from '../context/OverallContext';
 import { useFetchBookData } from '../hooks/useFetchBookData';
 
 const Marketplace = () => {
-  const { books, loading, closeSubmenu, API_BOOKS } = useGlobalContext();
+  const {
+    isUserLoggedIn,
+    books,
+    loading,
+    closeSubmenu,
+    API_BOOKS,
+  } = useGlobalContext();
   const { fetchBooks } = useFetchBookData();
 
   useEffect(() => {
-    fetchBooks(API_BOOKS);
-  }, [fetchBooks, API_BOOKS]);
+    if (isUserLoggedIn) {
+      fetchBooks(API_BOOKS);
+    }
+  }, [fetchBooks, API_BOOKS, isUserLoggedIn]);
 
   if (loading && books.length < 1) {
     return (

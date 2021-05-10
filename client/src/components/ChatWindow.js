@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import FilterButton from './FilterButton';
 import Form from './Form';
 import TextAreaInput from './TextAreaInput';
@@ -9,12 +9,13 @@ import { useGlobalContext } from '../context/OverallContext';
 const ChatWindow = () => {
   const {
     API_MESSAGES,
+    userId,
     chat,
     newMessage,
     setNewMessage,
     setIsMessageSent,
   } = useGlobalContext();
-  const { postMessage } = useMessaging();
+  const { postMessage, fetchMessages } = useMessaging();
 
   const handleMessage = (e) => {
     setNewMessage({ ...newMessage, [e.target.name]: e.target.value });
@@ -31,6 +32,10 @@ const ChatWindow = () => {
       sendMessage(e);
     }
   };
+
+  useEffect(() => {
+    fetchMessages(API_MESSAGES, sessionStorage.getItem('convId'), userId);
+  }, [API_MESSAGES, fetchMessages, userId]);
 
   return (
     <>

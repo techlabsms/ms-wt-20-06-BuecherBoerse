@@ -31,7 +31,7 @@ export const AppProvider = ({ children }) => {
     owner: userId,
     desc: '',
   });
-  const [bookImage, setBookImage] = useState();
+  const [bookImage, setBookImage] = useState({});
   const [loading, setLoading] = useState(false);
   const [isSubmenuOpen, setIsSubmenuOpen] = useState(false);
   const [showLinks, setShowLinks] = useState(false);
@@ -43,6 +43,7 @@ export const AppProvider = ({ children }) => {
   const [chat, setChat] = useState([]);
   const [conversations, setConversations] = useState([]);
   const [isMessageSent, setIsMessageSent] = useState(false);
+  const [selectedConversation, setSelectedConversation] = useState(false);
   const [newMessage, setNewMessage] = useState({
     sender: '',
     reciever: '',
@@ -116,6 +117,8 @@ export const AppProvider = ({ children }) => {
         setNewMessage,
         isMessageSent,
         setIsMessageSent,
+        selectedConversation,
+        setSelectedConversation,
         scrollToBottom,
       }}
     >
