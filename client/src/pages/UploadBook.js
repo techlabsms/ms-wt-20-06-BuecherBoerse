@@ -14,14 +14,14 @@ const UploadBook = () => {
   const {
     alert,
     setAlert,
-    closeSubmenu,
     newBook,
     setNewBook,
+    bookImage,
+    setBookImage,
+    closeSubmenu,
     jwt,
     userId,
     API_BOOKS,
-    bookImage,
-    setBookImage,
   } = useGlobalContext();
   const { bookUpload } = useBookUpload();
 
@@ -36,8 +36,7 @@ const UploadBook = () => {
       newBook.author &&
       newBook.genre &&
       newBook.language &&
-      newBook.condition &&
-      newBook.owner
+      newBook.condition
     ) {
       const bookData = new FormData();
       bookData.append('bookImage', bookImage);
@@ -46,7 +45,7 @@ const UploadBook = () => {
       bookData.append('category', newBook.genre);
       bookData.append('language', newBook.language);
       bookData.append('condition', newBook.condition);
-      bookData.append('owner', newBook.owner);
+      bookData.append('owner', userId);
       bookData.append('description', newBook.desc);
       bookUpload(API_BOOKS, jwt, bookData);
     } else {
@@ -63,7 +62,7 @@ const UploadBook = () => {
       <main onClick={closeSubmenu}>
         <h2 className='title'>Buch hochladen</h2>
         <Form className='book-form' onSubmit={uploadAll}>
-          <ImageUploader />
+          <ImageUploader bookImage={bookImage} setBookImage={setBookImage} />
           <div className='info-upload'>
             <InputField
               type='text'
@@ -109,14 +108,6 @@ const UploadBook = () => {
               placeholder='Zustand des Buches'
               value={newBook.condition}
               onChange={textChange}
-            />
-            <InputField
-              type='text'
-              htmlFor='Besitzer:'
-              name='owner'
-              id='owner'
-              value={userId}
-              disabled
             />
             <TextAreaInput
               htmlFor='Beschreibung:'

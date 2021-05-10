@@ -22,22 +22,21 @@ export const AppProvider = ({ children }) => {
   const [allBooks, setAllBooks] = useState([]);
   const [books, setBooks] = useState(allBooks);
   const [openBook, setOpenBook] = useState({});
-  const [newBook, setNewBook] = useState({
-    name: '',
-    author: '',
-    genre: '',
-    language: '',
-    condition: '',
-    owner: userId,
-    desc: '',
-  });
-  const [bookImage, setBookImage] = useState({});
   const [loading, setLoading] = useState(false);
   const [isSubmenuOpen, setIsSubmenuOpen] = useState(false);
   const [showLinks, setShowLinks] = useState(false);
   const [location, setLocation] = useState({});
   const [isTabLeft, setIsTabLeft] = useState(true);
   const [alert, setAlert] = useState({ display: false, icon: '', msg: '' });
+  const [newBook, setNewBook] = useState({
+    name: '',
+    author: '',
+    genre: '',
+    language: '',
+    condition: '',
+    desc: '',
+  });
+  const [bookImage, setBookImage] = useState();
   const [showMessageModal, setShowMessageModal] = useState(false);
   const [user, setUser] = useState();
   const [chat, setChat] = useState([]);
@@ -85,14 +84,14 @@ export const AppProvider = ({ children }) => {
         setBooks,
         openBook,
         setOpenBook,
-        newBook,
-        setNewBook,
-        bookImage,
-        setBookImage,
         loading,
         setLoading,
         alert,
         setAlert,
+        newBook,
+        setNewBook,
+        bookImage,
+        setBookImage,
         showLinks,
         setShowLinks,
         isSubmenuOpen,

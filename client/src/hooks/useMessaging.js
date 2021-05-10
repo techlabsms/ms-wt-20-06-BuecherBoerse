@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import { useCallback } from 'react';
 import { FaCheckCircle } from 'react-icons/fa';
 import { useGlobalContext } from '../context/OverallContext';
 
