@@ -108,8 +108,7 @@ export const useMessaging = () => {
         body: JSON.stringify(message),
       });
       if (res.ok) {
-        const writtenMessage = await res.json();
-        console.log(writtenMessage);
+        await res.json();
       } else {
         throw new Error('Nachricht konnte nicht verschickt werden');
       }

@@ -25,7 +25,6 @@ export const useSignIn = () => {
       });
       if (res.status >= 200 && res.status <= 299) {
         const userData = await res.json();
-        console.log(userData);
         if (tryLogin) {
           sessionStorage.setItem('id', userData.user._id);
           sessionStorage.setItem('name', userData.user.name);
@@ -58,10 +57,9 @@ export const useSignIn = () => {
     try {
       const res = await fetch(url);
       if (res.status >= 200 && res.status <= 299) {
-        const userLoggedOut = await res.json();
+        await res.json();
         setSelectedConversation(false);
         sessionStorage.clear();
-        console.log('Erfolgreich ausgeloggt!', userLoggedOut);
         setUserCredential({ name: '', email: '', password: '' });
       } else {
         throw new Error('Hoppala, da ist wohl was schief gelaufen...');

@@ -9,6 +9,7 @@ import authRoutes from './routes/auth.routes';
 import bookRoutes from './routes/book.routes';
 import conversationRoutes from './routes/conversation.routes';
 import path from 'path';
+import config from '../config/config';
 
 const CURRENT_WORKING_DIR = process.cwd();
 const app = express();
@@ -22,7 +23,10 @@ app.use(helmet());
 // Cross Origin Resource Sharing
 app.use(cors());
 
-app.use(express.static(path.join(CURRENT_WORKING_DIR, 'client/build')));
+// Serve up static files when deployed
+if (config.env === 'production') {
+  app.use(express.static(path.join(CURRENT_WORKING_DIR, 'client/build')));
+}
 
 // mount routes
 app.use('/', userRoutes);

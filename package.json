@@ -2,7 +2,7 @@
   "name": "buecherboerse_backend_user_login",
   "version": "0.0.1",
   "description": "Backend fuer den User Login",
-  "main": "./dist/server.generated.js",
+  "main": "server.js",
   "scripts": {
     "dev": "nodemon",
     "start": "node --es-module-specifier-resolution=node ./server/server.js",

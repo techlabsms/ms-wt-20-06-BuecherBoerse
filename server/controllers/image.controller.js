@@ -3,11 +3,19 @@ import ImageKit from 'imagekit';
 
 // imagekit.io Auth definition
 // Define in process.env.
-var imagekitUpload = new ImageKit({
-  publicKey: process.env.imagekit_pub_key,
-  privateKey: process.env.imagekit_private_key,
-  urlEndpoint: process.env.imagekit_url_endpoint,
-});
+var imagekitUpload = new ImageKit(
+  process.env.NODE_ENV === 'production'
+    ? {
+        publicKey: process.env.imagekit_pub_key,
+        privateKey: process.env.imagekit_private_key,
+        urlEndpoint: process.env.imagekit_url_endpoint,
+      }
+    : {
+        publicKey: 'public_BkwliLu898Q6yKxWwjKmWm9xkT8=',
+        privateKey: 'private_nWZuyhiqy+TMwIIe97htbs+bspk=',
+        urlEndpoint: 'https://ik.imagekit.io/buecherregal/',
+      }
+);
 
 // Save picture temporally in memory
 var storage = multer.memoryStorage();
