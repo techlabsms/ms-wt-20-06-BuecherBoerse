@@ -10,12 +10,14 @@ export const useSignIn = () => {
     setAlert,
     setIsTabLeft,
     setSelectedConversation,
+    setLoading,
   } = useGlobalContext();
   const history = useHistory();
   const { state } = useLocation();
 
   const signInUser = async (url, tryLogin) => {
     try {
+      setLoading(true);
       const res = await fetch(url, {
         method: 'POST',
         headers: {
@@ -23,8 +25,9 @@ export const useSignIn = () => {
         },
         body: JSON.stringify(userCredential),
       });
-      if (res.status >= 200 && res.status <= 299) {
+      if (res.ok) {
         const userData = await res.json();
+        setLoading(false);
         if (tryLogin) {
           sessionStorage.setItem('id', userData.user._id);
           sessionStorage.setItem('name', userData.user.name);
@@ -44,6 +47,7 @@ export const useSignIn = () => {
       }
     } catch (error) {
       console.log('errrorrrrr', error);
+      setLoading(false);
       setAlert({
         display: true,
         icon: <FaPoop />,

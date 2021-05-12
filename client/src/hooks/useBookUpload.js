@@ -5,8 +5,8 @@ export const useBookUpload = () => {
   const { setLoading, setAlert, setNewBook, setBookImage } = useGlobalContext();
 
   const bookUpload = async (api, token, formdata) => {
-    setLoading(true);
     try {
+      setLoading(true);
       const res = await fetch(api, {
         method: 'POST',
         headers: {
@@ -16,6 +16,7 @@ export const useBookUpload = () => {
       });
       if (res.ok) {
         await res.json();
+        setLoading(false);
         setAlert({
           display: true,
           icon: <FaCheckCircle />,
@@ -26,13 +27,13 @@ export const useBookUpload = () => {
       }
     } catch (error) {
       console.log('Hochladen fehlgeschlagen', error);
+      setLoading(false);
       setAlert({
         display: true,
         icon: <FaPoo />,
         msg: 'Das hat irgendwie nicht geklappt...',
       });
     } finally {
-      setLoading(false);
       setNewBook({
         name: '',
         author: '',

@@ -12,10 +12,12 @@ export const useMessaging = () => {
     setNewMessage,
     scrollToBottom,
     setIsMessageSent,
+    setLoading,
   } = useGlobalContext();
 
   const startNewConversation = async (api_messages, message) => {
     try {
+      setLoading(true);
       const res = await fetch(`${api_messages}`, {
         method: 'POST',
         headers: {
@@ -38,6 +40,7 @@ export const useMessaging = () => {
     } catch (error) {
       console.log(error);
     } finally {
+      setLoading(false);
       setNewMessage({
         sender: '',
         reciever: '',
@@ -49,6 +52,7 @@ export const useMessaging = () => {
   const fetchUserConversations = useCallback(
     async (api_messages_user, user_id) => {
       try {
+        setLoading(true);
         const res = await fetch(`${api_messages_user}${user_id}`);
         if (res.ok) {
           let data = await res.json();
@@ -59,9 +63,11 @@ export const useMessaging = () => {
         }
       } catch (error) {
         console.log(error);
+      } finally {
+        setLoading(false);
       }
     },
-    [setConversations]
+    [setConversations, setLoading]
   );
 
   const fetchMessages = useCallback(
@@ -70,6 +76,7 @@ export const useMessaging = () => {
         return null;
       }
       try {
+        setLoading(true);
         const res = await fetch(`${api_messages}${conv_id}`);
         if (res.ok) {
           const singleConv = await res.json();
@@ -92,14 +99,23 @@ export const useMessaging = () => {
       } catch (error) {
         console.log(error);
       } finally {
+        setLoading(false);
         setIsMessageSent(false);
       }
     },
-    [conversations, setChat, scrollToBottom, setNewMessage, setIsMessageSent]
+    [
+      conversations,
+      setLoading,
+      setChat,
+      scrollToBottom,
+      setNewMessage,
+      setIsMessageSent,
+    ]
   );
 
   const postMessage = async (api_messages, conv_id, message) => {
     try {
+      setLoading(true);
       const res = await fetch(`${api_messages}${conv_id}`, {
         method: 'POST',
         headers: {
@@ -115,6 +131,7 @@ export const useMessaging = () => {
     } catch (error) {
       console.log(error);
     } finally {
+      setLoading(false);
       setNewMessage({
         sender: '',
         reciever: '',

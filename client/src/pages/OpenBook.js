@@ -7,6 +7,7 @@ import UserAction from '../components/UserAction';
 import Alert from '../components/Alert';
 import ReturnTo from '../components/ReturnTo';
 import MessageModal from '../components/MessageModal';
+import Loading2 from '../components/Loading2';
 import { useFetchBookData } from '../hooks/useFetchBookData';
 
 const OpenBook = () => {
@@ -53,6 +54,7 @@ const OpenBook = () => {
   return (
     <>
       {showMessageModal && <MessageModal showMessageModal={showMessageModal} />}
+      {loading && <Loading2 />}
       <main onClick={closeSubmenu}>
         <ReturnTo />
         <article className='open-book'>

@@ -9,6 +9,7 @@ import TextAreaInput from '../components/TextAreaInput';
 import ActionBtn from '../components/ActionBtn';
 import Form from '../components/Form';
 import { useBookUpload } from '../hooks/useBookUpload';
+import Loading2 from '../components/Loading2';
 
 const UploadBook = () => {
   const {
@@ -16,6 +17,7 @@ const UploadBook = () => {
     setAlert,
     newBook,
     setNewBook,
+    loading,
     bookImage,
     setBookImage,
     closeSubmenu,
@@ -59,6 +61,7 @@ const UploadBook = () => {
 
   return (
     <>
+      {loading && <Loading2 />}
       <main onClick={closeSubmenu}>
         <h2 className='title'>Buch hochladen</h2>
         <Form className='book-form' onSubmit={uploadAll}>
