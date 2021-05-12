@@ -13,6 +13,8 @@ import config from '../config/config';
 const CURRENT_WORKING_DIR = process.cwd();
 const app = express();
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(compress());
 // Secure apps
