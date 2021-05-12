@@ -33,7 +33,7 @@ app.use('/', authRoutes);
 app.use('/', bookRoutes);
 app.use('/', conversationRoutes);
 
-app.get('*', (req, res) => {
+app.get('/', (req, res) => {
   res.sendFile(path.join(CURRENT_WORKING_DIR, 'client/build/index.html'));
 });
 
