@@ -19,6 +19,7 @@ export const useSignIn = () => {
     try {
       setLoading(true);
       const res = await fetch(url, {
+        credentials: 'include',
         method: 'POST',
         headers: {
           'content-type': 'application/json',

@@ -26,8 +26,7 @@ export const useMessaging = () => {
         body: JSON.stringify(message),
       });
       if (res.ok) {
-        const writtenMessage = await res.json();
-        console.log(writtenMessage);
+        await res.json();
         setAlert({
           display: true,
           icon: <FaCheckCircle />,

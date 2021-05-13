@@ -41,7 +41,8 @@ export const useFetchBookData = () => {
       try {
         const res = await fetch(`${api}${id}`, {
           headers: {
-            authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
+            'content-type': 'application/json',
           },
         });
         if (res.ok) {
@@ -86,8 +87,10 @@ export const useFetchBookData = () => {
           return null;
         }
         const res = await fetch(`${api}${owner}`, {
+          credentials: 'include',
           headers: {
-            authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
+            'content-type': 'application/json',
           },
         });
         if (res.ok) {

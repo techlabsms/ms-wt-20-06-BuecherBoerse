@@ -6,14 +6,8 @@ import '../styles/UserAction.css';
 import ActionButton from './ActionBtn';
 
 const UserAction = ({ owner, condition }) => {
-  const {
-    userId,
-    setAlert,
-    user,
-    jwt,
-    API_USERS,
-    setShowMessageModal,
-  } = useGlobalContext();
+  const { userId, setAlert, user, jwt, API_USERS, setShowMessageModal } =
+    useGlobalContext();
   const { fetchUser } = useFetchBookData();
 
   const notAvailable = () => {

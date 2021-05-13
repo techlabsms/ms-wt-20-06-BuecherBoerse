@@ -7,14 +7,8 @@ import EmptyShelf from '../components/EmptyShelf';
 import { useFetchBookData } from '../hooks/useFetchBookData';
 
 const MyBooks = () => {
-  const {
-    closeSubmenu,
-    books,
-    loading,
-    userId,
-    jwt,
-    API_BOOKSBYUSER,
-  } = useGlobalContext();
+  const { closeSubmenu, books, loading, userId, jwt, API_BOOKSBYUSER } =
+    useGlobalContext();
   const { fetchMyBooks } = useFetchBookData();
 
   useEffect(() => {

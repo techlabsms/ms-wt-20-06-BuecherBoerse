@@ -8,6 +8,7 @@ export const useBookUpload = () => {
     try {
       setLoading(true);
       const res = await fetch(api, {
+        credentials: 'include',
         method: 'POST',
         headers: {
           Authorization: `Bearer ${token}`,
