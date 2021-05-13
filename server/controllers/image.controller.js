@@ -25,7 +25,7 @@ const checkFileType = (req, file, cb) => {
   const filetypes = /jpeg|jpg|png/; // Allowed extention
   const hasMatchingMimetype = filetypes.test(file.mimetype); // Check mime
 
-  if (hasMatchingMimetype == true) {
+  if (hasMatchingMimetype) {
     cb(null, true);
   } else {
     cb(null, false);
@@ -46,7 +46,7 @@ const upload = multer({
 const UploadImageToMemory = upload.single('bookImage');
 
 const ShowUploadInfo = function name(req, res, next) {
-  //console.log(req.file);
+  //console.log(req.file)
   console.log('File upload to memory successfull.');
   next();
 };

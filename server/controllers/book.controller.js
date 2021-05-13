@@ -15,7 +15,7 @@ const create = async (req, res) => {
     }
     await book.save();
     return res.status(200).json({
-      message: 'Book upload successfull!',
+      message: 'Book upload successful!',
       book: book,
       image: res.locals.BookUrl,
     });

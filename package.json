@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon",
     "start": "node --es-module-specifier-resolution=node ./server/server.js",
-    "heroku-postbuild": "cd client && npm install && npm run build"
+    "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
   },
   "type": "module",
   "repository": {
@@ -27,6 +27,7 @@
     "nodemon": "2.0.2"
   },
   "dependencies": {
+    "body-parser": "^1.19.0",
     "compression": "1.7.4",
     "cookie-parser": "1.4.5",
     "cors": "2.8.5",
