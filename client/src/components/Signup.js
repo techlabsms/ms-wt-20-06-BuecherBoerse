@@ -3,16 +3,10 @@ import { useGlobalContext } from '../context/OverallContext';
 import { useSignIn } from '../hooks/useSignIn';
 import InputField from './InputField';
 import SigninBtn from './SigninBtn';
-import Alert from './Alert';
 import Form from './Form';
 
 const Signup = () => {
-  const {
-    API_USERS,
-    alert,
-    userCredential,
-    setUserCredential,
-  } = useGlobalContext();
+  const { API_USERS, userCredential, setUserCredential } = useGlobalContext();
   const { signInUser } = useSignIn();
   const { name, email, password } = userCredential;
 
@@ -65,7 +59,6 @@ const Signup = () => {
           <SigninBtn type='submit'>Registrieren</SigninBtn>
         </section>
       </Form>
-      {alert.display && <Alert />}
     </>
   );
 };

@@ -1,19 +1,13 @@
 import React from 'react';
 import { useGlobalContext } from '../context/OverallContext';
 import { useSignIn } from '../hooks/useSignIn';
-import Alert from './Alert';
 import InputField from './InputField';
 import SigninBtn from './SigninBtn';
 import Form from './Form';
 
 const Login = () => {
-  const {
-    AUTH_SIGNIN,
-    alert,
-    isTabLeft,
-    userCredential,
-    setUserCredential,
-  } = useGlobalContext();
+  const { AUTH_SIGNIN, isTabLeft, userCredential, setUserCredential } =
+    useGlobalContext();
   const { signInUser } = useSignIn();
   const { name, email, password } = userCredential;
 
@@ -66,7 +60,6 @@ const Login = () => {
           <SigninBtn type='submit'>Einloggen</SigninBtn>
         </section>
       </Form>
-      {alert.display && <Alert />}
     </>
   );
 };

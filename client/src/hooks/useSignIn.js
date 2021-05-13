@@ -19,7 +19,6 @@ export const useSignIn = () => {
     try {
       setLoading(true);
       const res = await fetch(url, {
-        credentials: 'include',
         method: 'POST',
         headers: {
           'content-type': 'application/json',
@@ -61,7 +60,7 @@ export const useSignIn = () => {
   const getLoggedOut = async (url) => {
     try {
       const res = await fetch(url);
-      if (res.status >= 200 && res.status <= 299) {
+      if (res.ok) {
         await res.json();
         setSelectedConversation(false);
         sessionStorage.clear();

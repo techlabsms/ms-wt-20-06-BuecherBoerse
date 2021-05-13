@@ -5,9 +5,10 @@ import Tab from '../components/Tab';
 import Signup from '../components/Signup';
 import { useGlobalContext } from '../context/OverallContext';
 import Loading2 from '../components/Loading2';
+import Alert from '../components/Alert';
 
 const LoginScreen = () => {
-  const { isTabLeft, loading } = useGlobalContext();
+  const { alert, isTabLeft, loading } = useGlobalContext();
 
   return (
     <>
@@ -18,6 +19,7 @@ const LoginScreen = () => {
           {isTabLeft ? <Login /> : <Signup />}
         </section>
       </main>
+      {alert.display && <Alert />}
     </>
   );
 };
