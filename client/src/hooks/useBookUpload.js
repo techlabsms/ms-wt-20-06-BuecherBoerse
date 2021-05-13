@@ -9,6 +9,7 @@ export const useBookUpload = () => {
       setLoading(true);
       const res = await fetch(api, {
         method: 'POST',
+        mode: 'cors',
         headers: {
           Authorization: `Bearer ${token}`,
         },
