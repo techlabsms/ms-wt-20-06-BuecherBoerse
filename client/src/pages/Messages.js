@@ -5,9 +5,10 @@ import { useGlobalContext } from '../context/OverallContext';
 import '../styles/Messages.css';
 import Loading2 from '../components/Loading2';
 import { motion } from 'framer-motion';
+import EmptyShelf from '../components/EmptyShelf';
 
 const Messages = () => {
-  const { closeSubmenu, loading } = useGlobalContext();
+  const { closeSubmenu, loading, conversations } = useGlobalContext();
 
   return (
     <>
@@ -19,10 +20,18 @@ const Messages = () => {
         transition={{ duration: 0.5 }}
         onClick={closeSubmenu}
       >
-        <section className='message-container'>
-          <Conversations />
-          <ChatWindow />
-        </section>
+        {conversations ? (
+          <section className='message-container'>
+            <Conversations />
+            <ChatWindow />
+          </section>
+        ) : (
+          <EmptyShelf>
+            Zurzeit befinden sich keine Nachrichten hier. Stöbere im Bücherregal
+            und schreibe einen User an, um die Nachrichtenfunktion zu
+            aktivieren.
+          </EmptyShelf>
+        )}
       </motion.main>
     </>
   );

@@ -7,6 +7,7 @@ const Conversations = () => {
   const {
     API_MESSAGESUSER,
     userId,
+    conversations,
     isMessageSent,
     setIsMessageSent,
   } = useGlobalContext();
@@ -22,7 +23,6 @@ const Conversations = () => {
     userId,
   ]);
 
-  const { conversations } = useGlobalContext();
   return (
     <>
       <aside className='conversations'>
