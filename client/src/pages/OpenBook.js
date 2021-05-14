@@ -9,6 +9,7 @@ import ReturnTo from '../components/ReturnTo';
 import MessageModal from '../components/MessageModal';
 import Loading2 from '../components/Loading2';
 import { useFetchBookData } from '../hooks/useFetchBookData';
+import { motion } from 'framer-motion';
 
 const OpenBook = () => {
   const {
@@ -55,7 +56,13 @@ const OpenBook = () => {
     <>
       {showMessageModal && <MessageModal showMessageModal={showMessageModal} />}
       {loading && <Loading2 />}
-      <main onClick={closeSubmenu}>
+      <motion.main
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.5 }}
+        onClick={closeSubmenu}
+      >
         <ReturnTo />
         <article className='open-book'>
           <img src={image} alt={name} />
@@ -88,7 +95,7 @@ const OpenBook = () => {
           <UserAction owner={owner} condition={condition} />
         </article>
         {alert.display && <Alert />}
-      </main>
+      </motion.main>
     </>
   );
 };

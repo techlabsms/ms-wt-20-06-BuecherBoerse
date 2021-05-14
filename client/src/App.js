@@ -5,6 +5,7 @@ import {
   Route,
   Switch,
 } from 'react-router-dom';
+import { AnimatePresence } from 'framer-motion';
 import { useGlobalContext } from './context/OverallContext';
 import Navbar from './components/Navbar';
 import ProtectedRoute from './components/ProtectedRoute';
@@ -27,38 +28,40 @@ const App = () => {
       <Router>
         {isUserLoggedIn && <Navbar />}
         <ScrollToTop />
-        <Switch>
-          <Route path='/login'>
-            {!isUserLoggedIn ? <LoginScreen /> : <Redirect to='/' />}
-          </Route>
-          <ProtectedRoute exact path='/'>
-            <Marketplace />
-          </ProtectedRoute>
-          <ProtectedRoute path='/uploadbook'>
-            <UploadBook />
-          </ProtectedRoute>
-          <ProtectedRoute path='/mybooks'>
-            <MyBooks />
-          </ProtectedRoute>
-          <ProtectedRoute path='/openbook/:id'>
-            <OpenBook />
-          </ProtectedRoute>
-          <ProtectedRoute path='/messages'>
-            <Messages />
-          </ProtectedRoute>
-          <ProtectedRoute path='/about'>
-            <Error />
-          </ProtectedRoute>
-          <ProtectedRoute path='/imprint'>
-            <Imprint />
-          </ProtectedRoute>
-          <ProtectedRoute path='/dataprivacy'>
-            <DataPrivacy />
-          </ProtectedRoute>
-          <Route path='*'>
-            <Error />
-          </Route>
-        </Switch>
+        <AnimatePresence exitBeforeEnter initial={false}>
+          <Switch>
+            <Route path='/login'>
+              {!isUserLoggedIn ? <LoginScreen /> : <Redirect to='/' />}
+            </Route>
+            <ProtectedRoute exact path='/'>
+              <Marketplace />
+            </ProtectedRoute>
+            <ProtectedRoute path='/uploadbook'>
+              <UploadBook />
+            </ProtectedRoute>
+            <ProtectedRoute path='/mybooks'>
+              <MyBooks />
+            </ProtectedRoute>
+            <ProtectedRoute path='/openbook/:id'>
+              <OpenBook />
+            </ProtectedRoute>
+            <ProtectedRoute path='/messages'>
+              <Messages />
+            </ProtectedRoute>
+            <ProtectedRoute path='/about'>
+              <Error />
+            </ProtectedRoute>
+            <ProtectedRoute path='/imprint'>
+              <Imprint />
+            </ProtectedRoute>
+            <ProtectedRoute path='/dataprivacy'>
+              <DataPrivacy />
+            </ProtectedRoute>
+            <Route path='*'>
+              <Error />
+            </Route>
+          </Switch>
+        </AnimatePresence>
         {isUserLoggedIn && <Footer />}
       </Router>
     </>

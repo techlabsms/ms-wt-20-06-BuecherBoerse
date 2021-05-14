@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import FilterButton from './FilterButton';
 import Form from './Form';
-import TextAreaInput from './TextAreaInput';
 import OpenChat from './OpenChat';
 import { useMessaging } from '../hooks/useMessaging';
 import { useGlobalContext } from '../context/OverallContext';
@@ -42,9 +41,8 @@ const ChatWindow = () => {
       <aside className='chat-window'>
         <OpenChat />
         <Form className='input-message' onSubmit={sendMessage}>
-          <TextAreaInput
-            cols='100'
-            rows='3'
+          <textarea
+            className='enter-message'
             name='message'
             value={newMessage.message}
             onChange={handleMessage}

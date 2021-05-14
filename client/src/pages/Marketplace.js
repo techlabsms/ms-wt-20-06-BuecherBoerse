@@ -6,15 +6,11 @@ import Loading from '../components/Loading';
 import EmptyShelf from '../components/EmptyShelf';
 import { useGlobalContext } from '../context/OverallContext';
 import { useFetchBookData } from '../hooks/useFetchBookData';
+import { motion } from 'framer-motion';
 
 const Marketplace = () => {
-  const {
-    isUserLoggedIn,
-    books,
-    loading,
-    closeSubmenu,
-    API_BOOKS,
-  } = useGlobalContext();
+  const { isUserLoggedIn, books, loading, closeSubmenu, API_BOOKS } =
+    useGlobalContext();
   const { fetchBooks } = useFetchBookData();
 
   useEffect(() => {
@@ -34,7 +30,13 @@ const Marketplace = () => {
   }
   return (
     <>
-      <main onClick={closeSubmenu}>
+      <motion.main
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.5 }}
+        onClick={closeSubmenu}
+      >
         <SearchBar />
         <GenreFilter />
         {books.length < 1 ? (
@@ -45,7 +47,7 @@ const Marketplace = () => {
         ) : (
           <Shelf books={books}>{books}</Shelf>
         )}
-      </main>
+      </motion.main>
     </>
   );
 };

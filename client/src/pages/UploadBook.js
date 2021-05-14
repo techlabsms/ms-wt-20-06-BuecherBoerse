@@ -10,6 +10,7 @@ import ActionBtn from '../components/ActionBtn';
 import Form from '../components/Form';
 import { useBookUpload } from '../hooks/useBookUpload';
 import Loading2 from '../components/Loading2';
+import { motion } from 'framer-motion';
 
 const UploadBook = () => {
   const {
@@ -62,7 +63,13 @@ const UploadBook = () => {
   return (
     <>
       {loading && <Loading2 />}
-      <main onClick={closeSubmenu}>
+      <motion.main
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.5 }}
+        onClick={closeSubmenu}
+      >
         <h2 className='title'>Buch hochladen</h2>
         <Form className='book-form' onSubmit={uploadAll}>
           <ImageUploader bookImage={bookImage} setBookImage={setBookImage} />
@@ -116,7 +123,6 @@ const UploadBook = () => {
               htmlFor='Beschreibung:'
               name='desc'
               id='desc'
-              cols='30'
               rows='5'
               placeholder='Kurze Beschreibung des Buches'
               value={newBook.desc}
@@ -145,7 +151,7 @@ const UploadBook = () => {
           </div>
         </Form>
         {alert.display && <Alert />}
-      </main>
+      </motion.main>
     </>
   );
 };
