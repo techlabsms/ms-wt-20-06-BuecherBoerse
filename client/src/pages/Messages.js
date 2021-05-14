@@ -1,14 +1,35 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Conversations from '../components/Conversations';
 import ChatWindow from '../components/ChatWindow';
 import { useGlobalContext } from '../context/OverallContext';
+import { useMessaging } from '../hooks/useMessaging';
 import '../styles/Messages.css';
 import Loading2 from '../components/Loading2';
 import { motion } from 'framer-motion';
 import EmptyShelf from '../components/EmptyShelf';
 
 const Messages = () => {
-  const { closeSubmenu, loading, conversations } = useGlobalContext();
+  const {
+    closeSubmenu,
+    API_MESSAGESUSER,
+    loading,
+    userId,
+    conversations,
+    isMessageSent,
+    setIsMessageSent,
+  } = useGlobalContext();
+
+  const { fetchUserConversations } = useMessaging();
+
+  useEffect(() => {
+    fetchUserConversations(API_MESSAGESUSER, userId);
+  }, [
+    API_MESSAGESUSER,
+    fetchUserConversations,
+    isMessageSent,
+    setIsMessageSent,
+    userId,
+  ]);
 
   return (
     <>
@@ -20,17 +41,16 @@ const Messages = () => {
         transition={{ duration: 0.5 }}
         onClick={closeSubmenu}
       >
-        {conversations ? (
+        {conversations.length < 1 ? (
+          <EmptyShelf>
+            Aktuell hast du noch keine Nachrichten verfasst. Schreibe einem
+            User, indem du ein Buch auswählst und auf "Jetzt ausleihen" klickst.
+          </EmptyShelf>
+        ) : (
           <section className='message-container'>
             <Conversations />
             <ChatWindow />
           </section>
-        ) : (
-          <EmptyShelf>
-            Zurzeit befinden sich keine Nachrichten hier. Stöbere im Bücherregal
-            und schreibe einen User an, um die Nachrichtenfunktion zu
-            aktivieren.
-          </EmptyShelf>
         )}
       </motion.main>
     </>

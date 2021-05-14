@@ -2,6 +2,7 @@
   max-width: var(--mx-wdth);
   -moz-max-wdth: var(--mx-wdth);
   display: grid;
+  width: 100vw;
   grid-template-columns: 1fr 2fr;
   -moz-grid-template-columns: 1fr 2fr;
   height: calc(100vh - 15vh);
@@ -13,6 +14,7 @@
   display: flex;
   flex-direction: column;
   overflow: auto;
+  width: 100%;
 }
 
 .conversation {
@@ -54,6 +56,7 @@
 .chat-window {
   display: flex;
   flex-direction: column;
+  width: 100%;
   justify-content: flex-end;
   overflow: hidden;
   border-left: 1px solid var(--clr-gry);
