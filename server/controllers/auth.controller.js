@@ -26,6 +26,11 @@ const signin = async (req, res) => {
       },
       config.jwtSecret
     );
+
+    res.cookie('t', token, {
+      expire: Date.now() + 9999,
+    });
+
     return res.json({
       token,
       user: {
@@ -42,6 +47,7 @@ const signin = async (req, res) => {
 };
 
 const signout = (req, res) => {
+  res.clearCookie('t');
   return res.status('200').json({
     message: 'signed out',
   });
