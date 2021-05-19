@@ -9,7 +9,17 @@
   visibility: hidden;
   overflow: hidden;
   transform: scale(0);
-  transition: var(--nvbr-trns);
+  transition: $nvbr-trns;
+
+  &.open {
+    visibility: visible;
+    z-index: 10;
+    transform: scale(1);
+  }
+
+  .modal-title {
+    color: $bckgrnd-clr;
+  }
 }
 
 .msg-modal {
@@ -19,35 +29,13 @@
   position: relative;
   text-align: center;
   width: 100vw;
-  background-color: var(--brnd-clr);
+  background-color: $brnd-clr;
   border-radius: 25px;
-  box-shadow: var(--bx-shdw);
+  box-shadow: $bx-shdw;
   animation: slide-up 0.75s;
 }
 
-.modal-wrapper.open {
-  visibility: visible;
-  z-index: 10;
-  transform: scale(1);
-}
-
-.modal-title {
-  color: var(--bckgrnd-clr);
-}
-
-@keyframes slide-up {
-  0% {
-    opacity: 0;
-    bottom: -10vh;
-  }
-
-  100% {
-    opacity: 1;
-    bottom: 0;
-  }
-}
-
-@media screen and (min-width: 800px) {
+@media (min-width: 800px) {
   .msg-modal {
     padding: 2rem;
     width: 60vw;

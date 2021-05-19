@@ -1,6 +1,3 @@
-import React from 'react';
-import '../styles/EmptyShelf.css';
-
 const EmptyShelf = ({ children }) => {
   return (
     <>

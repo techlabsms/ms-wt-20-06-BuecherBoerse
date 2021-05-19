@@ -1,9 +1,9 @@
 .dashboard {
-  max-width: var(--mx-wdth);
+  max-width: $mx-wdth;
   padding: 1rem;
 }
 
-@media screen and (min-width: 800px) {
+@media (min-width: 800px) {
   .dashboard {
     text-align: left;
   }

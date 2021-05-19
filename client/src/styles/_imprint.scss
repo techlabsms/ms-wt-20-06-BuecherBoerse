@@ -1,5 +1,5 @@
 .imprint {
-  max-width: var(--mx-wdth);
+  max-width: $mx-wdth;
   text-align: left;
   padding: 0 0.5rem;
 }
@@ -8,11 +8,11 @@
   color: rgb(38, 115, 191);
   text-decoration: underline;
   text-transform: none;
-}
 
-.extlink:hover {
-  color: var(--brnd-clr);
-  text-transform: none;
+  &:hover {
+    color: $brnd-clr;
+    text-transform: none;
+  }
 }
 
 .subtitle {

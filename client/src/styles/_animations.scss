@@ -1,26 +1,46 @@
-.user-bar {
-  z-index: 2;
-  border: none;
-  background-color: var(--bckgrnd-clr);
-  transition: var(--trnstn);
-  margin-left: 0.5rem;
-  color: var(--brnd-clr);
-  transform: perspective(1px) translateZ(0);
+@keyframes navBar-slideIn {
+  0% {
+    top: -80px;
+  }
+
+  100% {
+    top: 0px;
+  }
 }
 
-.user-bar:hover {
-  animation: buzz-up 3s 75ms;
+@keyframes spinner {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
-.user-icon {
-  align-self: center;
-  font-size: 2rem;
-  padding: 0.5rem;
+@keyframes alert-popup {
+  0% {
+    opacity: 0;
+  }
+
+  25% {
+    opacity: 1;
+  }
+
+  75% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
 }
 
-@media screen and (min-width: 800px) {
-  .user-bar {
-    margin-left: 2rem;
+@keyframes slide-up {
+  0% {
+    opacity: 0;
+    bottom: -10vh;
+  }
+
+  100% {
+    opacity: 1;
+    bottom: 0;
   }
 }
 

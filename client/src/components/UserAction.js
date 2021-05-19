@@ -1,8 +1,7 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { FaFlushed } from 'react-icons/fa';
 import { useGlobalContext } from '../context/OverallContext';
 import { useFetchBookData } from '../hooks/useFetchBookData';
-import '../styles/UserAction.css';
 import ActionButton from './ActionBtn';
 
 const UserAction = ({ owner, condition }) => {

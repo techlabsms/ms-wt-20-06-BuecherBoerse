@@ -1,6 +1,4 @@
-import React from 'react';
 import { useGlobalContext } from '../context/OverallContext';
-import '../styles/Imprint.css';
 import { motion } from 'framer-motion';
 
 const Imprint = () => {

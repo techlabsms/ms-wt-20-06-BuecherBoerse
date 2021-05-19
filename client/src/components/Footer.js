@@ -1,8 +1,6 @@
-import React from 'react';
 import { footer } from '../utils/linksDB';
 import MenuLink from './MenuLink';
 import { FaHeart } from 'react-icons/fa';
-import '../styles/Footer.css';
 
 const Footer = () => {
   return (

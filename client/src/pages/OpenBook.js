@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useGlobalContext } from '../context/OverallContext';
 import Loading from '../components/Loading';
-import '../styles/OpenBook.css';
 import UserAction from '../components/UserAction';
 import Alert from '../components/Alert';
 import ReturnTo from '../components/ReturnTo';
