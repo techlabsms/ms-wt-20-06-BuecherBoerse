@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import GenreFilter from '../components/GenreFilter';
 import Shelf from '../components/Shelf';
 import SearchBar from '../components/SearchBar';

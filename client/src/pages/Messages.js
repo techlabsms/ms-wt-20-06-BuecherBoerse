@@ -1,9 +1,8 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import Conversations from '../components/Conversations';
 import ChatWindow from '../components/ChatWindow';
 import { useGlobalContext } from '../context/OverallContext';
 import { useMessaging } from '../hooks/useMessaging';
-import '../styles/Messages.css';
 import Loading2 from '../components/Loading2';
 import { motion } from 'framer-motion';
 import EmptyShelf from '../components/EmptyShelf';

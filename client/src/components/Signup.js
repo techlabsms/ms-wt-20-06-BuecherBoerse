@@ -1,4 +1,3 @@
-import React from 'react';
 import { useGlobalContext } from '../context/OverallContext';
 import { useSignIn } from '../hooks/useSignIn';
 import InputField from './InputField';

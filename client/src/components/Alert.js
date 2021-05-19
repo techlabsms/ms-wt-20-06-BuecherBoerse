@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { useGlobalContext } from '../context/OverallContext';
-import '../styles/Alert.css';
 
 const Alert = () => {
   const { alert, setAlert } = useGlobalContext();

@@ -1,6 +1,4 @@
-import React from 'react';
 import { useGlobalContext } from '../context/OverallContext';
-import '../styles/UserDashboard.css';
 
 const UserDashboard = () => {
   const { userName } = useGlobalContext();

@@ -1,0 +1,44 @@
+.alert {
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  bottom: 0.5rem;
+  margin: 0 0.5rem;
+  width: calc(100% - 1rem);
+  background-color: $sm-clr;
+  color: $fnt-clr;
+  padding: 1rem;
+  border-radius: $brdr-rds-2;
+  box-shadow: $frm-shdw;
+  z-index: 100;
+  animation: alert-popup 2s ease-in-out;
+
+  p {
+    color: $bckgrnd-clr;
+    margin: 0 0.5rem;
+    text-align: center;
+  }
+
+  .icon {
+    padding: 1rem;
+    color: $brnd-clr;
+  }
+}
+
+@media (min-width: 800px) {
+  .alert {
+    width: auto;
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+
+    p {
+      font-size: 1rem;
+      margin: 0 1rem;
+    }
+
+    .icon {
+      font-size: 1.5rem;
+    }
+  }
+}

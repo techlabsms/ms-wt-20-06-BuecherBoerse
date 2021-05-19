@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import FilterButton from './FilterButton';
-import '../styles/GenreFilter.css';
 import { useGlobalContext } from '../context/OverallContext';
 
 const GenreFilter = () => {

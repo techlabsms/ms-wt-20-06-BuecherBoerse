@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useGlobalContext } from '../context/OverallContext';
-import '../styles/SearchBar.css';
 
 const SearchBar = () => {
   const [search, setSearch] = useState('');

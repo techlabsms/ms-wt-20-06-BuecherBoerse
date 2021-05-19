@@ -1,6 +1,4 @@
-import React from 'react';
 import { FaFileImage } from 'react-icons/fa';
-import '../styles/ImageUploader.css';
 
 const ImageUploader = ({ bookImage, setBookImage }) => {
   const imageChange = (e) => {

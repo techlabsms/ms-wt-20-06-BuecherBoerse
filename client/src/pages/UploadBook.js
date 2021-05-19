@@ -1,5 +1,3 @@
-import React from 'react';
-import '../styles/UploadBook.css';
 import Alert from '../components/Alert';
 import ImageUploader from '../components/ImageUploader';
 import InputField from '../components/InputField';
@@ -85,10 +83,10 @@ const UploadBook = () => {
             />
             <InputField
               type='text'
-              htmlFor='Autor:'
+              htmlFor='Autor*in:'
               name='author'
               id='author'
-              placeholder='Autor des Buches'
+              placeholder='Autor*in des Buches'
               value={newBook.author}
               onChange={textChange}
             />

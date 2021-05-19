@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import '../styles/Book.css';
 import defaultImage from '../static/NotAvailable.jpeg';
 
 const Book = ({ _id, image, name, author, category }) => {

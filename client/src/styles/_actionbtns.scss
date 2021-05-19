@@ -1,0 +1,22 @@
+.action-btn {
+  @include btn($bckgrnd-clr, $bckgrnd-clr, $brdr-rds);
+
+  color: $brnd-clr;
+  width: 100%;
+  margin-bottom: 0.5rem;
+  padding: 0.25rem;
+  text-transform: capitalize;
+
+  &:hover {
+    @include hover-btn($fnt-clr);
+
+    color: $bckgrnd-clr;
+  }
+}
+
+@media (min-width: 800px) {
+  .action-btn {
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+  }
+}

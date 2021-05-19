@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useGlobalContext } from '../context/OverallContext';
 import Shelf from '../components/Shelf';
 import UserDashboard from '../components/UserDashboard';

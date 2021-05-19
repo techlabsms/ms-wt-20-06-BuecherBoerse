@@ -1,5 +1,3 @@
-import React from 'react';
-import '../styles/Shelf.css';
 import Book from './Book';
 
 const Shelf = (props) => {

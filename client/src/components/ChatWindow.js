@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import FilterButton from './FilterButton';
 import Form from './Form';
 import OpenChat from './OpenChat';
