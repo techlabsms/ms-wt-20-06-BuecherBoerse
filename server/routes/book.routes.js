@@ -17,10 +17,30 @@ router.route('/api/books')
 router.route('/api/books/user/:userId')
     .get(bookCtrl.bookByUser)
 
+// check for muliform-data
+// Cond Route for book image change
+function skipThisRouteMiddleware(req, res, next) {
+    console.log(req.body)
+    if (req.body.bookImage !== undefined) {
+        // Upload New Image
+        return next();
+    }
+
+    // Jump to next put route
+    return next('route');
+}
+
+// With new image
+router.route('/api/books/:bookId')
+    .put(authCtrl.requireSignin, authCtrl.hasAuthorizationForBook, skipThisRouteMiddleware, imgCtrl.UploadImageToMemory, imgCtrl.UploadBookImageToImagekit, bookCtrl.update) // Update with PUT
+
+// Without new image
+router.route('/api/books/:bookId')
+    .put(authCtrl.requireSignin, authCtrl.hasAuthorizationForBook, bookCtrl.update) // Update with PUT
+
 router.route('/api/books/:bookId')
     .get(bookCtrl.read) //keine Registrierung nötig
-    .put(authCtrl.requireSignin, authCtrl.hasAuthorizationForBook, bookCtrl.update) // Update with PUT
-    .delete(authCtrl.requireSignin, authCtrl.hasAuthorizationForBook, bookCtrl.remove) // Remove with DELETE
+    .delete(authCtrl.requireSignin, authCtrl.hasAuthorizationForBook, imgCtrl.MoveBookToDeleteFolder, bookCtrl.remove) // Remove with DELETE
 
 router.param('bookId', bookCtrl.bookByID)
 
