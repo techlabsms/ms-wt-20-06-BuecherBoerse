@@ -2,7 +2,7 @@ import { useHistory, useLocation } from 'react-router-dom';
 import { FaCheckCircle, FaPoop } from 'react-icons/fa';
 import { useGlobalContext } from '../context/OverallContext';
 
-export const useSignIn = () => {
+export const useAuth = () => {
   const {
     userCredential,
     setUserCredential,

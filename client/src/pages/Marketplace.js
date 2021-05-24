@@ -5,13 +5,13 @@ import SearchBar from '../components/SearchBar';
 import Loading from '../components/Loading';
 import EmptyShelf from '../components/EmptyShelf';
 import { useGlobalContext } from '../context/OverallContext';
-import { useFetchBookData } from '../hooks/useFetchBookData';
+import { useBookData } from '../hooks/useBookData';
 import { motion } from 'framer-motion';
 
 const Marketplace = () => {
   const { isUserLoggedIn, books, loading, closeSubmenu, API_BOOKS } =
     useGlobalContext();
-  const { fetchBooks } = useFetchBookData();
+  const { fetchBooks } = useBookData();
 
   useEffect(() => {
     if (isUserLoggedIn) {

@@ -30,7 +30,7 @@ const SearchBar = () => {
             className='search-form'
             value={search}
             onChange={handleInput}
-            placeholder='Nach Titel oder Autor suchen...'
+            placeholder='Nach Titel oder Autor*in suchen...'
           ></input>
         </form>
       </section>

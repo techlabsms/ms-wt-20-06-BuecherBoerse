@@ -1,7 +1,8 @@
 import { useCallback } from 'react';
 import { useGlobalContext } from '../context/OverallContext';
+import { FaCheckCircle, FaPoo } from 'react-icons/fa';
 
-export const useFetchBookData = () => {
+export const useBookData = () => {
   const {
     isUserLoggedIn,
     setLoading,
@@ -9,6 +10,9 @@ export const useFetchBookData = () => {
     setBooks,
     setOpenBook,
     setUser,
+    setAlert,
+    setNewBook,
+    setBookImage,
   } = useGlobalContext();
 
   const fetchBooks = useCallback(
@@ -106,10 +110,54 @@ export const useFetchBookData = () => {
     [setUser]
   );
 
+  const bookUpload = async (api, token, formdata) => {
+    try {
+      setLoading(true);
+      const res = await fetch(api, {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        body: formdata,
+      });
+      if (res.ok) {
+        await res.json();
+        setLoading(false);
+        setAlert({
+          display: true,
+          icon: <FaCheckCircle />,
+          msg: 'Das Buch wurde erfolgreich hinzugefügt',
+        });
+      } else {
+        throw new Error('Hoppala, da ist was schief gegangen');
+      }
+    } catch (error) {
+      console.log('Hochladen fehlgeschlagen', error);
+      setLoading(false);
+      setAlert({
+        display: true,
+        icon: <FaPoo />,
+        msg: 'Das hat irgendwie nicht geklappt...',
+      });
+    } finally {
+      setNewBook({
+        name: '',
+        author: '',
+        genre: '',
+        language: '',
+        condition: '',
+        desc: '',
+      });
+      setBookImage();
+    }
+  };
+
   return {
     fetchBooks,
     fetchMyBooks,
     fetchSingleBook,
     fetchUser,
+    bookUpload,
   };
 };

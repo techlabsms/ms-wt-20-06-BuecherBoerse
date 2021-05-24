@@ -7,7 +7,7 @@ import Alert from '../components/Alert';
 import ReturnTo from '../components/ReturnTo';
 import MessageModal from '../components/MessageModal';
 import Loading2 from '../components/Loading2';
-import { useFetchBookData } from '../hooks/useFetchBookData';
+import { useBookData } from '../hooks/useBookData';
 import { motion } from 'framer-motion';
 
 const OpenBook = () => {
@@ -19,7 +19,7 @@ const OpenBook = () => {
     showMessageModal,
     openBook,
   } = useGlobalContext();
-  const { fetchSingleBook } = useFetchBookData();
+  const { fetchSingleBook } = useBookData();
   const [showDesc, setShowDesc] = useState(false);
   const { id } = useParams();
 

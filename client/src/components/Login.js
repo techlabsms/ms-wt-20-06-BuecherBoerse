@@ -1,5 +1,5 @@
 import { useGlobalContext } from '../context/OverallContext';
-import { useSignIn } from '../hooks/useSignIn';
+import { useAuth } from '../hooks/useAuth';
 import InputField from './InputField';
 import SigninBtn from './SigninBtn';
 import Form from './Form';
@@ -7,7 +7,7 @@ import Form from './Form';
 const Login = () => {
   const { AUTH_SIGNIN, isTabLeft, userCredential, setUserCredential } =
     useGlobalContext();
-  const { signInUser } = useSignIn();
+  const { signInUser } = useAuth();
   const { name, email, password } = userCredential;
 
   const checkLoginInput = (e) => {

@@ -4,13 +4,13 @@ import Shelf from '../components/Shelf';
 import UserDashboard from '../components/UserDashboard';
 import Loading from '../components/Loading';
 import EmptyShelf from '../components/EmptyShelf';
-import { useFetchBookData } from '../hooks/useFetchBookData';
+import { useBookData } from '../hooks/useBookData';
 import { motion } from 'framer-motion';
 
 const MyBooks = () => {
   const { closeSubmenu, books, loading, userId, jwt, API_BOOKSBYUSER } =
     useGlobalContext();
-  const { fetchMyBooks } = useFetchBookData();
+  const { fetchMyBooks } = useBookData();
 
   useEffect(() => {
     fetchMyBooks(API_BOOKSBYUSER, userId, jwt);

@@ -1,13 +1,13 @@
 import { useEffect } from 'react';
 import { FaFlushed } from 'react-icons/fa';
 import { useGlobalContext } from '../context/OverallContext';
-import { useFetchBookData } from '../hooks/useFetchBookData';
+import { useBookData } from '../hooks/useBookData';
 import ActionButton from './ActionBtn';
 
 const UserAction = ({ owner, condition }) => {
   const { userId, setAlert, user, jwt, API_USERS, setShowMessageModal } =
     useGlobalContext();
-  const { fetchUser } = useFetchBookData();
+  const { fetchUser } = useBookData();
 
   const notAvailable = () => {
     setAlert({
