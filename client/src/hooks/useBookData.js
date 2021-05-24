@@ -1,4 +1,5 @@
 import { useCallback } from 'react';
+import { useHistory } from 'react-router-dom';
 import { useGlobalContext } from '../context/OverallContext';
 import { FaCheckCircle, FaPoo } from 'react-icons/fa';
 
@@ -7,12 +8,14 @@ export const useBookData = () => {
     setLoading,
     setAllBooks,
     setBooks,
+    setMyBooks,
     setOpenBook,
     setUser,
     setAlert,
     setNewBook,
     setBookImage,
   } = useGlobalContext();
+  const history = useHistory();
 
   const fetchBooks = useCallback(
     async (api) => {
@@ -48,7 +51,7 @@ export const useBookData = () => {
         });
         if (res.ok) {
           const myBookList = await res.json();
-          setBooks(myBookList);
+          setMyBooks(myBookList);
         } else {
           throw new Error(`could not get books of user ${id}`);
         }
@@ -58,7 +61,7 @@ export const useBookData = () => {
         setLoading(false);
       }
     },
-    [setLoading, setBooks]
+    [setLoading, setMyBooks]
   );
 
   const fetchSingleBook = useCallback(
@@ -148,11 +151,45 @@ export const useBookData = () => {
     }
   };
 
+  const deleteSingleBook = async (api, id, token) => {
+    try {
+      setLoading(true);
+      const res = await fetch(`${api}${id}`, {
+        method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (res.ok) {
+        await res.json();
+        setLoading(false);
+        history.goBack(
+          setAlert({
+            display: true,
+            icon: <FaCheckCircle />,
+            msg: 'Das Buch wurde erfolgreich gelöscht',
+          })
+        );
+      } else {
+        throw new Error('Das Buch konnte nicht gelöscht werden');
+      }
+    } catch (error) {
+      setLoading(false);
+      console.log('Löschen fehlgeschlagen', error);
+      setAlert({
+        display: true,
+        icon: <FaPoo />,
+        msg: 'Das Buch konnte nicht gelöscht werden...',
+      });
+    }
+  };
+
   return {
     fetchBooks,
     fetchMyBooks,
     fetchSingleBook,
     fetchUser,
     bookUpload,
+    deleteSingleBook,
   };
 };

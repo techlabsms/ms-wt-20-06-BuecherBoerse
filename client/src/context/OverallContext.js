@@ -21,6 +21,7 @@ export const AppProvider = ({ children }) => {
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(userName ? true : false);
   const [allBooks, setAllBooks] = useState([]);
   const [books, setBooks] = useState(allBooks);
+  const [myBooks, setMyBooks] = useState([]);
   const [openBook, setOpenBook] = useState({});
   const [loading, setLoading] = useState(false);
   const [isSubmenuOpen, setIsSubmenuOpen] = useState(false);
@@ -82,6 +83,8 @@ export const AppProvider = ({ children }) => {
         setAllBooks,
         books,
         setBooks,
+        myBooks,
+        setMyBooks,
         openBook,
         setOpenBook,
         loading,

@@ -91,7 +91,7 @@ const OpenBook = () => {
               </p>
             </div>
           </section>
-          <UserAction owner={owner} condition={condition} />
+          <UserAction id={id} owner={owner} condition={condition} />
         </article>
         {alert.display && <Alert />}
       </motion.main>

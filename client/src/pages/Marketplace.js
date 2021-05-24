@@ -4,12 +4,13 @@ import Shelf from '../components/Shelf';
 import SearchBar from '../components/SearchBar';
 import Loading from '../components/Loading';
 import EmptyShelf from '../components/EmptyShelf';
+import Alert from '../components/Alert';
 import { useGlobalContext } from '../context/OverallContext';
 import { useBookData } from '../hooks/useBookData';
 import { motion } from 'framer-motion';
 
 const Marketplace = () => {
-  const { books, loading, closeSubmenu, API_BOOKS } = useGlobalContext();
+  const { alert, books, loading, closeSubmenu, API_BOOKS } = useGlobalContext();
   const { fetchBooks } = useBookData();
 
   useEffect(() => {
@@ -44,6 +45,7 @@ const Marketplace = () => {
         ) : (
           <Shelf books={books}>{books}</Shelf>
         )}
+        {alert.display && <Alert />}
       </motion.main>
     </>
   );
