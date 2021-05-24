@@ -18,21 +18,13 @@ const UserAction = ({ owner, condition }) => {
   };
 
   const messageUser = () => {
-    if (owner === userId) {
-      setAlert({
-        display: true,
-        icon: <FaFlushed />,
-        msg: 'Du willst doch nicht etwa dein eigenes Buch leihen, oder?',
-      });
-    } else {
-      sessionStorage.setItem('receiver', owner);
-      setShowMessageModal(true);
-    }
+    sessionStorage.setItem('receiver', owner);
+    setShowMessageModal(true);
   };
 
   useEffect(() => {
     fetchUser(owner, API_USERS, jwt);
-  }, [fetchUser, owner, API_USERS, jwt]);
+  }, [owner, API_USERS, jwt, fetchUser]);
 
   return (
     <>
@@ -49,8 +41,11 @@ const UserAction = ({ owner, condition }) => {
         <hr className='separation-line' />
         <section className='action-section'>
           <p>Was möchtest du tun?</p>
-          <ActionButton onClick={notAvailable}>Jetzt vormerken</ActionButton>
-          <ActionButton onClick={messageUser}>Jetzt ausleihen</ActionButton>
+          {owner === userId ? (
+            <ActionButton onClick={notAvailable}>Jetzt löschen</ActionButton>
+          ) : (
+            <ActionButton onClick={messageUser}>Jetzt ausleihen</ActionButton>
+          )}
         </section>
       </aside>
     </>

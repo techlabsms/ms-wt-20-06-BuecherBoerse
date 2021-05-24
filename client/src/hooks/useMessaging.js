@@ -20,7 +20,6 @@ export const useMessaging = () => {
       setLoading(true);
       const res = await fetch(`${api_messages}`, {
         method: 'POST',
-        mode: 'cors',
         headers: {
           'content-type': 'application/json',
         },
@@ -118,7 +117,6 @@ export const useMessaging = () => {
       setLoading(true);
       const res = await fetch(`${api_messages}${conv_id}`, {
         method: 'POST',
-        mode: 'cors',
         headers: {
           'content-type': 'application/json',
         },

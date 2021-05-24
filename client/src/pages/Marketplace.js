@@ -9,15 +9,12 @@ import { useBookData } from '../hooks/useBookData';
 import { motion } from 'framer-motion';
 
 const Marketplace = () => {
-  const { isUserLoggedIn, books, loading, closeSubmenu, API_BOOKS } =
-    useGlobalContext();
+  const { books, loading, closeSubmenu, API_BOOKS } = useGlobalContext();
   const { fetchBooks } = useBookData();
 
   useEffect(() => {
-    if (isUserLoggedIn) {
-      fetchBooks(API_BOOKS);
-    }
-  }, [fetchBooks, API_BOOKS, isUserLoggedIn]);
+    fetchBooks(API_BOOKS);
+  }, [fetchBooks, API_BOOKS]);
 
   if (loading && books.length < 1) {
     return (
@@ -34,7 +31,7 @@ const Marketplace = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        transition={{ duration: 0.5 }}
+        transition={{ duration: 0.25 }}
         onClick={closeSubmenu}
       >
         <SearchBar />

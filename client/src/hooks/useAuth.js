@@ -20,7 +20,6 @@ export const useAuth = () => {
       setLoading(true);
       const res = await fetch(url, {
         method: 'POST',
-        mode: 'cors',
         headers: {
           'content-type': 'application/json',
         },

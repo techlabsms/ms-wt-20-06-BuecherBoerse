@@ -4,7 +4,6 @@ import { FaCheckCircle, FaPoo } from 'react-icons/fa';
 
 export const useBookData = () => {
   const {
-    isUserLoggedIn,
     setLoading,
     setAllBooks,
     setBooks,
@@ -17,26 +16,24 @@ export const useBookData = () => {
 
   const fetchBooks = useCallback(
     async (api) => {
-      if (isUserLoggedIn) {
-        setLoading(true);
-        try {
-          const res = await fetch(api);
-          if (res.ok) {
-            let data = await res.json();
-            const bookList = data.reverse();
-            setAllBooks(bookList);
-            setBooks(bookList);
-          } else {
-            throw new Error('Hoppala, da ist was schief gelaufen');
-          }
-        } catch (err) {
-          console.log(err);
-        } finally {
-          setLoading(false);
+      setLoading(true);
+      try {
+        const res = await fetch(api);
+        if (res.ok) {
+          let data = await res.json();
+          const bookList = data.reverse();
+          setAllBooks(bookList);
+          setBooks(bookList);
+        } else {
+          throw new Error('Hoppala, da ist was schief gelaufen');
         }
+      } catch (err) {
+        console.log(err);
+      } finally {
+        setLoading(false);
       }
     },
-    [isUserLoggedIn, setLoading, setAllBooks, setBooks]
+    [setLoading, setAllBooks, setBooks]
   );
 
   const fetchMyBooks = useCallback(
@@ -91,7 +88,6 @@ export const useBookData = () => {
           return null;
         }
         const res = await fetch(`${api}${owner}`, {
-          credentials: 'include',
           headers: {
             Authorization: `Bearer ${token}`,
             'content-type': 'application/json',
@@ -115,7 +111,6 @@ export const useBookData = () => {
       setLoading(true);
       const res = await fetch(api, {
         method: 'POST',
-        mode: 'cors',
         headers: {
           Authorization: `Bearer ${token}`,
         },
