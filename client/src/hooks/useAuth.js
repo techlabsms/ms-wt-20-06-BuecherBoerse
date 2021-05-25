@@ -2,7 +2,7 @@ import { useHistory, useLocation } from 'react-router-dom';
 import { FaCheckCircle, FaPoop } from 'react-icons/fa';
 import { useGlobalContext } from '../context/OverallContext';
 
-export const useSignIn = () => {
+export const useAuth = () => {
   const {
     userCredential,
     setUserCredential,
@@ -20,7 +20,6 @@ export const useSignIn = () => {
       setLoading(true);
       const res = await fetch(url, {
         method: 'POST',
-        mode: 'cors',
         headers: {
           'content-type': 'application/json',
         },

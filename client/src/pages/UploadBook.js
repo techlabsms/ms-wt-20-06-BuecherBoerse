@@ -6,7 +6,7 @@ import { useGlobalContext } from '../context/OverallContext';
 import TextAreaInput from '../components/TextAreaInput';
 import ActionBtn from '../components/ActionBtn';
 import Form from '../components/Form';
-import { useBookUpload } from '../hooks/useBookUpload';
+import { useBookData } from '../hooks/useBookData';
 import Loading2 from '../components/Loading2';
 import { motion } from 'framer-motion';
 
@@ -24,7 +24,7 @@ const UploadBook = () => {
     userId,
     API_BOOKS,
   } = useGlobalContext();
-  const { bookUpload } = useBookUpload();
+  const { bookUpload } = useBookData();
 
   const textChange = (e) => {
     setNewBook({ ...newBook, [e.target.name]: e.target.value });
@@ -65,7 +65,7 @@ const UploadBook = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        transition={{ duration: 0.5 }}
+        transition={{ duration: 0.25 }}
         onClick={closeSubmenu}
       >
         <h2 className='title'>Buch hochladen</h2>

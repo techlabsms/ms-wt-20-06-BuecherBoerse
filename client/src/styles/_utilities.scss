@@ -9,20 +9,6 @@
   padding: 0.75rem;
 }
 
-@mixin btn($bckgrnd-clr, $brnd-clr, $brdr-rds-3) {
-  background-color: $bckgrnd-clr;
-  border: 2px solid $brnd-clr;
-  border-radius: $brdr-rds-3;
-  color: $brnd-clr;
-  cursor: pointer;
-  transition: $trnstn;
-}
-
-@mixin hover-btn($fnt-clr) {
-  background-color: $fnt-clr;
-  border: 2px solid $fnt-clr;
-}
-
 .form-control {
   margin: 0.5rem 0;
   display: grid;
