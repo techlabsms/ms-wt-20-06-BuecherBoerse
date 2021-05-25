@@ -13,6 +13,7 @@ const Messages = () => {
     API_MESSAGESUSER,
     loading,
     userId,
+    jwt,
     conversations,
     isMessageSent,
     setIsMessageSent,
@@ -21,13 +22,14 @@ const Messages = () => {
   const { fetchUserConversations } = useMessaging();
 
   useEffect(() => {
-    fetchUserConversations(API_MESSAGESUSER, userId);
+    fetchUserConversations(API_MESSAGESUSER, userId, jwt);
   }, [
     API_MESSAGESUSER,
     fetchUserConversations,
     isMessageSent,
     setIsMessageSent,
     userId,
+    jwt,
   ]);
 
   return (

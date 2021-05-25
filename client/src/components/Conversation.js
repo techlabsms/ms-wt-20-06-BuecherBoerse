@@ -3,14 +3,14 @@ import { useMessaging } from '../hooks/useMessaging';
 import { useGlobalContext } from '../context/OverallContext';
 
 const Conversation = ({ _id, recipients, messages }) => {
-  const { userName, API_MESSAGES, userId, setSelectedConversation } =
+  const { userName, API_MESSAGES, userId, jwt, setSelectedConversation } =
     useGlobalContext();
   const { fetchMessages } = useMessaging();
 
   const openConversation = (e) => {
     setSelectedConversation(true);
     sessionStorage.setItem('convId', e.currentTarget.id);
-    fetchMessages(API_MESSAGES, e.currentTarget.id, userId);
+    fetchMessages(API_MESSAGES, e.currentTarget.id, jwt, userId);
   };
 
   return (

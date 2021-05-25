@@ -8,6 +8,7 @@ const MessageModal = () => {
   const {
     API_MESSAGES,
     userId,
+    jwt,
     showMessageModal,
     setShowMessageModal,
     setIsMessageSent,
@@ -34,7 +35,7 @@ const MessageModal = () => {
           <Form
             onSubmit={(e) => {
               e.preventDefault();
-              startNewConversation(API_MESSAGES, newMessage);
+              startNewConversation(API_MESSAGES, jwt, newMessage);
               setIsMessageSent(true);
               sessionStorage.removeItem('receiver');
             }}

@@ -9,6 +9,7 @@ const ChatWindow = () => {
   const {
     API_MESSAGES,
     userId,
+    jwt,
     chat,
     newMessage,
     setNewMessage,
@@ -22,7 +23,7 @@ const ChatWindow = () => {
 
   const sendMessage = (e) => {
     e.preventDefault();
-    postMessage(API_MESSAGES, chat._id, newMessage);
+    postMessage(API_MESSAGES, chat._id, jwt, newMessage);
     setIsMessageSent(true);
   };
 
@@ -33,8 +34,8 @@ const ChatWindow = () => {
   };
 
   useEffect(() => {
-    fetchMessages(API_MESSAGES, sessionStorage.getItem('convId'), userId);
-  }, [API_MESSAGES, fetchMessages, userId]);
+    fetchMessages(API_MESSAGES, sessionStorage.getItem('convId'), jwt, userId);
+  }, [API_MESSAGES, fetchMessages, jwt, userId]);
 
   return (
     <>

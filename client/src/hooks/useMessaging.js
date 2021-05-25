@@ -15,13 +15,14 @@ export const useMessaging = () => {
     setLoading,
   } = useGlobalContext();
 
-  const startNewConversation = async (api_messages, message) => {
+  const startNewConversation = async (api_messages, token, message) => {
     try {
       setLoading(true);
       const res = await fetch(`${api_messages}`, {
         method: 'POST',
         headers: {
           'content-type': 'application/json',
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(message),
       });
@@ -49,10 +50,14 @@ export const useMessaging = () => {
   };
 
   const fetchUserConversations = useCallback(
-    async (api_messages_user, user_id) => {
+    async (api_messages_user, user_id, token) => {
       try {
         setLoading(true);
-        const res = await fetch(`${api_messages_user}${user_id}`);
+        const res = await fetch(`${api_messages_user}${user_id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         if (res.ok) {
           let data = await res.json();
           const convList = data.reverse();
@@ -70,13 +75,17 @@ export const useMessaging = () => {
   );
 
   const fetchMessages = useCallback(
-    async (api_messages, conv_id, user_id) => {
+    async (api_messages, conv_id, token, user_id) => {
       if (!conversations || !conv_id) {
         return null;
       }
       try {
         setLoading(true);
-        const res = await fetch(`${api_messages}${conv_id}`);
+        const res = await fetch(`${api_messages}${conv_id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         if (res.ok) {
           const singleConv = await res.json();
           setChat(singleConv);
@@ -112,13 +121,14 @@ export const useMessaging = () => {
     ]
   );
 
-  const postMessage = async (api_messages, conv_id, message) => {
+  const postMessage = async (api_messages, conv_id, token, message) => {
     try {
       setLoading(true);
       const res = await fetch(`${api_messages}${conv_id}`, {
         method: 'POST',
         headers: {
           'content-type': 'application/json',
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(message),
       });
