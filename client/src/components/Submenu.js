@@ -1,12 +1,12 @@
 import { useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useGlobalContext } from '../context/OverallContext';
-import { useSignIn } from '../hooks/useSignIn';
+import { useAuth } from '../hooks/useAuth';
 
 const Submenu = () => {
   const { isSubmenuOpen, location, AUTH_SIGNOUT, setIsUserLoggedIn } =
     useGlobalContext();
-  const { getLoggedOut } = useSignIn();
+  const { getLoggedOut } = useAuth();
   const container = useRef(null);
 
   useEffect(() => {

@@ -1,38 +1,25 @@
 import { useEffect } from 'react';
-import { FaFlushed } from 'react-icons/fa';
 import { useGlobalContext } from '../context/OverallContext';
-import { useFetchBookData } from '../hooks/useFetchBookData';
+import { useBookData } from '../hooks/useBookData';
 import ActionButton from './ActionBtn';
 
-const UserAction = ({ owner, condition }) => {
-  const { userId, setAlert, user, jwt, API_USERS, setShowMessageModal } =
+const UserAction = ({ id, owner, condition }) => {
+  const { userId, user, jwt, API_BOOKS, API_USERS, setShowMessageModal } =
     useGlobalContext();
-  const { fetchUser } = useFetchBookData();
+  const { fetchUser, deleteSingleBook } = useBookData();
 
-  const notAvailable = () => {
-    setAlert({
-      display: true,
-      icon: <FaFlushed />,
-      msg: 'Diese Funktion ist noch nicht bereit...',
-    });
+  const removeBook = () => {
+    deleteSingleBook(API_BOOKS, id, jwt);
   };
 
   const messageUser = () => {
-    if (owner === userId) {
-      setAlert({
-        display: true,
-        icon: <FaFlushed />,
-        msg: 'Du willst doch nicht etwa dein eigenes Buch leihen, oder?',
-      });
-    } else {
-      sessionStorage.setItem('receiver', owner);
-      setShowMessageModal(true);
-    }
+    sessionStorage.setItem('receiver', owner);
+    setShowMessageModal(true);
   };
 
   useEffect(() => {
     fetchUser(owner, API_USERS, jwt);
-  }, [fetchUser, owner, API_USERS, jwt]);
+  }, [owner, API_USERS, jwt, fetchUser]);
 
   return (
     <>
@@ -49,8 +36,11 @@ const UserAction = ({ owner, condition }) => {
         <hr className='separation-line' />
         <section className='action-section'>
           <p>Was möchtest du tun?</p>
-          <ActionButton onClick={notAvailable}>Jetzt vormerken</ActionButton>
-          <ActionButton onClick={messageUser}>Jetzt ausleihen</ActionButton>
+          {owner === userId ? (
+            <ActionButton onClick={removeBook}>Jetzt löschen</ActionButton>
+          ) : (
+            <ActionButton onClick={messageUser}>Jetzt ausleihen</ActionButton>
+          )}
         </section>
       </aside>
     </>

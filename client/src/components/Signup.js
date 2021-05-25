@@ -1,12 +1,12 @@
 import { useGlobalContext } from '../context/OverallContext';
-import { useSignIn } from '../hooks/useSignIn';
+import { useAuth } from '../hooks/useAuth';
 import InputField from './InputField';
 import SigninBtn from './SigninBtn';
 import Form from './Form';
 
 const Signup = () => {
   const { API_USERS, userCredential, setUserCredential } = useGlobalContext();
-  const { signInUser } = useSignIn();
+  const { signInUser } = useAuth();
   const { name, email, password } = userCredential;
 
   const checkSignupInput = (e) => {

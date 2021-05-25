@@ -106,13 +106,12 @@ button {
 }
 
 // component styling
-@import './styles/actionbtns';
 @import './styles/alert';
 @import './styles/book';
 @import './styles/bookupload';
+@import './styles/buttons';
 @import './styles/dataprivacy';
 @import './styles/errorpage';
-@import './styles/filterbtns';
 @import './styles/footer';
 @import './styles/imageupload';
 @import './styles/imprint';
@@ -122,10 +121,9 @@ button {
 @import './styles/messagemodal';
 @import './styles/messages';
 @import './styles/navbar';
-@import './styles/openbook.scss';
+@import './styles/openbook';
 @import './styles/search';
 @import './styles/shelf';
-@import './styles/signinbtns';
 @import './styles/submenu';
 @import './styles/tab';
 @import './styles/useraction';

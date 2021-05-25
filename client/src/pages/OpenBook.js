@@ -7,7 +7,7 @@ import Alert from '../components/Alert';
 import ReturnTo from '../components/ReturnTo';
 import MessageModal from '../components/MessageModal';
 import Loading2 from '../components/Loading2';
-import { useFetchBookData } from '../hooks/useFetchBookData';
+import { useBookData } from '../hooks/useBookData';
 import { motion } from 'framer-motion';
 
 const OpenBook = () => {
@@ -19,7 +19,7 @@ const OpenBook = () => {
     showMessageModal,
     openBook,
   } = useGlobalContext();
-  const { fetchSingleBook } = useFetchBookData();
+  const { fetchSingleBook } = useBookData();
   const [showDesc, setShowDesc] = useState(false);
   const { id } = useParams();
 
@@ -59,7 +59,7 @@ const OpenBook = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        transition={{ duration: 0.5 }}
+        transition={{ duration: 0.25 }}
         onClick={closeSubmenu}
       >
         <ReturnTo />
@@ -91,7 +91,7 @@ const OpenBook = () => {
               </p>
             </div>
           </section>
-          <UserAction owner={owner} condition={condition} />
+          <UserAction id={id} owner={owner} condition={condition} />
         </article>
         {alert.display && <Alert />}
       </motion.main>
