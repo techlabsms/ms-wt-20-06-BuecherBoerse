@@ -17,6 +17,10 @@ const BookSchema = new mongoose.Schema({
         type: String,
         required: 'Kein Bild ausgewählt',
     },
+    imagekitIoId: {
+        type: String,
+        required: 'Kein Bild ausgewählt',
+    },
     category: {
         type: String,
         trim: true,

@@ -77,17 +77,6 @@ const read = (req, res) => {
 const convByID = async (req, res, next, id) => {
     try {
         const conv = await Conversation.findById(id).populate('recipients', '_id name').populate("messages", "message sender reciever").exec()
-
-        // Import user model?
-        // .populate({
-        //     path: 'messages.message',
-        //      model: Message
-        //     populate: {
-        //         path: 'sender',
-        //         model: 'User'
-        //     }
-        // }).
-
         if (!conv)
             return res.status('400').json({
                 error: "Conversation not found"
@@ -101,5 +90,48 @@ const convByID = async (req, res, next, id) => {
     }
 }
 
+const deleteConvByID = async (req, res) => {
+    try {
+        let conv = req.conv;
+        let isLastRecipient = false
+        if (req.conv.recipients.length <= 1) {
+            isLastRecipient = true
+        }
 
-export default { createConv, convByID, read, writeMessage, getConvByUser }
+        if (isLastRecipient == true) {
+            // Delete conv if last iser
+            let deletedConv = await conv.remove();
+
+            return res.status(200).json({
+                message: 'Conversation successfully deleted!',
+                conversation: deletedConv,
+            });
+        }
+        else {
+            // Remove rec if not last else remove conv
+            let newRecipients = []
+            req.conv.recipients.forEach(recipient => {
+                if (recipient._id != req.auth._id) {
+                    newRecipients.push(recipient)
+                }
+            });
+
+            conv.recipients = newRecipients
+            await conv.save();
+
+            return res.status(200).json({
+                message: 'User from Conversation successfully removed!',
+                conversation: conv,
+            });
+        }
+
+
+    } catch (err) {
+        return res.status(400).json({
+            error: err.message,
+        });
+
+    }
+}
+
+export default { createConv, convByID, read, writeMessage, getConvByUser, deleteConvByID }

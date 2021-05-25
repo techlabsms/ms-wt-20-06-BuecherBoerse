@@ -53,7 +53,6 @@ const UploadBookImageToImagekit = function (req, res, next) {
     }).then(response => {
         // Add the image url to the response
         res.locals.BookUrl = response.url;
-        console.log(res.locals.BookUrl)
         // Add the image id to the response for deleting
         res.locals.BookImageId = response.fileId;
         next();

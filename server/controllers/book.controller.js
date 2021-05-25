@@ -8,6 +8,7 @@ const create = async (req, res) => {
         const book = new Book(req.body);
         try {
             book.image = res.locals.BookUrl
+            book.imagekitIoId = res.locals.BookImageId
         } catch (err) {
             return res.status(400).json({
                 message: 'You need to upload an image',
@@ -98,6 +99,26 @@ const update = async (req, res) => {
     }
 };
 
+const updateWithImage = async (req, res) => {
+    try {
+        // Get Book
+        let book = req.profile;
+
+        // Update image, image_id and timestamp
+        book.image = res.locals.BookUrl
+        book.imagekitIoId = res.locals.BookImageId
+        book.updated = Date.now();
+
+        // Save modified book to db
+        await book.save();
+        res.json(book);
+    } catch (err) {
+        return res.status(400).json({
+            error: errorHandler.getErrorMessage(err),
+        });
+    }
+};
+
 //lösche Buch
 const remove = async (req, res) => {
     try {
@@ -125,6 +146,7 @@ export default {
     bookByID,
     read,
     update,
+    updateWithImage,
     remove,
     bookByUser
 };

@@ -65,8 +65,9 @@ Editor-view: Json visual Editor
 | `/api/books/`          | `GET`     | Liste aller Bücher  |
 | `/api/books/:bookId`   | `GET`     | Finde ein bestimmtes Buch  |
 | `/api/books/:bookId`   | `PUT`     | Verändere Buch  |
+| `/api/books/image/:bookId` | `PUT` | Verändere nur das Bild von Buch |
 | `/api/books/:bookId`   | `DELETE`  | Lösche Buch  |
-| `/api/books/user/::userId`| 'GET' | Erhalte alle Bücher eines bestimmten Users|
+| `/api/books/user/:userId`| 'GET' | Erhalte alle Bücher eines bestimmten Users|
 
 ### Bücher Felder in der Datenbank
 | Feld        | Typ           | Beschreibung  |
@@ -88,6 +89,7 @@ Editor-view: Json visual Editor
 | `/api/messages`          |`POST`     | Erstelle Nachricht/Konversation     |
 | `/api/messages/:convId`   | `GET`     | Erhalte Konversation  |
 | `/api/messages/:convId`   | `POST`     | Schicke Nachricht/Update Konversation  |
+| `/api/messages/:convId`   | `DELETE`     | Lösche Konversation  |
 | `/api/messages/user/:userId`   | `GET`     | Erhalte alle Nachrichten vom User  |
 
 ### Nachrichten Felder in der Datenbank
