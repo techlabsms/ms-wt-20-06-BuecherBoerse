@@ -1,12 +1,17 @@
-import React from 'react';
 import { useGlobalContext } from '../context/OverallContext';
-import '../styles/Imprint.css';
+import { motion } from 'framer-motion';
 
 const Imprint = () => {
   const { closeSubmenu } = useGlobalContext();
   return (
     <>
-      <main onClick={closeSubmenu}>
+      <motion.main
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.5 }}
+        onClick={closeSubmenu}
+      >
         <section className='imprint'>
           <h3>Impressum</h3>
           <p>Angaben gem. § 5 TMG </p>
@@ -62,7 +67,7 @@ const Imprint = () => {
           </p>
           <br />
         </section>
-      </main>
+      </motion.main>
     </>
   );
 };

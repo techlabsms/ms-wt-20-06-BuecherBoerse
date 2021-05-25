@@ -1,12 +1,17 @@
-import React from 'react';
 import { useGlobalContext } from '../context/OverallContext';
-import '../styles/DataPrivacy.css';
+import { motion } from 'framer-motion';
 
 const DataPrivacy = () => {
   const { closeSubmenu } = useGlobalContext();
   return (
     <>
-      <main onClick={closeSubmenu}>
+      <motion.main
+        onClick={closeSubmenu}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.5 }}
+      >
         <section className='datenschutz'>
           <h3>Datenschutzerklärung</h3>
           <br />
@@ -396,7 +401,7 @@ const DataPrivacy = () => {
           </p>
           <br />
         </section>
-      </main>
+      </motion.main>
     </>
   );
 };

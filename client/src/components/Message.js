@@ -1,4 +1,3 @@
-import React from 'react';
 import { FaUserCircle } from 'react-icons/fa';
 
 const Message = ({ recipients, message, sender }) => {

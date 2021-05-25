@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useGlobalContext } from '../context/OverallContext';
 import Loading from '../components/Loading';
-import '../styles/OpenBook.css';
 import UserAction from '../components/UserAction';
 import Alert from '../components/Alert';
 import ReturnTo from '../components/ReturnTo';
 import MessageModal from '../components/MessageModal';
+import Loading2 from '../components/Loading2';
 import { useFetchBookData } from '../hooks/useFetchBookData';
+import { motion } from 'framer-motion';
 
 const OpenBook = () => {
   const {
@@ -53,10 +54,17 @@ const OpenBook = () => {
   return (
     <>
       {showMessageModal && <MessageModal showMessageModal={showMessageModal} />}
-      <main onClick={closeSubmenu}>
+      {loading && <Loading2 />}
+      <motion.main
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.5 }}
+        onClick={closeSubmenu}
+      >
         <ReturnTo />
         <article className='open-book'>
-          <img src={`../${image}`} alt={name} />
+          <img src={image} alt={name} />
           <section className='open-book-info'>
             <div>
               <h2 className='title'>{name}</h2>
@@ -86,7 +94,7 @@ const OpenBook = () => {
           <UserAction owner={owner} condition={condition} />
         </article>
         {alert.display && <Alert />}
-      </main>
+      </motion.main>
     </>
   );
 };

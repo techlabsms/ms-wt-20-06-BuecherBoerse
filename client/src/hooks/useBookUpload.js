@@ -2,20 +2,22 @@ import { useGlobalContext } from '../context/OverallContext';
 import { FaCheckCircle, FaPoo } from 'react-icons/fa';
 
 export const useBookUpload = () => {
-  const { setAlert, setNewBook, userId, setBookImage } = useGlobalContext();
+  const { setLoading, setAlert, setNewBook, setBookImage } = useGlobalContext();
 
   const bookUpload = async (api, token, formdata) => {
     try {
+      setLoading(true);
       const res = await fetch(api, {
         method: 'POST',
+        mode: 'cors',
         headers: {
           Authorization: `Bearer ${token}`,
         },
         body: formdata,
       });
       if (res.ok) {
-        const userBook = await res.json();
-        console.log(userBook);
+        await res.json();
+        setLoading(false);
         setAlert({
           display: true,
           icon: <FaCheckCircle />,
@@ -26,6 +28,7 @@ export const useBookUpload = () => {
       }
     } catch (error) {
       console.log('Hochladen fehlgeschlagen', error);
+      setLoading(false);
       setAlert({
         display: true,
         icon: <FaPoo />,
@@ -38,7 +41,6 @@ export const useBookUpload = () => {
         genre: '',
         language: '',
         condition: '',
-        owner: userId,
         desc: '',
       });
       setBookImage();

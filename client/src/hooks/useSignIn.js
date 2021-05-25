@@ -9,22 +9,26 @@ export const useSignIn = () => {
     setIsUserLoggedIn,
     setAlert,
     setIsTabLeft,
+    setSelectedConversation,
+    setLoading,
   } = useGlobalContext();
   const history = useHistory();
   const { state } = useLocation();
 
   const signInUser = async (url, tryLogin) => {
     try {
+      setLoading(true);
       const res = await fetch(url, {
         method: 'POST',
+        mode: 'cors',
         headers: {
           'content-type': 'application/json',
         },
         body: JSON.stringify(userCredential),
       });
-      if (res.status >= 200 && res.status <= 299) {
+      if (res.ok) {
         const userData = await res.json();
-        console.log(userData);
+        setLoading(false);
         if (tryLogin) {
           sessionStorage.setItem('id', userData.user._id);
           sessionStorage.setItem('name', userData.user.name);
@@ -44,6 +48,7 @@ export const useSignIn = () => {
       }
     } catch (error) {
       console.log('errrorrrrr', error);
+      setLoading(false);
       setAlert({
         display: true,
         icon: <FaPoop />,
@@ -56,11 +61,10 @@ export const useSignIn = () => {
   const getLoggedOut = async (url) => {
     try {
       const res = await fetch(url);
-      if (res.status >= 200 && res.status <= 299) {
-        const userLoggedOut = await res.json();
+      if (res.ok) {
+        await res.json();
+        setSelectedConversation(false);
         sessionStorage.clear();
-        console.log('Erfolgreich ausgeloggt!', userLoggedOut);
-        setIsUserLoggedIn(false);
         setUserCredential({ name: '', email: '', password: '' });
       } else {
         throw new Error('Hoppala, da ist wohl was schief gelaufen...');
@@ -69,6 +73,7 @@ export const useSignIn = () => {
       console.log('Das hat nicht geklappt', error);
     }
   };
+
   return {
     signInUser,
     getLoggedOut,

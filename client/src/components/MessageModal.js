@@ -1,10 +1,8 @@
-import React from 'react';
 import Form from './Form';
 import TextAreaInput from './TextAreaInput';
 import FilterButton from './FilterButton';
 import { useGlobalContext } from '../context/OverallContext';
 import { useMessaging } from '../hooks/useMessaging';
-import '../styles/MessageModal.css';
 
 const MessageModal = () => {
   const {
@@ -34,7 +32,6 @@ const MessageModal = () => {
         <aside className='msg-modal'>
           <h3 className='modal-title'>Deine Nachricht:</h3>
           <Form
-            className='msg-modal-form'
             onSubmit={(e) => {
               e.preventDefault();
               startNewConversation(API_MESSAGES, newMessage);
@@ -43,8 +40,6 @@ const MessageModal = () => {
             }}
           >
             <TextAreaInput
-              cols='100'
-              rows='3'
               name='message'
               value={newMessage.message}
               onChange={(e) => {

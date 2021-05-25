@@ -1,0 +1,25 @@
+.footer {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  background-color: $clr-gry;
+
+  .footer-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 1rem;
+    margin: 0.5rem;
+  }
+
+  .heart {
+    color: red;
+  }
+}
+
+@media (min-width: 800px) {
+  .footer-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

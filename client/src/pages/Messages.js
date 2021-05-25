@@ -1,21 +1,24 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import Conversations from '../components/Conversations';
 import ChatWindow from '../components/ChatWindow';
 import { useGlobalContext } from '../context/OverallContext';
 import { useMessaging } from '../hooks/useMessaging';
-import '../styles/Messages.css';
+import Loading2 from '../components/Loading2';
+import { motion } from 'framer-motion';
+import EmptyShelf from '../components/EmptyShelf';
 
 const Messages = () => {
   const {
     closeSubmenu,
-    API_MESSAGES,
     API_MESSAGESUSER,
+    loading,
     userId,
+    conversations,
     isMessageSent,
     setIsMessageSent,
   } = useGlobalContext();
-  const { fetchUserConversations, fetchMessages } = useMessaging();
-  let convId = sessionStorage.getItem('convId');
+
+  const { fetchUserConversations } = useMessaging();
 
   useEffect(() => {
     fetchUserConversations(API_MESSAGESUSER, userId);
@@ -27,28 +30,28 @@ const Messages = () => {
     userId,
   ]);
 
-  useEffect(() => {
-    fetchMessages(API_MESSAGES, convId, userId);
-    return () => {
-      setIsMessageSent(false);
-    };
-  }, [
-    API_MESSAGES,
-    fetchMessages,
-    isMessageSent,
-    setIsMessageSent,
-    userId,
-    convId,
-  ]);
-
   return (
     <>
-      <main onClick={closeSubmenu}>
-        <section className='message-container'>
-          <Conversations />
-          <ChatWindow />
-        </section>
-      </main>
+      {loading && <Loading2 />}
+      <motion.main
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.5 }}
+        onClick={closeSubmenu}
+      >
+        {conversations.length < 1 ? (
+          <EmptyShelf>
+            Aktuell hast du noch keine Nachrichten verfasst. Schreibe einem
+            User, indem du ein Buch auswählst und auf "Jetzt ausleihen" klickst.
+          </EmptyShelf>
+        ) : (
+          <section className='message-container'>
+            <Conversations />
+            <ChatWindow />
+          </section>
+        )}
+      </motion.main>
     </>
   );
 };

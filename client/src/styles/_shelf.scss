@@ -1,0 +1,32 @@
+/* Shelf */
+@mixin show-shelf {
+  max-width: $mx-wdth;
+  margin: 1rem auto;
+  display: grid;
+}
+
+.shelf-container {
+  @include show-shelf;
+  gap: 1rem;
+}
+
+.empty-shelf {
+  @include show-shelf;
+  place-items: center;
+
+  .error-message {
+    justify-content: center;
+    width: 60vw;
+    margin: 2rem auto;
+    height: 50vh;
+  }
+}
+
+@media (min-width: 800px) {
+  .shelf-container {
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    padding: 1rem;
+  }
+}

@@ -1,0 +1,21 @@
+/* Upload Book */
+.book-form {
+  background-color: $brnd-clr;
+  color: $bckgrnd-clr;
+  padding: 1.25rem 0.75rem;
+  border-radius: $brdr-rds-2;
+  box-shadow: $bx-shdw;
+  margin: 0.5rem;
+  width: 90vw;
+}
+
+@media (min-width: 800px) {
+  .book-form {
+    max-width: $mx-wdth;
+    padding: 1.5rem;
+    margin: 2rem auto;
+    display: grid;
+    grid-template-columns: repeat(2, 50%);
+    max-width: 750px;
+  }
+}

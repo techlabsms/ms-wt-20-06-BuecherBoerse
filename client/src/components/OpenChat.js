@@ -1,18 +1,12 @@
-import React from 'react';
 import Message from './Message';
-import Loading from './Loading';
 import { useGlobalContext } from '../context/OverallContext';
 
 const OpenChat = () => {
-  const { loading, chat, scrollToBottom } = useGlobalContext();
+  const { chat, selectedConversation, scrollToBottom } = useGlobalContext();
   const { recipients, messages } = chat;
 
-  if (loading && chat.length < 1) {
-    return (
-      <section className='chat'>
-        <Loading />
-      </section>
-    );
+  if (!selectedConversation) {
+    return null;
   }
   return (
     <>

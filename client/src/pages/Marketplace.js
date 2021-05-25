@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import GenreFilter from '../components/GenreFilter';
 import Shelf from '../components/Shelf';
 import SearchBar from '../components/SearchBar';
@@ -6,14 +6,18 @@ import Loading from '../components/Loading';
 import EmptyShelf from '../components/EmptyShelf';
 import { useGlobalContext } from '../context/OverallContext';
 import { useFetchBookData } from '../hooks/useFetchBookData';
+import { motion } from 'framer-motion';
 
 const Marketplace = () => {
-  const { books, loading, closeSubmenu, API_BOOKS } = useGlobalContext();
+  const { isUserLoggedIn, books, loading, closeSubmenu, API_BOOKS } =
+    useGlobalContext();
   const { fetchBooks } = useFetchBookData();
 
   useEffect(() => {
-    fetchBooks(API_BOOKS);
-  }, [fetchBooks, API_BOOKS]);
+    if (isUserLoggedIn) {
+      fetchBooks(API_BOOKS);
+    }
+  }, [fetchBooks, API_BOOKS, isUserLoggedIn]);
 
   if (loading && books.length < 1) {
     return (
@@ -26,7 +30,13 @@ const Marketplace = () => {
   }
   return (
     <>
-      <main onClick={closeSubmenu}>
+      <motion.main
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.5 }}
+        onClick={closeSubmenu}
+      >
         <SearchBar />
         <GenreFilter />
         {books.length < 1 ? (
@@ -37,7 +47,7 @@ const Marketplace = () => {
         ) : (
           <Shelf books={books}>{books}</Shelf>
         )}
-      </main>
+      </motion.main>
     </>
   );
 };

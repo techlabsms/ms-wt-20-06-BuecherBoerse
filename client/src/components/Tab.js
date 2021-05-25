@@ -1,6 +1,4 @@
-import React from 'react';
 import { useGlobalContext } from '../context/OverallContext';
-import '../styles/Tab.css';
 
 const Tab = () => {
   const { isTabLeft, setIsTabLeft } = useGlobalContext();

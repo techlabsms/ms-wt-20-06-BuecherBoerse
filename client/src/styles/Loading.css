@@ -1,8 +1,0 @@
-.loading {
-  overflow: hidden;
-  background-color: var(--bckgrnd-clr);
-  height: 75vh;
-  z-index: 3;
-  display: grid;
-  place-items: center;
-}

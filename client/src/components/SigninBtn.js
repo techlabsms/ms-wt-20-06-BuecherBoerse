@@ -1,6 +1,3 @@
-import React from 'react';
-import '../styles/SigninBtn.css';
-
 const SigninBtn = (props) => {
   return (
     <>

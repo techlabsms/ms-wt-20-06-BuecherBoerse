@@ -1,9 +1,9 @@
-import React from 'react';
 import { useGlobalContext } from '../context/OverallContext';
 import Conversation from './Conversation';
 
 const Conversations = () => {
   const { conversations } = useGlobalContext();
+
   return (
     <>
       <aside className='conversations'>
