@@ -17,6 +17,10 @@ const BookSchema = new mongoose.Schema({
         type: String,
         required: 'Kein Bild ausgewählt',
     },
+    imagekitIoId: {
+        type: String,
+        required: 'Kein Bild ausgewählt',
+    },
     category: {
         type: String,
         trim: true,
@@ -36,12 +40,10 @@ const BookSchema = new mongoose.Schema({
         type: String,
         required: "Bitte beschreibe dein Buch"
     },
-    //User ID, kann momentan nur manuell eingetragen werden?
-    // Erstmal einen String zum testen
+    //User ID
     owner: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
-        //type: String,
         required: "Bitte einen User eintragen"
     },
     status: {	//privat, bereit zum Verleihen, verliehen

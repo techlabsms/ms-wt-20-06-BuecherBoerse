@@ -37,13 +37,13 @@ const upload = multer({
 // feldname beim Upload-formular = bookImage
 const UploadImageToMemory = upload.single('bookImage');
 
-const ShowUploadInfo = function name(req, res, next) {
+const ShowUploadInfo = (req, res, next) => {
   //console.log(req.file)
   console.log('File upload to memory successfull.');
   next();
 };
 
-const UploadBookImageToImagekit = function (req, res, next) {
+const UploadBookImageToImagekit = (req, res, next) => {
   const file_name = Date.now() + '-' + req.file.originalname;
 
   imagekitUpload
@@ -55,6 +55,8 @@ const UploadBookImageToImagekit = function (req, res, next) {
     .then((response) => {
       // Add the image url to the response
       res.locals.BookUrl = response.url;
+      // Add the image id to the response for deleting
+      res.locals.BookImageId = response.fileId;
       next();
     })
     .catch((error) => {
@@ -64,9 +66,9 @@ const UploadBookImageToImagekit = function (req, res, next) {
 
 // For later for removing pictures from the db
 const MoveBookToDeleteFolder = (req, res, next) => {
-  const fileName = req.book.image.split('/').pop()[0];
+  const fileName = req.profile.image.split('/').pop();
   const sourceFilePath = '/b/' + fileName;
-  const destinationPath = '/d/' + fileName;
+  const destinationPath = '/d/';
 
   imagekitUpload
     .moveFile(sourceFilePath, destinationPath)
@@ -80,8 +82,37 @@ const MoveBookToDeleteFolder = (req, res, next) => {
     });
 };
 
+// We need the id to delete the file
+const DeleteBookImage = (req, res, next) => {
+  // Find by file name and file path
+  const fileName = req.profile.image.split('/').pop();
+  let ImageId = 0;
+  imagekitUpload.listFiles(
+    {
+      searchQuery: 'name=' + fileName + ' AND filePath="b"',
+    },
+    function (error, result) {
+      if (error) console.log(error);
+      else {
+        console.log(result);
+        ImageId = result.fileId;
+      }
+    }
+  );
+
+  if (ImageId != 0) {
+    imagekitUpload.deleteFile(ImageId, function (error, result) {
+      if (error) console.log(error);
+      else console.log(result);
+    });
+  } else {
+    res.send('Image not found');
+  }
+};
+
 export default {
   UploadImageToMemory,
   UploadBookImageToImagekit,
   ShowUploadInfo,
+  MoveBookToDeleteFolder,
 };

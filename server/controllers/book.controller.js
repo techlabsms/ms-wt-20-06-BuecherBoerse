@@ -8,6 +8,7 @@ const create = async (req, res) => {
     const book = new Book(req.body);
     try {
       book.image = res.locals.BookUrl;
+      book.imagekitIoId = res.locals.BookImageId;
     } catch (err) {
       return res.status(400).json({
         message: 'You need to upload an image',
@@ -63,7 +64,7 @@ const bookByID = async (req, res, next, id) => {
     let book = await Book.findById(id);
     if (!book) {
       return res.status('400').json({
-        error: 'Buch not found',
+        error: 'Book not found',
       });
     }
     req.profile = book;
@@ -83,13 +84,32 @@ const read = (req, res) => {
 //verändere Buch mit PUT
 const update = async (req, res) => {
   try {
+    // Get Book
     let book = req.profile;
-    //Verändern des Bildes und löschen des alten Bildes
-    // TBD
-
     //Verändern der restlichen Buchdaten
+    // Update via json
     book = extend(book, req.body);
     book.updated = Date.now();
+    await book.save();
+    res.json(book);
+  } catch (err) {
+    return res.status(400).json({
+      error: errorHandler.getErrorMessage(err),
+    });
+  }
+};
+
+const updateWithImage = async (req, res) => {
+  try {
+    // Get Book
+    let book = req.profile;
+
+    // Update image, image_id and timestamp
+    book.image = res.locals.BookUrl;
+    book.imagekitIoId = res.locals.BookImageId;
+    book.updated = Date.now();
+
+    // Save modified book to db
     await book.save();
     res.json(book);
   } catch (err) {
@@ -105,10 +125,14 @@ const remove = async (req, res) => {
     let book = req.profile;
     //löscht Bild des Buches aus der Datenbank
     // Loescht Bild vom Server? tbd
-
+    console.log(book);
     //löscht die restlichen Buchdaten
     let deletedBook = await book.remove();
-    res.json(deletedBook);
+
+    return res.status(200).json({
+      message: 'Book successfully deleted!',
+      book: deletedBook,
+    });
   } catch (err) {
     return res.status(400).json({
       error: errorHandler.getErrorMessage(err),
@@ -122,6 +146,7 @@ export default {
   bookByID,
   read,
   update,
+  updateWithImage,
   remove,
   bookByUser,
 };

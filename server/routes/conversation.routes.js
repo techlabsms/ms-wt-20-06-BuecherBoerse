@@ -1,24 +1,30 @@
 import express from 'express'
 import authCtrl from '../controllers/auth.controller'
+import userCtrl from '../controllers/user.controller'
 import conversationCtrl from '../controllers/conversation.controller'
 
 const router = express.Router()
 
 router.route('/api/messages')
-    .post(conversationCtrl.createConv) // Create conversation authCtrl.requireSignin, 
+    .post(authCtrl.requireSignin, authCtrl.hasAuthorizationForNewMessage, conversationCtrl.createConv) // Create conversation authCtrl.requireSignin, 
 
 // authCtrl.requireSignin, authCtrl.hasAuthorizationForConversation
 // Erstelle Nachricht in bestimmter Conversation, erhalte bestimmte Conversation
+// Loesche Konversation
 router.route('/api/messages/:convId')
-    .get(conversationCtrl.read)
-    .post(conversationCtrl.writeMessage)
+    .get(authCtrl.requireSignin, authCtrl.hasAuthorizationForConversation, conversationCtrl.read)
+    .post(authCtrl.requireSignin, authCtrl.hasAuthorizationForConversation, conversationCtrl.writeMessage)
+    .delete(authCtrl.requireSignin, authCtrl.hasAuthorizationForConversation, conversationCtrl.deleteConvByID)
 
 // Erhalte bestimmte Nachricht??
 
 // Erhalte alle Conversations in denen der User beteiligt ist
 router.route('/api/messages/user/:userId')
-    .get(conversationCtrl.getConvByUser)
+    .get(authCtrl.requireSignin, authCtrl.hasAuthorization, conversationCtrl.getConvByUser)
+
+
 
 router.param('convId', conversationCtrl.convByID)
+router.param('userId', userCtrl.userByID)
 
 export default router

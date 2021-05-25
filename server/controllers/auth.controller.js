@@ -65,6 +65,7 @@ const requireSignin = expressJwt({
 // Sein eigenes Profil bearbeiten ist in Ordnung
 const hasAuthorization = (req, res, next) => {
   const authorized = req.profile && req.auth && req.profile._id == req.auth._id;
+
   if (!authorized) {
     return res.status('403').json({
       error: 'User is not authorized',
@@ -73,19 +74,31 @@ const hasAuthorization = (req, res, next) => {
   next();
 };
 
+const hasAuthorizationForNewMessage = (req, res, next) => {
+  const authorized = req.body.sender == req.auth._id;
+  console.log(req.body.sender, req.auth._id);
+
+  if (!authorized) {
+    return res.status('403').json({
+      error: 'User is not the sender of the new message',
+    });
+  }
+  next();
+};
+
 const hasAuthorizationForConversation = (req, res, next) => {
   let isrecipient = false;
   req.conv.recipients.forEach((recipient) => {
-    if (recipient == req.auth._id) {
+    if (recipient._id == req.auth._id) {
       isrecipient = true;
     }
   });
 
-  let authorized = req.post && req.auth && isrecipient;
+  let authorized = req.auth && isrecipient;
 
   if (!authorized) {
     return res.status('403').json({
-      error: 'User is not authorized',
+      error: 'User is not part of conversation',
     });
   }
   next();
@@ -96,7 +109,7 @@ const hasAuthorizationForBook = (req, res, next) => {
   const authorized = req.profile.owner == req.auth._id;
   if (!authorized) {
     return res.status('403').json({
-      error: 'User ' + req.auth._id + ' is not authorized',
+      error: 'User is not authorized for book',
     });
   }
   next();
@@ -109,4 +122,5 @@ export default {
   hasAuthorization,
   hasAuthorizationForBook,
   hasAuthorizationForConversation,
+  hasAuthorizationForNewMessage,
 };
