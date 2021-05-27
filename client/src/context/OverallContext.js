@@ -39,6 +39,7 @@ export const AppProvider = ({ children }) => {
   });
   const [bookImage, setBookImage] = useState();
   const [showMessageModal, setShowMessageModal] = useState(false);
+  const [showEditBook, setShowEditBook] = useState(false);
   const [user, setUser] = useState();
   const [chat, setChat] = useState([]);
   const [conversations, setConversations] = useState([]);
@@ -109,6 +110,8 @@ export const AppProvider = ({ children }) => {
         hideLinks,
         showMessageModal,
         setShowMessageModal,
+        showEditBook,
+        setShowEditBook,
         user,
         setUser,
         conversations,

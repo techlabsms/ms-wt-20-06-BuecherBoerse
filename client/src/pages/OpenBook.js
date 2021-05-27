@@ -9,6 +9,7 @@ import MessageModal from '../components/MessageModal';
 import Loading2 from '../components/Loading2';
 import { useBookData } from '../hooks/useBookData';
 import { motion } from 'framer-motion';
+import EditBook from '../components/EditBook';
 
 const OpenBook = () => {
   const {
@@ -17,6 +18,7 @@ const OpenBook = () => {
     loading,
     API_BOOKS,
     showMessageModal,
+    showEditBook,
     openBook,
   } = useGlobalContext();
   const { fetchSingleBook } = useBookData();
@@ -53,7 +55,8 @@ const OpenBook = () => {
   }
   return (
     <>
-      {showMessageModal && <MessageModal showMessageModal={showMessageModal} />}
+      {showMessageModal && <MessageModal />}
+      {showEditBook && <EditBook />}
       {loading && <Loading2 />}
       <motion.main
         initial={{ opacity: 0 }}

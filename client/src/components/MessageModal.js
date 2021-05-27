@@ -3,6 +3,7 @@ import TextAreaInput from './TextAreaInput';
 import FilterButton from './FilterButton';
 import { useGlobalContext } from '../context/OverallContext';
 import { useMessaging } from '../hooks/useMessaging';
+import ModalWrapper from './ModalWrapper';
 
 const MessageModal = () => {
   const {
@@ -25,11 +26,7 @@ const MessageModal = () => {
   };
   return (
     <>
-      <main
-        className={`${
-          showMessageModal ? 'modal-wrapper open' : 'modal-wrapper'
-        }`}
-      >
+      <ModalWrapper showMessageModal={showMessageModal}>
         <aside className='msg-modal'>
           <h3 className='modal-title'>Deine Nachricht:</h3>
           <Form
@@ -62,7 +59,7 @@ const MessageModal = () => {
             </FilterButton>
           </Form>
         </aside>
-      </main>
+      </ModalWrapper>
     </>
   );
 };

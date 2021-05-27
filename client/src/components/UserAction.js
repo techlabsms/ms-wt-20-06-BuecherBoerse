@@ -4,8 +4,15 @@ import { useBookData } from '../hooks/useBookData';
 import ActionButton from './ActionBtn';
 
 const UserAction = ({ id, owner, condition }) => {
-  const { userId, user, jwt, API_BOOKS, API_USERS, setShowMessageModal } =
-    useGlobalContext();
+  const {
+    userId,
+    user,
+    jwt,
+    API_BOOKS,
+    API_USERS,
+    setShowMessageModal,
+    setShowEditBook,
+  } = useGlobalContext();
   const { fetchUser, deleteSingleBook } = useBookData();
 
   const removeBook = () => {
@@ -37,7 +44,16 @@ const UserAction = ({ id, owner, condition }) => {
         <section className='action-section'>
           <p>Was möchtest du tun?</p>
           {owner === userId ? (
-            <ActionButton onClick={removeBook}>Jetzt löschen</ActionButton>
+            <>
+              <ActionButton
+                onClick={() => {
+                  setShowEditBook(true);
+                }}
+              >
+                Jetzt bearbeiten
+              </ActionButton>
+              <ActionButton onClick={removeBook}>Jetzt löschen</ActionButton>
+            </>
           ) : (
             <ActionButton onClick={messageUser}>Jetzt ausleihen</ActionButton>
           )}
