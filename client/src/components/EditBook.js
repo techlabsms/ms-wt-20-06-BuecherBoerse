@@ -4,12 +4,26 @@ import Form from './Form';
 import InputField from './InputField';
 import TextAreaInput from './TextAreaInput';
 import ActionBtn from './ActionBtn';
+import { useBookData } from '../hooks/useBookData';
 
 const EditBook = () => {
-  const { showEditBook, setShowEditBook } = useGlobalContext();
+  const {
+    API_BOOKS,
+    jwt,
+    openBook,
+    setOpenBook,
+    showEditBook,
+    setShowEditBook,
+  } = useGlobalContext();
+  const { updateSingleBookInfo } = useBookData();
+
+  const textChange = (e) => {
+    setOpenBook({ ...openBook, [e.target.name]: e.target.value });
+  };
 
   const updateBook = (e) => {
     e.preventDefault();
+    updateSingleBookInfo(API_BOOKS, openBook._id, jwt, openBook);
   };
 
   const closeEditWindow = () => {
@@ -27,6 +41,8 @@ const EditBook = () => {
               name='name'
               id='name'
               placeholder='Name des Buches'
+              value={openBook.name}
+              onChange={textChange}
             />
             <InputField
               type='text'
@@ -34,13 +50,17 @@ const EditBook = () => {
               name='author'
               id='author'
               placeholder='Autor*in des Buches'
+              value={openBook.author}
+              onChange={textChange}
             />
             <InputField
               type='text'
               htmlFor='Genre:'
-              name='genre'
-              id='genre'
+              name='category'
+              id='category'
               placeholder='Genre des Buches'
+              value={openBook.category}
+              onChange={textChange}
             />
             <InputField
               type='text'
@@ -48,6 +68,8 @@ const EditBook = () => {
               name='language'
               id='language'
               placeholder='Sprache des Buches'
+              value={openBook.language}
+              onChange={textChange}
             />
             <InputField
               type='text'
@@ -55,6 +77,8 @@ const EditBook = () => {
               name='condition'
               id='condition'
               placeholder='Zustand des Buches'
+              value={openBook.condition}
+              onChange={textChange}
             />
             <TextAreaInput
               htmlFor='Beschreibung:'
@@ -62,10 +86,12 @@ const EditBook = () => {
               id='desc'
               rows='2'
               placeholder='Kurze Beschreibung des Buches'
+              value={openBook.description}
+              onChange={textChange}
             />
             <div className='action-btn-container'>
               <ActionBtn type='submit'>Jetzt speichern</ActionBtn>
-              <ActionBtn onClick={closeEditWindow}>Jetzt abbrechen</ActionBtn>
+              <ActionBtn onClick={closeEditWindow}>Abbrechen</ActionBtn>
             </div>
           </div>
         </Form>

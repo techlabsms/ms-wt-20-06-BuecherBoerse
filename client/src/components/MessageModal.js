@@ -39,6 +39,7 @@ const MessageModal = () => {
           >
             <TextAreaInput
               name='message'
+              rows='3'
               value={newMessage.message}
               onChange={(e) => {
                 setNewMessage({

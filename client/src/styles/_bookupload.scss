@@ -15,6 +15,7 @@
 
 .book-update-form {
   @include bookupload();
+  animation: slide-up 0.75s;
 }
 
 @media (min-width: 800px) {

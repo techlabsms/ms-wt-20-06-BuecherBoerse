@@ -14,6 +14,7 @@ export const useBookData = () => {
     setAlert,
     setNewBook,
     setBookImage,
+    setShowEditBook,
   } = useGlobalContext();
   const history = useHistory();
 
@@ -174,12 +175,54 @@ export const useBookData = () => {
         throw new Error('Das Buch konnte nicht gelöscht werden');
       }
     } catch (error) {
-      setLoading(false);
       console.log('Löschen fehlgeschlagen', error);
+      setLoading(false);
       setAlert({
         display: true,
         icon: <FaPoo />,
         msg: 'Das Buch konnte nicht gelöscht werden...',
+      });
+    }
+  };
+
+  const updateSingleBookInfo = async (api, id, token, data) => {
+    try {
+      setLoading(true);
+      const res = await fetch(`${api}${id}`, {
+        method: 'PUT',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'content-type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+      if (res.ok) {
+        await res.json();
+        setShowEditBook(false);
+        setAlert({
+          display: true,
+          icon: <FaCheckCircle />,
+          msg: 'Du hast die Buchinfo erfolgreich geändert!',
+        });
+      } else {
+        throw new Error('Hoppla, da ist wohl was schief gegangen');
+      }
+    } catch (error) {
+      console.log('Update fehlgeschlagen', error);
+      setAlert({
+        display: true,
+        icon: <FaPoo />,
+        msg: 'Die Buchinfo konnte irgendwie nicht gespeichert werden...',
+      });
+    } finally {
+      setLoading(false);
+      setNewBook({
+        name: '',
+        author: '',
+        genre: '',
+        language: '',
+        condition: '',
+        desc: '',
       });
     }
   };
@@ -191,5 +234,6 @@ export const useBookData = () => {
     fetchUser,
     bookUpload,
     deleteSingleBook,
+    updateSingleBookInfo,
   };
 };
